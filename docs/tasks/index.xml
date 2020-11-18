@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Tasks on Marblerun</title>
+    <link>https://marblerun.sh/docs/tasks/</link>
+    <description>Recent content in Tasks on Marblerun</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Nov 2020 16:28:16 +0530</lastBuildDate><atom:link href="https://marblerun.sh/docs/tasks/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Deploy Marblerun to your cluster</title>
+      <link>https://marblerun.sh/docs/tasks/deploy/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/deploy/</guid>
+      <description>Deploy Marblerun to your cluster Before you begin This article assumes that you have an existing AKS cluster. If you need an AKS cluster, see the AKS quickstart using the Azure CLI or using the Azure portal. Alternatively, you can deploy with minikube.
+This article uses Helm 3 to install Marblerun. Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the Helm install docs.</description>
+    </item>
+    
+    <item>
+      <title>Setting a Manifest</title>
+      <link>https://marblerun.sh/docs/tasks/set-manifest/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/set-manifest/</guid>
+      <description>Setting a Manifest The Manifest is a JSON document that defines which services span the mesh and how they should be configured. It further defines what Infrastructure providers are allowed. You can set a Manifest through Marblerun&amp;rsquo;s Client REST-API. The endpoint for all Manifest operations is /manifest.
+See the following Manifest for example (manifest.json).
+{ &amp;#34;Packages&amp;#34;: { &amp;#34;backend&amp;#34;: { &amp;#34;UniqueID&amp;#34;: &amp;#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&amp;#34;, &amp;#34;ProductID&amp;#34;: 43, &amp;#34;SecurityVersion&amp;#34;: 1, &amp;#34;Debug&amp;#34;: false }, &amp;#34;frontend&amp;#34;: { &amp;#34;SignerID&amp;#34;: &amp;#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&amp;#34;, &amp;#34;ProductID&amp;#34;: 42, &amp;#34;SecurityVersion&amp;#34;: 3, &amp;#34;Debug&amp;#34;: true } }, &amp;#34;Marbles&amp;#34;: { &amp;#34;backend_first&amp;#34;: { &amp;#34;Package&amp;#34;: &amp;#34;backend&amp;#34;, &amp;#34;MaxActivations&amp;#34;: 1, &amp;#34;Parameters&amp;#34;: { &amp;#34;Files&amp;#34;: { &amp;#34;/tmp/defg.</description>
+    </item>
+    
+    <item>
+      <title>Adding a Service</title>
+      <link>https://marblerun.sh/docs/tasks/add-service/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/add-service/</guid>
+      <description>Add a service Adding a service to your application requires two steps:
+ Building your service together with Marblerun to inject our Marble data plane. Adding the service to the Manifest so it will be recognized and managed by the Coordinator control plane.  Building your service with Marblerun We distinguish two cases when building your confidential application with Marblerun:
+  Your service is written in Go
+ You need to build your project together with our Marble code We have an example on how to do this here    Your service is written in any other language that can be compiled to binary code (e.</description>
+    </item>
+    
+    <item>
+      <title>Client-Side verification</title>
+      <link>https://marblerun.sh/docs/tasks/verification/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/verification/</guid>
+      <description>Client-side verification An important feature of Marblerun is providing the ability to verifying the confidentiality and integrity of the whole application on the client-side. To that end, we provide a simple REST-API that clients can use before interacting with the application.
+Establishing trust The first step is to establish trust with the whole microservice mesh. Therefore, Marblerun exposes the /quote endpoint that returns a quote and a root certificate for the whole mesh.</description>
+    </item>
+    
+    <item>
+      <title>Deployment updates</title>
+      <link>https://marblerun.sh/docs/tasks/updates/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/updates/</guid>
+      <description>Deployment updates The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.
+Updating to a new Marblerun version When updating to a new Marblerun version, updates to both the control plane and data plane components may be required.
+Updating the Coordinator Updating the Coordinator follows the regular steps for updating a deployment in Kubernetes.
+kubectl -n marblerun set image deployment/marblerun-coordinator coordinator=ghcr.</description>
+    </item>
+    
+    <item>
+      <title>Monitoring and logging</title>
+      <link>https://marblerun.sh/docs/tasks/monitoring/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/monitoring/</guid>
+      <description>Monitoring and logging As of now, the monitoring capabilities of Marblerun are basic. For status information, the Coordinator provides the /status endpoint in the client API. It returns the following information.
+ 0 recovery mode: Found a sealed state of an old seal key. Waiting for user input on /recover. 1 uninitialized: Fresh start, initializing the Coordinator. 2 waiting for a manifest: Waiting for user input on /manifest 3 accepting marbles: Accepting Marbles through the Marble API  More details about the Coordinator can be retrieved through its log as follows.</description>
+    </item>
+    
+  </channel>
+</rss>

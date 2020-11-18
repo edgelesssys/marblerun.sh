@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Features on Marblerun</title>
+    <link>https://marblerun.sh/docs/features/</link>
+    <description>Recent content in Features on Marblerun</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Nov 2020 16:28:16 +0530</lastBuildDate><atom:link href="https://marblerun.sh/docs/features/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Attestation</title>
+      <link>https://marblerun.sh/docs/features/attestation/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/attestation/</guid>
+      <description>Attestation Hardware-rooted remote attestation is a key ingredient for distributed confidential apps. Without it, services couldn&amp;rsquo;t trust each other and clients couldn&amp;rsquo;t trust the app. Thus, Marblerun relies heavily on the Data Center Attestation Primitives (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP here.
+Internal attestation of Marbles The Coordinator verifies the identity and integrity of each newly spawned Marble before admitting it to the mesh.</description>
+    </item>
+    
+    <item>
+      <title>Recovery</title>
+      <link>https://marblerun.sh/docs/features/recovery/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/recovery/</guid>
+      <description>Recovery Persistent storage for confidential applications in the cloud requires a bit of attention. Unfortunately, SGX sealing keys are unique to a single CPU, which means using the default SGX sealing methods has some caveats. For example, sealing data while running on one node could mean the data can&amp;rsquo;t be unsealed when running on another node later on. The Coordinator provides Marbles with virtual sealing keys making persistence straightforward for your applications.</description>
+    </item>
+    
+    <item>
+      <title>Secrets management</title>
+      <link>https://marblerun.sh/docs/features/secrets-management/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/secrets-management/</guid>
+      <description>Secrets management Two of the Coordinator&amp;rsquo;s central duties are the generation and the management of secrets for the Marbles (i.e., containers running enclaves). Specifically, the Coordinator deals with the following types of Marble secrets.
+ Virtual sealing keys Shared symmetric keys TLS credentials  All of these secrets are handed to Marbles via placeholders in the Manifest as is described here.
+Virtual sealing keys A key feature of Intel SGX is that it allows enclave software to derive so called &amp;ldquo;sealing keys&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Planned features</title>
+      <link>https://marblerun.sh/docs/features/planned-features/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/planned-features/</guid>
+      <description>Planned features TODO
+ Use constant-time crypto   </description>
+    </item>
+    
+  </channel>
+</rss>

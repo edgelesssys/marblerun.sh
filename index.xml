@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Marblerun</title>
+    <link>https://marblerun.sh/</link>
+    <description>Recent content on Marblerun</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Nov 2020 16:28:16 +0530</lastBuildDate><atom:link href="https://marblerun.sh/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Attestation</title>
+      <link>https://marblerun.sh/docs/features/attestation/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/attestation/</guid>
+      <description>Attestation Hardware-rooted remote attestation is a key ingredient for distributed confidential apps. Without it, services couldn&amp;rsquo;t trust each other and clients couldn&amp;rsquo;t trust the app. Thus, Marblerun relies heavily on the Data Center Attestation Primitives (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP here.
+Internal attestation of Marbles The Coordinator verifies the identity and integrity of each newly spawned Marble before admitting it to the mesh.</description>
+    </item>
+    
+    <item>
+      <title>Deploy Marblerun to your cluster</title>
+      <link>https://marblerun.sh/docs/tasks/deploy/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/deploy/</guid>
+      <description>Deploy Marblerun to your cluster Before you begin This article assumes that you have an existing AKS cluster. If you need an AKS cluster, see the AKS quickstart using the Azure CLI or using the Azure portal. Alternatively, you can deploy with minikube.
+This article uses Helm 3 to install Marblerun. Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the Helm install docs.</description>
+    </item>
+    
+    <item>
+      <title>Hello World</title>
+      <link>https://marblerun.sh/docs/examples/helloworld/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/examples/helloworld/</guid>
+      <description>Hello world We have two basic examples of how to build confidential applications with Marblerun.
+ See helloworld for how to integrate Marblerun with your Golang application. See helloc++ for how integrate Marblerun with your C++ application.  </description>
+    </item>
+    
+    <item>
+      <title>Introduction</title>
+      <link>https://marblerun.sh/docs/introduction/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/introduction/</guid>
+      <description>Introduction Marblerun (or Edgeless MR) is a framework for creating distributed confidential-computing apps.
+Build your confidential microservices with Edgeless RT, distribute them with Kubernetes on an SGX-enabled cluster, and let Marblerun take care of the rest. Deploy end-to-end secure and verifiable AI pipelines or crunch on sensitive big data in the cloud. Confidential computing at scale has never been easier.
+Marblerun guarantees that the topology of your distributed app adheres to a Manifest specified in simple JSON.</description>
+    </item>
+    
+    <item>
+      <title>Quickstart</title>
+      <link>https://marblerun.sh/docs/getting-started/quickstart/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/getting-started/quickstart/</guid>
+      <description>Quickstart Step 0: Setup Set up a Kubernetes cluster and install kubectl. One easy way to get started is to run Kubernetes on your local machine using Minikube.
+Please also install Helm (&amp;ldquo;the package manager for Kubernetes&amp;rdquo;).
+Step 1: Install the Coordinator onto the cluster Add the Edgeless Systems chart repository to Helm.
+helm repo add edgeless https://helm.edgeless.systems helm repo update Install Marblerun&amp;rsquo;s Coordinator using Helm. Update the hostname with your cluster&amp;rsquo;s FQDN or use localhost for local testing.</description>
+    </item>
+    
+    <item>
+      <title>Confidential Computing</title>
+      <link>https://marblerun.sh/docs/getting-started/confidential-computing/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/getting-started/confidential-computing/</guid>
+      <description>Confidential computing Confidential computing protects data in use by performing computation in hardware-based secure enclaves. The most prominent enclave to date is probably Intel SGX. Enclaves prevent unauthorized access or modification of applications and data while in use, thereby increasing the security assurances for organizations that manage sensitive and regulated data. For information about confidential computing, see the Confidential Computing Consortium white paper.</description>
+    </item>
+    
+    <item>
+      <title>Confidential Emoji Voting</title>
+      <link>https://marblerun.sh/docs/examples/emojivoto/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/examples/emojivoto/</guid>
+      <description>Confidential emoji voting The popular Linkerd service mesh uses the simple and fun scalable emojivoto app as the default demo. You can find our confidential variant here. Your emoji votes have never been safer!</description>
+    </item>
+    
+    <item>
+      <title>Recovery</title>
+      <link>https://marblerun.sh/docs/features/recovery/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/recovery/</guid>
+      <description>Recovery Persistent storage for confidential applications in the cloud requires a bit of attention. Unfortunately, SGX sealing keys are unique to a single CPU, which means using the default SGX sealing methods has some caveats. For example, sealing data while running on one node could mean the data can&amp;rsquo;t be unsealed when running on another node later on. The Coordinator provides Marbles with virtual sealing keys making persistence straightforward for your applications.</description>
+    </item>
+    
+    <item>
+      <title>Setting a Manifest</title>
+      <link>https://marblerun.sh/docs/tasks/set-manifest/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/set-manifest/</guid>
+      <description>Setting a Manifest The Manifest is a JSON document that defines which services span the mesh and how they should be configured. It further defines what Infrastructure providers are allowed. You can set a Manifest through Marblerun&amp;rsquo;s Client REST-API. The endpoint for all Manifest operations is /manifest.
+See the following Manifest for example (manifest.json).
+{ &amp;#34;Packages&amp;#34;: { &amp;#34;backend&amp;#34;: { &amp;#34;UniqueID&amp;#34;: &amp;#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&amp;#34;, &amp;#34;ProductID&amp;#34;: 43, &amp;#34;SecurityVersion&amp;#34;: 1, &amp;#34;Debug&amp;#34;: false }, &amp;#34;frontend&amp;#34;: { &amp;#34;SignerID&amp;#34;: &amp;#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&amp;#34;, &amp;#34;ProductID&amp;#34;: 42, &amp;#34;SecurityVersion&amp;#34;: 3, &amp;#34;Debug&amp;#34;: true } }, &amp;#34;Marbles&amp;#34;: { &amp;#34;backend_first&amp;#34;: { &amp;#34;Package&amp;#34;: &amp;#34;backend&amp;#34;, &amp;#34;MaxActivations&amp;#34;: 1, &amp;#34;Parameters&amp;#34;: { &amp;#34;Files&amp;#34;: { &amp;#34;/tmp/defg.</description>
+    </item>
+    
+    <item>
+      <title>Adding a Service</title>
+      <link>https://marblerun.sh/docs/tasks/add-service/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/add-service/</guid>
+      <description>Add a service Adding a service to your application requires two steps:
+ Building your service together with Marblerun to inject our Marble data plane. Adding the service to the Manifest so it will be recognized and managed by the Coordinator control plane.  Building your service with Marblerun We distinguish two cases when building your confidential application with Marblerun:
+  Your service is written in Go
+ You need to build your project together with our Marble code We have an example on how to do this here    Your service is written in any other language that can be compiled to binary code (e.</description>
+    </item>
+    
+    <item>
+      <title>Secrets management</title>
+      <link>https://marblerun.sh/docs/features/secrets-management/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/secrets-management/</guid>
+      <description>Secrets management Two of the Coordinator&amp;rsquo;s central duties are the generation and the management of secrets for the Marbles (i.e., containers running enclaves). Specifically, the Coordinator deals with the following types of Marble secrets.
+ Virtual sealing keys Shared symmetric keys TLS credentials  All of these secrets are handed to Marbles via placeholders in the Manifest as is described here.
+Virtual sealing keys A key feature of Intel SGX is that it allows enclave software to derive so called &amp;ldquo;sealing keys&amp;rdquo;.</description>
+    </item>
+    
+    <item>
+      <title>Service Mesh</title>
+      <link>https://marblerun.sh/docs/getting-started/service-mesh/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/getting-started/service-mesh/</guid>
+      <description>Confidential service mesh A service mesh is an infrastructure layer for managing, observing, and securing communications in a container-based cluster. In the Kubernetes world, Istio, HashiCorp Consul, and Linkerd are the most popular general-purpose service meshes.
+When we started looking into the concept of confidential microservices, we realized that there are additional challenges and requirements for service meshes in the context of confidential computing.
+ How to make an entire cluster or distributed app verifiable in a meaningful way from the outside?</description>
+    </item>
+    
+    <item>
+      <title>Client-Side verification</title>
+      <link>https://marblerun.sh/docs/tasks/verification/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/verification/</guid>
+      <description>Client-side verification An important feature of Marblerun is providing the ability to verifying the confidentiality and integrity of the whole application on the client-side. To that end, we provide a simple REST-API that clients can use before interacting with the application.
+Establishing trust The first step is to establish trust with the whole microservice mesh. Therefore, Marblerun exposes the /quote endpoint that returns a quote and a root certificate for the whole mesh.</description>
+    </item>
+    
+    <item>
+      <title>Overview</title>
+      <link>https://marblerun.sh/docs/getting-started/overview/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/getting-started/overview/</guid>
+      <description>Overview Logically, Marblerun consists of two parts, the control plane called Coordinator and the data plane called Marbles. The Coordinator needs to be deployed once in your cluster and the Marble layer needs to be integrated with each service. Marblerun is configured with a simple JSON document called the Manifest. It specifies the topology of the distributed app, the infrastructure properties, and provides configuration parameters for each service.
+Manifest The Manifest is a simple JSON file specifying three asset groups: Packages, Infrastructures, and Marbles:</description>
+    </item>
+    
+    <item>
+      <title>Planned features</title>
+      <link>https://marblerun.sh/docs/features/planned-features/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/planned-features/</guid>
+      <description>Planned features TODO
+ Use constant-time crypto   </description>
+    </item>
+    
+    <item>
+      <title>Deployment updates</title>
+      <link>https://marblerun.sh/docs/tasks/updates/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/updates/</guid>
+      <description>Deployment updates The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.
+Updating to a new Marblerun version When updating to a new Marblerun version, updates to both the control plane and data plane components may be required.
+Updating the Coordinator Updating the Coordinator follows the regular steps for updating a deployment in Kubernetes.
+kubectl -n marblerun set image deployment/marblerun-coordinator coordinator=ghcr.</description>
+    </item>
+    
+    <item>
+      <title>Monitoring and logging</title>
+      <link>https://marblerun.sh/docs/tasks/monitoring/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/tasks/monitoring/</guid>
+      <description>Monitoring and logging As of now, the monitoring capabilities of Marblerun are basic. For status information, the Coordinator provides the /status endpoint in the client API. It returns the following information.
+ 0 recovery mode: Found a sealed state of an old seal key. Waiting for user input on /recover. 1 uninitialized: Fresh start, initializing the Coordinator. 2 waiting for a manifest: Waiting for user input on /manifest 3 accepting marbles: Accepting Marbles through the Marble API  More details about the Coordinator can be retrieved through its log as follows.</description>
+    </item>
+    
+    <item>
+      <title>Changelog</title>
+      <link>https://marblerun.sh/docs/changelog/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/changelog/</guid>
+      <description>Changelog </description>
+    </item>
+    
+    <item>
+      <title>Community</title>
+      <link>https://marblerun.sh/community/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/community/</guid>
+      <description> Community  We want to build a community and together make Marblerun the driving force behind Confidential Computing in the cloud. We&#39;d love to have you join our community as an early adopter or contributor.   Get Involved   Report a Bug     GitHub      Get Support   Join Us On Slack     Email Us      Get Updates   Twitter      </description>
+    </item>
+    
+  </channel>
+</rss>
