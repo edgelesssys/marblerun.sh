@@ -1,0 +1,4 @@
+baseURL = "https://marblerun.sh"
+languageCode = "en-us"
+title = "Marblerun"
+theme = "Marblerun"
