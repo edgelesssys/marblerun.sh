@@ -9,25 +9,24 @@ weight: 3
 
 Adding a service to your application requires two steps:
 
-1. Building your service together with Marblerun to inject our _Marble_ data plane.
-2. Adding the service to the manifest so it will be recognized and managed by the _Coordinator_ control plane.
+1. Building your service together with Marblerun to inject our Marble data plane.
+2. Adding the service to the Manifest so it will be recognized and managed by the Coordinator control plane.
 
 ## Building your service with Marblerun
 
 We distinguish two cases when building your confidential application with Marblerun:
 
 1. Your service is written in Go
-
-   - You need to build your project together with our _Marble_ code
-   - We have an example on how to do this [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld/README.md)
+    * You need to build your project together with our Marble code
+    * We have an example on how to do this [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld/README.md)
 
 1. Your service is written in any other language that can be compiled to binary code (e.g. C++)
-   - You need to link your code against our _Marble_ library
-   - We have an example on how to do this [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B/README.md)
+    * You need to link your code against our Marble library
+    * We have an example on how to do this [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B/README.md)
 
 ## Adding your service to the Manifest
 
-The manifest contains a section with the information used to authenticate each service in the mesh:
+The Manifest contains a section with the information used to authenticate each service in the mesh:
 
 ```json
 	"Packages": {
@@ -81,7 +80,7 @@ You can add this directly to your `manifest.json` file like so:
 ```
 
 When you start your service, you need to pass in a couple of configuration parameters through environment variables.
-Make sure that you match the service's name in the manifest with the `EDG_MARBLE_TYPE` (Coordinator was started with `EDG_COORDINATOR_MESH_ADDR=localhost:2001`):
+Make sure that you match the service's name in the Manifest with the `EDG_MARBLE_TYPE` (Coordinator was started with `EDG_COORDINATOR_MESH_ADDR=localhost:2001`):
 
 ```bash
 EDG_MARBLE_COORDINATOR_ADDR=localhost:2001 EDG_MARBLE_TYPE=frontend EDG_MARBLE_UUID_FILE=$PWD/uuid EDG_MARBLE_DNS_NAMES=localhost erthost enclave.signed

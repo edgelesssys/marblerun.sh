@@ -5,6 +5,6 @@ draft: false
 weight: 2
 ---
 
-# Confidential Emoji Voting
+# Confidential emoji voting
 
-The popular [Linkerd](https://linkerd.io) service mesh uses the simple and fun scalable _emojivoto_ app as the default demo. You can find our confidential variant [here](https://github.com/edgelesssys/emojivoto). Your emoji votes have never been safer!
+The popular [Linkerd](https://linkerd.io) service mesh uses the simple and fun scalable *emojivoto* app as the default demo. You can find our confidential variant [here](https://github.com/edgelesssys/emojivoto). Your emoji votes have never been safer!
