@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Infrastructure Validation</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="canonical" href="https://marblerun.sh/docs/features/infrastructure-validation/" />
+	
+	<link rel="stylesheet" href="https://marblerun.sh/scss/bootstrap.min.05e88624b497548722fef3538d7efdf80b0045261b068a51fbcf9b25d5fa5298.css" emotion="🤩">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid">
+  <a class="navbar-brand" href="/">
+    <img src="/img/logo.png" width="140px">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link " href="/docs/introduction/"><i
+            class="fa fa-book"></i> Docs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/community"><i
+            class="fa fa-commenting"></i>
+          Community</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> <i class="fa fa-github"></i> Github</a>
+      </li>
+      <li class="nav-item">
+        <a href="#0" class="nav-link btn btn-primary ml-3">Get Started →</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container my-3">
+  <div class="mb-3">
+    <div id="breadcrumbs">
+  <a href="/">Home</a>
+  
+  
+  
+  
+  / <a href="/docs">Docs</a>
+  
+  
+  
+  / <a href="/features">Features</a>
+  
+  
+  
+  / <a href="/infrastructure-validation">Infrastructure validation</a>
+  
+  
+  
+  
+</div>
+  </div>
+  <h1 class="my-3">Docs</h1>
+  <div class="row">
+    <div class="col-12 col-lg-3">
+      <div class="docsSidebar">
+  
+  
+  
+  <div class="mb-3">
+    
+    <a href="https://marblerun.sh/docs/introduction/" class="d-block">Introduction</a>
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Getting Started</h6>
+    
+    <a href="https://marblerun.sh/docs/getting-started/quickstart/" class="d-block pl-3">Quickstart</a>
+    
+    <a href="https://marblerun.sh/docs/getting-started/confidential-computing/" class="d-block pl-3">Confidential Computing</a>
+    
+    <a href="https://marblerun.sh/docs/getting-started/service-mesh/" class="d-block pl-3">Service Mesh</a>
+    
+    <a href="https://marblerun.sh/docs/getting-started/overview/" class="d-block pl-3">Overview</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Features</h6>
+    
+    <a href="https://marblerun.sh/docs/features/service-authentication/" class="d-block pl-3">Service Authentication</a>
+    
+    <a href="https://marblerun.sh/docs/features/infrastructure-validation/" class="d-block pl-3">Infrastructure Validation</a>
+    
+    <a href="https://marblerun.sh/docs/features/remote-attestation/" class="d-block pl-3">Remote Attestation</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Tasks</h6>
+    
+    <a href="https://marblerun.sh/docs/tasks/deploy/" class="d-block pl-3">Deploy Marblerun to your cluster</a>
+    
+    <a href="https://marblerun.sh/docs/tasks/set-manifest/" class="d-block pl-3">Setting a Manifest</a>
+    
+    <a href="https://marblerun.sh/docs/tasks/add-service/" class="d-block pl-3">Adding a Service</a>
+    
+    <a href="https://marblerun.sh/docs/tasks/verification/" class="d-block pl-3">Client-Side verification</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Examples</h6>
+    
+    <a href="https://marblerun.sh/docs/examples/helloworld/" class="d-block pl-3">Hello World</a>
+    
+    <a href="https://marblerun.sh/docs/examples/emojivoto/" class="d-block pl-3">Confidential Emoji Voting</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <a href="https://marblerun.sh/docs/changelog/" class="d-block">Changelog</a>
+    
+  </div>
+  
+  
+  
+</div>
+    </div>
+    <div class="col-12 col-lg-9">
+      <article>
+        <h1 id="infrastructure-validation">Infrastructure Validation</h1>
+<p>Marblerun allows you to define several VM types you want to whitelist for your application to run on. This way you can make sure that when you deploy your application to a cluster with VM of type A, nobody can substitute one of the nodes with a VM of type B.</p>
+<p>The incentive is that an update of the Trusted Computing components as the CPU, Provisioning Certificate Enclave, or Quoting Enclave might contain security relevant changes.
+In the deployment of your application you want to make sure that it only runs on the latest up to date versions.
+You can do so by specifying the particular version numbers in <em>Infrastructures</em> section of your manifest:</p>
+<ul>
+<li><strong>QESVN</strong>: The Quoting Enclaves version number</li>
+<li><strong>PCESVN</strong>: The Provisioning Certificate Enclave version number</li>
+<li><strong>CPUSVN</strong>: The CPU version number</li>
+<li><strong>RootCA</strong>: The Root Certificate of the remote attestation chain</li>
+</ul>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">    <span style="color:#e6db74">&#34;Infrastructures&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
+        <span style="color:#f92672">&#34;Azure&#34;</span>: {
+            <span style="color:#f92672">&#34;QESVN&#34;</span>: <span style="color:#ae81ff">2</span>,
+            <span style="color:#f92672">&#34;PCESVN&#34;</span>: <span style="color:#ae81ff">3</span>,
+            <span style="color:#f92672">&#34;CPUSVN&#34;</span>: [<span style="color:#ae81ff">0</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">15</span>],
+            <span style="color:#f92672">&#34;RootCA&#34;</span>: [<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">3</span>]
+        },
+        <span style="color:#f92672">&#34;Alibaba&#34;</span>: {
+            <span style="color:#f92672">&#34;QESVN&#34;</span>: <span style="color:#ae81ff">2</span>,
+            <span style="color:#f92672">&#34;PCESVN&#34;</span>: <span style="color:#ae81ff">4</span>,
+            <span style="color:#f92672">&#34;CPUSVN&#34;</span>: [<span style="color:#ae81ff">15</span>,<span style="color:#ae81ff">14</span>,<span style="color:#ae81ff">13</span>,<span style="color:#ae81ff">12</span>,<span style="color:#ae81ff">11</span>,<span style="color:#ae81ff">10</span>,<span style="color:#ae81ff">9</span>,<span style="color:#ae81ff">8</span>,<span style="color:#ae81ff">7</span>,<span style="color:#ae81ff">6</span>,<span style="color:#ae81ff">5</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">3</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">0</span>],
+            <span style="color:#f92672">&#34;RootCA&#34;</span>: [<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>,<span style="color:#ae81ff">4</span>]
+        }
+    }
+</code></pre></div>
+      </article>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-light text-center p-3">
+
+	<div>Marblerun is brought to you by <a target="_blank" href="https://edgeless.systems/">Edgeless Systems GmbH <img
+				src="/img/ES_Symbol_black.svg" class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width="14px"
+				class="mb-3"></a>
+	</div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

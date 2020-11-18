@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Deploy Marblerun to your cluster</title>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="canonical" href="https://marblerun.sh/docs/tasks/deploy/" />
+	
+	<link rel="stylesheet" href="https://marblerun.sh/scss/bootstrap.min.05e88624b497548722fef3538d7efdf80b0045261b068a51fbcf9b25d5fa5298.css" emotion="🤩">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid">
+  <a class="navbar-brand" href="/">
+    <img src="/img/logo.png" width="140px">
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link " href="/docs/introduction/"><i
+            class="fa fa-book"></i> Docs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link " href="/community"><i
+            class="fa fa-commenting"></i>
+          Community</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"> <i class="fa fa-github"></i> Github</a>
+      </li>
+      <li class="nav-item">
+        <a href="#0" class="nav-link btn btn-primary ml-3">Get Started →</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<div class="container my-3">
+  <div class="mb-3">
+    <div id="breadcrumbs">
+  <a href="/">Home</a>
+  
+  
+  
+  
+  / <a href="/docs">Docs</a>
+  
+  
+  
+  / <a href="/tasks">Tasks</a>
+  
+  
+  
+  / <a href="/deploy">Deploy</a>
+  
+  
+  
+  
+</div>
+  </div>
+  <h1 class="my-3">Docs</h1>
+  <div class="row">
+    <div class="col-12 col-lg-3">
+      <div class="docsSidebar">
+  
+  
+  
+  <div class="mb-3">
+    
+    <a href="https://marblerun.sh/docs/introduction/" class="d-block">Introduction</a>
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Getting Started</h6>
+    
+    <a href="https://marblerun.sh/docs/getting-started/quickstart/" class="d-block pl-3">Quickstart</a>
+    
+    <a href="https://marblerun.sh/docs/getting-started/confidential-computing/" class="d-block pl-3">Confidential Computing</a>
+    
+    <a href="https://marblerun.sh/docs/getting-started/service-mesh/" class="d-block pl-3">Service Mesh</a>
+    
+    <a href="https://marblerun.sh/docs/getting-started/overview/" class="d-block pl-3">Overview</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Features</h6>
+    
+    <a href="https://marblerun.sh/docs/features/service-authentication/" class="d-block pl-3">Service Authentication</a>
+    
+    <a href="https://marblerun.sh/docs/features/infrastructure-validation/" class="d-block pl-3">Infrastructure Validation</a>
+    
+    <a href="https://marblerun.sh/docs/features/remote-attestation/" class="d-block pl-3">Remote Attestation</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Tasks</h6>
+    
+    <a href="https://marblerun.sh/docs/tasks/deploy/" class="d-block pl-3">Deploy Marblerun to your cluster</a>
+    
+    <a href="https://marblerun.sh/docs/tasks/set-manifest/" class="d-block pl-3">Setting a Manifest</a>
+    
+    <a href="https://marblerun.sh/docs/tasks/add-service/" class="d-block pl-3">Adding a Service</a>
+    
+    <a href="https://marblerun.sh/docs/tasks/verification/" class="d-block pl-3">Client-Side verification</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <h6>Examples</h6>
+    
+    <a href="https://marblerun.sh/docs/examples/helloworld/" class="d-block pl-3">Hello World</a>
+    
+    <a href="https://marblerun.sh/docs/examples/emojivoto/" class="d-block pl-3">Confidential Emoji Voting</a>
+    
+    
+  </div>
+  
+  <div class="mb-3">
+    
+    <a href="https://marblerun.sh/docs/changelog/" class="d-block">Changelog</a>
+    
+  </div>
+  
+  
+  
+</div>
+    </div>
+    <div class="col-12 col-lg-9">
+      <article>
+        <h1 id="deploy-marblerun-to-your-cluster">Deploy Marblerun to your cluster</h1>
+<h2 id="before-you-begin">Before you begin</h2>
+<p>This article assumes that you have an existing AKS cluster. If you need an AKS cluster, see the AKS quickstart <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough">using the Azure CLI</a> or using the <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal">Azure portal</a>.
+Alternatively, you can deploy with <a href="https://minikube.sigs.k8s.io/docs/start/">minikube</a>.</p>
+<p>This article uses <a href="https://helm.sh/">Helm 3</a> to install Marblerun. Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the <a href="https://docs.helm.sh/using_helm/#installing-helm">Helm install docs</a>. For more information on configuring and using Helm, see <a href="https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm">Install applications with Helm in Azure Kubernetes Service (AKS)</a>.</p>
+<h2 id="adding-marbleruns-helm-repository">Adding Marblerun&rsquo;s Helm repository</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm repo add edgeless https://helm.edgeless.systems
+helm repo update
+</code></pre></div><h2 id="installing-the-chart">Installing the chart</h2>
+<p>Update the hostname with your cluster&rsquo;s FQDN.</p>
+<ul>
+<li>
+<p>For a cluster with SGX support:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install marblerun-coordinator edgeless/marblerun-coordinator <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --create-namespace <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -n marblerun <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set coordinator.hostname<span style="color:#f92672">=</span>mycluster.uksouth.cloudapp.azure.com
+</code></pre></div></li>
+<li>
+<p>For a cluster without SGX support:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm install marblerun-coordinator edgeless/marblerun-coordinator <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --create-namespace <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    -n marblerun <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set coordinator.resources<span style="color:#f92672">=</span>null <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set coordinator.simulation<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set tolerations<span style="color:#f92672">=</span>null <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set coordinator.hostname<span style="color:#f92672">=</span>mycluster.uksouth.cloudapp.azure.com
+</code></pre></div></li>
+</ul>
+<h2 id="dns-for-the-client-api-on-azure-kubernetes-service-aks">DNS for the Client-API on Azure Kubernetes Service (AKS)</h2>
+<p>This explains how to configure the DNS for the Edgless Mesh Client-API when running on a AKS cluster.</p>
+<h3 id="configure-fqdn-for-the-coordinators-ip-address">Configure FQDN for the coordinators' IP address</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># Public IP address of your coordinator-client-api service</span>
+IP<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;MY_EXTERNAL_IP&#34;</span>
+
+<span style="color:#75715e"># Name to associate with public IP address</span>
+DNSNAME<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;marblerun&#34;</span>
+
+<span style="color:#75715e"># Get the resource-id of the public ip</span>
+PUBLICIPID<span style="color:#f92672">=</span><span style="color:#66d9ef">$(</span>az network public-ip list --query <span style="color:#e6db74">&#34;[?ipAddress!=null]|[?contains(ipAddress, &#39;</span>$IP<span style="color:#e6db74">&#39;)].[id]&#34;</span> --output tsv<span style="color:#66d9ef">)</span>
+
+<span style="color:#75715e"># Update public ip address with DNS name</span>
+az network public-ip update --ids $PUBLICIPID --dns-name $DNSNAME
+
+<span style="color:#75715e"># Display the FQDN</span>
+az network public-ip show --ids $PUBLICIPID --query <span style="color:#e6db74">&#34;[dnsSettings.fqdn]&#34;</span> --output tsv
+</code></pre></div><h3 id="test-the-dns-configuration">Test the DNS configuration</h3>
+<p>Use curl to test that the DNS was configured correctly. Update the hostname with the DNS name you created.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl -k https://marblerun.uksouth.cloudapp.azure.com:25555/status
+</code></pre></div><h3 id="ingressgateway-configuration">Ingress/Gateway configuration</h3>
+<p>If you&rsquo;re using an ingress-controller or gateway for managing access to the marblerun-coordinator make sure you&rsquo;re enabling SNI for your TLS connections.</p>
+<ul>
+<li>For the NGINX ingress controller add the <a href="https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#ssl-passthrough"><code>nginx.ingress.kubernetes.io/ssl-passthrough</code></a> annotation.</li>
+<li>For Istio Gatways set the <a href="https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-sni-passthrough/#configure-an-ingress-gateway">tls-mode PASSTHROUGH</a></li>
+</ul>
+
+      </article>
+    </div>
+  </div>
+</div>
+
+<footer class="bg-light text-center p-3">
+
+	<div>Marblerun is brought to you by <a target="_blank" href="https://edgeless.systems/">Edgeless Systems GmbH <img
+				src="/img/ES_Symbol_black.svg" class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width="14px"
+				class="mb-3"></a>
+	</div>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+</body>
+
+</html>

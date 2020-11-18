@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Docs on Marblerun</title>
+    <link>https://marblerun.sh/docs/</link>
+    <description>Recent content in Docs on Marblerun</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Nov 2020 16:28:16 +0530</lastBuildDate><atom:link href="https://marblerun.sh/docs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Introduction</title>
+      <link>https://marblerun.sh/docs/introduction/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/introduction/</guid>
+      <description>Introduction Marblerun (or Edgeless MR) is a framework for creating distributed confidential-computing apps.
+Build your confidential microservices with Edgeless RT, distribute them with Kubernetes on an SGX-enabled cluster, and let Marblerun take care of the rest. Deploy end-to-end secure and verifiable AI pipelines or crunch on sensitive big data in the cloud. Confidential computing at scale has never been easier.
+Marblerun guarantees that the topology of your distributed app adheres to a manifest specified in simple JSON.</description>
+    </item>
+    
+    <item>
+      <title>Changelog</title>
+      <link>https://marblerun.sh/docs/changelog/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/changelog/</guid>
+      <description>Changelog </description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Features on Marblerun</title>
+    <link>https://marblerun.sh/docs/features/</link>
+    <description>Recent content in Features on Marblerun</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Nov 2020 16:28:16 +0530</lastBuildDate><atom:link href="https://marblerun.sh/docs/features/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Service Authentication</title>
+      <link>https://marblerun.sh/docs/features/service-authentication/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/service-authentication/</guid>
+      <description>Service Authentication In a distributed confidential application it is of utmost importance to guarantee only trusted services are added to the mesh. Imagine an adversary could spawn a malicious instance of a backend service that would retrieve part of the data flow through load balancing. Your genuine instances would still guarantee the confidentiality of the data they receive, but part of the data would be leaked to the adversary.
+Marblerun verifies the identity and integrity of each newly spawned service before adding it to the service mesh.</description>
+    </item>
+    
+    <item>
+      <title>Infrastructure Validation</title>
+      <link>https://marblerun.sh/docs/features/infrastructure-validation/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/infrastructure-validation/</guid>
+      <description>Infrastructure Validation Marblerun allows you to define several VM types you want to whitelist for your application to run on. This way you can make sure that when you deploy your application to a cluster with VM of type A, nobody can substitute one of the nodes with a VM of type B.
+The incentive is that an update of the Trusted Computing components as the CPU, Provisioning Certificate Enclave, or Quoting Enclave might contain security relevant changes.</description>
+    </item>
+    
+    <item>
+      <title>Remote Attestation</title>
+      <link>https://marblerun.sh/docs/features/remote-attestation/</link>
+      <pubDate>Sat, 14 Nov 2020 16:28:16 +0530</pubDate>
+      
+      <guid>https://marblerun.sh/docs/features/remote-attestation/</guid>
+      <description>Remote Attestation Remote attestation is a fundamental problem for a distributed confidential application. To keep things simple, Marblerun acts as certificate authority and issues one concise remote attestation statement for your whole distributed app. This can be used by anyone to verify the integrity of your distributed app.
+To that end, the Coordinator provides a Client REST-API endpoint that allows any client to verify the topology of the distributed app adheres to the deployed manifest.</description>
+    </item>
+    
+  </channel>
+</rss>
