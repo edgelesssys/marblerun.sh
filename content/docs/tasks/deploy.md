@@ -1,16 +1,14 @@
 ---
-title: "Deploy Marblerun to your cluster"
+title: "Deploying Marblerun"
 date: 2020-11-14T16:28:16+05:30
 draft: false
 weight: 1
 ---
 
-# Deploy Marblerun to your cluster
+# Deploying Marblerun
 
-## Before you begin
-
-This article assumes that you have an existing AKS cluster. If you need an AKS cluster, see the AKS quickstart [using the Azure CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) or using the [Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal).
-Alternatively, you can deploy with [minikube](https://minikube.sigs.k8s.io/docs/start/).
+This article assumes that you have an existing Azure Kubernetes Service (AKS) cluster. An AKS cluster can be created using the [Azure CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) or the [Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal).
+Alternatively, you can deploy the steps with [minikube](https://minikube.sigs.k8s.io/docs/start/).
 
 This article uses [Helm 3](https://helm.sh/) to install Marblerun. Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the [Helm install docs](https://docs.helm.sh/using_helm/#installing-helm). For more information on configuring and using Helm, see [Install applications with Helm in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm).
 
@@ -44,8 +42,9 @@ Update the hostname with your cluster's FQDN.
         --set coordinator.simulation=1 \
         --set tolerations=null \
         --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
+    ```
 
-## DNS for the client API on Azure Kubernetes Service (AKS)
+## DNS for the client API on AKS
 
 This explains how to configure the DNS for the Edgeless Mesh Client-API when running on an AKS cluster.
 

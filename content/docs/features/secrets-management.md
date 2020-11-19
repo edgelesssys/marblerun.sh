@@ -7,7 +7,7 @@ weight: 3
 
 # Secrets management
 
-Two of the *Coordinator*'s central duties are the generation and the management of secrets for the Marbles (i.e., containers running enclaves). Specifically, the *Coordinator* deals with the following types of Marble secrets.
+Two of the Coordinator's central duties are the generation and the management of secrets for the Marbles (i.e., containers running enclaves). Specifically, the Coordinator deals with the following types of Marble secrets.
 
 * [Virtual sealing keys](#virtual-sealing-keys)
 * [Shared symmetric keys](#shared-symmetric-keys)

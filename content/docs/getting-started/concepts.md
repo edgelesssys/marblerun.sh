@@ -1,11 +1,21 @@
 ---
-title: "Service Mesh"
+title: "Concepts"
 date: 2020-11-14T16:28:16+05:30
 draft: false
 weight: 3
 ---
 
-# Confidential service mesh
+# Concepts
+
+This article describes the concepts of [confidential computing](#confidential-computing) and [service meshes](#services-meshes) which are key to the [Marblerun approach](#marblerun-approach).
+
+## Confidential computing
+
+Confidential computing protects data in use by performing computation in hardware-based secure enclaves. The most prominent enclave to date is probably [Intel SGX](https://www.intel.de/content/www/de/de/architecture-and-technology/software-guard-extensions.html).
+Enclaves prevent unauthorized access or modification of applications and data while in use, thereby increasing the security assurances for organizations that manage sensitive and regulated data.
+For information about confidential computing, see the Confidential Computing Consortium [white paper](https://confidentialcomputing.io/white-papers/).
+
+## Services meshes
 
 A service mesh is an infrastructure layer for managing, observing, and securing communications in a container-based cluster. In the Kubernetes world, [Istio](https://istio.io), [HashiCorp Consul](https://www.consul.io/), and [Linkerd](https://linkerd.io/) are the most popular general-purpose service meshes.
 
@@ -18,7 +28,7 @@ When we started looking into the concept of *confidential microservices*, we rea
 
 Ultimately, a *confidential service mesh* should enable *distributed confidential apps* that can be used, managed, and deployed with the ease of a *confidential monolith*.
 
-## Approach
+## Marblerun approach
 
 Most general-purpose service meshes are implemented using so-called *sidecars*. The most prevalent sidecar is probably [Envoy](https://www.envoyproxy.io/).
 In essence, sidecars are network proxies that are injected into *pods* running application containers. Sidecars observe, control, and often encrypt the network communication between application containers. Sidecars are often referred to as the data plane, in relation to the so-called control plane.

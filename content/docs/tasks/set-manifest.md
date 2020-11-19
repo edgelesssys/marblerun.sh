@@ -2,7 +2,7 @@
 title: "Setting a Manifest"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 2
+weight: 3
 ---
 
 # Setting a Manifest
@@ -77,7 +77,8 @@ See the following Manifest for example (`manifest.json`).
                 }
             }
         }
-    }
+    },
+    "RecoveryKey": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgkqhkiG9w0BAQEFAAOCAZIAMIIBjQKCAYQAyokHE545y3lU4xsxrqXJ\n58jiaXN8yEdjjuKk0903zMT+FV62UeX17BQhrtdOIf4l4/V/xipqI+osAHBQpRY1\nwM1NCIFFlXUQGgXdtoWiAS7zfFKC+mNlB63Z0Z/50Iw9pl6AFWBQ+16lfmsPMnIu\nLHf4AL3KXVlpgPn6cmRfUoDBx6ITm2QrCDFlVu4j4isgnaZrw6VD0V+G9Mcpgs/0\n0XNmz72eMULfuW+4ULJI9Fx88wiNWWHeSI4vz83ylM5+1QntFROSYWBjgmCnm25j\nKbzV765CVTIU3qq3qkYmclpHfKKt7/TOgVOauvkMCYXyLJkSd1LGLIctWK8tCs1K\nnB237nNg+dZ67Zz9lBYKfNnFoudoc85+vXBRKIfV56FXiXrB32hF1DEj11viMPUr\nroMokLFtDCoAk0Xok4AFQDOgxTw7F8cHskjIYWVCmCqmDUI+FGttyVrc5YLSHAuR\nxQ2oxD0F44JXwxDc/C+OYzOApYl25rmR2nuqioDGpL6/ELRRAgMBAAE=\n-----END PUBLIC KEY-----\n"
 }
 ```
 
@@ -102,3 +103,9 @@ Assuming you've deployed our Coordinator image from `ghcr.io/edgelesssys/coordin
     ```bash
     curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
     ```
+
+If the Manifest contains a `RecoveryKey` entry, you will receive a JSON reply including a recovery secret, encrypted with for the `RecoveryKey`. The reply will look like this, with `[base64]` as your encrypted recovery secret.
+
+`{"EncryptionKey":"[base64]"}`
+
+**It is important that you keep this value stored somewhere safe. Without it, you will not be able to perform a recovery step in case the SGX seal key changed.**

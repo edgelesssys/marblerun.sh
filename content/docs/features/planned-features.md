@@ -9,4 +9,4 @@ weight: 4
 
 TODO
 * Use constant-time crypto
-*
+* Split recovery key
