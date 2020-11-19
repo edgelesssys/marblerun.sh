@@ -30,7 +30,6 @@ Update the hostname with your cluster's FQDN or use localhost for local testing.
     helm install marblerun-coordinator edgeless/marblerun-coordinator \
         --create-namespace \
         -n marblerun \
-        --set global.pullSecret=regcred \
         --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
     ```
 
@@ -43,7 +42,6 @@ Update the hostname with your cluster's FQDN or use localhost for local testing.
         --set coordinator.resources=null \
         --set coordinator.simulation=1 \
         --set tolerations=null \
-        --set global.pullSecret=regcred \
         --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
     ```
 
