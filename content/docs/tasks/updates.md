@@ -1,11 +1,11 @@
 ---
-title: "Deployment updates"
+title: "Updating a deployment"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 5
+weight: 7
 ---
 
-# Deployment updates
+# Updating a deployment
 
 The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.
 

@@ -11,7 +11,7 @@ weight: 1
 
 ![logo](/img/mr_logo.svg)
 
-Marblerun (or Edgeless MR) is a framework for creating distributed confidential-computing apps.
+Marblerun is a framework for creating distributed confidential-computing apps.
 
 Build your confidential microservices with [Edgeless RT][edgelessrt], distribute them with Kubernetes on an SGX-enabled cluster, and let Marblerun take care of the rest. Deploy end-to-end secure and verifiable AI pipelines or crunch on sensitive big data in the cloud. Confidential computing at scale has never been easier.
 
@@ -27,9 +27,9 @@ To keep things simple, Marblerun issues one concise remote attestation statement
 
 ## Overview
 
-The following gives a high-level overview of a Marblerun-controlled cluster.
+Logically, Marblerun consists of two parts, the control plane called *Coordinator* and the data plane called *Marbles*.
+The Coordinator needs to be deployed once in your cluster and the Marble layer needs to be integrated with each service.
+Marblerun is configured with a simple JSON document called the *Manifest*.
+It specifies the topology of the distributed app, the infrastructure properties, and provides configuration parameters for each service.
 
-<img src="assets/overview.svg" alt="overview" width="600"/>
-
-<!-- refs -->
-[edgelessrt]: https://github.com/edgelesssys/edgelessrt
+![overview](/img/overview.svg)
