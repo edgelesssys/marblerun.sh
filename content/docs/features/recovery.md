@@ -25,7 +25,7 @@ openssl genrsa -out private_key.pem 4096
 openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
 ```
 
-In the manifest, the PEM is stored as `RecoveryKey`. See [Setting a Manifest](tasks/set-manifest.md) as an example. To preserve the new lines correctly, you can use the following command:
+In the manifest, the PEM is stored as `RecoveryKey`. See [Setting a Manifest]({{< ref "docs/tasks/set-manifest.md" >}}) as an example. To preserve the new lines correctly, you can use the following command:
 
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
@@ -61,5 +61,5 @@ You have to options on how to proceed:
 
 1. Dismiss the sealed state by uploading a new manifest
 
-    In case there is no desire to recover the old state it can simply be dismissed by [uploading a new manifest](tasks/set-manifest.md).
+    In case there is no desire to recover the old state it can simply be dismissed by [uploading a new manifest]({{< ref "docs/tasks/set-manifest.md" >}}).
     *Note* that if a new manifest is uploaded to the server, the old state will be *overwritten* on disk and the `/recover` endpoint will not be available anymore.
