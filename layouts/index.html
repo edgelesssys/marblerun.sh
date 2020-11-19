@@ -5,7 +5,7 @@
 		<div class="row justify-content-md-center my-5 pb-5">
 			<div class="col-12 col-lg-8">
 				<div class="">
-					<h1 class="heading">{{ .Params.title }}</h1>
+					<h1 class="heading">{{ .Params.claim | markdownify }}</h1>
 					<p style="color: rgba(255,255,255,0.7); background-color: #00010d;">{{ .Params.description | markdownify }}</p>
 					<br>
 					<a class="btn btn-primary btn-lg" href="{{ .Params.buttons.get_started.url }}">
@@ -37,7 +37,7 @@
 		{{ range .Params.features_list.items }}
 		<div class="col-12 col-lg-4 mb-4">
 			<div class="feature py-4">
-				<h5>{{ .title }}</h5>
+				<h5><i class="{{ .icon }}"></i> {{ .title }}</h5>
 				<p class="text-muted">{{ .description | markdownify }}</p>
 			</div>
 
