@@ -4,17 +4,19 @@
 / <a href=/docs>Docs</a>
 / <a href=/getting-started>Getting started</a>
 / <a href=/quickstart>Quickstart</a></div></div><h1 class=my-3>Docs</h1><div class=row><div class="col-12 col-lg-3"><div class=docsSidebar><div class=mb-3><a href=https://marblerun.sh/docs/introduction/ class=d-block>Introduction</a></div><div class=mb-3><h6>Getting Started</h6><a href=https://marblerun.sh/docs/getting-started/quickstart/ class="d-block pl-3">Quickstart</a>
-<a href=https://marblerun.sh/docs/getting-started/confidential-computing/ class="d-block pl-3">Confidential Computing</a>
-<a href=https://marblerun.sh/docs/getting-started/service-mesh/ class="d-block pl-3">Service Mesh</a>
-<a href=https://marblerun.sh/docs/getting-started/overview/ class="d-block pl-3">Overview</a></div><div class=mb-3><h6>Features</h6><a href=https://marblerun.sh/docs/features/attestation/ class="d-block pl-3">Attestation</a>
+<a href=https://marblerun.sh/docs/getting-started/concepts/ class="d-block pl-3">Concepts</a>
+<a href=https://marblerun.sh/docs/getting-started/coordinator/ class="d-block pl-3">Coordinator</a>
+<a href=https://marblerun.sh/docs/getting-started/marbles/ class="d-block pl-3">Marbles</a></div><div class=mb-3><h6>Features</h6><a href=https://marblerun.sh/docs/features/attestation/ class="d-block pl-3">Attestation</a>
 <a href=https://marblerun.sh/docs/features/recovery/ class="d-block pl-3">Recovery</a>
 <a href=https://marblerun.sh/docs/features/secrets-management/ class="d-block pl-3">Secrets management</a>
-<a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploy Marblerun to your cluster</a>
+<a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploying Marblerun</a>
+<a href=https://marblerun.sh/docs/tasks/define-manifest/ class="d-block pl-3">Defining a Manifest</a>
 <a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
 <a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a Service</a>
-<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Client-Side verification</a>
-<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Deployment updates</a>
-<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello World</a>
+<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Verifying a deployment</a>
+<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a>
+<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Updating a deployment</a>
+<a href=https://marblerun.sh/docs/tasks/recover-coordinator/ class="d-block pl-3">Recovering the Coordinator</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello World</a>
 <a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=quickstart>Quickstart</h1><h2 id=step-0-setup>Step 0: Setup</h2><p>Set up a Kubernetes cluster and install <code>kubectl</code>. One easy way to get started is to run Kubernetes on your local machine using <a href=https://kubernetes.io/docs/tasks/tools/install-minikube/>Minikube</a>.</p><p>Please also install <a href=https://helm.sh/docs/intro/install/>Helm</a> (&ldquo;the package manager for Kubernetes&rdquo;).</p><h2 id=step-1-install-the-coordinator-onto-the-cluster>Step 1: Install the Coordinator onto the cluster</h2><p>Add the Edgeless Systems chart repository to Helm.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm repo add edgeless https://helm.edgeless.systems
 helm repo update
 </code></pre></div><p>Install Marblerun&rsquo;s Coordinator using Helm.
