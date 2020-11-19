@@ -1,203 +1,42 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>Deployment updates</title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="canonical" href="https://marblerun.sh/docs/tasks/updates/" />
-	
-	<link rel="stylesheet" href="https://marblerun.sh/scss/bootstrap.min.05e88624b497548722fef3538d7efdf80b0045261b068a51fbcf9b25d5fa5298.css" emotion="🤩">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body>
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid">
-  <a class="navbar-brand" href="/">
-    <img src="/img/logo.png" width="140px">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link " href="/docs/introduction/"><i
-            class="fa fa-book"></i> Docs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="/community"><i
-            class="fa fa-commenting"></i>
-          Community</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> <i class="fa fa-github"></i> Github</a>
-      </li>
-      <li class="nav-item">
-        <a href="#0" class="nav-link btn btn-primary ml-3">Get Started →</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container my-3">
-  <div class="mb-3">
-    <div id="breadcrumbs">
-  <a href="/">Home</a>
-  
-  
-  
-  
-  / <a href="/docs">Docs</a>
-  
-  
-  
-  / <a href="/tasks">Tasks</a>
-  
-  
-  
-  / <a href="/updates">Updates</a>
-  
-  
-  
-  
-</div>
-  </div>
-  <h1 class="my-3">Docs</h1>
-  <div class="row">
-    <div class="col-12 col-lg-3">
-      <div class="docsSidebar">
-  
-  
-  
-  <div class="mb-3">
-    
-    <a href="https://marblerun.sh/docs/introduction/" class="d-block">Introduction</a>
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Getting Started</h6>
-    
-    <a href="https://marblerun.sh/docs/getting-started/quickstart/" class="d-block pl-3">Quickstart</a>
-    
-    <a href="https://marblerun.sh/docs/getting-started/confidential-computing/" class="d-block pl-3">Confidential Computing</a>
-    
-    <a href="https://marblerun.sh/docs/getting-started/service-mesh/" class="d-block pl-3">Service Mesh</a>
-    
-    <a href="https://marblerun.sh/docs/getting-started/overview/" class="d-block pl-3">Overview</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Features</h6>
-    
-    <a href="https://marblerun.sh/docs/features/attestation/" class="d-block pl-3">Attestation</a>
-    
-    <a href="https://marblerun.sh/docs/features/recovery/" class="d-block pl-3">Recovery</a>
-    
-    <a href="https://marblerun.sh/docs/features/secrets-management/" class="d-block pl-3">Secrets management</a>
-    
-    <a href="https://marblerun.sh/docs/features/planned-features/" class="d-block pl-3">Planned features</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Tasks</h6>
-    
-    <a href="https://marblerun.sh/docs/tasks/deploy/" class="d-block pl-3">Deploy Marblerun to your cluster</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/set-manifest/" class="d-block pl-3">Setting a Manifest</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/add-service/" class="d-block pl-3">Adding a Service</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/verification/" class="d-block pl-3">Client-Side verification</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/updates/" class="d-block pl-3">Deployment updates</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/monitoring/" class="d-block pl-3">Monitoring and logging</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Examples</h6>
-    
-    <a href="https://marblerun.sh/docs/examples/helloworld/" class="d-block pl-3">Hello World</a>
-    
-    <a href="https://marblerun.sh/docs/examples/emojivoto/" class="d-block pl-3">Confidential Emoji Voting</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <a href="https://marblerun.sh/docs/changelog/" class="d-block">Changelog</a>
-    
-  </div>
-  
-  
-  
-</div>
-    </div>
-    <div class="col-12 col-lg-9">
-      <article>
-        <h1 id="deployment-updates">Deployment updates</h1>
-<p>The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.</p>
-<h2 id="updating-to-a-new-marblerun-version">Updating to a new Marblerun version</h2>
-<p>When updating to a new Marblerun version, updates to both the control plane and data plane components may be required.</p>
-<h3 id="updating-the-coordinator">Updating the Coordinator</h3>
-<p>Updating the Coordinator follows the regular steps for <a href="https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment">updating a deployment in Kubernetes</a>.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl -n marblerun set image deployment/marblerun-coordinator coordinator<span style="color:#f92672">=</span>ghcr.io/edgelesssys/coordinator:v0.2.0 --record
-</code></pre></div><p>You can also use Helm to upgrade the image. Note that Helm requires you to pass all the flags with <code>upgrade</code> that you set during the initial deployment.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">helm upgrade marblerun-coordinator edgeless/marblerun-coordinator <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    -n marblerun <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --set coordinator.coordinatorImageVersion<span style="color:#f92672">=</span>v0.2.0
+<!doctype html><html><head><title>Deployment updates</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://marblerun.sh/docs/tasks/updates/><link rel=stylesheet href=https://marblerun.sh/scss/bootstrap.min.05e88624b497548722fef3538d7efdf80b0045261b068a51fbcf9b25d5fa5298.css emotion=🤩><link rel=stylesheet href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css></head><body><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid"><a class=navbar-brand href=/><img src=/img/logo.png width=140px></a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav ml-auto"><li class=nav-item><a class=nav-link href=/docs/introduction/><i class="fa fa-book"></i>Docs</a></li><li class=nav-item><a class=nav-link href=/community><i class="fa fa-commenting"></i>Community</a></li><li class=nav-item><a class=nav-link href=https://github.com/edgelesssys/marblerun><i class="fa fa-github"></i>Github</a></li><li class=nav-item><a href=/docs/getting-started/quickstart class="nav-link btn btn-primary ml-3">Get Started →</a></li></ul></div></nav><div class="container my-3"><div class=mb-3><div id=breadcrumbs><a href=/>Home</a>
+/ <a href=/docs>Docs</a>
+/ <a href=/tasks>Tasks</a>
+/ <a href=/updates>Updates</a></div></div><h1 class=my-3>Docs</h1><div class=row><div class="col-12 col-lg-3"><div class=docsSidebar><div class=mb-3><a href=https://marblerun.sh/docs/introduction/ class=d-block>Introduction</a></div><div class=mb-3><h6>Getting Started</h6><a href=https://marblerun.sh/docs/getting-started/quickstart/ class="d-block pl-3">Quickstart</a>
+<a href=https://marblerun.sh/docs/getting-started/confidential-computing/ class="d-block pl-3">Confidential Computing</a>
+<a href=https://marblerun.sh/docs/getting-started/service-mesh/ class="d-block pl-3">Service Mesh</a>
+<a href=https://marblerun.sh/docs/getting-started/overview/ class="d-block pl-3">Overview</a></div><div class=mb-3><h6>Features</h6><a href=https://marblerun.sh/docs/features/attestation/ class="d-block pl-3">Attestation</a>
+<a href=https://marblerun.sh/docs/features/recovery/ class="d-block pl-3">Recovery</a>
+<a href=https://marblerun.sh/docs/features/secrets-management/ class="d-block pl-3">Secrets management</a>
+<a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploy Marblerun to your cluster</a>
+<a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
+<a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a Service</a>
+<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Client-Side verification</a>
+<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Deployment updates</a>
+<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello World</a>
+<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=deployment-updates>Deployment updates</h1><p>The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.</p><h2 id=updating-to-a-new-marblerun-version>Updating to a new Marblerun version</h2><p>When updating to a new Marblerun version, updates to both the control plane and data plane components may be required.</p><h3 id=updating-the-coordinator>Updating the Coordinator</h3><p>Updating the Coordinator follows the regular steps for <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment>updating a deployment in Kubernetes</a>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n marblerun set image deployment/marblerun-coordinator coordinator<span style=color:#f92672>=</span>ghcr.io/edgelesssys/coordinator:v0.2.0 --record
+</code></pre></div><p>You can also use Helm to upgrade the image. Note that Helm requires you to pass all the flags with <code>upgrade</code> that you set during the initial deployment.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm upgrade marblerun-coordinator edgeless/marblerun-coordinator <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    -n marblerun <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>    --set coordinator.coordinatorImageVersion<span style=color:#f92672>=</span>v0.2.0
 </code></pre></div><p>If the Coordinator is rescheduled on the same host as before, it will continue running with the same Manifest as before.
-However, if the Coordinator gets rescheduled to another node during the updating process you need to perform the <a href="recovery.md">recovery step</a>.</p>
-<p>The Marbles won&rsquo;t be affected by the Coordinator update and will continue running.
+However, if the Coordinator gets rescheduled to another node during the updating process you need to perform the <a href=https://marblerun.sh/docs/features/recovery/>recovery step</a>.</p><p>The Marbles won&rsquo;t be affected by the Coordinator update and will continue running.
 New Marbles that are started can interact with existing ones.
-If the Coordinator version update also affects the data plane or the Marble bootstrapping process, you will need to restart your Marbles.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">kubectl rollout restart deployment your_deployment_name
+If the Coordinator version update also affects the data plane or the Marble bootstrapping process, you will need to restart your Marbles.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl rollout restart deployment your_deployment_name
 </code></pre></div><p><strong>Note:</strong> when updating the Coordinator image, you need to be careful about your client&rsquo;s configuration.
 If you specified a <code>UniqueID</code>, your clients won&rsquo;t accept the new Coordinator version.
-See our <a href="#manifest-values">remarks on Manifest values</a> for more information.</p>
-<h3 id="updating-marbles">Updating Marbles</h3>
-<p>The tight integration of Marblerun&rsquo;s data plane with your application requires a rebuild of your application and the corresponding containers.
+See our <a href=#manifest-values>remarks on Manifest values</a> for more information.</p><h3 id=updating-marbles>Updating Marbles</h3><p>The tight integration of Marblerun&rsquo;s data plane with your application requires a rebuild of your application and the corresponding containers.
 Note that you only need to update if there have been changes affecting the data plane.
-The process is similar to a regular update of your application, as is described in the following.</p>
-<h2 id="updating-your-confidential-application">Updating your confidential application</h2>
-<p>Updating your application is straightforward with Marblerun.
-You can roll out the new version similar to a regular <a href="(https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment)">deployment update</a>.
+The process is similar to a regular update of your application, as is described in the following.</p><h2 id=updating-your-confidential-application>Updating your confidential application</h2><p>Updating your application is straightforward with Marblerun.
+You can roll out the new version similar to a regular <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment>deployment update</a>.
 The Coordinator will manage the attestation and bootstrapping of your new version.
-Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the Manifest in effect.</p>
-<h3 id="manifest-values">Manifest values</h3>
-<p>Making updates work seamlessly requires some attention on what values are defined for your application in the Manifest.
-Take the following Manifest as an example:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json"><span style="color:#e6db74">&#34;package&#34;</span><span style="color:#960050;background-color:#1e0010">:</span> {
-    <span style="color:#f92672">&#34;UniqueID&#34;</span>: <span style="color:#e6db74">&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
-    <span style="color:#f92672">&#34;SignerID&#34;</span>: <span style="color:#e6db74">&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
-    <span style="color:#f92672">&#34;ProductID&#34;</span>: <span style="color:#ae81ff">42</span>,
-    <span style="color:#f92672">&#34;SecurityVersion&#34;</span>: <span style="color:#ae81ff">1</span>,
-    <span style="color:#f92672">&#34;Debug&#34;</span>: <span style="color:#66d9ef">false</span>
+Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the Manifest in effect.</p><h3 id=manifest-values>Manifest values</h3><p>Making updates work seamlessly requires some attention on what values are defined for your application in the Manifest.
+Take the following Manifest as an example:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#e6db74>&#34;package&#34;</span><span style=color:#960050;background-color:#1e0010>:</span> {
+    <span style=color:#f92672>&#34;UniqueID&#34;</span>: <span style=color:#e6db74>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
+    <span style=color:#f92672>&#34;SignerID&#34;</span>: <span style=color:#e6db74>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
+    <span style=color:#f92672>&#34;ProductID&#34;</span>: <span style=color:#ae81ff>42</span>,
+    <span style=color:#f92672>&#34;SecurityVersion&#34;</span>: <span style=color:#ae81ff>1</span>,
+    <span style=color:#f92672>&#34;Debug&#34;</span>: <span style=color:#66d9ef>false</span>
 }
 </code></pre></div><p>Setting <code>UniqueID</code> (aka <code>MRENCLAVE</code>), will pin your application to one specific release build.
 It will not be possible to update this release in the future.
@@ -205,26 +44,4 @@ We recommend setting the triple of <code>SignerID</code>, <code>ProductID</code>
 <code>SignerID</code> will only accept releases signed by you.
 <code>ProductID</code> will pin this package to one specific application and <code>SecuritVersion</code> to a minimum security version.
 You define those values when building your application&rsquo;s secure enclave.
-Future versions of Marblerun will support <code>SecurityVersion</code> updates in the Manifest, making it possible to drop older potentially vulnerable versions of your software without redeploying a Manifest.</p>
-
-      </article>
-    </div>
-  </div>
-</div>
-
-<footer class="bg-light text-center p-3">
-
-	<div>Marblerun is brought to you by <a target="_blank" href="https://edgeless.systems/">Edgeless Systems GmbH <img
-				src="/img/ES_Symbol_black.svg" class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width="14px"
-				class="mb-3"></a>
-	</div>
-</footer>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-</body>
-
-</html>
+Future versions of Marblerun will support <code>SecurityVersion</code> updates in the Manifest, making it possible to drop older potentially vulnerable versions of your software without redeploying a Manifest.</p></article></div></div></div><footer class="bg-light text-center p-3"><div>Marblerun is brought to you by <a target=_blank href=https://edgeless.systems/>Edgeless Systems GmbH <img src=/img/ES_Symbol_black.svg class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width=14px class=mb-3></a></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx crossorigin=anonymous></script><script src=/js/main.js></script></body></html>

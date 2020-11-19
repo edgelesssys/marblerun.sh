@@ -1,230 +1,82 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<title>Setting a Manifest</title>
-	<meta http-equiv="content-type" content="text/html; charset=utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="canonical" href="https://marblerun.sh/docs/tasks/set-manifest/" />
-	
-	<link rel="stylesheet" href="https://marblerun.sh/scss/bootstrap.min.05e88624b497548722fef3538d7efdf80b0045261b068a51fbcf9b25d5fa5298.css" emotion="🤩">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-</head>
-
-<body>
-
-<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-<link rel="manifest" href="/site.webmanifest">
-<meta name="msapplication-TileColor" content="#da532c">
-<meta name="theme-color" content="#ffffff">
-
-
-
-<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid">
-  <a class="navbar-brand" href="/">
-    <img src="/img/logo.png" width="140px">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link " href="/docs/introduction/"><i
-            class="fa fa-book"></i> Docs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " href="/community"><i
-            class="fa fa-commenting"></i>
-          Community</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#"> <i class="fa fa-github"></i> Github</a>
-      </li>
-      <li class="nav-item">
-        <a href="#0" class="nav-link btn btn-primary ml-3">Get Started →</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-
-<div class="container my-3">
-  <div class="mb-3">
-    <div id="breadcrumbs">
-  <a href="/">Home</a>
-  
-  
-  
-  
-  / <a href="/docs">Docs</a>
-  
-  
-  
-  / <a href="/tasks">Tasks</a>
-  
-  
-  
-  / <a href="/set-manifest">Set manifest</a>
-  
-  
-  
-  
-</div>
-  </div>
-  <h1 class="my-3">Docs</h1>
-  <div class="row">
-    <div class="col-12 col-lg-3">
-      <div class="docsSidebar">
-  
-  
-  
-  <div class="mb-3">
-    
-    <a href="https://marblerun.sh/docs/introduction/" class="d-block">Introduction</a>
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Getting Started</h6>
-    
-    <a href="https://marblerun.sh/docs/getting-started/quickstart/" class="d-block pl-3">Quickstart</a>
-    
-    <a href="https://marblerun.sh/docs/getting-started/confidential-computing/" class="d-block pl-3">Confidential Computing</a>
-    
-    <a href="https://marblerun.sh/docs/getting-started/service-mesh/" class="d-block pl-3">Service Mesh</a>
-    
-    <a href="https://marblerun.sh/docs/getting-started/overview/" class="d-block pl-3">Overview</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Features</h6>
-    
-    <a href="https://marblerun.sh/docs/features/attestation/" class="d-block pl-3">Attestation</a>
-    
-    <a href="https://marblerun.sh/docs/features/recovery/" class="d-block pl-3">Recovery</a>
-    
-    <a href="https://marblerun.sh/docs/features/secrets-management/" class="d-block pl-3">Secrets management</a>
-    
-    <a href="https://marblerun.sh/docs/features/planned-features/" class="d-block pl-3">Planned features</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Tasks</h6>
-    
-    <a href="https://marblerun.sh/docs/tasks/deploy/" class="d-block pl-3">Deploy Marblerun to your cluster</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/set-manifest/" class="d-block pl-3">Setting a Manifest</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/add-service/" class="d-block pl-3">Adding a Service</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/verification/" class="d-block pl-3">Client-Side verification</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/updates/" class="d-block pl-3">Deployment updates</a>
-    
-    <a href="https://marblerun.sh/docs/tasks/monitoring/" class="d-block pl-3">Monitoring and logging</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <h6>Examples</h6>
-    
-    <a href="https://marblerun.sh/docs/examples/helloworld/" class="d-block pl-3">Hello World</a>
-    
-    <a href="https://marblerun.sh/docs/examples/emojivoto/" class="d-block pl-3">Confidential Emoji Voting</a>
-    
-    
-  </div>
-  
-  <div class="mb-3">
-    
-    <a href="https://marblerun.sh/docs/changelog/" class="d-block">Changelog</a>
-    
-  </div>
-  
-  
-  
-</div>
-    </div>
-    <div class="col-12 col-lg-9">
-      <article>
-        <h1 id="setting-a-manifest">Setting a Manifest</h1>
-<p>The Manifest is a JSON document that defines which services span the mesh and how they should be configured.
+<!doctype html><html><head><title>Setting a Manifest</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://marblerun.sh/docs/tasks/set-manifest/><link rel=stylesheet href=https://marblerun.sh/scss/bootstrap.min.05e88624b497548722fef3538d7efdf80b0045261b068a51fbcf9b25d5fa5298.css emotion=🤩><link rel=stylesheet href=https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css></head><body><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid"><a class=navbar-brand href=/><img src=/img/logo.png width=140px></a>
+<button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav ml-auto"><li class=nav-item><a class=nav-link href=/docs/introduction/><i class="fa fa-book"></i>Docs</a></li><li class=nav-item><a class=nav-link href=/community><i class="fa fa-commenting"></i>Community</a></li><li class=nav-item><a class=nav-link href=https://github.com/edgelesssys/marblerun><i class="fa fa-github"></i>Github</a></li><li class=nav-item><a href=/docs/getting-started/quickstart class="nav-link btn btn-primary ml-3">Get Started →</a></li></ul></div></nav><div class="container my-3"><div class=mb-3><div id=breadcrumbs><a href=/>Home</a>
+/ <a href=/docs>Docs</a>
+/ <a href=/tasks>Tasks</a>
+/ <a href=/set-manifest>Set manifest</a></div></div><h1 class=my-3>Docs</h1><div class=row><div class="col-12 col-lg-3"><div class=docsSidebar><div class=mb-3><a href=https://marblerun.sh/docs/introduction/ class=d-block>Introduction</a></div><div class=mb-3><h6>Getting Started</h6><a href=https://marblerun.sh/docs/getting-started/quickstart/ class="d-block pl-3">Quickstart</a>
+<a href=https://marblerun.sh/docs/getting-started/confidential-computing/ class="d-block pl-3">Confidential Computing</a>
+<a href=https://marblerun.sh/docs/getting-started/service-mesh/ class="d-block pl-3">Service Mesh</a>
+<a href=https://marblerun.sh/docs/getting-started/overview/ class="d-block pl-3">Overview</a></div><div class=mb-3><h6>Features</h6><a href=https://marblerun.sh/docs/features/attestation/ class="d-block pl-3">Attestation</a>
+<a href=https://marblerun.sh/docs/features/recovery/ class="d-block pl-3">Recovery</a>
+<a href=https://marblerun.sh/docs/features/secrets-management/ class="d-block pl-3">Secrets management</a>
+<a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploy Marblerun to your cluster</a>
+<a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
+<a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a Service</a>
+<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Client-Side verification</a>
+<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Deployment updates</a>
+<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello World</a>
+<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=setting-a-manifest>Setting a Manifest</h1><p>The Manifest is a JSON document that defines which services span the mesh and how they should be configured.
 It further defines what Infrastructure providers are allowed.
 You can set a Manifest through Marblerun&rsquo;s Client REST-API.
-The endpoint for all Manifest operations is <code>/manifest</code>.</p>
-<p>See the following Manifest for example (<code>manifest.json</code>).</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#f92672">&#34;Packages&#34;</span>: {
-        <span style="color:#f92672">&#34;backend&#34;</span>: {
-            <span style="color:#f92672">&#34;UniqueID&#34;</span>: <span style="color:#e6db74">&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
-            <span style="color:#f92672">&#34;ProductID&#34;</span>: <span style="color:#ae81ff">43</span>,
-            <span style="color:#f92672">&#34;SecurityVersion&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;Debug&#34;</span>: <span style="color:#66d9ef">false</span>
+The endpoint for all Manifest operations is <code>/manifest</code>.</p><p>See the following Manifest for example (<code>manifest.json</code>).</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+    <span style=color:#f92672>&#34;Packages&#34;</span>: {
+        <span style=color:#f92672>&#34;backend&#34;</span>: {
+            <span style=color:#f92672>&#34;UniqueID&#34;</span>: <span style=color:#e6db74>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
+            <span style=color:#f92672>&#34;ProductID&#34;</span>: <span style=color:#ae81ff>43</span>,
+            <span style=color:#f92672>&#34;SecurityVersion&#34;</span>: <span style=color:#ae81ff>1</span>,
+            <span style=color:#f92672>&#34;Debug&#34;</span>: <span style=color:#66d9ef>false</span>
         },
-        <span style="color:#f92672">&#34;frontend&#34;</span>: {
-            <span style="color:#f92672">&#34;SignerID&#34;</span>: <span style="color:#e6db74">&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
-            <span style="color:#f92672">&#34;ProductID&#34;</span>: <span style="color:#ae81ff">42</span>,
-            <span style="color:#f92672">&#34;SecurityVersion&#34;</span>: <span style="color:#ae81ff">3</span>,
-            <span style="color:#f92672">&#34;Debug&#34;</span>: <span style="color:#66d9ef">true</span>
+        <span style=color:#f92672>&#34;frontend&#34;</span>: {
+            <span style=color:#f92672>&#34;SignerID&#34;</span>: <span style=color:#e6db74>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
+            <span style=color:#f92672>&#34;ProductID&#34;</span>: <span style=color:#ae81ff>42</span>,
+            <span style=color:#f92672>&#34;SecurityVersion&#34;</span>: <span style=color:#ae81ff>3</span>,
+            <span style=color:#f92672>&#34;Debug&#34;</span>: <span style=color:#66d9ef>true</span>
         }
     },
-    <span style="color:#f92672">&#34;Marbles&#34;</span>: {
-        <span style="color:#f92672">&#34;backend_first&#34;</span>: {
-            <span style="color:#f92672">&#34;Package&#34;</span>: <span style="color:#e6db74">&#34;backend&#34;</span>,
-            <span style="color:#f92672">&#34;MaxActivations&#34;</span>: <span style="color:#ae81ff">1</span>,
-            <span style="color:#f92672">&#34;Parameters&#34;</span>: {
-                <span style="color:#f92672">&#34;Files&#34;</span>: {
-                    <span style="color:#f92672">&#34;/tmp/defg.txt&#34;</span>: <span style="color:#e6db74">&#34;foo&#34;</span>,
-                    <span style="color:#f92672">&#34;/tmp/jkl.mno&#34;</span>: <span style="color:#e6db74">&#34;bar&#34;</span>
+    <span style=color:#f92672>&#34;Marbles&#34;</span>: {
+        <span style=color:#f92672>&#34;backend_first&#34;</span>: {
+            <span style=color:#f92672>&#34;Package&#34;</span>: <span style=color:#e6db74>&#34;backend&#34;</span>,
+            <span style=color:#f92672>&#34;MaxActivations&#34;</span>: <span style=color:#ae81ff>1</span>,
+            <span style=color:#f92672>&#34;Parameters&#34;</span>: {
+                <span style=color:#f92672>&#34;Files&#34;</span>: {
+                    <span style=color:#f92672>&#34;/tmp/defg.txt&#34;</span>: <span style=color:#e6db74>&#34;foo&#34;</span>,
+                    <span style=color:#f92672>&#34;/tmp/jkl.mno&#34;</span>: <span style=color:#e6db74>&#34;bar&#34;</span>
                 },
-                <span style="color:#f92672">&#34;Env&#34;</span>: {
-                    <span style="color:#f92672">&#34;IS_FIRST&#34;</span>: <span style="color:#e6db74">&#34;true&#34;</span>,
-                    <span style="color:#f92672">&#34;ROOT_CA&#34;</span>: <span style="color:#e6db74">&#34;$$root_ca&#34;</span>,
-                    <span style="color:#f92672">&#34;SEAL_KEY&#34;</span>: <span style="color:#e6db74">&#34;$$seal_key&#34;</span>,
-                    <span style="color:#f92672">&#34;MARBLE_CERT&#34;</span>: <span style="color:#e6db74">&#34;$$marble_cert&#34;</span>,
-                    <span style="color:#f92672">&#34;MARBLE_KEY&#34;</span>: <span style="color:#e6db74">&#34;$$marble_key&#34;</span>
+                <span style=color:#f92672>&#34;Env&#34;</span>: {
+                    <span style=color:#f92672>&#34;IS_FIRST&#34;</span>: <span style=color:#e6db74>&#34;true&#34;</span>,
+                    <span style=color:#f92672>&#34;ROOT_CA&#34;</span>: <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
+                    <span style=color:#f92672>&#34;SEAL_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
+                    <span style=color:#f92672>&#34;MARBLE_CERT&#34;</span>: <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
+                    <span style=color:#f92672>&#34;MARBLE_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
                 },
-                <span style="color:#f92672">&#34;Argv&#34;</span>: [
-                    <span style="color:#e6db74">&#34;--first&#34;</span>,
-                    <span style="color:#e6db74">&#34;serve&#34;</span>
+                <span style=color:#f92672>&#34;Argv&#34;</span>: [
+                    <span style=color:#e6db74>&#34;--first&#34;</span>,
+                    <span style=color:#e6db74>&#34;serve&#34;</span>
                 ]
             }
         },
-        <span style="color:#f92672">&#34;backend_other&#34;</span>: {
-            <span style="color:#f92672">&#34;Package&#34;</span>: <span style="color:#e6db74">&#34;backend&#34;</span>,
-            <span style="color:#f92672">&#34;Parameters&#34;</span>: {
-                <span style="color:#f92672">&#34;Env&#34;</span>: {
-                    <span style="color:#f92672">&#34;ROOT_CA&#34;</span>: <span style="color:#e6db74">&#34;$$root_ca&#34;</span>,
-                    <span style="color:#f92672">&#34;SEAL_KEY&#34;</span>: <span style="color:#e6db74">&#34;$$seal_key&#34;</span>,
-                    <span style="color:#f92672">&#34;MARBLE_CERT&#34;</span>: <span style="color:#e6db74">&#34;$$marble_cert&#34;</span>,
-                    <span style="color:#f92672">&#34;MARBLE_KEY&#34;</span>: <span style="color:#e6db74">&#34;$$marble_key&#34;</span>
+        <span style=color:#f92672>&#34;backend_other&#34;</span>: {
+            <span style=color:#f92672>&#34;Package&#34;</span>: <span style=color:#e6db74>&#34;backend&#34;</span>,
+            <span style=color:#f92672>&#34;Parameters&#34;</span>: {
+                <span style=color:#f92672>&#34;Env&#34;</span>: {
+                    <span style=color:#f92672>&#34;ROOT_CA&#34;</span>: <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
+                    <span style=color:#f92672>&#34;SEAL_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
+                    <span style=color:#f92672>&#34;MARBLE_CERT&#34;</span>: <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
+                    <span style=color:#f92672>&#34;MARBLE_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
                 },
-                <span style="color:#f92672">&#34;Argv&#34;</span>: [
-                    <span style="color:#e6db74">&#34;serve&#34;</span>
+                <span style=color:#f92672>&#34;Argv&#34;</span>: [
+                    <span style=color:#e6db74>&#34;serve&#34;</span>
                 ]
             }
         },
-        <span style="color:#f92672">&#34;frontend&#34;</span>: {
-            <span style="color:#f92672">&#34;Package&#34;</span>: <span style="color:#e6db74">&#34;frontend&#34;</span>,
-            <span style="color:#f92672">&#34;Parameters&#34;</span>: {
-                <span style="color:#f92672">&#34;Env&#34;</span>: {
-                    <span style="color:#f92672">&#34;ROOT_CA&#34;</span>: <span style="color:#e6db74">&#34;$$root_ca&#34;</span>,
-                    <span style="color:#f92672">&#34;SEAL_KEY&#34;</span>: <span style="color:#e6db74">&#34;$$seal_key&#34;</span>,
-                    <span style="color:#f92672">&#34;MARBLE_CERT&#34;</span>: <span style="color:#e6db74">&#34;$$marble_cert&#34;</span>,
-                    <span style="color:#f92672">&#34;MARBLE_KEY&#34;</span>: <span style="color:#e6db74">&#34;$$marble_key&#34;</span>
+        <span style=color:#f92672>&#34;frontend&#34;</span>: {
+            <span style=color:#f92672>&#34;Package&#34;</span>: <span style=color:#e6db74>&#34;frontend&#34;</span>,
+            <span style=color:#f92672>&#34;Parameters&#34;</span>: {
+                <span style=color:#f92672>&#34;Env&#34;</span>: {
+                    <span style=color:#f92672>&#34;ROOT_CA&#34;</span>: <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
+                    <span style=color:#f92672>&#34;SEAL_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
+                    <span style=color:#f92672>&#34;MARBLE_CERT&#34;</span>: <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
+                    <span style=color:#f92672>&#34;MARBLE_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
                 }
             }
         }
@@ -232,40 +84,7 @@ The endpoint for all Manifest operations is <code>/manifest</code>.</p>
 }
 </code></pre></div><p>For setting the Manifest, we first need to establish trust in the Coordinator.
 Therefore, we perform a remote attestation step.
-Assuming you&rsquo;ve deployed our Coordinator image from <code>ghcr.io/edgelesssys/coordinator</code>:</p>
-<ol>
-<li>
-<p>Pull the UniqueID and SignerID values for this image:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
-</code></pre></div></li>
-<li>
-<p>Use the Edgeless Remote Attestation tool to verify the Mesh&rsquo;s quote and get a trusted certificate:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
-</code></pre></div></li>
-<li>
-<p>Now that we have established trust, we can set the Manifest through the Client API:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">curl --cacert marblerun.crt --data-binary @manifest.json <span style="color:#e6db74">&#34;https://</span>$MARBLERUN<span style="color:#e6db74">/manifest&#34;</span>
-</code></pre></div></li>
-</ol>
-
-      </article>
-    </div>
-  </div>
-</div>
-
-<footer class="bg-light text-center p-3">
-
-	<div>Marblerun is brought to you by <a target="_blank" href="https://edgeless.systems/">Edgeless Systems GmbH <img
-				src="/img/ES_Symbol_black.svg" class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width="14px"
-				class="mb-3"></a>
-	</div>
-</footer>
-
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-</body>
-
-</html>
+Assuming you&rsquo;ve deployed our Coordinator image from <code>ghcr.io/edgelesssys/coordinator</code>:</p><ol><li><p>Pull the UniqueID and SignerID values for this image:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
+</code></pre></div></li><li><p>Use the Edgeless Remote Attestation tool to verify the Mesh&rsquo;s quote and get a trusted certificate:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
+</code></pre></div></li><li><p>Now that we have established trust, we can set the Manifest through the Client API:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl --cacert marblerun.crt --data-binary @manifest.json <span style=color:#e6db74>&#34;https://</span>$MARBLERUN<span style=color:#e6db74>/manifest&#34;</span>
+</code></pre></div></li></ol></article></div></div></div><footer class="bg-light text-center p-3"><div>Marblerun is brought to you by <a target=_blank href=https://edgeless.systems/>Edgeless Systems GmbH <img src=/img/ES_Symbol_black.svg class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width=14px class=mb-3></a></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx crossorigin=anonymous></script><script src=/js/main.js></script></body></html>
