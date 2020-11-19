@@ -12,7 +12,7 @@ The Coordinator needs to be deployed once in your cluster and the Marble layer n
 Marblerun is configured with a simple JSON document called the *Manifest*.
 It specifies the topology of the distributed app, the infrastructure properties, and provides configuration parameters for each service.
 
-![overview](/img/mesh_overview.svg)
+![overview](/img/overview.svg)
 
 ## Manifest
 
