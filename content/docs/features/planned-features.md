@@ -7,6 +7,10 @@ weight: 4
 
 # Planned features
 
-TODO
-* Use constant-time crypto
-* Split recovery key
+Among others, the following features are planned for Marblerun. 
+
+* Support for [Graphene](https://github.com/oscarlab/graphene) and [SGX-LKL](https://github.com/lsds/sgx-lkl) to facilitate the porting of existing software
+* Splitting recovery key between a set of parties
+* Fault-tolerant distribution of the Coordinator
+* Transparent TLS for Marbles  
+* Constant-time crypto in the Coordinator
