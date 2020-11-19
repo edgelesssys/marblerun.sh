@@ -23,7 +23,6 @@ helm repo update
 Update the hostname with your cluster&rsquo;s FQDN or use localhost for local testing.</p><ul><li><p>For a cluster with SGX support:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm install marblerun-coordinator edgeless/marblerun-coordinator <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    --create-namespace <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    -n marblerun <span style=color:#ae81ff>\
-</span><span style=color:#ae81ff></span>    --set global.pullSecret<span style=color:#f92672>=</span>regcred <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    --set coordinator.hostname<span style=color:#f92672>=</span>mycluster.uksouth.cloudapp.azure.com
 </code></pre></div></li><li><p>For a cluster without SGX support:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm install marblerun-coordinator edgeless/marblerun-coordinator <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    --create-namespace <span style=color:#ae81ff>\
@@ -31,7 +30,6 @@ Update the hostname with your cluster&rsquo;s FQDN or use localhost for local te
 </span><span style=color:#ae81ff></span>    --set coordinator.resources<span style=color:#f92672>=</span>null <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    --set coordinator.simulation<span style=color:#f92672>=</span><span style=color:#ae81ff>1</span> <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    --set tolerations<span style=color:#f92672>=</span>null <span style=color:#ae81ff>\
-</span><span style=color:#ae81ff></span>    --set global.pullSecret<span style=color:#f92672>=</span>regcred <span style=color:#ae81ff>\
 </span><span style=color:#ae81ff></span>    --set coordinator.hostname<span style=color:#f92672>=</span>mycluster.uksouth.cloudapp.azure.com
 </code></pre></div></li></ul><h2 id=step-2-pull-the-demo-application>Step 2: Pull the demo application</h2><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>git clone https://github.com/edgelesssys/emojivoto.git <span style=color:#f92672>&amp;&amp;</span> cd emojivoto
 </code></pre></div><h2 id=step-3-initialize-and-verify-the-coordinator>Step 3: Initialize and verify the Coordinator</h2><ol><li><p>Pull the remote attestation configuration</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
