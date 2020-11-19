@@ -2,3 +2,4 @@ baseURL = "https://marblerun.sh"
 languageCode = "en-us"
 title = "Marblerun - The Service Mesh for Confidential Computing"
 theme = "marblerun"
+enableEmoji = true
