@@ -37,7 +37,7 @@
 		{{ range .Params.features_list.items }}
 		<div class="col-12 col-lg-4 mb-4">
 			<div class="feature py-4">
-				<h5><i class="{{ .icon }}"></i> {{ .title }}</h5>
+				<h5><i class="{{ .icon }}"></i><br> {{ .title | markdownify }}</h5>
 				<p class="text-muted">{{ .description | markdownify }}</p>
 			</div>
 
