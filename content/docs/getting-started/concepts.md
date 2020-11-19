@@ -15,7 +15,7 @@ Confidential computing protects data in use by performing computation in hardwar
 Enclaves prevent unauthorized access or modification of applications and data while in use, thereby increasing the security assurances for organizations that manage sensitive and regulated data.
 For information about confidential computing, see the Confidential Computing Consortium [white paper](https://confidentialcomputing.io/white-papers/).
 
-## Services meshes
+## Service meshes
 
 A service mesh is an infrastructure layer for managing, observing, and securing communications in a container-based cluster. In the Kubernetes world, [Istio](https://istio.io), [HashiCorp Consul](https://www.consul.io/), and [Linkerd](https://linkerd.io/) are the most popular general-purpose service meshes.
 
