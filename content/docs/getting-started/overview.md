@@ -12,7 +12,7 @@ The Coordinator needs to be deployed once in your cluster and the Marble layer n
 Marblerun is configured with a simple JSON document called the *Manifest*.
 It specifies the topology of the distributed app, the infrastructure properties, and provides configuration parameters for each service.
 
-![overview](/img/mesh_overview.svg)
+![overview](/img/overview.svg)
 
 ## Manifest
 
@@ -156,7 +156,7 @@ The API currently contains two endpoints:
 
 ## Marbles
 
-Marbles represent the data plane in Marblerun and run your actual application code in secure enclaves within otherwise normal Docker containers. Marbles communicate with the Coordinator via gRPC over TLS. See the [Add a Service](add-service.md) section on how to build a Marble.
+Marbles represent the data plane in Marblerun and run your actual application code in secure enclaves within otherwise normal Docker containers. Marbles communicate with the Coordinator via gRPC over TLS. See the [Add a Service]({{< ref "docs/tasks/add-service.md" >}}) section on how to build a Marble.
 
 Marbles can be configured with several environment variables.
 

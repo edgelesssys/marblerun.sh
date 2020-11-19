@@ -64,7 +64,7 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 1. Get the Coordinator's address and set the DNS
 
     * If you're running on AKS:
-        * Check our docs on [how to set the DNS for the Client-API](TODO)
+        * Check our docs on [how to set the DNS for the Client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
 
             ```bash
             export MARBLERUN=mycluster.uksouth.cloudapp.azure.com
@@ -117,9 +117,9 @@ curl --silent --cacert marblerun.crt -X POST -H  "Content-Type: application/json
 ## Step 6: Watch it run
 
 * If you're running on AKS
-    * You need to expose the `web-svc` in the `emojivoto` namespace. This works similar to [how we expose the client-API](TODO)
+    * You need to expose the `web-svc` in the `emojivoto` namespace. This works similar to [how we expose the client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
     * Get the public IP with: `kubectl -n emojivoto get svc web-svc -o wide`
-    * If you're using ingress/gateway-controllers make sure you enable [SNI-passthrough](TODO)
+    * If you're using ingress/gateway-controllers make sure you enable [SNI-passthrough]({{< ref "docs/tasks/deploy.md#ingressgateway-configuration" >}})
 * If you're running on minikube
 
     ```bash
@@ -136,7 +136,7 @@ curl --silent --cacert marblerun.crt -X POST -H  "Content-Type: application/json
         * Go to `Tools > Options > Advanced > Certificates: View Certificates`
         * Go to `Import...` and select the `marblerun.crt` of the previous step
 
-* Browse to [https://localhost](https://localhost) or https://your-clusters-fqdn:25555 depending on your type of deployment.
+* Browse to [https://localhost](https://localhost) or [https://your-clusters-fqdn:port](#) depending on your type of deployment.
 
 * Notes on DNS: If your running emojivoto on a remote machine you can add the machine's DNS name to the emojivoto certificate (e.g. `emojivoto.example.org`):
 

@@ -13,7 +13,7 @@ Two of the *Coordinator*'s central duties are the generation and the management 
 * [Shared symmetric keys](#shared-symmetric-keys)
 * [TLS credentials](#tls-private-keys)
 
-All of these secrets are handed to Marbles via placeholders in the Manifest as is described [here](set-manifest.md).
+All of these secrets are handed to Marbles via placeholders in the Manifest as is described [here]({{< ref "docs/tasks/set-manifest.md" >}}).
 
 ## Virtual sealing keys
 
