@@ -1,8 +1,8 @@
 ---
-title: Marblerun - The service mesh for Confidential Computing
-claim: The service mesh for Confidential Computing
+title: Marblerun - The service mesh for confidential computing
+claim: The service mesh for confidential computing
 description:
-  "**Marblerun** makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for [Confidential Computing](https://confidentialcomputing.io/). It's open source, written in Go, and truely cloud native."
+  "**Marblerun** makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for [confidential computing](https://confidentialcomputing.io/). It's open source, written in Go, and truely cloud native."
 buttons:
   get_started:
     caption: Get Started →
@@ -23,7 +23,7 @@ features_list:
     - title: Keep using your existing tools and stacks
       icon: fas fa-tools
       description:
-        Despite using the latest Confidential Computing tech, Marblerun works frictionless with [K8s](https://kubernetes.io/), [Helm](https://helm.sh/) and conventional services meshes. 
+        Despite using the latest confidential-computing tech, Marblerun works frictionless with [K8s](https://kubernetes.io/), [Helm](https://helm.sh/) and conventional services meshes. 
     - title: Cloud native and cloud agnostic
       icon: fas fa-cloud
       description:
