@@ -17,13 +17,14 @@ Build your confidential microservices with [Edgeless RT][edgelessrt], distribute
 
 Marblerun guarantees that the topology of your distributed app adheres to a Manifest specified in simple JSON. Marblerun verifies the integrity of services, bootstraps them, and sets up encrypted connections between them. If a node fails, Marblerun will seamlessly substitute it with respect to the rules defined in the Manifest.
 
-To keep things simple, Marblerun issues one concise remote attestation statement for your whole distributed app. This can be used by anyone to verify the integrity of your distributed app.
+To keep things simple, Marblerun issues one concise remote-attestation statement for your whole distributed app. This can be used by anyone to verify the integrity of your distributed app.
 
 ## Key features
 
-* Authentication and integrity verification of microservices :lock:
-* Provisioning of certificates, configurations, and application artifacts :package:
-* Remote attestation for the confidentiallity and integrity over the whole cluster :globe_with_meridians:
+* Authentication and integrity verification of microservices wrt. Manifest :lock:
+* Secrets management for microservices :key:
+* Provisioning of certificates, configurations, and parameters :package:
+* Remote attestation of the entire cluster :globe_with_meridians:
 
 ## Overview
 
@@ -33,3 +34,6 @@ Marblerun is configured with a simple JSON document called the *Manifest*.
 It specifies the topology of the distributed app, the infrastructure properties, and provides configuration parameters for each service.
 
 ![overview](/img/overview.svg)
+
+<!-- refs -->
+[edgelessrt]: https://github.com/edgelesssys/edgelessrt
