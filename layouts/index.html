@@ -8,10 +8,10 @@
 					<h1 class="heading">{{ .Params.claim | markdownify }}</h1>
 					<p style="color: rgba(255,255,255,0.7); background-color: #00010d;">{{ .Params.description | markdownify }}</p>
 					<br>
-					<a class="btn btn-primary btn-lg" href="{{ .Params.buttons.get_started.url }}">
+					<a class="btn btn-primary btn-lg mb-2" href="{{ .Params.buttons.get_started.url }}">
 						{{ .Params.buttons.get_started.caption }}
 					</a>
-					<a class="btn btn-outline-primary btn-lg" href="{{ .Params.buttons.community.url }}">
+					<a class="btn btn-outline-primary btn-lg mb-2" href="{{ .Params.buttons.community.url }}">
 						{{ .Params.buttons.community.caption }}
 					</a>
 					<div class="desktop-space"></div>
