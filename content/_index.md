@@ -5,10 +5,10 @@ description:
   "**Marblerun** makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for [confidential computing](https://confidentialcomputing.io/). It's open source, written in Go, and truely cloud native."
 buttons:
   get_started:
-    caption: Get Started →
+    caption: Get started →
     url: '/docs/getting-started/quickstart/'
   community:
-    caption: Join the Community
+    caption: Join the community
     url: '/community/'
 features_list:
   items:
