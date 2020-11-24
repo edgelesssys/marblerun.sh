@@ -55,10 +55,10 @@ Marbles represent the actual services in your mesh. They are defined in the *Mar
 
 These `Parameters` are passed from the Coordinator to secure enclaves after successful initial remote attestation. `Parameters` can contain the following placeholders:
 
-* `$$root_ca`: The root certificate of the cluster issued by the Coordinator; it can be used to verify the certificates of all Marbles in the cluster.
-* `$$marble_cert`: The Marble's certificate; issued by the Coordinator and used for Marble-to-Marble and Marble-to-client authentication
-* `$$marble_key`: The private key corresponding to `$$marble_cert`
-* `$$seal_key`: A 128-bit symmetric encryption key that can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this "virtual sealing key" will still allow for unsealing data from the disk even though the host's actual sealing key might have changed.
+* `.Marblerun.RootCA.Public`: The root certificate of the cluster issued by the Coordinator; it can be used to verify the certificates of all Marbles in the cluster.
+* `.Marblerun.MarbleCert.Public`: The Marble's certificate; issued by the Coordinator and used for Marble-to-Marble and Marble-to-client authentication
+* `.Marblerun.MarbleCert.Private`: The private key corresponding to `$$marble_cert`
+* `.Marblerun.SealKey`: A 128-bit symmetric encryption key that can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this "virtual sealing key" will still allow for unsealing data from the disk even though the host's actual sealing key might have changed.
 
 ```javascript
 {
@@ -74,10 +74,10 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
                 },
                 "Env": {
                     "IS_FIRST": "true",
-                    "ROOT_CA": "$$root_ca",
-                    "SEAL_KEY": "$$seal_key",
-                    "MARBLE_CERT": "$$marble_cert",
-                    "MARBLE_KEY": "$$marble_key"
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
                     "--first",
@@ -89,10 +89,10 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
             "Package": "frontend",
             "Parameters": {
                 "Env": {
-                    "ROOT_CA": "$$root_ca",
-                    "SEAL_KEY": "$$seal_key",
-                    "MARBLE_CERT": "$$marble_cert",
-                    "MARBLE_KEY": "$$marble_key"
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 }
             }
         }
@@ -103,7 +103,7 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
 
 ## Manifest:RecoveryKey
 
-The optional entry `RecoveryKey` holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}). 
+The optional entry `RecoveryKey` holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}).
 
 ```javascript
 {
