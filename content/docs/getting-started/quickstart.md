@@ -8,7 +8,7 @@ weight: 1
 # Quickstart
 
 ## Step 0: Setup
-Set up a Kubernetes cluster and install `kubectl`. One easy way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/).
+Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes. 
 
 Please also install [Helm](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes").
 

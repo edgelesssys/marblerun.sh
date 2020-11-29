@@ -23,7 +23,7 @@ features_list:
     - title: Keep using your existing tools and stacks
       icon: fas fa-tools
       description:
-        Despite using the latest confidential-computing tech, Marblerun works frictionless with [K8s](https://kubernetes.io/), [Helm](https://helm.sh/) and conventional services meshes. 
+        Despite using the latest confidential-computing tech, Marblerun works frictionless with [K8s](https://kubernetes.io/), [Helm](https://helm.sh/) and normal services meshes like [Istio](https://istio.io/) or [Linkerd](https://linkerd.io/). 
     - title: Cloud native and cloud agnostic
       icon: fas fa-cloud
       description:
@@ -36,4 +36,12 @@ features_list:
       icon: fab fa-github
       description:
         Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/) and [Edgeless RT](https://github.com/edgelesssys/edgelessrt). In the future, it will also support [Graphene](https://github.com/oscarlab/graphene).
+blog_list:
+  items:
+    - title: "[Blog post #1](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-1-3-28f4bd6df679)"
+      description: We give an intro to the concept of confidential computing.
+    - title: "[Blog post #2](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-2-3-c417fa581ef5)"
+      description: We give intro to the service mesh concept and discuss crucial properties in the context of confidential computing.
+    - title: "[Blog post #3](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-3-3-ffc00b2c3508)"
+      description: We describe how the two fit together and describe the key features and architecture of Marblerun.
 ---
