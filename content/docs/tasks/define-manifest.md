@@ -57,7 +57,7 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
 
 * `.Marblerun.RootCA.Public`: The root certificate of the cluster issued by the Coordinator; it can be used to verify the certificates of all Marbles in the cluster.
 * `.Marblerun.MarbleCert.Public`: The Marble's certificate; issued by the Coordinator and used for Marble-to-Marble and Marble-to-client authentication
-* `.Marblerun.MarbleCert.Private`: The private key corresponding to `$$marble_cert`
+* `.Marblerun.MarbleCert.Private`: The private key corresponding to `MarbleCert`
 * `.Marblerun.SealKey`: A 128-bit symmetric encryption key that can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this "virtual sealing key" will still allow for unsealing data from the disk even though the host's actual sealing key might have changed.
 
 ```javascript
