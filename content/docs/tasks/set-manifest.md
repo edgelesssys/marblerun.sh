@@ -44,7 +44,7 @@ See the following Manifest for example (`manifest.json`).
                     "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
                     "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
-                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Public }}"
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
                     "--first",
@@ -59,7 +59,7 @@ See the following Manifest for example (`manifest.json`).
                     "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
                     "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
-                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Public }}"
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
                     "serve"
@@ -73,7 +73,7 @@ See the following Manifest for example (`manifest.json`).
                     "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
                     "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
-                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Public }}"
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 }
             }
         }

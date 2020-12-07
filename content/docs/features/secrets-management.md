@@ -33,4 +33,4 @@ As with virtual sealing keys, care has to be taken to not repeat nonces between 
 
 ## TLS credentials
 
-The Coordinator will generate a private TLS key for each new Marble and issue a corresponding X.509 certificate. Both are injected via the `{{ pem .Marblerun.MarbleCert.Public }}` and `{{ pem .Marblerun.MarbleCert.Public }}` placeholders in the Manifest, respectively. Marbles use these TLS credentials for communicating internally and externally. External clients can verify a Marble's certificate with respect to the Coordinator's certificate.
+The Coordinator will generate a private TLS key for each new Marble and issue a corresponding X.509 certificate. Both are injected via the `{{ pem .Marblerun.MarbleCert.Private }}` and `{{ pem .Marblerun.MarbleCert.Public }}` placeholders in the Manifest, respectively. Marbles use these TLS credentials for communicating internally and externally. External clients can verify a Marble's certificate with respect to the Coordinator's certificate.
