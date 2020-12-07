@@ -101,6 +101,154 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
 }
 ```
 
+## Manifest:Secrets
+This section allows to define own secrets which are automatically generated upon the Coordinator's (if shared) or a Marble's (if not shared) launch and obtainable in the `Parameters` section similar to the placeholders values via the `.Secrets` prefix, following this convention:
+
+`{{<output-type> .Secrets.<name>.<value>}}`
+
+The following output options are available (replace with `<output-type>` in the example):
+* `raw`: Returns the requested value as raw bytes.
+* `hex`: Returns the requested value as a hex string.
+* `base64`: Returns the requested value encoded in Base64.
+* `pem`: Returns the requested value as a PEM (with the header matching the requested value).
+
+And the following values can be queried from a secret (replace with `<value>` in the example):
+* `<none>`: For secret type `raw`, returns the symmetric key. For other types, returns the public key.
+* `Cert`: Returns the certificate (if available for given type)
+* `Public`: Returns the public key (for secret type `raw`: returns the symmetric key)
+* `Private`: Returns the private key (for secret type `raw`: returns the symmetric key)
+
+Some examples based on the example secrets specified down below:
+
+`{{ pem .Secrets.rsa_cert.Cert }}` (returns a PEM-encoded RSA certificate)
+
+`{{ pem .Secrets.rsa_cert.Public }}` (returns the PKIX encoded public key of the generated certificate as PEM)
+
+`{{ raw .Secrets.rsa_cert.Private }}` (returns the PKCS#8 encoded private key of the generated certificate as raw bytes)
+
+`{{ hex .Secrets.secret_aes_key }}` (returns a randomly generated 16 byte symmetric key as a hex string)
+
+
+
+The following parameters are available:
+* `Type`: Can be either `raw` (symmetric key), `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
+* `Size`: Defines the size of the key used to generate the secret. As common for symmetric keys, for a secret of type `raw`, the size needs to be divisible by 8. For an ECDSA certificate, the size needs to map to valid curve supported by Go's crypto library, which are currently (P-)224, 256, 384 or 521. For an ed25519 certificate, the parameter `size` needs to be omitted as in this case, the elliptic key used is always of the size 256.
+* `Shared` (default: `false`): Specifies if the secret should be shared across all marbles and sealed into the coordinator's state (`true`), or if the secret should be uniquely generated for each marble (`false`). Keep in mind that secrets confined to a marble come with certain limitations by now. For more information, look up the section [Secrets management]({{< ref "docs/features/secrets-management.md" >}}).
+* `ValidFor` (only for certificates, default: `365`): Defines how long the certificate should be valid after generation in days. If not specified, a default value of `365` (365 days) is used. Please note that this field cannot be specified in combination with the `NotAfter` field in `Cert`. Only one of them can be defined.
+* `Cert` (only for certificates): Allows the user to specify parameters for the x509 certificate which should be generated. This maps directly to a Go x509.Certificate object, and every supported value can be specified, though certain ones (listed below) will either be filled automatically if left empty or even get replaced.
+### Example of the Secrets section
+```javascript
+{
+    //...
+    "Secrets": {
+        "secret_aes_key": {
+            "Type": "raw",
+            "Size": 128,
+            "Shared": true
+        },
+        "rsa_cert": {
+            "Type": "cert-rsa",
+            "Size": 2048,
+            "Shared": false,
+            "ValidFor": 7,
+            "Cert": {
+                "SerialNumber": 42,
+                "Subject": {
+                    "SerialNumber": "42",
+                    "CommonName": "Marblerun Unit Test"
+                }
+            }
+        }
+    }
+    //...
+}
+```
+### Struct of the `Cert` field (Go x509.Certificate)
+```javascript
+"Cert": {
+        "Raw": null,
+        "RawTBSCertificate": null,
+        "RawSubjectPublicKeyInfo": null,
+        "RawSubject": null,
+        "RawIssuer": null,
+        "Signature": null,
+        "SignatureAlgorithm": 0,
+        "PublicKeyAlgorithm": 0,
+        "PublicKey": null,
+        "Version": 0,
+        "SerialNumber": null,
+        "Issuer": {
+            "Country": null,
+            "Organization": null,
+            "OrganizationalUnit": null,
+            "Locality": null,
+            "Province": null,
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "",
+            "Names": null,
+            "ExtraNames": null
+        },
+        "Subject": {
+            "Country": null,
+            "Organization": null,
+            "OrganizationalUnit": null,
+            "Locality": null,
+            "Province": null,
+            "StreetAddress": null,
+            "PostalCode": null,
+            "SerialNumber": "",
+            "CommonName": "",
+            "Names": null,
+            "ExtraNames": null
+        },
+        "NotBefore": "0001-01-01T00:00:00Z",
+        "NotAfter": "0001-01-01T00:00:00Z",
+        "KeyUsage": 0,
+        "Extensions": null,
+        "ExtraExtensions": null,
+        "UnhandledCriticalExtensions": null,
+        "ExtKeyUsage": null,
+        "UnknownExtKeyUsage": null,
+        "BasicConstraintsValid": false,
+        "IsCA": false,
+        "MaxPathLen": 0,
+        "MaxPathLenZero": false,
+        "SubjectKeyId": null,
+        "AuthorityKeyId": null,
+        "OCSPServer": null,
+        "IssuingCertificateURL": null,
+        "DNSNames": null,
+        "EmailAddresses": null,
+        "IPAddresses": null,
+        "URIs": null,
+        "PermittedDNSDomainsCritical": false,
+        "PermittedDNSDomains": null,
+        "ExcludedDNSDomains": null,
+        "PermittedIPRanges": null,
+        "ExcludedIPRanges": null,
+        "PermittedEmailAddresses": null,
+        "ExcludedEmailAddresses": null,
+        "PermittedURIDomains": null,
+        "ExcludedURIDomains": null,
+        "CRLDistributionPoints": null,
+        "PolicyIdentifiers": null
+    }
+```
+Of course, not every value needs to be defined. Some values you might want to fill out:
+* `DNSNames`
+* `IPAdresses`
+* `KeyUsage` & `ExtKeyUsage`
+* `Subject` (+ children)
+
+The following values are always overwritten:
+* `IsCA` (always `false`)
+* `Issuer` (replaced with the Coordinator's Root CA, as it will issue the requested certificate)
+* `BasicConstraintsValid` (always `true`)
+* `NotBefore` (will be set to the current time during generation)
+
+
 ## Manifest:RecoveryKey
 
 The optional entry `RecoveryKey` holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}).

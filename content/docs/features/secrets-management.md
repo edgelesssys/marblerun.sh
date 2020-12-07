@@ -11,7 +11,8 @@ Two of the Coordinator's central duties are the generation and the management of
 
 * [Virtual sealing keys](#virtual-sealing-keys)
 * [Shared symmetric keys](#shared-symmetric-keys)
-* [TLS credentials](#tls-private-keys)
+* [TLS credentials](#tls-credentials)
+* [User-definable secrets](#user-definable-secrets)
 
 All of these secrets are handed to Marbles via placeholders in the Manifest as is described [here]({{< ref "docs/tasks/set-manifest.md" >}}).
 
@@ -34,3 +35,10 @@ As with virtual sealing keys, care has to be taken to not repeat nonces between 
 ## TLS credentials
 
 The Coordinator will generate a private TLS key for each new Marble and issue a corresponding X.509 certificate. Both are injected via the `{{ pem .Marblerun.MarbleCert.Private }}` and `{{ pem .Marblerun.MarbleCert.Cert }}` placeholders in the Manifest, respectively. Marbles use these TLS credentials for communicating internally and externally. External clients can verify a Marble's certificate with respect to the Coordinator's certificate.
+
+## User-definable secrets
+Next to the predefined secrets, Marblerun also allows to specify additional secrets which can be generated on-the-fly and be either confined to a single marble, or shared across all of them. These can be either symmetric keys or certificates, which can be referenced via the `{{ .Secret }}` prefix and loaded into environment variables or a file, similar to the predefined keys and their placeholders. Name, size and duration of validity (for certificates) are user-definable, and supported output formats are `raw`, `hex`, `base64` or `pem`.
+
+Keys and certificates which are set to be unique to a marble are not stored on disk automatically, but are generated each time a marble is activated. For symmetric keys, hkdf is used with an embedded secret to deterministically generate the same key every time. X.509 certificates are newly generated on every launch with the Coordinator's root CA certificate as the issuer. 
+
+This means that support for certificate pinning is not available so far. In case you need to pin a certificate, you should consider to set the secret to be shared across all marbles (which get stored in the coordinator's sealed state), or to generate a fixed one in your application logic itself.
