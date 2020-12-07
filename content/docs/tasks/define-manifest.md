@@ -55,8 +55,8 @@ Marbles represent the actual services in your mesh. They are defined in the *Mar
 
 These `Parameters` are passed from the Coordinator to secure enclaves after successful initial remote attestation. `Parameters` can contain the following placeholders:
 
-* `.Marblerun.RootCA.Public`: The root certificate of the cluster issued by the Coordinator; it can be used to verify the certificates of all Marbles in the cluster.
-* `.Marblerun.MarbleCert.Public`: The Marble's certificate; issued by the Coordinator and used for Marble-to-Marble and Marble-to-client authentication
+* `.Marblerun.RootCA.Cert`: The root certificate of the cluster issued by the Coordinator; it can be used to verify the certificates of all Marbles in the cluster.
+* `.Marblerun.MarbleCert.Cert`: The Marble's certificate; issued by the Coordinator and used for Marble-to-Marble and Marble-to-client authentication
 * `.Marblerun.MarbleCert.Private`: The private key corresponding to `MarbleCert`
 * `.Marblerun.SealKey`: A 128-bit symmetric encryption key that can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this "virtual sealing key" will still allow for unsealing data from the disk even though the host's actual sealing key might have changed.
 
@@ -74,9 +74,9 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
                 },
                 "Env": {
                     "IS_FIRST": "true",
-                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
-                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
                     "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
@@ -89,9 +89,9 @@ These `Parameters` are passed from the Coordinator to secure enclaves after succ
             "Package": "frontend",
             "Parameters": {
                 "Env": {
-                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
-                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
                     "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 }
             }

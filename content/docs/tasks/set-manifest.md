@@ -41,9 +41,9 @@ See the following Manifest for example (`manifest.json`).
                 },
                 "Env": {
                     "IS_FIRST": "true",
-                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
-                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
                     "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
@@ -56,9 +56,9 @@ See the following Manifest for example (`manifest.json`).
             "Package": "backend",
             "Parameters": {
                 "Env": {
-                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
-                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
                     "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
@@ -70,9 +70,9 @@ See the following Manifest for example (`manifest.json`).
             "Package": "frontend",
             "Parameters": {
                 "Env": {
-                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Public }}",
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
                     "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
-                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Public }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
                     "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 }
             }
