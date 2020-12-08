@@ -132,10 +132,10 @@ Some examples based on the example secrets specified down below:
 
 The following parameters are available:
 * `Type`: Can be either `raw` (symmetric key), `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
-* `Size`: Defines the size of the key used to generate the secret. As common for symmetric keys, for a secret of type `raw`, the size needs to be divisible by 8. For an ECDSA certificate, the size needs to map to valid curve supported by Go's crypto library, which are currently (P-)224, 256, 384 or 521. For an ed25519 certificate, the parameter `size` needs to be omitted as in this case, the elliptic key used is always of the size 256.
-* `Shared` (default: `false`): Specifies if the secret should be shared across all marbles and sealed into the coordinator's state (`true`), or if the secret should be uniquely generated for each marble (`false`). Keep in mind that secrets confined to a marble come with certain limitations by now. For more information, look up the section [Secrets management]({{< ref "docs/features/secrets-management.md" >}}).
+* `Size`: Defines the size of the key used to generate the secret. As common for symmetric keys, for a secret of type `raw`, the size needs to be divisible by 8. For an ECDSA certificate, the size needs to map to a valid curve supported by Go's crypto library, which are currently (P-)224, 256, 384, or 521. For an ed25519 certificate, the parameter `size` needs to be omitted as in this case, the elliptic key used is always of the size 256.
+* `Shared` (default: `false`): Specifies if the secret should be shared across all Marbles and sealed into the Coordinator's state (`true`), or if the secret should be uniquely generated for each Marble (`false`). Keep in mind that secrets confined to a Marble come with certain limitations by now. For more information, look up the section [Secrets management]({{< ref "docs/features/secrets-management.md" >}}).
 * `ValidFor` (only for certificates, default: `365`): Defines how long the certificate should be valid after generation in days. If not specified, a default value of `365` (365 days) is used. Please note that this field cannot be specified in combination with the `NotAfter` field in `Cert`. Only one of them can be defined.
-* `Cert` (only for certificates): Allows the user to specify parameters for the x509 certificate which should be generated. This maps directly to a Go x509.Certificate object, and every supported value can be specified, though certain ones (listed below) will either be filled automatically if left empty or even get replaced.
+* `Cert` (only for certificates): Allows the user to specify parameters for the x509 certificate which should be generated. This maps directly to a Go x509.Certificate object and every supported value can be specified, though certain ones (listed below) will either be filled automatically if left empty or even get replaced.
 ### Example of the Secrets section
 ```javascript
 {
@@ -276,4 +276,3 @@ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
 ## Manifest:Infrastructures
 
 Future versions of Marblerun will allow you to define certain trusted infrastructures and hardware configurations under `Infrastructures`.
-
