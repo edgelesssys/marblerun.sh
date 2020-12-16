@@ -6,3 +6,8 @@ weight: 10
 ---
 
 # Changelog
+
+## Version 0.2.0
+
+* Switch from simple `$$<key-name>` placeholders to more versatile Go Templates for secrets injection in the Manifest.
+* Add `Secrets` section to Manifest for the definition of custom keys and certificates.
