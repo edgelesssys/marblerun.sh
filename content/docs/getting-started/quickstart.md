@@ -8,7 +8,7 @@ weight: 1
 # Quickstart
 
 ## Step 0: Setup
-Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes. 
+Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
 
 Please also install [Helm](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes").
 
@@ -17,7 +17,7 @@ Please also install [Helm](https://helm.sh/docs/intro/install/) ("the package ma
 Add the Edgeless Systems chart repository to Helm.
 
 ```bash
-helm repo add edgeless https://helm.edgeless.systems
+helm repo add edgeless https://helm.edgeless.systems/stable
 helm repo update
 ```
 
@@ -95,8 +95,15 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 ## Step 4: Set the Manifest
 
 ```bash
-curl --silent --cacert marblerun.crt -X POST -H  "Content-Type: application/json" --data-binary @tools/manifest.json "https://$MARBLERUN/manifest"
+curl --cacert marblerun.crt --data-binary @tools/manifest.json "https://$MARBLERUN/manifest"
 ```
+
+* If you're running emojivoto on a custom domain, you can set the certificate's CN accordingly
+
+    ```bash
+    manifest=$(cat "tools/manifest.json" | sed "s/localhost/<your-domain>/g")
+    curl --cacert marblerun.crt --data-binary "$manifest" https://$MARBLERUN/manifest
+    ```
 
 ## Step 5: Deploy the demo application
 
@@ -135,25 +142,3 @@ curl --silent --cacert marblerun.crt -X POST -H  "Content-Type: application/json
         * Go to `Import...` and select the `marblerun.crt` of the previous step
 
 * Browse to [https://localhost](https://localhost) or [https://your-clusters-fqdn:port](#) depending on your type of deployment.
-
-* Notes on DNS: If your running emojivoto on a remote machine you can add the machine's DNS name to the emojivoto certificate (e.g. `emojivoto.example.org`):
-
-  * Open the `kubernetes/sgx_values.yaml` or `kubernetes/nosgx_values.yaml` file depending on your type of deployment
-
-  * Add your DNS name to the `hosts` field:
-
-    * `hosts: "emojivoto.example.org,localhost,web-svc,web-svc.emojivoto,web-svc.emojivoto.svc.cluster.local"`
-
-  * You need to apply your changes with:
-
-    * If your using `kubernetes/sgx_values.yaml` for your deployment:
-
-        ```bash
-        helm upgrade -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes -n emojivoto
-        ```
-
-    * Otherwise:
-
-        ```bash
-        helm upgrade -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes -n emojivoto
-        ```

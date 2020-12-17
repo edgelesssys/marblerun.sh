@@ -15,7 +15,7 @@ This article uses [Helm 3](https://helm.sh/) to install Marblerun. Make sure tha
 ## Adding Marblerun's Helm repository
 
 ```bash
-helm repo add edgeless https://helm.edgeless.systems
+helm repo add edgeless https://helm.edgeless.systems/stable
 helm repo update
 ```
 
