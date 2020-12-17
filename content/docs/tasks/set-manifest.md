@@ -41,10 +41,10 @@ See the following Manifest for example (`manifest.json`).
                 },
                 "Env": {
                     "IS_FIRST": "true",
-                    "ROOT_CA": "$$root_ca",
-                    "SEAL_KEY": "$$seal_key",
-                    "MARBLE_CERT": "$$marble_cert",
-                    "MARBLE_KEY": "$$marble_key"
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
+                    "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
                     "--first",
@@ -56,10 +56,10 @@ See the following Manifest for example (`manifest.json`).
             "Package": "backend",
             "Parameters": {
                 "Env": {
-                    "ROOT_CA": "$$root_ca",
-                    "SEAL_KEY": "$$seal_key",
-                    "MARBLE_CERT": "$$marble_cert",
-                    "MARBLE_KEY": "$$marble_key"
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
+                    "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 },
                 "Argv": [
                     "serve"
@@ -70,10 +70,10 @@ See the following Manifest for example (`manifest.json`).
             "Package": "frontend",
             "Parameters": {
                 "Env": {
-                    "ROOT_CA": "$$root_ca",
-                    "SEAL_KEY": "$$seal_key",
-                    "MARBLE_CERT": "$$marble_cert",
-                    "MARBLE_KEY": "$$marble_key"
+                    "ROOT_CA": "{{ pem .Marblerun.RootCA.Cert }}",
+                    "SEAL_KEY": "{{ hex .Marblerun.SealKey }}",
+                    "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
+                    "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 }
             }
         }
