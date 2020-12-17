@@ -20,74 +20,74 @@
 <a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=setting-a-manifest>Setting a Manifest</h1><p>The Manifest is a JSON document that defines which services span the mesh and how they should be configured.
 It further defines what Infrastructure providers are allowed.
 You can set a Manifest through Marblerun&rsquo;s Client REST-API.
-The endpoint for all Manifest operations is <code>/manifest</code>.</p><p>See the following Manifest for example (<code>manifest.json</code>).</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
-    <span style=color:#f92672>&#34;Packages&#34;</span>: {
-        <span style=color:#f92672>&#34;backend&#34;</span>: {
-            <span style=color:#f92672>&#34;UniqueID&#34;</span>: <span style=color:#e6db74>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
-            <span style=color:#f92672>&#34;ProductID&#34;</span>: <span style=color:#ae81ff>43</span>,
-            <span style=color:#f92672>&#34;SecurityVersion&#34;</span>: <span style=color:#ae81ff>1</span>,
-            <span style=color:#f92672>&#34;Debug&#34;</span>: <span style=color:#66d9ef>false</span>
+The endpoint for all Manifest operations is <code>/manifest</code>.</p><p>See the following Manifest for example (<code>manifest.json</code>).</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json>{
+    <span style=color:#309;font-weight:700>&#34;Packages&#34;</span>: {
+        <span style=color:#309;font-weight:700>&#34;backend&#34;</span>: {
+            <span style=color:#309;font-weight:700>&#34;UniqueID&#34;</span>: <span style=color:#c30>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
+            <span style=color:#309;font-weight:700>&#34;ProductID&#34;</span>: <span style=color:#f60>43</span>,
+            <span style=color:#309;font-weight:700>&#34;SecurityVersion&#34;</span>: <span style=color:#f60>1</span>,
+            <span style=color:#309;font-weight:700>&#34;Debug&#34;</span>: <span style=color:#069;font-weight:700>false</span>
         },
-        <span style=color:#f92672>&#34;frontend&#34;</span>: {
-            <span style=color:#f92672>&#34;SignerID&#34;</span>: <span style=color:#e6db74>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
-            <span style=color:#f92672>&#34;ProductID&#34;</span>: <span style=color:#ae81ff>42</span>,
-            <span style=color:#f92672>&#34;SecurityVersion&#34;</span>: <span style=color:#ae81ff>3</span>,
-            <span style=color:#f92672>&#34;Debug&#34;</span>: <span style=color:#66d9ef>true</span>
+        <span style=color:#309;font-weight:700>&#34;frontend&#34;</span>: {
+            <span style=color:#309;font-weight:700>&#34;SignerID&#34;</span>: <span style=color:#c30>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
+            <span style=color:#309;font-weight:700>&#34;ProductID&#34;</span>: <span style=color:#f60>42</span>,
+            <span style=color:#309;font-weight:700>&#34;SecurityVersion&#34;</span>: <span style=color:#f60>3</span>,
+            <span style=color:#309;font-weight:700>&#34;Debug&#34;</span>: <span style=color:#069;font-weight:700>true</span>
         }
     },
-    <span style=color:#f92672>&#34;Marbles&#34;</span>: {
-        <span style=color:#f92672>&#34;backend_first&#34;</span>: {
-            <span style=color:#f92672>&#34;Package&#34;</span>: <span style=color:#e6db74>&#34;backend&#34;</span>,
-            <span style=color:#f92672>&#34;MaxActivations&#34;</span>: <span style=color:#ae81ff>1</span>,
-            <span style=color:#f92672>&#34;Parameters&#34;</span>: {
-                <span style=color:#f92672>&#34;Files&#34;</span>: {
-                    <span style=color:#f92672>&#34;/tmp/defg.txt&#34;</span>: <span style=color:#e6db74>&#34;foo&#34;</span>,
-                    <span style=color:#f92672>&#34;/tmp/jkl.mno&#34;</span>: <span style=color:#e6db74>&#34;bar&#34;</span>
+    <span style=color:#309;font-weight:700>&#34;Marbles&#34;</span>: {
+        <span style=color:#309;font-weight:700>&#34;backend_first&#34;</span>: {
+            <span style=color:#309;font-weight:700>&#34;Package&#34;</span>: <span style=color:#c30>&#34;backend&#34;</span>,
+            <span style=color:#309;font-weight:700>&#34;MaxActivations&#34;</span>: <span style=color:#f60>1</span>,
+            <span style=color:#309;font-weight:700>&#34;Parameters&#34;</span>: {
+                <span style=color:#309;font-weight:700>&#34;Files&#34;</span>: {
+                    <span style=color:#309;font-weight:700>&#34;/tmp/defg.txt&#34;</span>: <span style=color:#c30>&#34;foo&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;/tmp/jkl.mno&#34;</span>: <span style=color:#c30>&#34;bar&#34;</span>
                 },
-                <span style=color:#f92672>&#34;Env&#34;</span>: {
-                    <span style=color:#f92672>&#34;IS_FIRST&#34;</span>: <span style=color:#e6db74>&#34;true&#34;</span>,
-                    <span style=color:#f92672>&#34;ROOT_CA&#34;</span>: <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
-                    <span style=color:#f92672>&#34;SEAL_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
-                    <span style=color:#f92672>&#34;MARBLE_CERT&#34;</span>: <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
-                    <span style=color:#f92672>&#34;MARBLE_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
+                <span style=color:#309;font-weight:700>&#34;Env&#34;</span>: {
+                    <span style=color:#309;font-weight:700>&#34;IS_FIRST&#34;</span>: <span style=color:#c30>&#34;true&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;ROOT_CA&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.RootCA.Cert }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;SEAL_KEY&#34;</span>: <span style=color:#c30>&#34;{{ hex .Marblerun.SealKey }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;MARBLE_CERT&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Cert }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;MARBLE_KEY&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Private }}&#34;</span>
                 },
-                <span style=color:#f92672>&#34;Argv&#34;</span>: [
-                    <span style=color:#e6db74>&#34;--first&#34;</span>,
-                    <span style=color:#e6db74>&#34;serve&#34;</span>
+                <span style=color:#309;font-weight:700>&#34;Argv&#34;</span>: [
+                    <span style=color:#c30>&#34;--first&#34;</span>,
+                    <span style=color:#c30>&#34;serve&#34;</span>
                 ]
             }
         },
-        <span style=color:#f92672>&#34;backend_other&#34;</span>: {
-            <span style=color:#f92672>&#34;Package&#34;</span>: <span style=color:#e6db74>&#34;backend&#34;</span>,
-            <span style=color:#f92672>&#34;Parameters&#34;</span>: {
-                <span style=color:#f92672>&#34;Env&#34;</span>: {
-                    <span style=color:#f92672>&#34;ROOT_CA&#34;</span>: <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
-                    <span style=color:#f92672>&#34;SEAL_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
-                    <span style=color:#f92672>&#34;MARBLE_CERT&#34;</span>: <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
-                    <span style=color:#f92672>&#34;MARBLE_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
+        <span style=color:#309;font-weight:700>&#34;backend_other&#34;</span>: {
+            <span style=color:#309;font-weight:700>&#34;Package&#34;</span>: <span style=color:#c30>&#34;backend&#34;</span>,
+            <span style=color:#309;font-weight:700>&#34;Parameters&#34;</span>: {
+                <span style=color:#309;font-weight:700>&#34;Env&#34;</span>: {
+                    <span style=color:#309;font-weight:700>&#34;ROOT_CA&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.RootCA.Cert }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;SEAL_KEY&#34;</span>: <span style=color:#c30>&#34;{{ hex .Marblerun.SealKey }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;MARBLE_CERT&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Cert }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;MARBLE_KEY&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Private }}&#34;</span>
                 },
-                <span style=color:#f92672>&#34;Argv&#34;</span>: [
-                    <span style=color:#e6db74>&#34;serve&#34;</span>
+                <span style=color:#309;font-weight:700>&#34;Argv&#34;</span>: [
+                    <span style=color:#c30>&#34;serve&#34;</span>
                 ]
             }
         },
-        <span style=color:#f92672>&#34;frontend&#34;</span>: {
-            <span style=color:#f92672>&#34;Package&#34;</span>: <span style=color:#e6db74>&#34;frontend&#34;</span>,
-            <span style=color:#f92672>&#34;Parameters&#34;</span>: {
-                <span style=color:#f92672>&#34;Env&#34;</span>: {
-                    <span style=color:#f92672>&#34;ROOT_CA&#34;</span>: <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
-                    <span style=color:#f92672>&#34;SEAL_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
-                    <span style=color:#f92672>&#34;MARBLE_CERT&#34;</span>: <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
-                    <span style=color:#f92672>&#34;MARBLE_KEY&#34;</span>: <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
+        <span style=color:#309;font-weight:700>&#34;frontend&#34;</span>: {
+            <span style=color:#309;font-weight:700>&#34;Package&#34;</span>: <span style=color:#c30>&#34;frontend&#34;</span>,
+            <span style=color:#309;font-weight:700>&#34;Parameters&#34;</span>: {
+                <span style=color:#309;font-weight:700>&#34;Env&#34;</span>: {
+                    <span style=color:#309;font-weight:700>&#34;ROOT_CA&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.RootCA.Cert }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;SEAL_KEY&#34;</span>: <span style=color:#c30>&#34;{{ hex .Marblerun.SealKey }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;MARBLE_CERT&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Cert }}&#34;</span>,
+                    <span style=color:#309;font-weight:700>&#34;MARBLE_KEY&#34;</span>: <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Private }}&#34;</span>
                 }
             }
         }
     },
-    <span style=color:#f92672>&#34;RecoveryKey&#34;</span>: <span style=color:#e6db74>&#34;-----BEGIN PUBLIC KEY-----\nMIIBpTANBgkqhkiG9w0BAQEFAAOCAZIAMIIBjQKCAYQAyokHE545y3lU4xsxrqXJ\n58jiaXN8yEdjjuKk0903zMT+FV62UeX17BQhrtdOIf4l4/V/xipqI+osAHBQpRY1\nwM1NCIFFlXUQGgXdtoWiAS7zfFKC+mNlB63Z0Z/50Iw9pl6AFWBQ+16lfmsPMnIu\nLHf4AL3KXVlpgPn6cmRfUoDBx6ITm2QrCDFlVu4j4isgnaZrw6VD0V+G9Mcpgs/0\n0XNmz72eMULfuW+4ULJI9Fx88wiNWWHeSI4vz83ylM5+1QntFROSYWBjgmCnm25j\nKbzV765CVTIU3qq3qkYmclpHfKKt7/TOgVOauvkMCYXyLJkSd1LGLIctWK8tCs1K\nnB237nNg+dZ67Zz9lBYKfNnFoudoc85+vXBRKIfV56FXiXrB32hF1DEj11viMPUr\nroMokLFtDCoAk0Xok4AFQDOgxTw7F8cHskjIYWVCmCqmDUI+FGttyVrc5YLSHAuR\nxQ2oxD0F44JXwxDc/C+OYzOApYl25rmR2nuqioDGpL6/ELRRAgMBAAE=\n-----END PUBLIC KEY-----\n&#34;</span>
+    <span style=color:#309;font-weight:700>&#34;RecoveryKey&#34;</span>: <span style=color:#c30>&#34;-----BEGIN PUBLIC KEY-----\nMIIBpTANBgkqhkiG9w0BAQEFAAOCAZIAMIIBjQKCAYQAyokHE545y3lU4xsxrqXJ\n58jiaXN8yEdjjuKk0903zMT+FV62UeX17BQhrtdOIf4l4/V/xipqI+osAHBQpRY1\nwM1NCIFFlXUQGgXdtoWiAS7zfFKC+mNlB63Z0Z/50Iw9pl6AFWBQ+16lfmsPMnIu\nLHf4AL3KXVlpgPn6cmRfUoDBx6ITm2QrCDFlVu4j4isgnaZrw6VD0V+G9Mcpgs/0\n0XNmz72eMULfuW+4ULJI9Fx88wiNWWHeSI4vz83ylM5+1QntFROSYWBjgmCnm25j\nKbzV765CVTIU3qq3qkYmclpHfKKt7/TOgVOauvkMCYXyLJkSd1LGLIctWK8tCs1K\nnB237nNg+dZ67Zz9lBYKfNnFoudoc85+vXBRKIfV56FXiXrB32hF1DEj11viMPUr\nroMokLFtDCoAk0Xok4AFQDOgxTw7F8cHskjIYWVCmCqmDUI+FGttyVrc5YLSHAuR\nxQ2oxD0F44JXwxDc/C+OYzOApYl25rmR2nuqioDGpL6/ELRRAgMBAAE=\n-----END PUBLIC KEY-----\n&#34;</span>
 }
 </code></pre></div><p>For setting the Manifest, we first need to establish trust in the Coordinator.
 Therefore, we perform a remote attestation step.
-Assuming you&rsquo;ve deployed our Coordinator image from <code>ghcr.io/edgelesssys/coordinator</code>:</p><ol><li><p>Pull the UniqueID and SignerID values for this image:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
-</code></pre></div></li><li><p>Use the Edgeless Remote Attestation tool to verify the Mesh&rsquo;s quote and get a trusted certificate:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
-</code></pre></div></li><li><p>Now that we have established trust, we can set the Manifest through the Client API:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl --cacert marblerun.crt --data-binary @manifest.json <span style=color:#e6db74>&#34;https://</span>$MARBLERUN<span style=color:#e6db74>/manifest&#34;</span>
+Assuming you&rsquo;ve deployed our Coordinator image from <code>ghcr.io/edgelesssys/coordinator</code>:</p><ol><li><p>Pull the UniqueID and SignerID values for this image:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
+</code></pre></div></li><li><p>Use the Edgeless Remote Attestation tool to verify the Mesh&rsquo;s quote and get a trusted certificate:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>era -c coordinator-era.json -h <span style=color:#033>$MARBLERUN</span> -o marblerun.crt
+</code></pre></div></li><li><p>Now that we have established trust, we can set the Manifest through the Client API:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>curl --cacert marblerun.crt --data-binary @manifest.json <span style=color:#c30>&#34;https://</span><span style=color:#033>$MARBLERUN</span><span style=color:#c30>/manifest&#34;</span>
 </code></pre></div></li></ol><p>If the Manifest contains a <code>RecoveryKey</code> entry, you will receive a JSON reply including a recovery secret, encrypted with for the <code>RecoveryKey</code>. The reply will look like this, with <code>[base64]</code> as your encrypted recovery secret.</p><p><code>{"EncryptionKey":"[base64]"}</code></p><p><strong>It is important that you keep this value stored somewhere safe. Without it, you will not be able to perform a recovery step in case the SGX seal key changed.</strong></p></article></div></div></div><footer class="bg-light text-center p-3"><div>Marblerun is brought to you by <a target=_blank href=https://edgeless.systems/>Edgeless Systems GmbH <img src=/img/ES_Symbol_black.svg class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width=14px class=mb-3></a></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx crossorigin=anonymous></script><script src=/js/main.js></script></body></html>

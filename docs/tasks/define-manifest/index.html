@@ -17,70 +17,133 @@
 <a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a>
 <a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Updating a deployment</a>
 <a href=https://marblerun.sh/docs/tasks/recover-coordinator/ class="d-block pl-3">Recovering the Coordinator</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello World</a>
-<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=defining-a-manifest>Defining a Manifest</h1><p>The Manifest is a simple JSON file that determines the key properties of your cluster: <code>Packages</code>, <code>Infrastructures</code>, <code>Marbles</code>, and <code>RecoveryKey</code>.
-This article describes how to define these in your <code>manifest.json</code>.</p><h2 id=manifestpackages>Manifest:Packages</h2><p>A package defines a specific container image in your application.
-It contains the secure enclave&rsquo;s measurements and associated properties:</p><ul><li><strong>UniqueID</strong>: The enclave&rsquo;s unique identifying measurement, called MRENCLAVE on SGX</li><li><strong>SignerID</strong>: The signer&rsquo;s unique identifier, called MRSIGNER on SGX</li><li><strong>ProductID</strong>: The unique identifier of your product associated with the enclave</li><li><strong>SecurityVersion</strong>: The version number of your product associated with the enclave</li><li><strong>Debug</strong>: A flag indicating whether your enclave should be run in debug mode</li></ul><p>You can use any combination of these values depending on how you want to identify the image.
-For each confidential container you want to run in your cluster, you need to add an entry in the <em>Packages</em> section of the Manifest.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
-    <span style=color:#75715e>// ...
-</span><span style=color:#75715e></span>    <span style=color:#e6db74>&#34;Packages&#34;</span><span style=color:#f92672>:</span> {
-        <span style=color:#e6db74>&#34;backend&#34;</span><span style=color:#f92672>:</span> {
-            <span style=color:#e6db74>&#34;UniqueID&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
-            <span style=color:#e6db74>&#34;ProductID&#34;</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>42</span>,
-            <span style=color:#e6db74>&#34;SecurityVersion&#34;</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>1</span>,
-            <span style=color:#e6db74>&#34;Debug&#34;</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>false</span>
+<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=defining-a-manifest>Defining a Manifest</h1><p>The Manifest is a simple JSON file that determines the key properties of your cluster: <code>Packages</code>, <code>Marbles</code>, <code>Secrets</code>, and <code>RecoveryKey</code>.
+This article describes how to define these in your <code>manifest.json</code>.</p><h2 id=manifestpackages>Manifest:Packages</h2><p>The <code>Packages</code> section of the Manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.</p><ul><li><code>UniqueID</code>: the globally unique identity of the enclave software; on SGX, this corresponds to the MRENCLAVE value, which is a hash of an enclave&rsquo;s initial contents and its configuration.</li><li><code>SignerID</code>: the globally unique identity of the enclave&rsquo;s issuer; on SGX, this corresponds to the MRSIGNER value, which is a hash over the enclave issuer&rsquo;s public key.</li><li><code>ProductID</code>: an integer that uniquely identifies the enclave software for a given <code>SignerID</code>. Can only be used in conjunction with <code>SignerID</code>.</li><li><code>SecurityVersion</code>: an integer that reflects the security patch level of the enclave software. Can only be used in conjunction with <code>SignerID</code>.</li><li><code>Debug</code>: <code>true</code> if the enclave is running in debug mode.</li></ul><p>The following gives an example of a simple <code>Packages</code> section with dummy values.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
+    <span style=color:#09f;font-style:italic>// ...
+</span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;Packages&#34;</span><span style=color:#555>:</span> {
+        <span style=color:#c30>&#34;backend&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;UniqueID&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
+            <span style=color:#c30>&#34;SecurityVersion&#34;</span><span style=color:#555>:</span> <span style=color:#f60>1</span>,
+            <span style=color:#c30>&#34;Debug&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>false</span>
         },
-        <span style=color:#e6db74>&#34;frontend&#34;</span><span style=color:#f92672>:</span> {
-            <span style=color:#e6db74>&#34;SignerID&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
-            <span style=color:#e6db74>&#34;ProductID&#34;</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>43</span>,
-            <span style=color:#e6db74>&#34;SecurityVersion&#34;</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>3</span>,
-            <span style=color:#e6db74>&#34;Debug&#34;</span><span style=color:#f92672>:</span> <span style=color:#66d9ef>true</span>
+        <span style=color:#c30>&#34;frontend&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;SignerID&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
+            <span style=color:#c30>&#34;ProductID&#34;</span><span style=color:#555>:</span> <span style=color:#f60>43</span>,
+            <span style=color:#c30>&#34;SecurityVersion&#34;</span><span style=color:#555>:</span> <span style=color:#f60>3</span>,
+            <span style=color:#c30>&#34;Debug&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>true</span>
         }
     }
-    <span style=color:#75715e>// ...
-</span><span style=color:#75715e></span>}
-</code></pre></div><h2 id=manifestmarbles>Manifest:Marbles</h2><p>Marbles represent the actual services in your mesh. They are defined in the <em>Marbles</em> section. Each Marble corresponds to a <code>Package</code> and defines a set of optional <code>Parameters</code>:</p><ul><li>Files: Files and their contents</li><li>Env: Environment variables</li><li>Argv: Command line arguments</li></ul><p>These <code>Parameters</code> are passed from the Coordinator to secure enclaves after successful initial remote attestation. <code>Parameters</code> can contain the following placeholders:</p><ul><li><code>$$root_ca</code>: The root certificate of the cluster issued by the Coordinator; it can be used to verify the certificates of all Marbles in the cluster.</li><li><code>$$marble_cert</code>: The Marble&rsquo;s certificate; issued by the Coordinator and used for Marble-to-Marble and Marble-to-client authentication</li><li><code>$$marble_key</code>: The private key corresponding to <code>$$marble_cert</code></li><li><code>$$seal_key</code>: A 128-bit symmetric encryption key that can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this &ldquo;virtual sealing key&rdquo; will still allow for unsealing data from the disk even though the host&rsquo;s actual sealing key might have changed.</li></ul><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
-    <span style=color:#75715e>// ...
-</span><span style=color:#75715e></span>    <span style=color:#e6db74>&#34;Marbles&#34;</span><span style=color:#f92672>:</span> {
-        <span style=color:#e6db74>&#34;backend_first&#34;</span><span style=color:#f92672>:</span> {
-            <span style=color:#e6db74>&#34;Package&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;backend&#34;</span>,
-            <span style=color:#e6db74>&#34;MaxActivations&#34;</span><span style=color:#f92672>:</span> <span style=color:#ae81ff>1</span>,
-            <span style=color:#e6db74>&#34;Parameters&#34;</span><span style=color:#f92672>:</span> {
-                <span style=color:#e6db74>&#34;Files&#34;</span><span style=color:#f92672>:</span> {
-                    <span style=color:#e6db74>&#34;/tmp/defg.txt&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;foo&#34;</span>,
-                    <span style=color:#e6db74>&#34;/tmp/jkl.mno&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;bar&#34;</span>
+    <span style=color:#09f;font-style:italic>// ...
+</span><span style=color:#09f;font-style:italic></span>}
+</code></pre></div><p><code>SignerID</code> can only be used in conjunction with <code>ProductID</code> and <code>SecurityVersion</code>. Note that packages identified by <code>UniqueID</code> cannot be updated. (At least on SGX, this is because an enclave software&rsquo;s hash/measurement changes if a single bit in the software is changed.)</p><h2 id=manifestmarbles>Manifest:Marbles</h2><p>Marbles represent the actual services in your mesh. They are defined in the <code>Marbles</code> section, which typically looks somewhat like the following example.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
+    <span style=color:#09f;font-style:italic>// ...
+</span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;Marbles&#34;</span><span style=color:#555>:</span> {
+        <span style=color:#c30>&#34;backend_first&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;Package&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;backend&#34;</span>,
+            <span style=color:#c30>&#34;MaxActivations&#34;</span><span style=color:#555>:</span> <span style=color:#f60>1</span>,
+            <span style=color:#c30>&#34;Parameters&#34;</span><span style=color:#555>:</span> {
+                <span style=color:#c30>&#34;Files&#34;</span><span style=color:#555>:</span> {
+                    <span style=color:#c30>&#34;/tmp/defg.txt&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;foo&#34;</span>,
+                    <span style=color:#c30>&#34;/tmp/jkl.mno&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;bar&#34;</span>
                 },
-                <span style=color:#e6db74>&#34;Env&#34;</span><span style=color:#f92672>:</span> {
-                    <span style=color:#e6db74>&#34;IS_FIRST&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;true&#34;</span>,
-                    <span style=color:#e6db74>&#34;ROOT_CA&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
-                    <span style=color:#e6db74>&#34;SEAL_KEY&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
-                    <span style=color:#e6db74>&#34;MARBLE_CERT&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
-                    <span style=color:#e6db74>&#34;MARBLE_KEY&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
+                <span style=color:#c30>&#34;Env&#34;</span><span style=color:#555>:</span> {
+                    <span style=color:#c30>&#34;IS_FIRST&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;true&#34;</span>,
+                    <span style=color:#c30>&#34;ROOT_CA&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ pem .Marblerun.RootCA.Cert }}&#34;</span>,
+                    <span style=color:#c30>&#34;SEAL_KEY&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ hex .Marblerun.SealKey }}&#34;</span>,
+                    <span style=color:#c30>&#34;MARBLE_CERT&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Cert }}&#34;</span>,
+                    <span style=color:#c30>&#34;MARBLE_KEY&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Private }}&#34;</span>
                 },
-                <span style=color:#e6db74>&#34;Argv&#34;</span><span style=color:#f92672>:</span> [
-                    <span style=color:#e6db74>&#34;--first&#34;</span>,
-                    <span style=color:#e6db74>&#34;serve&#34;</span>
+                <span style=color:#c30>&#34;Argv&#34;</span><span style=color:#555>:</span> [
+                    <span style=color:#c30>&#34;--first&#34;</span>,
+                    <span style=color:#c30>&#34;serve&#34;</span>
                 ]
             }
         },
-        <span style=color:#e6db74>&#34;frontend&#34;</span><span style=color:#f92672>:</span> {
-            <span style=color:#e6db74>&#34;Package&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;frontend&#34;</span>,
-            <span style=color:#e6db74>&#34;Parameters&#34;</span><span style=color:#f92672>:</span> {
-                <span style=color:#e6db74>&#34;Env&#34;</span><span style=color:#f92672>:</span> {
-                    <span style=color:#e6db74>&#34;ROOT_CA&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$root_ca&#34;</span>,
-                    <span style=color:#e6db74>&#34;SEAL_KEY&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$seal_key&#34;</span>,
-                    <span style=color:#e6db74>&#34;MARBLE_CERT&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$marble_cert&#34;</span>,
-                    <span style=color:#e6db74>&#34;MARBLE_KEY&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;$$marble_key&#34;</span>
+        <span style=color:#c30>&#34;frontend&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;Package&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;frontend&#34;</span>,
+            <span style=color:#c30>&#34;Parameters&#34;</span><span style=color:#555>:</span> {
+                <span style=color:#c30>&#34;Env&#34;</span><span style=color:#555>:</span> {
+                    <span style=color:#c30>&#34;ROOT_CA&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ pem .Marblerun.RootCA.Cert }}&#34;</span>,
+                    <span style=color:#c30>&#34;SEAL_KEY&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ hex .Marblerun.SealKey }}&#34;</span>,
+                    <span style=color:#c30>&#34;MARBLE_CERT&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Cert }}&#34;</span>,
+                    <span style=color:#c30>&#34;MARBLE_KEY&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;{{ pem .Marblerun.MarbleCert.Private }}&#34;</span>
                 }
             }
         }
     }
-    <span style=color:#75715e>//...
-</span><span style=color:#75715e></span>}
-</code></pre></div><h2 id=manifestrecoverykey>Manifest:RecoveryKey</h2><p>The optional entry <code>RecoveryKey</code> holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described <a href=https://marblerun.sh/docs/features/recovery/>here</a>.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
-    <span style=color:#75715e>//...
-</span><span style=color:#75715e></span>    <span style=color:#e6db74>&#34;RecoveryKey&#34;</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk...&#34;</span>
+    <span style=color:#09f;font-style:italic>//...
+</span><span style=color:#09f;font-style:italic></span>}
+</code></pre></div><p>Each Marble corresponds to a <code>Package</code> (see the <a href=#manifestpackages>previous section</a>) and defines a set of optional <code>Parameters</code>:</p><ul><li><code>Files</code>: Files and their contents</li><li><code>Env</code>: Environment variables</li><li><code>Argv</code>: Command line arguments</li></ul><p>These <code>Parameters</code> are passed from the Coordinator to secure enclaves (i.e., Marbles) after successful initial remote attestation. In the remote attestation step, the Coordinator ensures that enclaves run the software defined in the <code>Packages</code> section. It is important to note that <code>Parameters</code> are only accessible from within the corresponding secure enclave. <code>Parameters</code> may contain arbitrary static data. However, they can also be used to securely communicate different types of dynamically generated cryptographic keys and certificates to Marbles. For this, we use <a href=https://golang.org/pkg/text/template/>Go Templates</a> with the following syntax.</p><p><code>{{ &lt;encoding> &lt;name of key or certificate> }}</code></p><p>The following enconding types are available.</p><ul><li><code>raw</code>: raw bytes</li><li><code>hex</code>: hex string</li><li><code>base64</code>: <a href=https://de.wikipedia.org/wiki/Base64>Base64</a> encoding</li><li><code>pem</code>: <a href=https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail>PEM</a> encoding with a header matching the type of the requested key or certificate</li></ul><p>The following named keys and certificates are always available.</p><ul><li><code>.Marblerun.RootCA.Cert</code>: the root certificate of the cluster issued by the Coordinator; this can be used to verify the certificates of all Marbles in the cluster.</li><li><code>.Marblerun.MarbleCert.Cert</code>: the Marble&rsquo;s certificate; this is issued by the <code>.Marblerun.RootCA.Cert</code> and is for Marble-to-Marble and Marble-to-client authentication.</li><li><code>.Marblerun.MarbleCert.Private</code>: the Marble&rsquo;s private key corresponding to <code>.Marblerun.MarbleCert.Cert</code></li><li><code>.Marblerun.SealKey</code>: a 128-bit symmetric encryption key, which can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this &ldquo;virtual sealing key&rdquo; will still allow for unsealing data from the disk even though the host&rsquo;s actual sealing key might have changed.</li></ul><p>Finally, the optional field <code>MaxActivations</code> can be used to restrict the number of distinct instances that can be created of a Marble.</p><h2 id=manifestsecrets>Manifest:Secrets</h2><p>In the <a href=#manifestmarbles>previous section</a>, we discussed how certain cryptographic keys and certificates can be injected into a Marble&rsquo;s <code>Parameters</code> using Go Templates. In addition, Marblerun also allows for the specification of custom cryptographic keys and certificates in the <code>Secrets</code> section. A typical <code>Secrets</code> section looks like the following.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
+    <span style=color:#09f;font-style:italic>//...
+</span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;Secrets&#34;</span><span style=color:#555>:</span> {
+        <span style=color:#c30>&#34;secret_aes_key&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;Type&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;raw&#34;</span>,
+            <span style=color:#c30>&#34;Size&#34;</span><span style=color:#555>:</span> <span style=color:#f60>128</span>,
+            <span style=color:#c30>&#34;Shared&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>true</span>
+        },
+        <span style=color:#c30>&#34;rsa_cert&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;Type&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;cert-rsa&#34;</span>,
+            <span style=color:#c30>&#34;Size&#34;</span><span style=color:#555>:</span> <span style=color:#f60>2048</span>,
+            <span style=color:#c30>&#34;Shared&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>false</span>,
+            <span style=color:#c30>&#34;ValidFor&#34;</span><span style=color:#555>:</span> <span style=color:#f60>7</span>,
+            <span style=color:#c30>&#34;Cert&#34;</span><span style=color:#555>:</span> {
+                <span style=color:#c30>&#34;SerialNumber&#34;</span><span style=color:#555>:</span> <span style=color:#f60>42</span>,
+                <span style=color:#c30>&#34;Subject&#34;</span><span style=color:#555>:</span> {
+                    <span style=color:#c30>&#34;SerialNumber&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;42&#34;</span>,
+                    <span style=color:#c30>&#34;CommonName&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;Marblerun Unit Test&#34;</span>
+                }
+            }
+        }
+    }
+    <span style=color:#09f;font-style:italic>//...
+</span><span style=color:#09f;font-style:italic></span>}
+</code></pre></div><p>When defining a custom key or certificate, the following fields are available.</p><ul><li><code>Type</code>: can be either <code>raw</code> for a symmetric encryption key, <code>cert-rsa</code>, <code>cert-ecdsa</code> or <code>cert-ed25519</code></li><li><code>Size</code>: the size of the key in bits. For symmetric keys, this needs to be a multiple of <code>8</code>. For ECDSA, this needs to map to a curve supported by Go&rsquo;s crypto library, currently: <code>224</code>, <code>256</code>, <code>384</code>, or <code>521</code>. For Ed25519, this should be ommitted.</li><li><code>Shared</code> (default: <code>false</code>): specifies if the secret should be shared across all Marbles (<code>true</code>), or if the secret should be uniquely generated for each Marble (<code>false</code>). See <a href=https://marblerun.sh/docs/features/secrets-management/>Secrets management</a> for more info.</li><li><code>ValidFor</code> (only for certificates, default: <code>365</code>): validity of the certificate in days; cannot be specified in combination with the <code>NotAfter</code>.</li><li><code>Cert</code> (only for certificates): allows for the specification of additional X.509 certificate properties. See below for details.</li></ul><h3 id=available-cert-fields>Available <code>Cert</code> fields</h3><p>When specifying a custom certificate in the <code>Secrets</code> section, the following properties can be set. These map directly to Go&rsquo;s <code>x509.Certificate</code> structure. (This is because the Coordinator is written in Go.)</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#c30>&#34;Cert&#34;</span><span style=color:#555>:</span> {
+        <span style=color:#c30>&#34;SignatureAlgorithm&#34;</span><span style=color:#555>:</span> <span style=color:#f60>0</span>,
+        <span style=color:#c30>&#34;SerialNumber&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;Subject&#34;</span><span style=color:#555>:</span> {
+            <span style=color:#c30>&#34;Country&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;Organization&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;OrganizationalUnit&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;Locality&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;Province&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;StreetAddress&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;PostalCode&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;SerialNumber&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;&#34;</span>,
+            <span style=color:#c30>&#34;CommonName&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;&#34;</span>,
+            <span style=color:#c30>&#34;Names&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+            <span style=color:#c30>&#34;ExtraNames&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>
+        },
+        <span style=color:#c30>&#34;NotAfter&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;0001-01-01T00:00:00Z&#34;</span>,
+        <span style=color:#c30>&#34;KeyUsage&#34;</span><span style=color:#555>:</span> <span style=color:#f60>0</span>,
+        <span style=color:#c30>&#34;ExtKeyUsage&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;UnknownExtKeyUsage&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;MaxPathLen&#34;</span><span style=color:#555>:</span> <span style=color:#f60>0</span>,
+        <span style=color:#c30>&#34;MaxPathLenZero&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>false</span>,
+        <span style=color:#c30>&#34;SubjectKeyId&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;AuthorityKeyId&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;OCSPServer&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;IssuingCertificateURL&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;DNSNames&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;EmailAddresses&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;IPAddresses&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;URIs&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;PermittedDNSDomainsCritical&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>false</span>,
+        <span style=color:#c30>&#34;PermittedDNSDomains&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;ExcludedDNSDomains&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;PermittedIPRanges&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;ExcludedIPRanges&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;PermittedEmailAddresses&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;ExcludedEmailAddresses&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;PermittedURIDomains&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;ExcludedURIDomains&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;CRLDistributionPoints&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>,
+        <span style=color:#c30>&#34;PolicyIdentifiers&#34;</span><span style=color:#555>:</span> <span style=color:#069;font-weight:700>null</span>
+    }
+</code></pre></div><p>Typically, you only define a subset of these. Commonly used properties include for example:</p><ul><li><code>DNSNames</code></li><li><code>IPAdresses</code></li><li><code>KeyUsage</code> & <code>ExtKeyUsage</code></li><li><code>Subject</code> (+ children)</li></ul><p>The following X.509 properties cannot not be specified, because they are set by the Coordinator when creating a certificate.</p><ul><li><code>IsCA</code>: always set to &ldquo;false&rdquo;</li><li><code>Issuer</code>: always set to &ldquo;Marblerun Coordinator&rdquo;</li><li><code>BasicConstraintsValid</code>: always set to &ldquo;true&rdquo;</li><li><code>NotBefore</code>: always set to the host time at creation</li></ul><h3 id=injecting-custom-secrets>Injecting custom secrets</h3><p>Keys and certificates defined in the <code>Secrets</code> section can be injected via <code>Parameters</code> using the following syntax.</p><p><code>{{ &lt;encoding> .Secrets.&lt;name>.&lt;part> }}</code></p><p>Refer to the <a href=#manifestmarbles>previous section</a> for a list of supported encodings. <code>&lt;part></code> can be any of the following.</p><ul><li><em>empty</em>: for secret type <code>raw</code>, returns the symmetric key. For other types, returns the public key.</li><li><code>Cert</code>: returns the certificate.</li><li><code>Public</code>: returns the public key.</li><li><code>Private</code>: returns the private key.</li></ul><p>The following gives some examples.</p><ul><li>Inject the certificate of custom secret <code>rsa_cert</code> in PEM format: <code>{{ pem .Secrets.rsa_cert.Cert }}</code></li><li>Inject the corresponidng private key in PKCS#8 format: <code>{{ raw .Secrets.rsa_cert.Private }}</code></li><li>Inject the corresponding public key PKIX-encoded and in PEM format: <code>{{ pem .Secrets.rsa_cert.Public }}</code></li><li>Inject a symmetric key in hex format: <code>{{ hex .Secrets.secret_aes_key }}</code></li></ul><h2 id=manifestrecoverykey>Manifest:RecoveryKey</h2><p>The optional entry <code>RecoveryKey</code> holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described <a href=https://marblerun.sh/docs/features/recovery/>here</a>.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>{
+    <span style=color:#09f;font-style:italic>//...
+</span><span style=color:#09f;font-style:italic></span>    <span style=color:#c30>&#34;RecoveryKey&#34;</span><span style=color:#555>:</span> <span style=color:#c30>&#34;-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk...&#34;</span>
 }
-</code></pre></div><p>This key can be generated with the help of OpenSSL.</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>openssl genrsa -out private_key.pem <span style=color:#ae81ff>4096</span>
+</code></pre></div><p>This key can be generated with the help of OpenSSL.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>openssl genrsa -out private_key.pem <span style=color:#f60>4096</span>
 openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
-</code></pre></div><p>To preserve the new lines correctly, you can use the following command:</p><div class=highlight><pre style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>awk <span style=color:#e6db74>&#39;NF {sub(/\r/, &#34;&#34;); printf &#34;%s\\n&#34;,$0;}&#39;</span> public_key.pem
+</code></pre></div><p>To preserve the new lines correctly, you can use the following command:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>awk <span style=color:#c30>&#39;NF {sub(/\r/, &#34;&#34;); printf &#34;%s\\n&#34;,$0;}&#39;</span> public_key.pem
 </code></pre></div><h2 id=manifestinfrastructures>Manifest:Infrastructures</h2><p>Future versions of Marblerun will allow you to define certain trusted infrastructures and hardware configurations under <code>Infrastructures</code>.</p></article></div></div></div><footer class="bg-light text-center p-3"><div>Marblerun is brought to you by <a target=_blank href=https://edgeless.systems/>Edgeless Systems GmbH <img src=/img/ES_Symbol_black.svg class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width=14px class=mb-3></a></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx crossorigin=anonymous></script><script src=/js/main.js></script></body></html>
