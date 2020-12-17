@@ -14,3 +14,4 @@ Among others, the following features are planned for Marblerun.
 * Fault-tolerant distribution of the Coordinator
 * Transparent TLS for Marbles  
 * Constant-time crypto in the Coordinator
+* Use online time sources for the verification of certificates and SGX collaterals
