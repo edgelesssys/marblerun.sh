@@ -127,7 +127,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
     //...
     "Secrets": {
         "secret_aes_key": {
-            "Type": "raw",
+            "Type": "symmetric-key",
             "Size": 128,
             "Shared": true
         },
@@ -151,7 +151,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
 
 When defining a custom key or certificate, the following fields are available.
 
-* `Type`: can be either `raw` for a symmetric encryption key, `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
+* `Type`: can be either `symmetric-key` for a symmetric encryption key, `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
 * `Size`: the size of the key in bits. For symmetric keys, this needs to be a multiple of `8`. For ECDSA, this needs to map to a curve supported by Go's crypto library, currently: `224`, `256`, `384`, or `521`. For Ed25519, this should be ommitted.
 * `Shared` (default: `false`): specifies if the secret should be shared across all Marbles (`true`), or if the secret should be uniquely generated for each Marble (`false`). See [Secrets management]({{< ref "docs/features/secrets-management.md" >}}) for more info.
 * `ValidFor` (only for certificates, default: `365`): validity of the certificate in days; cannot be specified in combination with the `NotAfter`.
@@ -225,7 +225,7 @@ Keys and certificates defined in the `Secrets` section can be injected via `Para
 
 Refer to the [previous section](#manifestmarbles) for a list of supported encodings. `<part>` can be any of the following.
 
-* *empty*: for secret type `raw`, returns the symmetric key. For other types, returns the public key.
+* *empty*: for secret type `symmetric-key`, returns the symmetric key. For other types, returns the public key.
 * `Cert`: returns the certificate.
 * `Public`: returns the public key.
 * `Private`: returns the private key.
@@ -233,7 +233,7 @@ Refer to the [previous section](#manifestmarbles) for a list of supported encodi
 The following gives some examples.
 
 * Inject the certificate of custom secret `rsa_cert` in PEM format: `{{ pem .Secrets.rsa_cert.Cert }}`
-* Inject the corresponidng private key in PKCS#8 format: `{{ raw .Secrets.rsa_cert.Private }}`
+* Inject the corresponding private key in PKCS#8 format: `{{ raw .Secrets.rsa_cert.Private }}`
 * Inject the corresponding public key PKIX-encoded and in PEM format: `{{ pem .Secrets.rsa_cert.Public }}`
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
