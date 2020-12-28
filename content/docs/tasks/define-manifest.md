@@ -32,7 +32,7 @@ The following gives an example of a simple `Packages` section with dummy values.
             "Debug": false
         },
         "frontend": {
-            "SignerID": "c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee",
+            "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
             "ProductID": 43,
             "SecurityVersion": 3,
             "Debug": true
@@ -42,7 +42,7 @@ The following gives an example of a simple `Packages` section with dummy values.
 }
 ```
 
-`SignerID` can only be used in conjunction with `ProductID` and `SecurityVersion`. Note that packages identified by `UniqueID` cannot be updated. (At least on SGX, this is because an enclave software's hash/measurement changes if a single bit in the software is changed.) 
+`SignerID` can only be used in conjunction with `ProductID` and `SecurityVersion`. Note that packages identified by `UniqueID` cannot be updated. (At least on SGX, this is because an enclave software's hash/measurement changes if a single bit in the software is changed.)
 
 ## Manifest:Marbles
 
@@ -113,7 +113,7 @@ The following named keys and certificates are always available.
 * `.Marblerun.MarbleCert.Private`: the Marble's private key corresponding to `.Marblerun.MarbleCert.Cert`
 * `.Marblerun.SealKey`: a 128-bit symmetric encryption key, which can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this "virtual sealing key" will still allow for unsealing data from the disk even though the host's actual sealing key might have changed.
 
-Finally, the optional field `MaxActivations` can be used to restrict the number of distinct instances that can be created of a Marble. 
+Finally, the optional field `MaxActivations` can be used to restrict the number of distinct instances that can be created of a Marble.
 
 ## Manifest:Secrets
 
@@ -224,8 +224,8 @@ Refer to the [previous section](#manifestmarbles) for a list of supported encodi
 
 * *empty*: for secret type `raw`, returns the symmetric key. For other types, returns the public key.
 * `Cert`: returns the certificate.
-* `Public`: returns the public key. 
-* `Private`: returns the private key. 
+* `Public`: returns the public key.
+* `Private`: returns the private key.
 
 The following gives some examples.
 

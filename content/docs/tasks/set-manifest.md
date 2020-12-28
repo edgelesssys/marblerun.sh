@@ -24,7 +24,7 @@ See the following Manifest for example (`manifest.json`).
             "Debug": false
         },
         "frontend": {
-            "SignerID": "c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee",
+            "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
             "ProductID": 42,
             "SecurityVersion": 3,
             "Debug": true
