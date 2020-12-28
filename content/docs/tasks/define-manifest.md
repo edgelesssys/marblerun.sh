@@ -27,7 +27,7 @@ The following gives an example of a simple `Packages` section with dummy values.
     // ...
     "Packages": {
         "backend": {
-            "UniqueID": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+            "UniqueID": "6b2822ac2585040d4b9397675d54977a71ef292ab5b3c0a6acceca26074ae585",
             "SecurityVersion": 1,
             "Debug": false
         },
