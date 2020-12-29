@@ -15,10 +15,10 @@ This article describes how to define these in your `manifest.json`.
 The `Packages` section of the Manifest lists all the secure enclave software-packages that your application uses. A package is defined by the following properties.
 
 * `UniqueID`: the globally unique ID of the enclave software-package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
-* ``SignerID``: the globally unique ID of the enclave's issuer; on SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
-* ``ProductID``: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with `SignerID`.
-* ``SecurityVersion``: an integer that reflects the security-patch level of the enclave software. Can only be used in conjunction with `SignerID`.
-* ``Debug``: `true` if the enclave is to be run in debug mode. Note that enclaves in debug mode are not secure.
+* `SignerID`: the globally unique ID of the enclave's issuer; on SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
+* `ProductID`: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with `SignerID`.
+* `SecurityVersion`: an integer that reflects the security-patch level of the enclave software. Can only be used in conjunction with `SignerID`.
+* `Debug`: `true` if the enclave is to be run in debug mode. Note that enclaves in debug mode are not secure.
 
 The following gives an example of a simple `Packages` section with made-up values.
 
@@ -26,12 +26,11 @@ The following gives an example of a simple `Packages` section with made-up value
 {
     // ...
     "Packages": {
-        "backend": {
+        "pkg0": {
             "UniqueID": "6b2822ac2585040d4b9397675d54977a71ef292ab5b3c0a6acceca26074ae585",
-            "SecurityVersion": 1,
             "Debug": false
         },
-        "frontend": {
+        "pkg1": {
             "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
             "ProductID": 43,
             "SecurityVersion": 3,
@@ -42,7 +41,11 @@ The following gives an example of a simple `Packages` section with made-up value
 }
 ```
 
-`SignerID` can only be used in conjunction with `ProductID` and `SecurityVersion`. Note that packages identified by `UniqueID` cannot be updated. (At least on SGX, this is because an enclave software's hash/measurement changes if a single bit in the software is changed.)
+In this example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the hash of the enclave software-package, this means that `pkg0` cannot be updated. (That is, because any update to the package will change the hash.)
+
+In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
+
+Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
 
 ## Manifest:Marbles
 

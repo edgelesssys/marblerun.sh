@@ -56,32 +56,3 @@ Updating your application is straightforward with Marblerun.
 You can roll out the new version similar to a regular [deployment update](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
 The Coordinator will manage the attestation and bootstrapping of your new version.
 Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the Manifest in effect.
-
-### Manifest values
-
-Making updates work seamlessly requires some attention when defining enclave software-packages in the `Packages` section of the Manifest.
-Take the following Manifest as example.
-
-```json
-{
-    "Packages": {
-        "pkg0": {
-            "UniqueID": "6b2822ac2585040d4b9397675d54977a71ef292ab5b3c0a6acceca26074ae585",
-            "Debug": false
-        },
-        "pkg1": {
-            "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
-            "ProductID": 42,
-            "SecurityVersion": 1,
-            "Debug": false
-        }
-    }
-}
-```
-
-The properties `UniqueID`, `SignerID`, `ProductID`, and `ProductID` are described in more detail [here]({{< ref "docs/tasks/define-manifest.md#manifestpackages" >}}).
-In the case of our example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the cryptographic hash of the enclave software-package, this means that `pkg0` cannot be updated. (That is, because any update to the package will change the hash.)
-
-In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
-
-Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
