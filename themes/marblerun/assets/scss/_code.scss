@@ -2,6 +2,7 @@
 code {
   @include font-size($code-font-size);
   color: $code-color;
+  background-color: $code-bg-color;
   word-wrap: break-word;
 
   // Streamline the style when inside anchors to avoid broken underline and more
@@ -37,6 +38,7 @@ pre {
   code {
     @include font-size(inherit);
     color: inherit;
+    background-color: transparent;
     word-break: normal;
   }
 }
