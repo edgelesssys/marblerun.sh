@@ -59,23 +59,29 @@ Notably, nothing changes on the client-side of Marblerun, the version update is 
 
 ### Manifest values
 
-Making updates work seamlessly requires some attention on what values are defined for your application in the Manifest.
-Take the following Manifest as an example:
+Making updates work seamlessly requires some attention when defining enclave software-packages in the `Packages` section of the Manifest.
+Take the following Manifest as example.
 
 ```json
-"package": {
-    "UniqueID": "6b2822ac2585040d4b9397675d54977a71ef292ab5b3c0a6acceca26074ae585",
-    "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
-    "ProductID": 42,
-    "SecurityVersion": 1,
-    "Debug": false
+{
+    "Packages": {
+        "pkg0": {
+            "UniqueID": "6b2822ac2585040d4b9397675d54977a71ef292ab5b3c0a6acceca26074ae585",
+            "Debug": false
+        },
+        "pkg1": {
+            "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
+            "ProductID": 42,
+            "SecurityVersion": 1,
+            "Debug": false
+        }
+    }
 }
 ```
 
-Setting `UniqueID` (aka `MRENCLAVE`), will pin your application to one specific release build.
-It will not be possible to update this release in the future.
-We recommend setting the triple of `SignerID`, `ProductID`, and `SecurityVersion` instead.
-`SignerID` will only accept releases signed by you.
-`ProductID` will pin this package to one specific application and `SecuritVersion` to a minimum security version.
-You define those values when building your application's secure enclave.
-Future versions of Marblerun will support `SecurityVersion` updates in the Manifest, making it possible to drop older potentially vulnerable versions of your software without redeploying a Manifest.
+The properties `UniqueID`, `SignerID`, `ProductID`, and `ProductID` are described in more detail [here]({{< ref "docs/tasks/define-manifest.md#manifestpackages" >}}).
+In the case of our example, `pk0` is identified through `UniqueID`. Since `UniqueID` is the cryptographic hash of the enclave software-package, this means that `pk0` cannot be updated. (That is, because any update to the package will change the hash.)
+
+In contrast, `pk1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
+
+Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
