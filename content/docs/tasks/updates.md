@@ -80,8 +80,8 @@ Take the following Manifest as example.
 ```
 
 The properties `UniqueID`, `SignerID`, `ProductID`, and `ProductID` are described in more detail [here]({{< ref "docs/tasks/define-manifest.md#manifestpackages" >}}).
-In the case of our example, `pk0` is identified through `UniqueID`. Since `UniqueID` is the cryptographic hash of the enclave software-package, this means that `pk0` cannot be updated. (That is, because any update to the package will change the hash.)
+In the case of our example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the cryptographic hash of the enclave software-package, this means that `pkg0` cannot be updated. (That is, because any update to the package will change the hash.)
 
-In contrast, `pk1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
+In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
 
 Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
