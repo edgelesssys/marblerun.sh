@@ -14,13 +14,13 @@ This article describes how to define these in your `manifest.json`.
 
 The `Packages` section of the Manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.
 
-* `UniqueID`: the globally unique identity of the enclave software; on SGX, this corresponds to the MRENCLAVE value, which is a hash of an enclave's initial contents and its configuration.
+* `UniqueID`: the globally unique identity of the enclave software; on SGX, this corresponds to the MRENCLAVE value, which is a cryptographic hash of an enclave's initial contents and its configuration.
 * ``SignerID``: the globally unique identity of the enclave's issuer; on SGX, this corresponds to the MRSIGNER value, which is a hash over the enclave issuer's public key.
 * ``ProductID``: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with ``SignerID``.
 * ``SecurityVersion``: an integer that reflects the security patch level of the enclave software. Can only be used in conjunction with ``SignerID``.
 * ``Debug``: `true` if the enclave is running in debug mode.
 
-The following gives an example of a simple `Packages` section with dummy values.
+The following gives an example of a simple `Packages` section with made-up values.
 
 ```javascript
 {
