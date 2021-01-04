@@ -9,11 +9,11 @@ weight: 3
 
 Adding a service to your application requires three steps, which are described in the following.
 
-## Step #1: Get your service ready for Marblerun
+## **Step 1:** Get your service ready for Marblerun
 
 To get your service ready for Marblerun, you possibly need to adapt its code slightly and you need to rebuild it. Details are given in the following steps 1.1 and 1.2. *Note that we are working on making these unnecessary in the future - at least for services written in Go.*
 
-### Step #1.1: Make your service use the provided TLS credentials
+### **Step 1.1:** Make your service use the provided TLS credentials
 
 Quick refresher: Marblerun's Coordinator issues TLS credentials for each verified Marble (i.e., a service running in a secure enclave) as is described [here]({{< ref "docs/features/secrets-management.md#tls-credentials" >}}).
 
@@ -33,22 +33,22 @@ func main() {
 }
 ```
 
-### Step #1.2: Re-compile/build your service for Marblerun
+### **Step 1.2:** Re-compile/build your service for Marblerun
 
 Finally, you need to re-build your service for the enclave environment and include/link Marblerun-specific code. Please follow the build instructions for Go provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld) or the build instructions for C++ provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B).
 
-## Step #2: Define your service in the Manifest
+## **Step 2:** Define your service in the Manifest
 
 Now that your service is ready, you need to make two types of entries in the Manifest regarding its properties and parameters.
 
-### Step #2.1: Define the enclave software-package
+### **Step 2.1:** Define the enclave software-package
 
 As is described in more detail [here]({{< ref "docs/tasks/define-manifest.md#manifestpackages" >}}), the Manifest contains a section `Packages`, in which allowed enclave software-packages are defined.
 
-To add an entry for your service, run [tools/create_config.py](https://github.com/edgelesssys/marblerun/blob/master/tools/create_config.py) on the enclave file you built in the previous step.
+To add an entry for your service, run the `oesign` tool on the enclave file you built in the previous step as follows. (`oesign` is installed with [Edgeless RT](https://github.com/edgelesssys/edgelessrt).)
 
 ```bash
-tools/create_config.py -e enclave.signed
+oesign eradump -e enclave.signed
 ```
 
 The tool's output will look like the following.
@@ -64,11 +64,11 @@ The tool's output will look like the following.
 
 Use `UniqueID` (i.e., `MRENCLAVE` in Intel SGX speak) or the triplet of `SignerID` (i.e., `MRSIGNER`), `SecurityVersion`, and `ProductID` to add an entry in the `Packages` section.
 
-### Step #2.2: Define the parameters
+### **Step 2.2:** Define the parameters
 
 Now you can define with which parameters (i.e., files, environments variables, and command line arguments) your service is allowed to run. This is done in the `Marbles` section of the Manifest as is described [here]({{< ref "docs/tasks/define-manifest.md#manifestmarbles" >}}). As discussed in [Step #1.1](#step-11-make-your-service-use-the-provided-tls-credentials), you need to make sure that the TLS credentials for your service (i.e., `Marblerun.MarbleCert.Cert` and `Marblerun.MarbleCert.Private`) are injected such that your service will find them at runtime. If your service is written in Go and you're using the `marble` package, there is no need to inject these explicitly.
 
-### Step #3: Start your service
+## **Step 3:** Start your service
 
 When you start your service, you need to pass in a couple of configuration parameters through environment variables. Here is an example:
 

@@ -14,11 +14,11 @@ This article describes how to define these in your `manifest.json`.
 
 The `Packages` section of the Manifest lists all the secure enclave software-packages that your application uses. A package is defined by the following properties.
 
-* `UniqueID`: the globally unique ID of the enclave software-package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
-* `SignerID`: the globally unique ID of the enclave's issuer; on SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
+* `UniqueID`: this value will pin this package to one specific release build of an application. It represents the globally unique ID of the enclave software-package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
+* `SignerID`: this value limits Marblerun to only accept releases signed by a given public key. On SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
 * `ProductID`: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with `SignerID`.
 * `SecurityVersion`: an integer that reflects the security-patch level of the enclave software. Can only be used in conjunction with `SignerID`.
-* `Debug`: `true` if the enclave is to be run in debug mode. Note that enclaves in debug mode are not secure.
+* `Debug`: set to `true` if the enclave is to be run in debug mode. This allows you to experiment deploying your application with Marblerun without having to worry about setting correct values for the above properties, but note that enclaves in debug mode are not secure.
 
 The following gives an example of a simple `Packages` section with made-up values.
 
