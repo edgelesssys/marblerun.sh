@@ -12,27 +12,26 @@ This article describes how to define these in your `manifest.json`.
 
 ## Manifest:Packages
 
-The `Packages` section of the Manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.
+The `Packages` section of the Manifest lists all the secure enclave software-packages that your application uses. A package is defined by the following properties.
 
-* `UniqueID`: the globally unique identity of the enclave software; on SGX, this corresponds to the MRENCLAVE value, which is a hash of an enclave's initial contents and its configuration.
-* ``SignerID``: the globally unique identity of the enclave's issuer; on SGX, this corresponds to the MRSIGNER value, which is a hash over the enclave issuer's public key.
-* ``ProductID``: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with ``SignerID``.
-* ``SecurityVersion``: an integer that reflects the security patch level of the enclave software. Can only be used in conjunction with ``SignerID``.
-* ``Debug``: `true` if the enclave is running in debug mode.
+* `UniqueID`: this value will pin this package to one specific release build of an application. It represents the globally unique ID of the enclave software-package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
+* `SignerID`: this value limits Marblerun to only accept releases signed by a given public key. On SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
+* `ProductID`: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with `SignerID`.
+* `SecurityVersion`: an integer that reflects the security-patch level of the enclave software. Can only be used in conjunction with `SignerID`.
+* `Debug`: set to `true` if the enclave is to be run in debug mode. This allows you to experiment deploying your application with Marblerun without having to worry about setting correct values for the above properties, but note that enclaves in debug mode are not secure.
 
-The following gives an example of a simple `Packages` section with dummy values.
+The following gives an example of a simple `Packages` section with made-up values.
 
 ```javascript
 {
     // ...
     "Packages": {
-        "backend": {
-            "UniqueID": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
-            "SecurityVersion": 1,
+        "pkg0": {
+            "UniqueID": "6b2822ac2585040d4b9397675d54977a71ef292ab5b3c0a6acceca26074ae585",
             "Debug": false
         },
-        "frontend": {
-            "SignerID": "c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee",
+        "pkg1": {
+            "SignerID": "43361affedeb75affee9baec7e054a5e14883213e5a121b67d74a0e12e9d2b7a",
             "ProductID": 43,
             "SecurityVersion": 3,
             "Debug": true
@@ -42,7 +41,11 @@ The following gives an example of a simple `Packages` section with dummy values.
 }
 ```
 
-`SignerID` can only be used in conjunction with `ProductID` and `SecurityVersion`. Note that packages identified by `UniqueID` cannot be updated. (At least on SGX, this is because an enclave software's hash/measurement changes if a single bit in the software is changed.) 
+In this example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the hash of the enclave software-package, this means that `pkg0` cannot be updated. (That is, because any update to the package will change the hash.)
+
+In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
+
+Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
 
 ## Manifest:Marbles
 
@@ -113,7 +116,7 @@ The following named keys and certificates are always available.
 * `.Marblerun.MarbleCert.Private`: the Marble's private key corresponding to `.Marblerun.MarbleCert.Cert`
 * `.Marblerun.SealKey`: a 128-bit symmetric encryption key, which can be used for sealing data to disk in a host-independent way; if a Marble is scheduled or restarted on a new host, this "virtual sealing key" will still allow for unsealing data from the disk even though the host's actual sealing key might have changed.
 
-Finally, the optional field `MaxActivations` can be used to restrict the number of distinct instances that can be created of a Marble. 
+Finally, the optional field `MaxActivations` can be used to restrict the number of distinct instances that can be created of a Marble.
 
 ## Manifest:Secrets
 
@@ -224,8 +227,8 @@ Refer to the [previous section](#manifestmarbles) for a list of supported encodi
 
 * *empty*: for secret type `raw`, returns the symmetric key. For other types, returns the public key.
 * `Cert`: returns the certificate.
-* `Public`: returns the public key. 
-* `Private`: returns the private key. 
+* `Public`: returns the public key.
+* `Private`: returns the private key.
 
 The following gives some examples.
 
