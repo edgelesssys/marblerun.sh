@@ -24,7 +24,7 @@ For now, you just need to make sure that your service reads the certificate and 
 For services written in Go, we provide a convenience package called `github.com/edgelesssys/ertgolib/marble`. With it, a service can automatically get and use its Marblerun TLS credentials. The following gives an example.
 ```Go
 func main() {
-    serverCfg, err := marble.GetServerTLSConfig()
+    serverCfg, err := marble.GetTLSConfig(false)
     if err != nil {
         log.Fatalf("Failed to retrieve server TLS config from ertgolib")
     }
