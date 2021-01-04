@@ -11,8 +11,8 @@
 <a href=https://marblerun.sh/docs/features/secrets-management/ class="d-block pl-3">Secrets management</a>
 <a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploying Marblerun</a>
 <a href=https://marblerun.sh/docs/tasks/define-manifest/ class="d-block pl-3">Defining a Manifest</a>
-<a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
 <a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a service</a>
+<a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
 <a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Verifying a deployment</a>
 <a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a>
 <a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Updating a deployment</a>
@@ -32,18 +32,4 @@ Note that you only need to update if there have been changes affecting the data 
 The process is similar to a regular update of your application, as is described in the following.</p><h2 id=updating-your-confidential-application>Updating your confidential application</h2><p>Updating your application is straightforward with Marblerun.
 You can roll out the new version similar to a regular <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment>deployment update</a>.
 The Coordinator will manage the attestation and bootstrapping of your new version.
-Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the Manifest in effect.</p><h3 id=manifest-values>Manifest values</h3><p>Making updates work seamlessly requires some attention on what values are defined for your application in the Manifest.
-Take the following Manifest as an example:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-json data-lang=json><span style=color:#c30>&#34;package&#34;</span><span style=color:#a00;background-color:#faa>:</span> {
-    <span style=color:#309;font-weight:700>&#34;UniqueID&#34;</span>: <span style=color:#c30>&#34;000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f&#34;</span>,
-    <span style=color:#309;font-weight:700>&#34;SignerID&#34;</span>: <span style=color:#c30>&#34;c0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffeec0ffee&#34;</span>,
-    <span style=color:#309;font-weight:700>&#34;ProductID&#34;</span>: <span style=color:#f60>42</span>,
-    <span style=color:#309;font-weight:700>&#34;SecurityVersion&#34;</span>: <span style=color:#f60>1</span>,
-    <span style=color:#309;font-weight:700>&#34;Debug&#34;</span>: <span style=color:#069;font-weight:700>false</span>
-}
-</code></pre></div><p>Setting <code>UniqueID</code> (aka <code>MRENCLAVE</code>), will pin your application to one specific release build.
-It will not be possible to update this release in the future.
-We recommend setting the triple of <code>SignerID</code>, <code>ProductID</code>, and <code>SecurityVersion</code> instead.
-<code>SignerID</code> will only accept releases signed by you.
-<code>ProductID</code> will pin this package to one specific application and <code>SecuritVersion</code> to a minimum security version.
-You define those values when building your application&rsquo;s secure enclave.
-Future versions of Marblerun will support <code>SecurityVersion</code> updates in the Manifest, making it possible to drop older potentially vulnerable versions of your software without redeploying a Manifest.</p></article></div></div></div><footer class="bg-light text-center p-3"><div>Marblerun is brought to you by <a target=_blank href=https://edgeless.systems/>Edgeless Systems GmbH <img src=/img/ES_Symbol_black.svg class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width=14px class=mb-3></a></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx crossorigin=anonymous></script><script src=/js/main.js></script></body></html>
+Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the Manifest in effect.</p></article></div></div></div><footer class="bg-light text-center p-3"><div>Marblerun is brought to you by <a target=_blank href=https://edgeless.systems/>Edgeless Systems GmbH <img src=/img/ES_Symbol_black.svg class="verticle-align-middle ml-2" alt="Edgeless Systems GmbH Logo" width=14px class=mb-3></a></div></footer><script src=https://code.jquery.com/jquery-3.5.1.slim.min.js integrity=sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj crossorigin=anonymous></script><script src=https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js integrity=sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx crossorigin=anonymous></script><script src=/js/main.js></script></body></html>
