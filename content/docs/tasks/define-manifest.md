@@ -237,9 +237,35 @@ The following gives some examples.
 * Inject the corresponding public key PKIX-encoded and in PEM format: `{{ pem .Secrets.rsa_cert.Public }}`
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
+## Manifest:Admins
+The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates, which Marblerun can use to authenticate updates to certain parameters of an already set manifest when used as a TLS client certificate, as is described [here]({{< ref "docs/tasks/update-manifest.md>}}).
+
+```javascript
+{
+    //...
+    "Admins": {
+        "alice": "-----BEGIN CERTIFICATE-----\nMIIFPjCCA...",
+        "bob": "-----BEGIN CERTIFICATE-----\nMIIFP..."
+    }
+}
+```
+In this scenario, Marblerun does not verify the certificate up to X.509 standards, meaning issuer, subject and the expiration date defined in the certificate are ignored. Even when a certificate is expired, it will still be accepted in order to avoid locking yourself out of administrative options e.g.  in case you have set an early expiration date in your self-signed certificate. All that matters for this specific use-case here is that you own the private key matching the certificate you use here.
+
+To generate a certificate which can be used here, the following commands can be used as an example. When asked to enter values for the Distinguished Name, you may leave them empty or choose values as you please.
+
+```bash
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout admin_private.key -out admin_certificate.crt
+```
+
+To preserve the new lines correctly, you can use the following command:
+
+```bash
+awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
+```
+
 ## Manifest:RecoveryKey
 
-The optional entry `RecoveryKey` holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}).
+The optional entry `RecoveryKey` holds a  PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}).
 
 ```javascript
 {
