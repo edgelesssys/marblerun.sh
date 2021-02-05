@@ -6,7 +6,9 @@
 			<div class="col-12 col-lg-8">
 				<div class="">
 					<h1 class="heading">{{ .Params.claim | markdownify }}</h1>
-					<p style="color: rgba(255,255,255,0.7); background-color: #00010d;">{{ .Params.description | markdownify }}</p>
+					<p style="color: rgba(255,255,255,0.7); background-color: #00010d;">
+						{{ .Params.description | markdownify }}
+					</p>
 					<br>
 					<a class="btn btn-primary btn-lg mb-2" href="{{ .Params.buttons.get_started.url }}">
 						{{ .Params.buttons.get_started.caption }}
@@ -24,7 +26,10 @@
 </div>
 
 <section class="text-center mx-2 video-holder">
-	<iframe class="rounded-lg shadow video" width="560" height="315" src="https://www.youtube.com/embed/9jPDf9LRkR4?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+	<iframe class="rounded-lg shadow video" width="560" height="315"
+		src="https://www.youtube.com/embed/9jPDf9LRkR4?controls=0" frameborder="0"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen></iframe>
 </section>
 
 <div class="container py-5 text-black text-center">
@@ -36,7 +41,8 @@
 				<p style="color: rgba(0, 0, 0, 0.7)">{{ .Params.OC3_more | markdownify }}</p>
 				<p style="color: rgba(0, 0, 0, 0.7)">{{ .Params.OC3_more2 | markdownify }}</p>
 				<p><a href="https://OC3.dev">
-						<img src="img/oc3_banner.png" alt="OC3 Banner" style="height:auto;max-width:100%;border:none;display:block;"></a>
+						<img src="img/oc3_banner.png" alt="OC3 Banner"
+							style="height:auto;max-width:100%;border:none;display:block;"></a>
 					<hr>
 				</p>
 			</div>
