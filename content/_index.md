@@ -2,7 +2,7 @@
 title: Marblerun - The service mesh for confidential computing
 claim: The service mesh for confidential computing
 OC3_headline: Meet us at OC3
-OC3_more: We will present Marblerun at the Open Confidential Computing Conference (OC3) on March 11, 2021. Join us!
+OC3_more: We will present Marblerun at the Open Confidential Computing Conference (OC3). Join us!
 description:
   "**Marblerun** makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for [confidential computing](https://confidentialcomputing.io/). It's open source, written in Go, and truely cloud native."
 buttons:
