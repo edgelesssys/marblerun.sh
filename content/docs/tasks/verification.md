@@ -17,13 +17,19 @@ Therefore, Marblerun exposes the `/quote` endpoint that returns a quote and a ro
 Verifying the quote can be done manually, but to ease the process we provide the Edgeless Remote Attestation tools ([era](https://github.com/edgelesssys/era)) for this purpose:
 
 ```bash
-# If you have EdgelessRT installed
-go install github.com/edgelesssys/era/cmd/era
-# Or use the binary release
-wget -O .local/bin/era https://github.com/edgelesssys/era/releases/latest/download/era
+# Either install era for the current user
+wget -P ~/.local/bin https://github.com/edgelesssys/era/releases/latest/download/era
+chmod +x ~/.local/bin/era
+
+# Or install it globally on your machine (requires root permissions)
+sudo -O /usr/local/bin/era https://github.com/edgelesssys/era/releases/latest/download/era
+sudo chmod +x /usr/local/bin/era
+
 # Run era
 era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
 ```
+
+*Note: On machines running Ubuntu, ~/.local/bin is only added to PATH when the directory exists when initializing your bash environment during login. You might need to re-login after creating the directory. Also, non-default shells such as `zsh` do not add this path by default. Therefore, if you receive `command not found: era` as an error message for a local user installation, either make sure ~/.local/bin was added to your PATH successfully or simply use the machine-wide installation method.*
 
 era requires the Coordinator's UniqueID and SignerID (or MRENCLAVE and MRSIGNER in SGX terms) to verify the quote.
 In production, these would be generated when building Coordinator and distributed to your clients.
