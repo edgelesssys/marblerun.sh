@@ -43,14 +43,24 @@ The API currently contains two endpoints:
 
     * We provide a tool to automatically verify the quote and output the trusted certificate:
 
-    ```bash
-    go install github.com/edgelesssys/era/cmd/era
-    era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
-    ```
+        ```bash
+        # Either install era for the current user
+        wget -P ~/.local/bin https://github.com/edgelesssys/era/releases/latest/download/era
+        chmod +x ~/.local/bin/era
 
-        * Note that `coordinator-era.json` contains the *Packages* information for the Coordinator. For our testing image this can be pulled from our GitHub releases:
+        # Or install it globally on your machine (requires root permissions)
+        sudo -O /usr/local/bin/era https://github.com/edgelesssys/era/releases/latest/download/era
+        sudo chmod +x /usr/local/bin/era
 
-    ```bash
-    wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
-    ```
-    
+        era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
+        ```
+
+        *Note: On machines running Ubuntu, ~/.local/bin is only added to PATH when the directory exists when initializing your bash environment during login. You might need to re-login after creating the directory. Also, non-default shells such as `zsh` do not add this path by default. Therefore, if you receive `command not found: era` as an error message for a local user installation, either make sure ~/.local/bin was added to your PATH successfully or simply use the machine-wide installation method.*
+
+
+    * Note that `coordinator-era.json` contains the *Packages* information for the Coordinator. For our testing image this can be pulled from our GitHub releases:
+
+        ```bash
+        wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
+        ```
+        
