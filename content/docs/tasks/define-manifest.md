@@ -238,7 +238,7 @@ The following gives some examples.
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
 ## Manifest:Admins
-The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described [here]({{< ref "docs/tasks/update-manifest.md>}})).
+The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described [here]({{< ref "docs/tasks/update-manifest.md">}})).
 
 ```javascript
 {
