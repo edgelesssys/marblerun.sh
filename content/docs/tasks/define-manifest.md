@@ -238,7 +238,7 @@ The following gives some examples.
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
 ## Manifest:Admins
-The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates, which Marblerun can use to authenticate updates to certain parameters of an already set manifest when used as a TLS client certificate, as is described [here]({{< ref "docs/tasks/update-manifest.md>}}).
+The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described [here]({{< ref "docs/tasks/update-manifest.md>}})).
 
 ```javascript
 {
@@ -249,15 +249,15 @@ The optional entry `Admins` can be used to define one or multiple PEM-encoded se
     }
 }
 ```
-In this scenario, Marblerun does not verify the certificate up to X.509 standards, meaning issuer, subject and the expiration date defined in the certificate are ignored. Even when a certificate is expired, it will still be accepted in order to avoid locking yourself out of administrative options e.g.  in case you have set an early expiration date in your self-signed certificate. All that matters for this specific use-case here is that you own the private key matching the certificate you use here.
+When verifying certificates in this context, Marblerun ignores their `issuer`, `subject`, and `expiration date` fields. Thus, admins cannot lock themselves out through expired certificates.
 
-To generate a certificate which can be used here, the following commands can be used as an example. When asked to enter values for the Distinguished Name, you may leave them empty or choose values as you please.
+Use OpenSSL to generate a compatible certificate.
 
 ```bash
 openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout admin_private.key -out admin_certificate.crt
 ```
 
-To preserve the new lines correctly, you can use the following command:
+Use the following command to preserve newlines correctly:
 
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
@@ -265,7 +265,7 @@ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
 
 ## Manifest:RecoveryKey
 
-The optional entry `RecoveryKey` holds a  PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}).
+The optional entry `RecoveryKey` holds a PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described [here]({{< ref "docs/features/recovery.md" >}})).
 
 ```javascript
 {
@@ -281,7 +281,7 @@ openssl genrsa -out private_key.pem 4096
 openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
 ```
 
-To preserve the new lines correctly, you can use the following command:
+Use the following command to preserve newlines correctly:
 
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
