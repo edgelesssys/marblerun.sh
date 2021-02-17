@@ -30,7 +30,7 @@ In general, a successful API call (HTTP Code 200) will return a response in the 
     }
 }
 ```
-Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the coordinator, or may just be `null` to acknowledge that the requested operation was performormed successfully.
+Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the coordinator, or may just be `null` to acknowledge that the requested operation was performed successfully.
 
 Whereas an error (HTTP Code 4xx or 5xx) might look like this:
 ```json
@@ -43,9 +43,24 @@ Whereas an error (HTTP Code 4xx or 5xx) might look like this:
 For errors, `data` will always be `null`, and `message` contains the specific error the Coordinator ran into when processing the request.
 
 ### Endpoints
-The API currently contains the following endpoints:
+The API currently contains the following endpoints. If an endpoint specifies *Returns* for either HTTP GET or HTTP POST, it means that the specified data can be found encoded inside the `data` block if the response was successful. If no returns are specified for a given endpoint, or in case all possible return values for an endpoint are declared as optional, `data` can just be `null`.
 
-* `/manifest`: For deploying and verifying the Manifest
+* `/manifest`: For deploying and verifying the Manifest.
+
+    **Returns (HTTP GET)**:
+
+    | Field value       | Type   | Description                                                                                        |
+    |-------------------|--------|----------------------------------------------------------------------------------------------------|
+    | ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an Update Manifest has been applied. |
+    |                   |        |                                                                                                    |
+
+    **Returns (HTTP POST)**:
+
+    | Field value     | Type             | Description                                                                                                                                                                                                |
+    |-----------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | RecoverySecrets | array (optional) | An array containing key-value mapping for encrypted secrets to be used for recovering the Coordinator in case of disaster recovery. The key matches each supplied key from `RecoveryKeys` in the Manifest. |
+    |                 |                  |                                                                                                                                                                                                            |
+
     * Example for setting the Manifest (HTTP POST):
 
         ```bash
@@ -59,6 +74,13 @@ The API currently contains the following endpoints:
         ```
 
 * `/quote`: For retrieving a remote attestation quote over the whole cluster and the root certificate
+
+    **Returns (HTTP GET)**:
+    | Field value | Type   | Description                                                                                                                                                               |
+    |-------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+    | Cert        | string | A PEM-encoded certificate chain containing the Coordinator's Root CA and Intermediate CA, which can be used for trust establishment between a client and the Coordinator. |
+    | Quote       | string | Base64-encoded quote which can be used for Remote Attestation, as described in [Verifying a deployment]({{< ref "docs/tasks/verification.md" >}})                         |
+
     * Example for retrieving a quote
 
         ```bash
@@ -100,6 +122,21 @@ The API currently contains the following endpoints:
         ```
 
 * `/status`: For returning the current state of the coordinator.
+
+    **Returns (HTTP GET)**:
+    | Field value   | Type   | Description                                                                                       |
+    |---------------|--------|---------------------------------------------------------------------------------------------------|
+    | StatusCode    | int    | A status code which matches the internal code of the Coordinator's current state.                 |
+    | StatusMessage | string | A descriptive status message of what the Coordinator expects the user to do in its current state. |
+
+    * Possible values:
+
+        | StatusCode | StatusMessage                                                                                                                                                       |
+        |------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | 1    | Coordinator is in recovery mode. Either upload a key to unseal the saved state, or set a new manifest. For more information on how to proceed, consult the documentation. |
+        | 2    | Coordinator is ready to accept a manifest.                                                                                                                                |
+        | 3    | Coordinator is running correctly and ready to accept marbles.                                                                                                             |
+
     * Example for getting the status:
     ```bash
     curl -k "https://$MARBLERUN/status"
@@ -107,14 +144,6 @@ The API currently contains the following endpoints:
 
     * It may be useful to use this API endpoint and use it for other monitoring tools. More information can be found under [Monitoring and Logging]({{< ref "docs/tasks/monitoring.md" >}})
 
-    * Possible status codes:
-
-        | Code | Status                                                                                                                                                                                                                |
-        |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-        | 1    | Recovery Mode: The coordinator was unable to unseal an existing state and needs to be reset or recovered. Consult [Recovering the Coordinator]({{< ref "docs/tasks/recover-coordinator.md" >}}) for more information. |
-        | 2    | Ready to accept a manifest over the /manifest endpoint.                                                                                                                                                               |
-        | 3    | The coordinator is setup correctly and ready to launch marbles.                                                                                                                                                       |
-        | -1   | An unknown error occured.                                                                                                                                                                                             |
 
 * `/update`: For updating the packages specified in the currently set Manifest.
 
