@@ -18,20 +18,44 @@ The Coordinator can be configured with several environment variables:
 
 ## Client API
 
-The Client API is designed as an HTTP-REST interface.
+### Response Style
+The Client API is designed as an HTTP-REST interface. Responses follow the [JSend](https://github.com/omniti-labs/jsend) style, though only the response types `success` and `error` are returned so far.
+
+In general, a successful API call (HTTP Code 200) will return a response in the following style:
+```json
+{
+    "status": "success",
+    "data": {
+        "ManifestSignature": "3fff78e99dd9bd801e0a3a22b7f7a24a492302c4d00546d18c7f7ed6e26e95c3"
+    }
+}
+```
+Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the coordinator, or may just be `null` to acknowledge that the requested operation was performormed successfully.
+
+Whereas an error (HTTP Code 4xx or 5xx) might look like this:
+```json
+{
+    "status": "error",
+    "data": null,
+    "message": "server is not in expected state"
+}
+```
+For errors, `data` will always be `null`, and `message` contains the specific error the Coordinator ran into when processing the request.
+
+### Endpoints
 The API currently contains the following endpoints:
 
 * `/manifest`: For deploying and verifying the Manifest
-    * Example for setting the Manifest:
+    * Example for setting the Manifest (HTTP POST):
 
         ```bash
         curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
         ```
 
-    * Example for verifying the deployed Manifest
+    * Example for verifying the deployed Manifest (HTTP GET):
 
         ```bash
-        curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.ManifestSignature' --raw-output
+        curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSignature' --raw-output
         ```
 
 * `/quote`: For retrieving a remote attestation quote over the whole cluster and the root certificate
