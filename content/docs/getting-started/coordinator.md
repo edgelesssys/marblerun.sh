@@ -81,6 +81,8 @@ The API currently contains the following endpoints:
     curl -k "https://$MARBLERUN/status"
     ```
 
+    * It may be useful to use this API endpoint and use it for other monitoring tools. More information can be found under [Monitoring and Logging]({{< ref "docs/tasks/monitoring.md" >}})
+
     * Possible status codes:
 
         | Code | Status                                                                                                                                                                                                                |
