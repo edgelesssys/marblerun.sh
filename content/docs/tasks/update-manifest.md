@@ -5,20 +5,20 @@ draft: false
 weight: 2
 ---
 
-# Updating a manifest
-In order to ensure the confidentiality of a deployed application, Marblerun uses a manifest to which defines the software packages and the infrastructure your deployment uses. To verify that your deployment has not been altered with, the manifest is usually set in stone after it was set to ensure no one can alter with your cluster.
+# Updating a Manifest
+In order to ensure the confidentiality of a deployed application, Marblerun uses a Manifest to which defines the software packages and the infrastructure your deployment uses. To verify that your deployment has not been altered with, the Manifest is usually set in stone after it was set to ensure no one can alter with your cluster.
 
-Yet, updates play an important role to ensure your software stays secure. To avoid having to redeploy your application from scratch, Marblerun allows to upload a separate "update manifest" which increases the minimum `SecurityVersion` of one or multiple already deployed package. After such an update is performed, an old version of a defined software package cannot be loaded anymore under the current manifest.
+Yet, updates play an important role to ensure your software stays secure. To avoid having to redeploy your application from scratch, Marblerun allows to upload a separate "Update Manifest" which increases the minimum `SecurityVersion` of one or multiple already deployed package. After such an update is performed, an old version of a defined software package cannot be loaded anymore under the current Manifest.
 
 ## Requirements
-In order to deploy an update manifest, the original manifest, you need to be in possession of a certificate/private key pair which has been defined in the `Admins` section of the original manifest, as described in ["Defining a Manifest"]({{< ref "docs/tasks/define-manifest.md#manifestmarbles" >}}).
+In order to deploy an Update Manifest, the original Manifest, you need to be in possession of a certificate/private key pair which has been defined in the `Admins` section of the original Manifest, as described in ["Defining a Manifest"]({{< ref "docs/tasks/define-Manifest.md#Manifestmarbles" >}}).
 
-If no administrator has been initially set up, no manifest updates can be performed, meaning you have to redeploy your service mesh.
+If no administrator has been initially set up, no Manifest Updates can be performed, meaning you have to redeploy your service mesh.
 
-## Defining an update manifest
-The format of an update manifest follows the syntax of the original manifest, though it only expects to contain a package name and a new `SecurityVersion` value set for it.
+## Defining an Update Manifest
+The format of an Update Manifest follows the syntax of the original Manifest, though it only expects to contain a package name and a new `SecurityVersion` value set for it.
 
-For example, the current `Packages` section of your original manifest looks like this:
+For example, the current `Packages` section of your original Manifest looks like this:
 
 ```javascript
 {
@@ -39,7 +39,7 @@ For example, the current `Packages` section of your original manifest looks like
 }
 ```
 
-If you now want to update the minimum required version for `pkg1`, the complete definition for the update manifest just needs to be as short this example:
+If you now want to update the minimum required version for `pkg1`, the complete definition for the update Manifest just needs to be as short this example:
 
 
 ```javascript
@@ -52,21 +52,21 @@ If you now want to update the minimum required version for `pkg1`, the complete 
 }
 ```
 
-Please do not define other values except than `SecurityVersion` value for a package, as Marblerun will refuse to accept such an update manifest. 
+Please do not define other values except than `SecurityVersion` value for a package, as Marblerun will refuse to accept such an Update Manifest.
 
-Also, if an update manifest was already set and you want to deploy another update on top of it too, you can! Just make sure that the new update manifest contains each specified package as the old one does, and that the `SecurityVersion` is indeed higher than defined in the previous update manifest, as downgrades are obviously not supported for security reasons without completely redeploying your service mesh.
+Also, if an Update Manifest was already set and you want to deploy another update on top of it too, you can! Just make sure that the new Update Manifest contains each specified package as the old one does, and that the `SecurityVersion` is indeed higher than defined in the previous Update Manifest, as downgrades are obviously not supported for security reasons without completely redeploying your service mesh.
 
-## Deploy an update manifest
+## Deploy an Update Manifest
 
-Similar to other operations, an update manifest can be deployed e.g. with the help of `curl`. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
+Similar to other operations, an Update Manifest can be deployed e.g. with the help of `curl`. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
 
 This operation can be performed in the following way:
 
 ```bash
-curl --cacert marblerun.crt --cert admin_certificate.crt --key admin_private.key -w "%{http_code}" --data-binary @update_manifest.json https://$MARBLERUN/update
+curl --cacert marblerun.crt --cert admin_certificate.crt --key admin_private.key -w "%{http_code}" --data-binary @update_Manifest.json https://$MARBLERUN/update
 ```
 
-If everything went well, no message will be returned and your Marblerun logs should highlight that an update manifest has been set. And if something went wrong, the API endpoint will return an error message telling you what happened. If you receive `unauthorized user` back, it means Marblerun either received no client certificate over the TLS connection, or you used the wrong certificate. In this case, curls verbose option (`-v`) might help you debugging issues from the client-side.
+If everything went well, no message will be returned and your Marblerun logs should highlight that an Update Manifest has been set. And if something went wrong, the API endpoint will return an error message telling you what happened. If you receive `unauthorized user` back, it means Marblerun either received no client certificate over the TLS connection, or you used the wrong certificate. In this case, curls verbose option (`-v`) might help you debugging issues from the client-side.
 
-## Effects of an manifest update
-When a manifest has been updated, the coordinator will generate new certificates which your Marbles will receive upon the next startup. Also, if you are trying to launch Marbles based on packages containing the old `SecurityVersion`, they will refuse to run (unless you are running in SGX Simulation or non-Enclave mode). However, so far currently running Marble will continue to run and will be able to authenticate each other as long as they are still running, so if you need to enforce an update, make sure to kill the Marbles on your host and restart them.
+## Effects of an Manifest Update
+When a Manifest has been updated, the coordinator will generate new certificates which your Marbles will receive upon the next startup. Also, if you are trying to launch Marbles based on packages containing the old `SecurityVersion`, they will refuse to run (unless you are running in SGX Simulation or non-Enclave mode). However, so far currently running Marble will continue to run and will be able to authenticate each other as long as they are still running, so if you need to enforce an update, make sure to kill the Marbles on your host and restart them.
