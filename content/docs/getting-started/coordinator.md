@@ -19,27 +19,27 @@ The Coordinator can be configured with several environment variables:
 ## Client API
 
 The Client API is designed as an HTTP-REST interface.
-The API currently contains two endpoints:
+The API currently contains the following endpoints:
 
 * `/manifest`: For deploying and verifying the Manifest
     * Example for setting the Manifest:
 
-    ```bash
-    curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
-    ```
+        ```bash
+        curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
+        ```
 
     * Example for verifying the deployed Manifest
 
-    ```bash
-    curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.ManifestSignature' --raw-output
-    ```
+        ```bash
+        curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.ManifestSignature' --raw-output
+        ```
 
 * `/quote`: For retrieving a remote attestation quote over the whole cluster and the root certificate
     * Example for retrieving a quote
 
-    ```bash
-    curl -k "https://$MARBLERUN/quote"
-    ```
+        ```bash
+        curl -k "https://$MARBLERUN/quote"
+        ```
 
     * We provide a tool to automatically verify the quote and output the trusted certificate:
 
@@ -63,4 +63,39 @@ The API currently contains two endpoints:
         ```bash
         wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
         ```
-        
+
+* `/recover`: For recovering the Coordinator in case unsealing the existing state failed.
+
+    * This API endpoint is only available when the coordinator is in recovery mode.
+
+    * Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/tasks/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
+
+    * Example for recovering the coordinator:
+        ```bash
+        curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recover"
+        ```
+
+* `/status`: For returning the current state of the coordinator.
+    * Example for getting the status:
+    ```bash
+    curl -k "https://$MARBLERUN/status"
+    ```
+
+    * Possible status codes:
+
+        | Code | Status                                                                                                                                                                                                                |
+        |------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+        | 1    | Recovery Mode: The coordinator was unable to unseal an existing state and needs to be reset or recovered. Consult [Recovering the Coordinator]({{< ref "docs/tasks/recover-coordinator.md" >}}) for more information. |
+        | 2    | Ready to accept a manifest over the /manifest endpoint.                                                                                                                                                               |
+        | 3    | The coordinator is setup correctly and ready to launch marbles.                                                                                                                                                       |
+        | -1   | An unknown error occured.                                                                                                                                                                                             |
+
+* `/update`: For updating the packages specified in the currently set Manifest.
+
+    * This API endpoint only works when `Admins` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/tasks/update-manifest.md" >}})
+
+    * Example for updating the manifest:
+
+        ```bash
+        curl --cacert marblerun.crt --cert admin_certificate.crt --key admin_private.key -w "%{http_code}" --data-binary @update_manifest.json https://$MARBLERUN/update
+        ```
