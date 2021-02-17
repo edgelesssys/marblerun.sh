@@ -7,7 +7,7 @@ weight: 2
 
 # Defining a Manifest
 
-The Manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKey`.
+The Manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKeys`.
 This article describes how to define these in your `manifest.json`.
 
 ## Manifest:Packages
@@ -263,14 +263,17 @@ Use the following command to preserve newlines correctly:
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
 ```
 
-## Manifest:RecoveryKey
+## Manifest:RecoveryKeys
 
-The optional entry `RecoveryKey` holds a PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described [here]({{< ref "docs/features/recovery.md" >}})).
+The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described [here]({{< ref "docs/features/recovery.md" >}})). So far, only one public key entry is supported in the current release of Marblerun.
 
 ```javascript
 {
     //...
-    "RecoveryKey": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
+    "RecoveryKeys":
+    {
+        "recoveryKey1": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
+    }
 }
 ```
 
