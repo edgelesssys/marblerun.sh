@@ -18,7 +18,7 @@ It returns the following information.
 More details about the Coordinator can be retrieved through its log as follows.
 
 ```bash
-kubectl -n marblerun logs -f marblerun-coordinator-5b9b4849c8-jbjwr
+kubectl -n marblerun logs -f marblerun-coordinator-xxxxxxxxxx-xxxxx
 ```
 
 Going forward, plans are to support your favorite monitoring tool via logging through [Prometheus](https://prometheus.io/) and having a web dashboard with status and health information quickly accessible.

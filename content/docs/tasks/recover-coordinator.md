@@ -2,7 +2,7 @@
 title: "Recovering the Coordinator"
 date: 2020-11-19T15:53:14+01:00
 draft: false
-weight: 8
+weight: 9
 ---
 
 # Recovering the Coordinator

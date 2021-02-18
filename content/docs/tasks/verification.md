@@ -2,7 +2,7 @@
 title: "Verifying a Deployment"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 5
+weight: 6
 ---
 
 # Verifying a Deployment
@@ -38,7 +38,7 @@ For testing, we have published a Coordinator image at `ghcr.io/edgelesssys/coord
 You can pull the corresponding `coordinator-era.json` file from our release page:
 
 ```bash
-    wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
+wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
 ```
 
 After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem` and `marblerun-intermediate.pem` in your directory which you can choose to use for your application, depending on use case. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. If this is not a critical issue for you, you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated Manifest.
