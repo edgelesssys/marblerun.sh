@@ -85,27 +85,11 @@ See the following Manifest for example (`manifest.json`).
 }
 ```
 
-For setting the Manifest, we first need to establish trust in the Coordinator.
-Therefore, we perform a remote attestation step.
-Assuming you've deployed our Coordinator image from `ghcr.io/edgelesssys/coordinator`:
+To set the manifest we can use the command line interface, which automatically performs remote attestation before uploading the manifest.
 
-1. Pull the UniqueID and SignerID values for this image:
-
-    ```bash
-    wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
-    ```
-
-2. Use the Edgeless Remote Attestation tool to verify the Mesh's quote and get a trusted certificate:
-
-    ```bash
-    era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
-    ```
-
-3. Now that we have established trust, we can set the Manifest through the Client API:
-
-    ```bash
-    curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
-    ```
+```bash
+marblerun manifest set manifest.json $MARBLERUN
+```
 
 If the Manifest contains a `RecoveryKeys` entry, you will receive a JSON reply including a recovery secret, encrypted with the public key supplied in `RecoveryKeys`. The reply will look like this, with `[base64]` as your encrypted recovery secret.
 
