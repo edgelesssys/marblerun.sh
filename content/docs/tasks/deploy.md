@@ -7,8 +7,14 @@ weight: 1
 
 # Deploying Marblerun
 
-This article assumes that you have an existing Azure Kubernetes Service (AKS) cluster. An AKS cluster can be created using the [Azure CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) or the [Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal).
-Alternatively, you can deploy the steps with [minikube](https://minikube.sigs.k8s.io/docs/start/).
+This article assumes that you have an existing Kubernetes cluster. Currently, there are several providers offering confidential nodes on CPUs with SGX support:
+
+* [Azure Kubernetes Services](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-overview) confidential nodes on [DCv2 VMs](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-computing-enclaves)
+    * An AKS cluster can be created using the [Azure CLI](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough) or the [Azure portal](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal)
+* [Alibaba Cloud](https://www.alibabacloud.com/help/doc-detail/108507.htm) ECS Bare Metal Instances
+* [IBM Cloud](https://cloud.ibm.com/docs/bare-metal?topic=bare-metal-bm-server-provision-sgx) Bare Metal Servers
+* [Equinix](https://metal.equinix.com/product/features/) Bare Metal Servers
+* Alternatively, you can deploy the steps with [minikube](https://minikube.sigs.k8s.io/docs/start/)
 
 This article uses [Helm 3](https://helm.sh/) to install Marblerun. Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the [Helm install docs](https://docs.helm.sh/using_helm/#installing-helm). For more information on configuring and using Helm, see [Install applications with Helm in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm).
 
@@ -44,40 +50,14 @@ Update the hostname with your cluster's FQDN.
         --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
     ```
 
-## DNS for the client API on AKS
+### Accesing the Client API
 
-This explains how to configure the DNS for the Edgeless Mesh Client-API when running on an AKS cluster.
-
-### Configure FQDN for the Coordinator's IP address
-
-```bash
-# Public IP address of your coordinator-client-api service
-IP="MY_EXTERNAL_IP"
-
-# Name to associate with the public IP address
-DNSNAME="marblerun"
-
-# Get the resource-id of the public ip
-PUBLICIPID=$(az network public-ip list --query "[?ipAddress!=null]|[?contains(ipAddress, '$IP')].[id]" --output tsv)
-
-# Update public ip address with DNS name
-az network public-ip update --ids $PUBLICIPID --dns-name $DNSNAME
-
-# Display the FQDN
-az network public-ip show --ids $PUBLICIPID --query "[dnsSettings.fqdn]" --output tsv
-```
-
-### Test the DNS configuration
-
-Use curl to test that the DNS was configured correctly. Update the hostname with the DNS name you created.
-
-```bash
-curl -k https://marblerun.uksouth.cloudapp.azure.com:25555/status
-```
-
+The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 25555.
+Depending on your cloud provider you can provision a LoadBalancer that exposes this service to the outside world or you deploy an Ingress Gateway forwarding the traffic.
+If you are running with Minikube you can expose this service to localhost with `kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost`.
 ### Ingress/Gateway configuration
 
-If you're using an ingress-controller or gateway for managing access to the marblerun-coordinator make sure you're enabling SNI for your TLS connections.
+If you're using an ingress-controller or gateway for managing access to the coordinator-client-api service make sure you're enabling SNI for your TLS connections.
 
 * For the NGINX ingress controller add the [`nginx.ingress.kubernetes.io/ssl-passthrough`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#ssl-passthrough) annotation.
 * For Istio Gateways set the [tls-mode PASSTHROUGH](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-sni-passthrough/#configure-an-ingress-gateway)
