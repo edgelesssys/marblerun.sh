@@ -52,7 +52,7 @@ Flags:
 Use "marblerun [command] --help" for more information about a command.
 ```
 
-## Install
+## **`install`**
 
 Install Marblerun on your Kubernetes cluster.
 This command will add Marblerun to your local helm repository if it is not present yet, optionally you can provide a path to your own helm chart.
@@ -106,7 +106,7 @@ marblerun install [flags]
   ```
 
 
-## Status
+## **`status`**
 
 Checks on the current status of the coordinator.
 
@@ -141,7 +141,7 @@ Got latest config
 ```
 
 
-## Manifest
+## **`manifest`**
 
 Set or update a manifest, or retrieve the signature of the manifest in place.
 
@@ -254,7 +254,7 @@ These flags apply to all sub commands of manifest
   Manifest written to: manifest-signature.json
   ```
 
-## Recover
+## **`recover`**
 
 Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
 For more information about coordinator recovery see [Recovery]({{< ref "docs/tasks/recover-coordinator.md" >}})
@@ -289,7 +289,7 @@ Successfully uploaded recovery key and unsealed the Marblerun coordinator
 ```
 
 
-## Certificate
+## **`certificate`**
 
 Get the root and/or intermediate certificates of the Marblerun coordinator.
 
@@ -336,7 +336,7 @@ These flags apply to all sub commands of certificate
   ```
 
 
-## Namespace
+## **`namespace`**
 
 Add namespaces Marblerun.
 If the auto-injection feature is enabled. All new pods in those namespaces will get their Marblerun configuration automatically injected.
