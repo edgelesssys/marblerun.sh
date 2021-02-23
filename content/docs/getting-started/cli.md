@@ -7,7 +7,7 @@ weight: 5
 # Command Line Interface (CLI)
 
 We provide a command-line interface (CLI) for Marblerun.
-This CLI allows you to install Marblerun on your cluster and interacts with the control plane for all administrative tasks in the service mesh.
+This CLI allows you to install Marblerun on your cluster and interacts with the control plane through the Client API for all administrative tasks in the service mesh.
 
 To install the Marblerun CLI on your machine you can use our pre-built binaries.
 ### For the current user
