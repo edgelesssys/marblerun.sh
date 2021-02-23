@@ -1,11 +1,32 @@
 ---
-title: "Command Line Interface"
+title: "CLI"
+draft: false
+weight: 5
 ---
 
-# Command Line Interface
+# Command Line Interface (CLI)
 
-To make managing Marblerun as easy as possible for the user, we provide a command line interface which handles the most common tasks of the framework.
-To list all avaiable commands, either run `marblerun` with no commands or execute `marblerun help`
+We provide a command-line interface (CLI) for Marblerun.
+This CLI allows you to install Marblerun on your cluster and interacts with the control plane for all administrative tasks in the service mesh.
+
+To install the Marblerun CLI on your machine you can use our pre-built binaries.
+### For the current user
+```bash
+wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+chmod +x ~/.local/bin/marblerun
+```
+### Global install (requires root)
+```bash
+sudo -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+sudo chmod +x /usr/local/bin/marblerun
+```
+
+To build the Marblerun CLI, [Edgeless RT](https://github.com/edgelesssys/edgelessrt) needs to be installed on your machine.
+```bash
+go build -o marblerun github.com/edgelesssys/marblerun/cli
+```
+
+To list all available commands, either run `marblerun` with no commands or execute `marblerun help`
 The output is the following
 ```bash
 Usage:
@@ -29,8 +50,8 @@ Use "marblerun [command] --help" for more information about a command.
 
 ## Install
 
-Automatically installs Marblerun on a kubernetes cluster using helm charts.
-The tool will add Marblerun to your local helm repository if it is not yet present, optionally you can provide a path to your own helm chart.
+Install Marblerun on your Kubernetes cluster.
+This command will add Marblerun to your local helm repository if it is not present yet, optionally you can provide a path to your own helm chart.
 
 **Usage**
 
@@ -46,6 +67,7 @@ marblerun install [flags]
 | --domain               | localhost     | Sets the CNAME for the coordinator certificate                 |
 | --help, -h             |               | help for install                                               |
 | --marblerun-chart-path |               | Path to marblerun helm chart                                   |
+| --mesh-sever-port      | 25554         | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles |
 | --no-sgx-device-plugin |               | Disables the installation of an sgx device plugin              |
 | --simulation           |               | Set Marblerun to start in simulation mode, needed when not <br> running on an SGX enabled cluster |
 
@@ -111,7 +133,7 @@ Got latest config
 
 ## Manifest
 
-Manages setting, and updating of the manifest as well as retrieving a signature of an already set manifest.
+Set or update a manifest, or retrieve the signature of the manifest in place.
 
 **Flags**
 These flags apply to all sub commands of manifest
@@ -156,7 +178,7 @@ These flags apply to all sub commands of manifest
 
     Update a manifest by uploading an update manifest to the Marblerun coordinator. 
     The original manifest has to define one or multiple Admins who are allowed to update the manifest.
-    For more information see (LINK TO UPDATE SECTION OF DOCS)
+    For more information see [Update]({{< ref "docs/tasks/update-manifest.md" >}})
 
     **Usage**
 
@@ -198,7 +220,7 @@ These flags apply to all sub commands of manifest
 
     | Name, shorthand        | Default       | Description                                                    |
     |------------------------|---------------|----------------------------------------------------------------|
-    | --output, -o           | manifest.json | Define file to write to                                        |
+    | --output, -o           | signature.json | Define file to write to                                        |
 
 
     **Examples**
@@ -216,8 +238,8 @@ These flags apply to all sub commands of manifest
 
 ## Recover
 
-Recovers the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see (LINK TO RECOVERY)
+Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
+For more information about coordinator recovery see [Recovery]({{< ref "docs/tasks/recover-coordinator.md" >}})
 
 **Usage**
 
@@ -248,7 +270,7 @@ Successfully uploaded recovery key and unsealed the Marblerun coordinator
 
 ## Certificate
 
-Gets the root and/or intermediate certificates of the Marblerun coordinator.
+Get the root and/or intermediate certificates of the Marblerun coordinator.
 
 **Flags**
 These flags apply to all sub commands of certificate
@@ -293,7 +315,8 @@ These flags apply to all sub commands of certificate
 
 ## Namespace
 
-To enable automatic injection of environment variables into kubernetes pods of a namespace, specific labels have to be applied to that namespace so that Marbleruns Mutating Admission Webhook can intercept the pods and apply changes.
+Add namespaces Marblerun.
+If the auto-injection feature is enabled. All new pods in those namespaces will get their Marblerun configuration automatically injected.
 
 
 * ### add

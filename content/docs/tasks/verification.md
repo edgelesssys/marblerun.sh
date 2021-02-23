@@ -50,7 +50,8 @@ To that end, Marblerun exposes the endpoint `/manifest`.
 Using the CLI you can get the Manifest's signature aka its sha256 hash:
 
 ```bash
-curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSignature' --raw-output
+marblerun manifest get $MARBLERUN -o manifest-signature.json
+cat manifest-signature.json | jq '.data.ManifestSignature' --raw-output
 ```
 
 Compare this against your local version of the Manifest:

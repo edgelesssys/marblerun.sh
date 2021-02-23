@@ -16,16 +16,35 @@ This article assumes that you have an existing Kubernetes cluster. Currently, th
 * [Equinix](https://metal.equinix.com/product/features/) Bare Metal Servers
 * Alternatively, you can deploy the steps with [minikube](https://minikube.sigs.k8s.io/docs/start/)
 
-This article uses [Helm 3](https://helm.sh/) to install Marblerun. Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the [Helm install docs](https://docs.helm.sh/using_helm/#installing-helm). For more information on configuring and using Helm, see [Install applications with Helm in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm).
 
-## Adding Marblerun's Helm repository
+## Install with the Marblerun CLI
+
+You can also install Marblerun using the command line interface:
+
+* For a cluster with SGX support:
+
+    ```bash
+    marblerun install --domain=mycluster.uksouth.cloudapp.azure.com
+    ```
+
+* For a cluster without SGX support:
+
+    ```bash
+    marblerun install --domain=mycluster.uksouth.cloudapp.azure.com --simulation
+    ```
+
+## Install with Helm
+
+Make sure that you are using the latest release of Helm and have access to the Marblerun Helm repositories. For upgrade instructions, see the [Helm install docs](https://docs.helm.sh/using_helm/#installing-helm). For more information on configuring and using Helm, see [Install applications with Helm in Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-helm).
+
+### Adding Marblerun's Helm repository
 
 ```bash
 helm repo add edgeless https://helm.edgeless.systems/stable
 helm repo update
 ```
 
-## Installing the chart
+### Installing the chart
 
 Update the hostname with your cluster's FQDN.
 
@@ -50,12 +69,13 @@ Update the hostname with your cluster's FQDN.
         --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
     ```
 
-### Accesing the Client API
+## Accesing the Client API
 
 The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 25555.
 Depending on your cloud provider you can provision a LoadBalancer that exposes this service to the outside world or you deploy an Ingress Gateway forwarding the traffic.
 If you are running with Minikube you can expose this service to localhost with `kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost`.
-### Ingress/Gateway configuration
+
+## Ingress/Gateway configuration
 
 If you're using an ingress-controller or gateway for managing access to the coordinator-client-api service make sure you're enabling SNI for your TLS connections.
 
