@@ -58,15 +58,15 @@ Also, if an Update Manifest was already set and you want to deploy another updat
 
 ## Deploy an Update Manifest
 
-Similar to other operations, an Update Manifest can be deployed e.g. with the help of `curl`. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
+Similar to other operations, an Update Manifest can be deployed e.g. with the help of the CLI. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
 
 This operation can be performed in the following way:
 
 ```bash
-curl --cacert marblerun.crt --cert admin_certificate.crt --key admin_private.key -w "%{http_code}" --data-binary @update_Manifest.json https://$MARBLERUN/update
+marblerun manifest update update-manifest.json $MARBLERUN --cert=admin-cert.pem --key=admin-key.pem --era-config=era.json
 ```
 
-If everything went well, no message will be returned and your Marblerun logs should highlight that an Update Manifest has been set. And if something went wrong, the API endpoint will return an error message telling you what happened. If you receive `unauthorized user` back, it means Marblerun either received no client certificate over the TLS connection, or you used the wrong certificate. In this case, curls verbose option (`-v`) might help you debugging issues from the client-side.
+If everything went well, no message will be returned and your Marblerun logs should highlight that an Update Manifest has been set. And if something went wrong, the API endpoint will return an error message telling you what happened. If you receive `unauthorized user` back, it means Marblerun either received no client certificate over the TLS connection, or you used the wrong certificate.
 
 ## Effects of an Manifest Update
 When a Manifest has been updated, the coordinator will generate new certificates which your Marbles will receive upon the next startup. Also, if you are trying to launch Marbles based on packages containing the old `SecurityVersion`, they will refuse to run (unless you are running in SGX Simulation or non-Enclave mode). However, so far currently running Marble will continue to run and will be able to authenticate each other as long as they are still running, so if you need to enforce an update, make sure to kill the Marbles on your host and restart them.

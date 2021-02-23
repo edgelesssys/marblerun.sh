@@ -47,10 +47,11 @@ After successful verification, you'll have `marblerun-chain.pem`, `marblerun-roo
 
 Establishing trust with the service mesh allows you to verify the deployed Manifest in the second step.
 To that end, Marblerun exposes the endpoint `/manifest`.
-Using curl you can get the Manifest's signature aka its sha256 hash:
+Using the CLI you can get the Manifest's signature aka its sha256 hash:
 
 ```bash
-curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSignature' --raw-output
+marblerun manifest get $MARBLERUN -o manifest-signature.json
+cat manifest-signature.json | jq '.data.ManifestSignature' --raw-output
 ```
 
 Compare this against your local version of the Manifest:

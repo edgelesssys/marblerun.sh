@@ -20,10 +20,10 @@ You have two options:
     openssl pkeyutl -inkey private_key.pem -in recovery_key_encrypted -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -decrypt -out recovery_key_decrypted
     ```
 
-    The extracted secret can then be uploaded via the client API.
+    The extracted secret can then be uploaded using the Marblerun CLI.
 
     ```bash
-    curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recover"
+    marblerun recover $MARBLERUN recovery_key_decrypted
     ```
 
     If the recovery worked correctly, the Coordinator should apply the sealed state again without returning an error. In case the Coordinator was not able to restore the state with the uploaded key, an error will be returned in the logs and the `/recover` endpoint will stay open for further interaction.
