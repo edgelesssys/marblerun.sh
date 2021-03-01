@@ -3,24 +3,32 @@ title: "Auto-injection"
 draft: false
 weight: 4
 ---
-# Auto-injection
+# Automatic Config Injection
 
-By default a Marblerun installation ships with a kubernetes [MutatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook). <br>
-This admission controller monitors selected namespaces of the cluster and controlls the creation of pods in those namespaces, by preventing pods with missing labels from starting and injecting allowed pods with additional environment variables for the Marblerun mesh, as well as the option to inject [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) for sgx enabled nodes.
+Services Meshs are typically implemented using a sidecar proxy as we've explained in our [concepts]({{< ref "docs/gettings-started/concepts.md#marblerunapproach" >}}) section.
+Facilitating their deployment they often provide a feature known as "proxy injection" which automatically adds the data plane proxy to pods for workloads inside the mesh.
+In Kubernetes this usually implemented using a [MutatingAdmissionWebhook](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook).
+Marblerun injects the data-plane logic directly into the application logic running inside secure enclaves, hence, there is no need for a "proxy-injection".
+However, our data plane requires its deployment-specific configuration to be provided through the Kubernetes resource definitions.
+Similar to the proxy-injection, we make use of an admission controller to automatically inject this configuration for workloads inside the Marblerun mesh.
+It optionally injects [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for our SGX device plugin.
+For more information about SGX device plugin see the [SGX Device Plugin]({{< ref "docs/gettings-started/sgx-device-plugin.md" >}}) section.
 
-To enable a namespace for auto-injection by the webhook, one can use the Marblerun cli:
+See [Add a Service]({{< ref "docs/tasks/concepts.md#marblerunapproach" >}}) for a walkthrough of how to use this feature in practice.
+
+You can enable a namespace for auto-injection using the Marblerun cli:
 
 ```bash
 marblerun namespace add NAMESPACE [--inject-sgx]
 ```
 
-This will add the label `marblerun/inject=enabled` to the chosen namespace and allow the webhook to intercept the creation of pods in that namespace.
+This will add the label `marblerun/inject=enabled` to the chosen namespace and allow the admission webhook to intercept the creation of deployments, pods, etc. in that namespace.
 If the `--inject-sgx` flag is set this will additionaly add the label `marblerun/inject-sgx=enabled`.
 
 ##  Marbletype label
 
 By default any pods trying to deploy in a namespace added to a Marblerun mesh will be rejected, unless they posses the label `marblerun/marbletype`.
-This value should reflect the name of the marble defined in the manifest.
+This value should reflect the name of the Marble defined in the manifest.
 
 
 ## Injected Environment Variables
