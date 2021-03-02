@@ -21,7 +21,7 @@ marblerun install [--no-sgx-device-plugin]
 ```
 
 When writing this feature, there was no official device plugin available from Intel so we decided to use Azure's plugin.
-Scheduling pods to TEE enabled hardware requires the following additions to your kubernetes resource definitions:
+Scheduling pods to TEE enabled hardware requires the following additions to your Kubernetes resource definitions:
 
 ```yaml
 apiVersion: apps/v1
@@ -51,6 +51,6 @@ spec:
             kubernetes.azure.com/sgx_epc_mem_in_MiB: 10
 ```
 
-See our [auto-injection]({{< ref "docs/features/autoinjection.md" >}}) feature for more information on how we inject these values automatically.
+See our [auto-injection]({{< ref "docs/features/auto-injection.md" >}}) feature for more information on how we inject these values automatically.
 Note that this plugin is not Azure-specific and can be deployed on any cluster with SGX hardware.
 We might switch to the official Intel device plugin anytime in the future.

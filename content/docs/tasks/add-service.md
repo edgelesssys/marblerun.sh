@@ -88,18 +88,18 @@ EDG_MARBLE_COORDINATOR_ADDR=coordinator-mesh-api.marblerun:25554 EDG_MARBLE_TYPE
 
 ## **Step 4:** Deploy your service with Kubernetes
 
-Typically, you'll write a Kubernetes resource definition for your service, which you'll deploy with the Kubernetes CLI, Helm or similar tools.
+Typically, you'll write a Kubernetes resource definition for your service, which you'll deploy with the Kubernetes CLI, Helm, or similar tools.
 
-In order for your services to take advantage of Marblerun, they need to be "added to the mesh" by having the data plane configuration injected into their pods.
-This is typically done by annotating the namespace, deployment, or pod with the `marblerun/inject=enabled` Kubernetes annotation.
-This annotation triggers automatic configuration injection when the resources are created. (See the [auto injection page]({{< ref "docs/features/auto-injection.md" >}}) for more on how this works.)
+For your services to take advantage of Marblerun, they need to be "added to the mesh" by having the data plane configuration injected into their pods.
+This is typically done by labeling the namespace, deployment, or pod with the `marblerun/inject=enabled` Kubernetes label.
+This label triggers automatic configuration injection when the resources are created. (See the [auto injection page]({{< ref "docs/features/auto-injection.md" >}}) for more on how this works.)
 Alternatively, you can enable a namespace for auto-injection using the Marblerun CLI:
 
 ```bash
 marblerun namespace add NAMESPACE [--inject-sgx]
 ```
 
-In order for our injection service to know which type of marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
+In order for our injection service to know which type of Marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
 An example for a Marble of type `web` could look like this:
 
 ```yaml
@@ -108,12 +108,11 @@ kind: Deployment
 metadata:
   name: web
   namespace: emojivoto
-  annotations:
-    marblerun/inject: enabled
   labels:
     app.kubernetes.io/name: web
     app.kubernetes.io/part-of: emojivoto
     app.kubernetes.io/version: v1
+    marblerun/inject: enabled
     marblerun/marbletype: web
 ```
 
@@ -133,5 +132,13 @@ spec:
         value: "$PWD/uuid"
 ```
 
+Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for complete Helm chart examples.
+
 ## **Step 4.1:** Injecting SGX Devices in Kubernetes
-Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for Helm chart examples.
+
+Your confidential apps need access to the SGX device inside the container they are running in.
+See our section on the [SGX device plugin]({{< ref "docs/getting-started/sgx-device-plugin.md" >}}) for more information on how SGX is managed in Kubernetes.
+You can deploy your own SGX device plugin in your cluster or let Marblerun take care of it.
+By default, Marblerun will check whether an SGX device plugin is already present in the cluster and only install one if that is not the case.
+If you have the auto-injection feature enabled Marblerun will also take care of injecting the required tolerations and resource requests for the plugin in your resource definitions when deploying your app.
+See [auto-injection]({{< ref "docs/features/auto-injection.md" >}}) for how this works.
