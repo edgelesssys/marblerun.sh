@@ -133,12 +133,3 @@ spec:
 ```
 
 Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for complete Helm chart examples.
-
-## **Step 4.1:** Injecting SGX Devices in Kubernetes
-
-Your confidential apps need access to the SGX device inside the container they are running in.
-See our section on the [SGX device plugin]({{< ref "docs/getting-started/sgx-device-plugin.md" >}}) for more information on how SGX is managed in Kubernetes.
-You can deploy your own SGX device plugin in your cluster or let Marblerun take care of it.
-By default, Marblerun will check whether an SGX device plugin is already present in the cluster and only install one if that is not the case.
-If you have the auto-injection feature enabled Marblerun will also take care of injecting the required tolerations and resource requests for the plugin in your resource definitions when deploying your app.
-See [auto-injection]({{< ref "docs/features/auto-injection.md" >}}) for how this works.
