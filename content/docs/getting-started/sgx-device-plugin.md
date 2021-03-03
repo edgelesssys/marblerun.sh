@@ -53,4 +53,4 @@ spec:
 
 See our [auto-injection]({{< ref "docs/features/auto-injection.md" >}}) feature for more information on how we inject these values automatically.
 Note that this plugin is not Azure-specific and can be deployed on any cluster with SGX hardware.
-We might switch to the official Intel device plugin anytime in the future.
+We may switch to the official device plugin from Intel in the future.
