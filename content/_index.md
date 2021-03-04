@@ -1,8 +1,6 @@
 ---
 title: Marblerun - The service mesh for confidential computing
 claim: The service mesh for confidential computing
-OC3_headline: Meet us at OC3
-OC3_more: We will present Marblerun at the Open Confidential Computing Conference (OC3). Join us!
 description:
   "**Marblerun** makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for [confidential computing](https://confidentialcomputing.io/). It's open source, written in Go, and truely cloud native."
 buttons:
@@ -37,7 +35,7 @@ features_list:
     - title: Open source and open standards
       icon: fab fa-github
       description:
-        Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/) and [Edgeless RT](https://github.com/edgelesssys/edgelessrt). In the future, it will also support [Graphene](https://github.com/oscarlab/graphene).
+        Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/). It has native support for [EGo](https://www.ego.dev/) based services. In the future, it will also support [Graphene](https://github.com/oscarlab/graphene).
 blog_list:
   items:
     - title: "[Blog post #1](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-1-3-28f4bd6df679)"
