@@ -12,11 +12,11 @@ Marblerun optionally injects [tolerations](https://kubernetes.io/docs/concepts/s
 You can enable auto-injection of the data-plane configuration for a namespace using the Marblerun CLI:
 
 ```bash
-marblerun namespace add NAMESPACE [--inject-sgx]
+marblerun namespace add NAMESPACE [--no-sgx-injection]
 ```
 
 This will add the label `marblerun/inject=enabled` to the chosen namespace and allow the admission webhook to intercept the creation of deployments, pods, etc. in that namespace.
-The flag `--inject-sgx` sets the label `marblerun/inject-sgx=enabled`.
+The flag `--no-sgx-injection` disables the label `marblerun/inject-sgx`. This is useful when using your own SGX device plugin.
 
 ## The Marbletype label
 

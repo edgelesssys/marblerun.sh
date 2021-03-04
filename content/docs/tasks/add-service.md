@@ -96,7 +96,7 @@ This label triggers automatic configuration injection when the resources are cre
 Alternatively, you can enable a namespace for auto-injection using the Marblerun CLI:
 
 ```bash
-marblerun namespace add NAMESPACE [--inject-sgx]
+marblerun namespace add NAMESPACE [--no-sgx-injection]
 ```
 
 In order for our injection service to know which type of Marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
