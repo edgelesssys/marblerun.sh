@@ -1,27 +1,23 @@
 ---
-title: "SGX Device Plugin"
+title: "SGX device plugin"
 draft: false
 weight: 6
 ---
 
-# Kubernetes SGX Device Plugin
+# SGX device plugin on Kubernetes
 
-Kubernetes manages hardware resources as Intel SGX through a [device plugin framework](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/).
-On Kubernetes, exposing SGX to confidential workloads requires an SGX device plugin running on the nodes they are scheduled on.
-The device plugin can either be deployed manually or as a DaemonSet in the cluster. You can write your own device plugin, however, there are already a couple of public open-source SGX Device Plugins from different vendors:
+Kubernetes manages hardware resources like Intel SGX through its [device plugin framework](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/).
+The SGX device plugin can either be deployed manually or as a DaemonSet in the cluster. Different vendors provide open-source device plugins for SGX:
 
 * [Intel](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html)
 * [Azure](https://github.com/Azure/aks-engine/blob/master/docs/topics/sgx.md#deploying-the-sgx-device-plugin)
-* [Alibaba Cloud and Ant Financia](https://github.com/AliyunContainerService/sgx-device-plugin)
+* [Alibaba Cloud](https://github.com/AliyunContainerService/sgx-device-plugin)
 
-When deploying Marblerun it will check whether an SGX device plugin is already running and optionally deploy one if that is not the case.
+Marblerun checks if an SGX device plugin is already running and deploys Azure's plugin otherwise. Note that the Azure SGX plugin is not tied to Azure. We may however switch to the official device plugin from Intel in the future.
 
-```bash
-marblerun install [--no-sgx-device-plugin]
-```
+## Manually deploying an SGX device plugin
 
-When writing this feature, there was no official device plugin available from Intel so we decided to use Azure's plugin.
-Scheduling pods to TEE enabled hardware requires the following additions to your Kubernetes resource definitions:
+For different reasons, you may want to deploy the device plugin manually. This requires two steps. First, add `tolerations` and `resources` to your Kubernetes deployment spec as outlined below.
 
 ```yaml
 apiVersion: apps/v1
@@ -51,6 +47,8 @@ spec:
             kubernetes.azure.com/sgx_epc_mem_in_MiB: 10
 ```
 
-See our [auto-injection]({{< ref "docs/features/auto-injection.md" >}}) feature for more information on how we inject these values automatically.
-Note that this plugin is not Azure-specific and can be deployed on any cluster with SGX hardware.
-We may switch to the official device plugin from Intel in the future.
+Note that in this case, the plugin from Azure is used. Second, install Marblerun using the `--no-sgx-device-plugin` flag:
+
+```bash
+marblerun install [--no-sgx-device-plugin]
+```
