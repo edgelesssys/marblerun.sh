@@ -34,7 +34,11 @@ In Marblerun, marbles (i.e, secure enclaves) are defined in the [manifest]({{< r
     marblerun/marbletype: voting-svc
 ```
 
-Pods without a valid `marblerun/marbletype` label are rejected in a namespace with enabled auto-injection (i.e., `marblerun/inject=enabled`).
+We use this label to map Kubernetes Pods to Marblerun Marbles.
+When you deploy your application, Marblerun will read out this label's value, `voting-svc` in the example above.
+It will check the Marbles section of your manifest for an entry with the same name.
+If such entry is present in the Manifest, the Pod is provided with the particular configuration for this Marble.
+If no such entry exists or a valid `marblerun/marbletype` label is missing, the Pod's creation is rejected.
 
 ## Injected environment variables
 
