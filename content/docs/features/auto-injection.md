@@ -30,7 +30,15 @@ In Marblerun, marbles (i.e, secure enclaves) are defined in the [manifest]({{< r
 ```
 
 ```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: voting
+  namespace: emojivoto
   labels:
+    app.kubernetes.io/name: voting
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/version: v1
     marblerun/marbletype: voting-svc
 ```
 
