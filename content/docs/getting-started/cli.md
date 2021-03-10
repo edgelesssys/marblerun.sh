@@ -13,14 +13,14 @@ To install the Marblerun CLI on your machine you can use our pre-built binaries.
 ### For the current user
 
 ```bash
-wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 chmod +x ~/.local/bin/marblerun
 ```
 
 ### Global install (requires root)
 
 ```bash
-sudo -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+sudo -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 sudo chmod +x /usr/local/bin/marblerun
 ```
 
