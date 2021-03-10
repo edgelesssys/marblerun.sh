@@ -86,7 +86,37 @@ EDG_MARBLE_COORDINATOR_ADDR=coordinator-mesh-api.marblerun:25554 EDG_MARBLE_TYPE
 
 * `EDG_MARBLE_DNS_NAMES` is the list of DNS names the Coordinator will issue the Marble's certificate for.
 
-Typically, you will define these in a Kubernetes manifest or a Helm chart, for example:
+## **Step 4:** Deploy your service with Kubernetes
+
+Typically, you'll write a Kubernetes resource definition for your service, which you'll deploy with the Kubernetes CLI, Helm, or similar tools.
+
+For your services to take advantage of Marblerun, they need to be "added to the mesh" by having the data plane configuration injected into their pods.
+This is typically done by labeling the namespace, deployment, or pod with the `marblerun/inject=enabled` Kubernetes label.
+This label triggers automatic configuration injection when the resources are created. (See the [auto injection page]({{< ref "docs/features/auto-injection.md" >}}) for more on how this works.)
+Alternatively, you can enable a namespace for auto-injection using the Marblerun CLI:
+
+```bash
+marblerun namespace add NAMESPACE [--no-sgx-injection]
+```
+
+In order for our injection service to know which type of Marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
+An example for a Marble of type `web` could look like this:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: emojivoto
+  labels:
+    app.kubernetes.io/name: web
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/version: v1
+    marblerun/inject: enabled
+    marblerun/marbletype: web
+```
+
+This will result in the following configuration being injected when your resources are created:
 
 ```yaml
 spec:
@@ -95,11 +125,11 @@ spec:
     - name: EDG_MARBLE_COORDINATOR_ADDR
         value: coordinator-mesh-api.marblerun:25554
     - name: EDG_MARBLE_TYPE
-        value: mymarble
+        value: web
     - name: EDG_MARBLE_DNS_NAMES
-        value: "localhost,myservice"
+        value: "web,web.emojivoto,web.emojivoto.svc.cluster.local"
     - name: EDG_MARBLE_UUID_FILE
         value: "$PWD/uuid"
 ```
 
-Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for Helm chart examples.
+Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for complete Helm chart examples.
