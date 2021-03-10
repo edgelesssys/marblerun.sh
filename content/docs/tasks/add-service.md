@@ -11,31 +11,18 @@ Adding a service to your application requires three steps, which are described i
 
 ## **Step 1:** Get your service ready for Marblerun
 
-To get your service ready for Marblerun, you possibly need to adapt its code slightly and you need to rebuild it. Details are given in the following steps 1.1 and 1.2. *Note that we are working on making these unnecessary in the future - at least for services written in Go.*
+To get your service ready for Marblerun, you need to rebuild it with one of the supported [runtimes]({{< ref "docs/features/runtimes.md" >}}):
+* [EGo]({{< ref "docs/tasks/build-service-ego.md" >}})
+* [Edgeless RT](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B)
+* [Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}})
 
-### **Step 1.1:** Make your service use the provided TLS credentials
+### Make your service use the provided TLS credentials
 
 Quick refresher: Marblerun's Coordinator issues TLS credentials for each verified Marble (i.e., a service running in a secure enclave) as is described [here]({{< ref "docs/features/secrets-management.md#tls-credentials" >}}).
 
 The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environments variables, or commandline arguments. This is defined in the Manifest as is described [here]({{< ref "docs/tasks/define-manifest.md#manifestmarbles" >}}).
 
 For now, you just need to make sure that your service reads the certificate and the private key from arbitrary paths, environment variables, or commandline arguments, e.g., the file `/tmp/mycert.cert` or the environment variable `MY_PRIVATE_KEY`, and uses them at runtime for internal and external connections. If you're lucky, your service already does this and you don't need to change a thing in the code.
-
-For services written in Go, we provide a convenience package called `github.com/edgelesssys/ertgolib/marble`. With it, a service can automatically get and use its Marblerun TLS credentials. The following gives an example.
-```Go
-func main() {
-    serverCfg, err := marble.GetTLSConfig(false)
-    if err != nil {
-        log.Fatalf("Failed to retrieve server TLS config from ertgolib")
-    }
-    serverCreds := credentials.NewTLS(serverCfg)
-    // use serverCreds, e.g., to create an HTTPS server
-}
-```
-
-### **Step 1.2:** Re-compile/build your service for Marblerun
-
-Finally, you need to re-build your service for the enclave environment and include/link Marblerun-specific code. Please follow the build instructions for Go provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld) or the build instructions for C++ provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B).
 
 ## **Step 2:** Define your service in the Manifest
 
