@@ -13,7 +13,7 @@ weight: 1
 
 Marblerun is a framework for creating distributed confidential-computing apps.
 
-Build your confidential microservices with [Edgeless RT][edgelessrt], distribute them with Kubernetes on an SGX-enabled cluster, and let Marblerun take care of the rest. Deploy end-to-end secure and verifiable AI pipelines or crunch on sensitive big data in the cloud. Confidential computing at scale has never been easier.
+Build your confidential microservices with [EGo or another runtime]({{< ref "docs/features/runtimes.md" >}}), distribute them with Kubernetes on an SGX-enabled cluster, and let Marblerun take care of the rest. Deploy end-to-end secure and verifiable AI pipelines or crunch on sensitive big data in the cloud. Confidential computing at scale has never been easier.
 
 Marblerun guarantees that the topology of your distributed app adheres to a Manifest specified in simple JSON. Marblerun verifies the integrity of services, bootstraps them, and sets up encrypted connections between them. If a node fails, Marblerun will seamlessly substitute it with respect to the rules defined in the Manifest.
 
@@ -34,6 +34,3 @@ Marblerun is configured with a simple JSON document called the *Manifest*.
 It specifies the topology of the distributed app, the infrastructure properties, and provides configuration parameters for each service.
 
 ![overview](/img/overview.svg)
-
-<!-- refs -->
-[edgelessrt]: https://github.com/edgelesssys/edgelessrt

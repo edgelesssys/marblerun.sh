@@ -2,7 +2,7 @@
 title: "Updating a Deployment"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 8
+weight: 10
 ---
 
 # Updating a deployment

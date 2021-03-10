@@ -2,7 +2,7 @@
 title: "Verifying a Deployment"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 6
+weight: 8
 ---
 
 # Verifying a Deployment
