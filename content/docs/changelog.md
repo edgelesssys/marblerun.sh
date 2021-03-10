@@ -9,7 +9,8 @@ weight: 10
 
 ## Version 0.3.0
 
-* Add a feature for `updating the manifest`
+* Add support for privileged Client API endpoints
+* Allow increasing the minimum required `SecurityVersion` for packages after a manifest has been set initially (also referred to as 'Manifest Update')
 * Add an intermediate certificate to the Marblerun certificate chain. Keep the root certificate permanent and change the intermediate with each manifest update. Return the whole cert-chain on the client API.
 * Add a command-line interface (`CLI`) for administrating Marblerun
 * Add integration for `Graphene`-based Marbles
