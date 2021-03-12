@@ -106,13 +106,13 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 * If you're deploying on a cluster with nodes that support SGX1+FLC (e.g. AKS or minikube + Azure Standard_DC*s)
 
   ```bash
-  helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes -n emojivoto
+  helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
   ```
 
 * Otherwise
 
   ```bash
-  helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes -n emojivoto
+  helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
   ```
 
 ## Step 6: Watch it run
