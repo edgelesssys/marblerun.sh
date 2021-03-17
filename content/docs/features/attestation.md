@@ -8,6 +8,8 @@ weight: 1
 # Attestation
 
 Hardware-rooted *remote attestation* is a key ingredient for distributed confidential apps. Without it, services couldn't trust each other and clients couldn't trust the app. Thus, Marblerun relies heavily on the *Data Center Attestation Primitives* (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP [here](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
+At the time of writing only Microsoft Azure had a public DCAP service deployed in their data-centers. Hence, our demos are heavily tested and deployed on Azure Kubernetes Service (AKS).
+However, Marblerun works with any DCAP service complying with the SGX specification. You can read more about setting up your own DCAP infrastructure [here](https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html).
 
 ## Internal attestation of Marbles
 

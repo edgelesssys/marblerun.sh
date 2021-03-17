@@ -1,8 +1,8 @@
 ---
-title: "Adding a service"
+title: "Adding a Service"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 3
+weight: 4
 ---
 
 # Adding a service
@@ -11,31 +11,18 @@ Adding a service to your application requires three steps, which are described i
 
 ## **Step 1:** Get your service ready for Marblerun
 
-To get your service ready for Marblerun, you possibly need to adapt its code slightly and you need to rebuild it. Details are given in the following steps 1.1 and 1.2. *Note that we are working on making these unnecessary in the future - at least for services written in Go.*
+To get your service ready for Marblerun, you need to rebuild it with one of the supported [runtimes]({{< ref "docs/features/runtimes.md" >}}):
+* [EGo]({{< ref "docs/tasks/build-service-ego.md" >}})
+* [Edgeless RT](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B)
+* [Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}})
 
-### **Step 1.1:** Make your service use the provided TLS credentials
+### Make your service use the provided TLS credentials
 
 Quick refresher: Marblerun's Coordinator issues TLS credentials for each verified Marble (i.e., a service running in a secure enclave) as is described [here]({{< ref "docs/features/secrets-management.md#tls-credentials" >}}).
 
 The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environments variables, or commandline arguments. This is defined in the Manifest as is described [here]({{< ref "docs/tasks/define-manifest.md#manifestmarbles" >}}).
 
 For now, you just need to make sure that your service reads the certificate and the private key from arbitrary paths, environment variables, or commandline arguments, e.g., the file `/tmp/mycert.cert` or the environment variable `MY_PRIVATE_KEY`, and uses them at runtime for internal and external connections. If you're lucky, your service already does this and you don't need to change a thing in the code.
-
-For services written in Go, we provide a convenience package called `github.com/edgelesssys/ertgolib/marble`. With it, a service can automatically get and use its Marblerun TLS credentials. The following gives an example.
-```Go
-func main() {
-    serverCfg, err := marble.GetTLSConfig(false)
-    if err != nil {
-        log.Fatalf("Failed to retrieve server TLS config from ertgolib")
-    }
-    serverCreds := credentials.NewTLS(serverCfg)
-    // use serverCreds, e.g., to create an HTTPS server
-}
-```
-
-### **Step 1.2:** Re-compile/build your service for Marblerun
-
-Finally, you need to re-build your service for the enclave environment and include/link Marblerun-specific code. Please follow the build instructions for Go provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld) or the build instructions for C++ provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B).
 
 ## **Step 2:** Define your service in the Manifest
 
@@ -86,7 +73,37 @@ EDG_MARBLE_COORDINATOR_ADDR=coordinator-mesh-api.marblerun:25554 EDG_MARBLE_TYPE
 
 * `EDG_MARBLE_DNS_NAMES` is the list of DNS names the Coordinator will issue the Marble's certificate for.
 
-Typically, you will define these in a Kubernetes manifest or a Helm chart, for example:
+## **Step 4:** Deploy your service with Kubernetes
+
+Typically, you'll write a Kubernetes resource definition for your service, which you'll deploy with the Kubernetes CLI, Helm, or similar tools.
+
+For your services to take advantage of Marblerun, they need to be "added to the mesh" by having the data plane configuration injected into their pods.
+This is typically done by labeling the namespace, deployment, or pod with the `marblerun/inject=enabled` Kubernetes label.
+This label triggers automatic configuration injection when the resources are created. (See the [auto injection page]({{< ref "docs/features/auto-injection.md" >}}) for more on how this works.)
+Alternatively, you can enable a namespace for auto-injection using the Marblerun CLI:
+
+```bash
+marblerun namespace add NAMESPACE [--no-sgx-injection]
+```
+
+In order for our injection service to know which type of Marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
+An example for a Marble of type `web` could look like this:
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web
+  namespace: emojivoto
+  labels:
+    app.kubernetes.io/name: web
+    app.kubernetes.io/part-of: emojivoto
+    app.kubernetes.io/version: v1
+    marblerun/inject: enabled
+    marblerun/marbletype: web
+```
+
+This will result in the following configuration being injected when your resources are created:
 
 ```yaml
 spec:
@@ -95,11 +112,11 @@ spec:
     - name: EDG_MARBLE_COORDINATOR_ADDR
         value: coordinator-mesh-api.marblerun:25554
     - name: EDG_MARBLE_TYPE
-        value: mymarble
+        value: web
     - name: EDG_MARBLE_DNS_NAMES
-        value: "localhost,myservice"
+        value: "web,web.emojivoto,web.emojivoto.svc.cluster.local"
     - name: EDG_MARBLE_UUID_FILE
         value: "$PWD/uuid"
 ```
 
-Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for Helm chart examples.
+Refer to our [emojivoto](https://github.com/edgelesssys/emojivoto) app for complete Helm chart examples.

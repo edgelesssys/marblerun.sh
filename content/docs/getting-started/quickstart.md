@@ -12,37 +12,35 @@ Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to g
 
 Please also install [Helm](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes").
 
-## Step 1: Install the Coordinator onto the cluster
-
-Add the Edgeless Systems chart repository to Helm.
-
+Please also install the Marblerun CLI:
+### For the current user
 ```bash
-helm repo add edgeless https://helm.edgeless.systems/stable
-helm repo update
+wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+chmod +x ~/.local/bin/marblerun
 ```
+### Global install (requires root)
+```bash
+sudo -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+sudo chmod +x /usr/local/bin/marblerun
+```
+
+## Step 1: Install the Coordinator onto the cluster
 
 Install Marblerun's Coordinator using Helm.
 Update the hostname with your cluster's FQDN or use localhost for local testing.
 
-* For a cluster with SGX support:
+Install Marblerun's Coordinator using the CLI.
+Update the hostname with your cluster's FQDN or use localhost for local testing.
 
+* For a cluster with SGX support:
     ```bash
-    helm install marblerun-coordinator edgeless/marblerun-coordinator \
-        --create-namespace \
-        -n marblerun \
-        --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
+    marblerun install --domain=localhost
     ```
 
 * For a cluster without SGX support:
 
     ```bash
-    helm install marblerun-coordinator edgeless/marblerun-coordinator \
-        --create-namespace \
-        -n marblerun \
-        --set coordinator.resources=null \
-        --set coordinator.simulation=1 \
-        --set tolerations=null \
-        --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
+    marblerun install --domain=localhost --simulation
     ```
 
 ## Step 2: Pull the demo application
@@ -52,12 +50,6 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 ```
 
 ## Step 3: Initialize and verify the Coordinator
-
-1. Pull the remote attestation configuration
-
-    ```bash
-    wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
-    ```
 
 1. Get the Coordinator's address and set the DNS
 
@@ -75,34 +67,38 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
         export MARBLERUN=localhost:25555
         ```
 
-1. Install the Edgeless Remote Attestation Tool
-    1. Check [requirements](https://github.com/edgelesssys/era#requirements)
-    2. See [install](https://github.com/edgelesssys/era#install)
-
 1. Verify the Quote and get the Coordinator's Root-Certificate
     * If you're running on a cluster with nodes that support SGX1+FLC
 
         ```bash
-        era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
+        marblerun certificate root $MARBLERUN -o marblerun.crt
         ```
 
     * Otherwise
 
         ```bash
-        era -skip-quote -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
+        marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
         ```
 
 ## Step 4: Set the Manifest
 
-```bash
-curl --cacert marblerun.crt --data-binary @tools/manifest.json "https://$MARBLERUN/manifest"
-```
+    * If you're running on a cluster with nodes that support SGX1+FLC
+
+        ```bash
+        marblerun manifest set tools/manifest.json $MARBLERUN
+        ```
+
+    * Otherwise
+
+        ```bash
+        marblerun manifest set tools/manifest.json $MARBLERUN --insecure
+        ```
 
 * If you're running emojivoto on a custom domain, you can set the certificate's CN accordingly
 
     ```bash
-    manifest=$(cat "tools/manifest.json" | sed "s/localhost/<your-domain>/g")
-    curl --cacert marblerun.crt --data-binary "$manifest" https://$MARBLERUN/manifest
+    cat "tools/manifest.json" | sed "s/localhost/<your-domain>/g" > manifest.json
+    marblerun manifest set manifest.json $MARBLERUN
     ```
 
 ## Step 5: Deploy the demo application
@@ -110,13 +106,13 @@ curl --cacert marblerun.crt --data-binary @tools/manifest.json "https://$MARBLER
 * If you're deploying on a cluster with nodes that support SGX1+FLC (e.g. AKS or minikube + Azure Standard_DC*s)
 
   ```bash
-  helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes -n emojivoto
+  helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
   ```
 
 * Otherwise
 
   ```bash
-  helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes -n emojivoto
+  helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
   ```
 
 ## Step 6: Watch it run

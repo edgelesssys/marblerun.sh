@@ -7,7 +7,7 @@ weight: 2
 
 # Defining a Manifest
 
-The Manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKey`.
+The Manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKeys`.
 This article describes how to define these in your `manifest.json`.
 
 ## Manifest:Packages
@@ -127,7 +127,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
     //...
     "Secrets": {
         "secret_aes_key": {
-            "Type": "raw",
+            "Type": "symmetric-key",
             "Size": 128,
             "Shared": true
         },
@@ -151,7 +151,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
 
 When defining a custom key or certificate, the following fields are available.
 
-* `Type`: can be either `raw` for a symmetric encryption key, `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
+* `Type`: can be either `symmetric-key` for a symmetric encryption key, `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
 * `Size`: the size of the key in bits. For symmetric keys, this needs to be a multiple of `8`. For ECDSA, this needs to map to a curve supported by Go's crypto library, currently: `224`, `256`, `384`, or `521`. For Ed25519, this should be ommitted.
 * `Shared` (default: `false`): specifies if the secret should be shared across all Marbles (`true`), or if the secret should be uniquely generated for each Marble (`false`). See [Secrets management]({{< ref "docs/features/secrets-management.md" >}}) for more info.
 * `ValidFor` (only for certificates, default: `365`): validity of the certificate in days; cannot be specified in combination with the `NotAfter`.
@@ -225,7 +225,7 @@ Keys and certificates defined in the `Secrets` section can be injected via `Para
 
 Refer to the [previous section](#manifestmarbles) for a list of supported encodings. `<part>` can be any of the following.
 
-* *empty*: for secret type `raw`, returns the symmetric key. For other types, returns the public key.
+* *empty*: for secret type `symmetric-key`, returns the symmetric key. For other types, returns the public key.
 * `Cert`: returns the certificate.
 * `Public`: returns the public key.
 * `Private`: returns the private key.
@@ -233,18 +233,47 @@ Refer to the [previous section](#manifestmarbles) for a list of supported encodi
 The following gives some examples.
 
 * Inject the certificate of custom secret `rsa_cert` in PEM format: `{{ pem .Secrets.rsa_cert.Cert }}`
-* Inject the corresponidng private key in PKCS#8 format: `{{ raw .Secrets.rsa_cert.Private }}`
+* Inject the corresponding private key in PKCS#8 format: `{{ raw .Secrets.rsa_cert.Private }}`
 * Inject the corresponding public key PKIX-encoded and in PEM format: `{{ pem .Secrets.rsa_cert.Public }}`
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
-## Manifest:RecoveryKey
-
-The optional entry `RecoveryKey` holds a X.509 PEM-encoded RSA public key, which can be used to recover a failed Marblerun deployment, as is described [here]({{< ref "docs/features/recovery.md" >}}).
+## Manifest:Admins
+The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described [here]({{< ref "docs/tasks/update-manifest.md">}})).
 
 ```javascript
 {
     //...
-    "RecoveryKey": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
+    "Admins": {
+        "alice": "-----BEGIN CERTIFICATE-----\nMIIFPjCCA...",
+        "bob": "-----BEGIN CERTIFICATE-----\nMIIFP..."
+    }
+}
+```
+When verifying certificates in this context, Marblerun ignores their `issuer`, `subject`, and `expiration date` fields. Thus, admins cannot lock themselves out through expired certificates.
+
+Use OpenSSL to generate a compatible certificate.
+
+```bash
+openssl req -x509 -newkey rsa:4096 -sha256 -days 3650 -nodes -keyout admin_private.key -out admin_certificate.crt
+```
+
+Use the following command to preserve newlines correctly:
+
+```bash
+awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
+```
+
+## Manifest:RecoveryKeys
+
+The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described [here]({{< ref "docs/features/recovery.md" >}})). So far, only one public key entry is supported in the current release of Marblerun.
+
+```javascript
+{
+    //...
+    "RecoveryKeys":
+    {
+        "recoveryKey1": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
+    }
 }
 ```
 
@@ -255,7 +284,7 @@ openssl genrsa -out private_key.pem 4096
 openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
 ```
 
-To preserve the new lines correctly, you can use the following command:
+Use the following command to preserve newlines correctly:
 
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem

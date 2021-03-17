@@ -1,11 +1,11 @@
 ---
-title: "Monitoring and logging"
+title: "Monitoring and Logging"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 6
+weight: 8
 ---
 
-# Monitoring and logging
+# Monitoring and Logging
 
 As of now, the monitoring capabilities of Marblerun are basic. For status information, the Coordinator provides the `/status` endpoint in the client API.
 It returns the following information.
@@ -18,7 +18,7 @@ It returns the following information.
 More details about the Coordinator can be retrieved through its log as follows.
 
 ```bash
-kubectl -n marblerun logs -f marblerun-coordinator-5b9b4849c8-jbjwr
+kubectl -n marblerun logs -f marblerun-coordinator-xxxxxxxxxx-xxxxx
 ```
 
 Going forward, plans are to support your favorite monitoring tool via logging through [Prometheus](https://prometheus.io/) and having a web dashboard with status and health information quickly accessible.
