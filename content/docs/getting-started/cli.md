@@ -91,6 +91,7 @@ marblerun install [flags]
     ```bash
     Did not find marblerun helm repository on system, adding now...
     edgeless has been added to your helm repositories
+    Setting up Marblerun Webhook... Done
     Marblerun installed successfully
     ```
 
@@ -103,6 +104,7 @@ marblerun install [flags]
   The output is similar to the following:
 
   ```bash
+  Setting up Marblerun Webhook... Done
   Marblerun installed successfully
   ```
 
@@ -339,7 +341,7 @@ These flags apply to all sub commands of certificate
 
 ## **`namespace`**
 
-Add namespaces Marblerun.
+Add namespaces to Marblerun.
 If the auto-injection feature is enabled. All new pods in those namespaces will get their Marblerun configuration automatically injected.
 
 
@@ -416,4 +418,21 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 
   ```bash
   testspace
+  ```
+
+
+## **`uninstall`**
+
+  Remove Marblerun from your kubernetes cluster.
+  This command will remove all resources added by the installation command.
+
+  **Usage**
+
+  ```bash
+  marblerun uninstall
+  ```
+
+  The output is the following:
+  ```bash
+  Marblerun successfully removed from your cluster
   ```
