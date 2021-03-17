@@ -1,0 +1,16 @@
+.annotation {
+    padding: 1em 1em 1em 1em;
+    margin-bottom: 1rem;
+}
+
+.note {
+    @extend .annotation;
+    border-radius: .3em;
+    border-style: solid;
+}
+
+.alert {
+    @extend .annotation;
+    background-color: black;
+    color: white;
+}
