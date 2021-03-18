@@ -7,41 +7,46 @@ weight: 1
 
 # Quickstart
 
-## Step 0: Setup
+
 Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
 
-Please also install [Helm](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes").
+In this guide will show you how to deploy and verify the [Confidential Emoji.voto](https://github.com/edgelesssys/emojivoto) application, an microservice that allows users to vote for their favorite emoji, and tracks votes received on a leaderboard.
 
-Please also install the Marblerun CLI:
-### For the current user
+Choose either to follow the [Fist Steps on Minikube]({{< ref "docs/getting/started/quickstart.md#fist-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [Fisrt Steps on AKS]({{< ref "docs/getting/started/quickstart.md#fist-steps-on-aks" >}}).
+
+# First Steps on Minikube
+
+## Step 0: Setup
+
+[Install Helm](https://helm.sh/docs/intro/install/), the "package manager" for Kubernetes. Helm should be at version v3.2.0 or higher. You can check the version of an existing helm installation as following:
 ```bash
-wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
-chmod +x ~/.local/bin/marblerun
-```
-### Global install (requires root)
-```bash
-sudo -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
-sudo chmod +x /usr/local/bin/marblerun
+helm version
 ```
 
-## Step 1: Install the Coordinator onto the cluster
-
-Install Marblerun's Coordinator using Helm.
-Update the hostname with your cluster's FQDN or use localhost for local testing.
-
-Install Marblerun's Coordinator using the CLI.
-Update the hostname with your cluster's FQDN or use localhost for local testing.
-
-* For a cluster with SGX support:
+Next, install the Marblerun CLI from our latest binary release:
++ For the current user
     ```bash
-    marblerun install --domain=localhost
+    wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+    chmod +x ~/.local/bin/marblerun
+    ```
++ Global install (requires root)
+    ```bash
+    sudo wget -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+    sudo chmod +x /usr/local/bin/marblerun
     ```
 
-* For a cluster without SGX support:
+## Step 1: Deploy the Coordinator onto the cluster
 
-    ```bash
-    marblerun install --domain=localhost --simulation
-    ```
+Deploy Marblerun's Coordinator to the Minikube cluster using the CLI.
+
+```bash
+marblerun install --domain=localhost --simulation
+```
+
+You can now find the Marblerun Coordinator Pod deployed on your cluster using kubectl:
+```bash
+kubectl get pods -n marblerun
+```
 
 ## Step 2: Pull the demo application
 
@@ -51,50 +56,107 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 
 ## Step 3: Initialize and verify the Coordinator
 
-1. Get the Coordinator's address and set the DNS
+Get the Coordinator's address and set the DNS
 
-    * If you're running on AKS:
-        * Check our docs on [how to set the DNS for the Client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
+```bash
+kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost >/dev/null &
+export MARBLERUN=localhost:25555
+```
 
-            ```bash
-            export MARBLERUN=mycluster.uksouth.cloudapp.azure.com
-            ```
+Verify the Quote and get the Coordinator's Root-Certificate. The SGX Quote proofs the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as marblerun.cert in your current directory. The Certificate is bound to the Quote and can be used for future verification. Since we are not using SGX hardware in this case, the quote is omitted by marblerun.
 
-    * If you're running on minikube
-
-        ```bash
-        kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost >/dev/null &
-        export MARBLERUN=localhost:25555
-        ```
-
-1. Verify the Quote and get the Coordinator's Root-Certificate
-    * If you're running on a cluster with nodes that support SGX1+FLC
-
-        ```bash
-        marblerun certificate root $MARBLERUN -o marblerun.crt
-        ```
-
-    * Otherwise
-
-        ```bash
-        marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
-        ```
+```bash
+marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
+```
 
 ## Step 4: Set the Manifest
 
-    * If you're running on a cluster with nodes that support SGX1+FLC
+```bash
+marblerun manifest set tools/manifest.json $MARBLERUN --insecure
+```
 
-        ```bash
-        marblerun manifest set tools/manifest.json $MARBLERUN
-        ```
+## Step 5: Deploy the demo application
 
-    * Otherwise
+```bash
+helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
+```
 
-        ```bash
-        marblerun manifest set tools/manifest.json $MARBLERUN --insecure
-        ```
+## Step 6: Watch it run
 
-* If you're running emojivoto on a custom domain, you can set the certificate's CN accordingly
+Make the voting frontend reachable for with port-forwarding:
+
+```bash
+sudo kubectl -n emojivoto port-forward svc/web-svc 443:443 --address 0.0.0.0
+```
+
+Install Marblerun-Certificate in your browser
+* **Warning** Be careful when adding certificates to your browser. We only do this temporarily for the sake of this demo. Make sure you don't use your browser for other activities in the meanwhile and remove the certificate afterward.
+* Chrome:
+    * Go to <chrome://settings/security>
+    * Go to `"Manage certificates" > "Import..."`
+    * Follow the "Certificate Import Wizard" and import the `marblerun.crt` of the previous step as a "Personal" certificate
+* Firefox:
+    * Go to <about:preferences#privacy>
+    * Go to `Certificates: View Certificates > Authorities`
+    * Go to `Import...` and select the `marblerun.crt` of the previous step
+
+Browse to [https://localhost](https://localhost).
+
+
+# First Steps on AKS
+
+## Step 0: Setup
+
+[Install Helm](https://helm.sh/docs/intro/install/), the "package manager" for Kubernetes. Helm should be at version v3.2.0 or higher. You can check the version of an existing helm installation as following:
+```bash
+helm version
+```
+
+Next, install the Marblerun CLI from our latest binary release:
+### For the current user
+```bash
+wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+chmod +x ~/.local/bin/marblerun
+```
+### Global install (requires root)
+```bash
+sudo wget -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun-cli
+sudo chmod +x /usr/local/bin/marblerun
+```
+
+## Step 1: Deploy the Coordinator onto the cluster
+
+Deploy Marblerun's Coordinator to the Minikube cluster using the CLI. Update the domain parameter with your cluster's domain name.
+
+```bash
+marblerun install --domain=mycluster.uksouth.cloudapp.azure.com
+```
+
+## Step 2: Pull the demo application
+
+```bash
+git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
+```
+
+## Step 3: Initialize and verify the Coordinator
+
+Get the Coordinator's address and set the DNS
+
+* If you're running on AKS, check our docs on [how to set the DNS for the Client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
+
+```bash
+export MARBLERUN=mycluster.uksouth.cloudapp.azure.com
+```
+
+Verify the Quote and get the Coordinator's Root-Certificate. The SGX Quote proofs the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as marblerun.cert in your current directory. The Certificate is bound to the Quote and can be used for future verification.
+
+```bash
+marblerun certificate root $MARBLERUN -o marblerun.crt
+```
+
+## Step 4: Set the Manifest
+
+Set the certificate's CN accordingly and hand the manifest to the Marblerun Coordinator.
 
     ```bash
     cat "tools/manifest.json" | sed "s/localhost/<your-domain>/g" > manifest.json
@@ -103,16 +165,8 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 
 ## Step 5: Deploy the demo application
 
-* If you're deploying on a cluster with nodes that support SGX1+FLC (e.g. AKS or minikube + Azure Standard_DC*s)
-
   ```bash
   helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
-  ```
-
-* Otherwise
-
-  ```bash
-  helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
   ```
 
 ## Step 6: Watch it run
@@ -121,11 +175,6 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
     * You need to expose the `web-svc` in the `emojivoto` namespace. This works similar to [how we expose the client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
     * Get the public IP with: `kubectl -n emojivoto get svc web-svc -o wide`
     * If you're using ingress/gateway-controllers make sure you enable [SNI-passthrough]({{< ref "docs/tasks/deploy.md#ingressgateway-configuration" >}})
-* If you're running on minikube
-
-    ```bash
-    sudo kubectl -n emojivoto port-forward svc/web-svc 443:443 --address 0.0.0.0
-    ```
 
 * Install Marblerun-Certificate in your browser
     * **Warning** Be careful when adding certificates to your browser. We only do this temporarily for the sake of this demo. Make sure you don't use your browser for other activities in the meanwhile and remove the certificate afterward.
@@ -133,8 +182,9 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
         * Go to <chrome://settings/security>
         * Go to `"Manage certificates" > "Import..."`
         * Follow the "Certificate Import Wizard" and import the `marblerun.crt` of the previous step as a "Personal" certificate
-    * Firefox:
-        * Go to `Tools > Options > Advanced > Certificates: View Certificates`
+   * Firefox:
+        * Go to <about:preferences#privacy>
+        * Go to `Certificates: View Certificates > Authorities`
         * Go to `Import...` and select the `marblerun.crt` of the previous step
 
-* Browse to [https://localhost](https://localhost) or [https://your-clusters-fqdn:port](#) depending on your type of deployment.
+* Browse to [https://your-clusters-domain:port](#).
