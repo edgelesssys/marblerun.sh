@@ -12,7 +12,7 @@ Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to g
 
 In this guide will show you how to deploy and verify the [Confidential Emoji.voto](https://github.com/edgelesssys/emojivoto) application, an microservice that allows users to vote for their favorite emoji, and tracks votes received on a leaderboard.
 
-Choose either to follow the [Fist Steps on Minikube]({{< ref "docs/getting/started/quickstart.md#fist-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [Fisrt Steps on AKS]({{< ref "docs/getting/started/quickstart.md#fist-steps-on-aks" >}}).
+Choose either to follow the [Fist Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#fist-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [Fisrt Steps on AKS]({{< ref "docs/getting-started/quickstart.md#fist-steps-on-aks" >}}).
 
 # First Steps on Minikube
 
@@ -158,16 +158,16 @@ marblerun certificate root $MARBLERUN -o marblerun.crt
 
 Set the certificate's CN accordingly and hand the manifest to the Marblerun Coordinator.
 
-    ```bash
-    cat "tools/manifest.json" | sed "s/localhost/<your-domain>/g" > manifest.json
-    marblerun manifest set manifest.json $MARBLERUN
-    ```
+```bash
+cat "tools/manifest.json" | sed "s/localhost/<your-domain>/g" > manifest.json
+marblerun manifest set manifest.json $MARBLERUN
+```
 
 ## Step 5: Deploy the demo application
 
-  ```bash
-  helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
-  ```
+```bash
+helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-namespace -n emojivoto
+```
 
 ## Step 6: Watch it run
 
