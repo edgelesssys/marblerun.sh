@@ -12,7 +12,7 @@ Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to g
 
 In this guide will show you how to deploy and verify the [Confidential Emoji.voto](https://github.com/edgelesssys/emojivoto) application, an microservice that allows users to vote for their favorite emoji, and tracks votes received on a leaderboard.
 
-Choose either to follow the [Fist Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#fist-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [Fisrt Steps on AKS]({{< ref "docs/getting-started/quickstart.md#fist-steps-on-aks" >}}).
+Choose either to follow the [Fist Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#first-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [Fisrt Steps on AKS]({{< ref "docs/getting-started/quickstart.md#first-steps-on-aks" >}}).
 
 # First Steps on Minikube
 
@@ -140,9 +140,7 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 
 ## Step 3: Initialize and verify the Coordinator
 
-Get the Coordinator's address and set the DNS
-
-* If you're running on AKS, check our docs on [how to set the DNS for the Client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
+Get the Coordinator's address and set the DNS. Check our docs on [how to expose the Client-API]({{< ref "docs/tasks/deploy.md#accesing-the-client-api" >}})
 
 ```bash
 export MARBLERUN=mycluster.uksouth.cloudapp.azure.com
@@ -171,8 +169,8 @@ helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-nam
 
 ## Step 6: Watch it run
 
-* If you're running on AKS
-    * You need to expose the `web-svc` in the `emojivoto` namespace. This works similar to [how we expose the client-API]({{< ref "docs/tasks/deploy.md#dns-for-the-client-api-on-azure-kubernetes-service-aks" >}})
+* Exposing your service
+    * You need to expose the `web-svc` in the `emojivoto` namespace. This works similar to [how we expose the client-API]({{< ref "docs/tasks/deploy.md#accesing-the-client-api" >}})
     * Get the public IP with: `kubectl -n emojivoto get svc web-svc -o wide`
     * If you're using ingress/gateway-controllers make sure you enable [SNI-passthrough]({{< ref "docs/tasks/deploy.md#ingressgateway-configuration" >}})
 
