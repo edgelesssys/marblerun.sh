@@ -12,7 +12,7 @@ Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to g
 
 In this guide will show you how to deploy and verify the [Confidential Emoji.voto](https://github.com/edgelesssys/emojivoto) application, an microservice that allows users to vote for their favorite emoji, and tracks votes received on a leaderboard.
 
-Choose either to follow the [Fist Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#first-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [Fisrt Steps on AKS]({{< ref "docs/getting-started/quickstart.md#first-steps-on-aks" >}}).
+Choose either to follow the [First Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#first-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [First Steps on AKS]({{< ref "docs/getting-started/quickstart.md#first-steps-on-aks" >}}).
 
 # First Steps on Minikube
 
