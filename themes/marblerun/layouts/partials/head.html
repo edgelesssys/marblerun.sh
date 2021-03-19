@@ -9,6 +9,15 @@
 	{{ $style := resources.Get "scss/bootstrap.scss" | toCSS | minify | fingerprint }}
 	<link rel="stylesheet" href="{{ $style.Permalink }}" emotion="🤩">
 	<script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js"></script>
+
+	<meta property="og:title" content="Marblerun - The service mesh for confidential computing">
+	<meta property="og:description" content="Marblerun makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for confidential computing.​">
+	<meta property="og:image" content="https://www.marblerun.sh/img/social.png">
+
+	<meta name="twitter:title" content="Marblerun - The service mesh for confidential computing">
+	<meta name="twitter:description" content="Marblerun makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes.">
+	<meta name="twitter:image" content="https://www.marblerun.sh/img/social.png">
+	<meta name="twitter:card" content="Marblerun">
 </head>
 
 <body>
