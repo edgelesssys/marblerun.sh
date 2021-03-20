@@ -16,16 +16,16 @@
 <a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploying Marblerun</a>
 <a href=https://marblerun.sh/docs/tasks/define-manifest/ class="d-block pl-3">Defining a Manifest</a>
 <a href=https://marblerun.sh/docs/tasks/update-manifest/ class="d-block pl-3">Updating a Manifest</a>
-<a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a Service</a>
-<a href=https://marblerun.sh/docs/tasks/build-service-ego/ class="d-block pl-3">Building a Service: EGo</a>
-<a href=https://marblerun.sh/docs/tasks/build-service-graphene/ class="d-block pl-3">Building a Service: Graphene</a>
+<a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a service</a>
+<a href=https://marblerun.sh/docs/tasks/build-service-ego/ class="d-block pl-3">Building a service: EGo</a>
+<a href=https://marblerun.sh/docs/tasks/build-service-graphene/ class="d-block pl-3">Building a service: Graphene</a>
 <a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
-<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and Logging</a>
-<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Verifying a Deployment</a>
-<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Updating a Deployment</a>
-<a href=https://marblerun.sh/docs/tasks/recover-coordinator/ class="d-block pl-3">Recovering the Coordinator</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello World</a>
-<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Confidential Emoji Voting</a>
-<a href=https://marblerun.sh/docs/examples/graphene/ class="d-block pl-3">Graphene</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=attestation>Attestation</h1><p>Hardware-rooted <em>remote attestation</em> is a key ingredient for distributed confidential apps. Without it, services couldn&rsquo;t trust each other and clients couldn&rsquo;t trust the app. Thus, Marblerun relies heavily on the <em>Data Center Attestation Primitives</em> (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP <a href=https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf>here</a>.
+<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a>
+<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Verifying a deployment</a>
+<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Updating a deployment</a>
+<a href=https://marblerun.sh/docs/tasks/recover-coordinator/ class="d-block pl-3">Recovering the Coordinator</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello world</a>
+<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Emoji voting</a>
+<a href=https://marblerun.sh/docs/examples/graphene/ class="d-block pl-3">Graphene-based examples</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=attestation>Attestation</h1><p>Hardware-rooted <em>remote attestation</em> is a key ingredient for distributed confidential apps. Without it, services couldn&rsquo;t trust each other and clients couldn&rsquo;t trust the app. Thus, Marblerun relies heavily on the <em>Data Center Attestation Primitives</em> (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP <a href=https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf>here</a>.
 At the time of writing only Microsoft Azure had a public DCAP service deployed in their data-centers. Hence, our demos are heavily tested and deployed on Azure Kubernetes Service (AKS).
 However, Marblerun works with any DCAP service complying with the SGX specification. You can read more about setting up your own DCAP infrastructure <a href=https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html>here</a>.</p><h2 id=internal-attestation-of-marbles>Internal attestation of Marbles</h2><p>The Coordinator verifies the identity and integrity of each newly spawned Marble before admitting it to the mesh.
 A freshly spawned Marble will try to register and activate itself by sending an activation request via gRPC to the Coordinator.
