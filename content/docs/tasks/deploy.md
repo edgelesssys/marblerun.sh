@@ -70,7 +70,7 @@ Update the hostname with your cluster's FQDN.
         --set coordinator.hostname=mycluster.uksouth.cloudapp.azure.com
     ```
 
-## Accesing the Client API
+## Accessing the client API
 
 The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 25555.
 Depending on your cloud provider you can provision a LoadBalancer that exposes this service to the outside world or you deploy an Ingress Gateway forwarding the traffic.

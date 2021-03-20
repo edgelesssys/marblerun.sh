@@ -52,7 +52,7 @@ Flags:
 Use "marblerun [command] --help" for more information about a command.
 ```
 
-## **`install`**
+## Command `install`
 
 Install Marblerun on your Kubernetes cluster.
 This command will add Marblerun to your local helm repository if it is not present yet, optionally you can provide a path to your own helm chart.
@@ -66,16 +66,16 @@ marblerun install [flags]
 **Flags**
 
 {{<table "table table-striped table-bordered">}}
-| Name, shorthand        | Default       | Description                                                    |
-|:-----------------------|:--------------|:---------------------------------------------------------------|
-| --client-server-port   | 25555         | Set the client server port. Needs to be configured to the same <br> port as in your client tool stack |
-| --disable-auto-injection|              | Disable automatic injection of selected namespaces             |
-| --domain               | localhost     | Sets the CNAME for the coordinator certificate                 |
-| --help, -h             |               | help for install                                               |
-| --marblerun-chart-path |               | Path to marblerun helm chart                                   |
-| --mesh-sever-port      | 25554         | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles |
-| --no-sgx-device-plugin |               | Disables the installation of an sgx device plugin              |
-| --simulation           |               | Set Marblerun to start in simulation mode, needed when not <br> running on an SGX enabled cluster |
+| Name, shorthand          | Default   | Description                                                                                           |
+| :----------------------- | :-------- | :---------------------------------------------------------------------------------------------------- |
+| --client-server-port     | 25555     | Set the client server port. Needs to be configured to the same <br> port as in your client tool stack |
+| --disable-auto-injection |           | Disable automatic injection of selected namespaces                                                    |
+| --domain                 | localhost | Sets the CNAME for the coordinator certificate                                                        |
+| --help, -h               |           | help for install                                                                                      |
+| --marblerun-chart-path   |           | Path to marblerun helm chart                                                                          |
+| --mesh-sever-port        | 25554     | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles   |
+| --no-sgx-device-plugin   |           | Disables the installation of an sgx device plugin                                                     |
+| --simulation             |           | Set Marblerun to start in simulation mode, needed when not <br> running on an SGX enabled cluster     |
 {{</table>}}
 
 **Examples**
@@ -109,7 +109,7 @@ marblerun install [flags]
   ```
 
 
-## **`status`**
+## Command `status`
 
 Checks on the current status of the coordinator.
 
@@ -122,11 +122,11 @@ marblerun status <IP:PORT> [flags]
 **Flags**
 
 {{<table "table table-striped table-bordered">}}
-| Name, shorthand        | Default       | Description                                                    |
-|------------------------|---------------|----------------------------------------------------------------|
-| --era-config           |               | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h             |               | help for status                                                |
-| --insecure, -i         |               | Set to skip quote verification, needed when running in <br> simulation mode |
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for status                                                                                                                  |
+| --insecure, -i  |         | Set to skip quote verification, needed when running in <br> simulation mode                                                      |
 {{</table>}}
 
 **Examples**
@@ -144,7 +144,7 @@ Got latest config
 ```
 
 
-## **`manifest`**
+## Command `manifest`
 
 Set or update a manifest, or retrieve the signature of the manifest in place.
 
@@ -152,14 +152,14 @@ Set or update a manifest, or retrieve the signature of the manifest in place.
 These flags apply to all sub commands of manifest
 
 {{<table "table table-striped table-bordered">}}
-| Name, shorthand        | Default       | Description                                                    |
-|------------------------|---------------|----------------------------------------------------------------|
-| --era-config           |               | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h             |               | help for manifest                                              |
-| --insecure, -i         |               | simulation mode                                                |
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for manifest                                                                                                                |
+| --insecure, -i  |         | simulation mode                                                                                                                  |
 {{</table>}}
 
-* ### **`set`**
+* ### `set`
 
   Uploads a manifest in json format to the Marblerun coordinator.
   If a recovery key was set in the manifest, a recovery secret will be sent back.
@@ -173,9 +173,9 @@ These flags apply to all sub commands of manifest
   **Flags**
 
   {{<table "table table-striped table-bordered">}}
-  | Name, shorthand        | Default       | Description                                                    |
-  |------------------------|---------------|----------------------------------------------------------------|
-  | --recovery-data, -r    |               | File to write recovery data to, print to stdout if not set     |
+  | Name, shorthand     | Default | Description                                                |
+  | ------------------- | ------- | ---------------------------------------------------------- |
+  | --recovery-data, -r |         | File to write recovery data to, print to stdout if not set |
   {{</table>}}
 
   **Examples**
@@ -192,7 +192,7 @@ These flags apply to all sub commands of manifest
   ```
 
 
-* ### **`update`**
+* ### `update`
 
   Update a manifest by uploading an update manifest to the Marblerun coordinator.
   The original manifest has to define one or multiple Admins who are allowed to update the manifest.
@@ -207,10 +207,10 @@ These flags apply to all sub commands of manifest
   **Flags**
 
   {{<table "table table-striped table-bordered">}}
-  | Name, shorthand        | Default       | Description                                                    |
-  |------------------------|---------------|----------------------------------------------------------------|
-  | --cert, -c             |               | PEM encoded admin certificate file (required)                  |
-  | --key, -k              |               | PEM encoded admin key file (required)                          |
+  | Name, shorthand | Default | Description                                   |
+  | --------------- | ------- | --------------------------------------------- |
+  | --cert, -c      |         | PEM encoded admin certificate file (required) |
+  | --key, -k       |         | PEM encoded admin key file (required)         |
   {{</table>}}
 
   **Examples**
@@ -226,7 +226,7 @@ These flags apply to all sub commands of manifest
   Manifest successfully updated
   ```
 
-* ### **`get`**
+* ### `get`
 
   Retrieves the signature of an uploaded manifest. This allows a user to verify what manifest is running on the coordinator.
 
@@ -239,9 +239,9 @@ These flags apply to all sub commands of manifest
   **Flags**
 
   {{<table "table table-striped table-bordered">}}
-  | Name, shorthand        | Default       | Description                                                    |
-  |------------------------|---------------|----------------------------------------------------------------|
-  | --output, -o           | signature.json | Define file to write to                                        |
+  | Name, shorthand | Default        | Description             |
+  | --------------- | -------------- | ----------------------- |
+  | --output, -o    | signature.json | Define file to write to |
   {{</table>}}
 
   **Examples**
@@ -257,7 +257,7 @@ These flags apply to all sub commands of manifest
   Manifest written to: manifest-signature.json
   ```
 
-## **`recover`**
+## Command `recover`
 
 Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
 For more information about coordinator recovery see [Recovery]({{< ref "docs/tasks/recover-coordinator.md" >}})
@@ -271,11 +271,11 @@ marblerun recover <IP:PORT> <recovery_key_decrypted> [flags]
 **Flags**
 
 {{<table "table table-striped table-bordered">}}
-| Name, shorthand        | Default       | Description                                                    |
-|------------------------|---------------|----------------------------------------------------------------|
-| --era-config           |               | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h             |               | help for recover                                               |
-| --insecure, -i         |               | Set to skip quote verification, needed when running in <br> simulation mode |
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for recover                                                                                                                 |
+| --insecure, -i  |         | Set to skip quote verification, needed when running in <br> simulation mode                                                      |
 {{</table>}}
 
 **Examples**
@@ -291,8 +291,7 @@ Successfully verified coordinator, now uploading key
 Successfully uploaded recovery key and unsealed the Marblerun coordinator
 ```
 
-
-## **`certificate`**
+## Command `certificate`
 
 Get the root and/or intermediate certificates of the Marblerun coordinator.
 
@@ -300,15 +299,15 @@ Get the root and/or intermediate certificates of the Marblerun coordinator.
 These flags apply to all sub commands of certificate
 
 {{<table "table table-striped table-bordered">}}
-| Name, shorthand        | Default       | Description                                                    |
-|------------------------|---------------|----------------------------------------------------------------|
-| --era-config           |               | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h             |               | help for certificate                                           |
-| --insecure, -i         |               | simulation mode                                                |
-| --output, -o           |               | File to save the certificate to                                |
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for certificate                                                                                                             |
+| --insecure, -i  |         | simulation mode                                                                                                                  |
+| --output, -o    |         | File to save the certificate to                                                                                                  |
 {{</table>}}
 
-* ### **`root`**
+* ### `root`
 
   Gets the root certificate of the Marblerun coordinator.
 
@@ -318,7 +317,7 @@ These flags apply to all sub commands of certificate
   marblerun certificate root <IP:PORT> [flags]
   ```
 
-* ### **`intermediate`**
+* ### `intermediate`
 
   Gets the intermediate certificate of the Marblerun coordinator.
 
@@ -328,7 +327,7 @@ These flags apply to all sub commands of certificate
   marblerun certificate intermediate <IP:PORT> [flags]
   ```
 
-* ### **`chain`**
+* ### `chain`
 
   Gets the certificate chain of the Marblerun coordinator.
 
@@ -339,13 +338,13 @@ These flags apply to all sub commands of certificate
   ```
 
 
-## **`namespace`**
+## Command `namespace`
 
 Add namespaces to Marblerun.
 If the auto-injection feature is enabled. All new pods in those namespaces will get their Marblerun configuration automatically injected.
 
 
-* ### **`add`**
+* ### `add`
 
   Add a namespace to the Marblerun mesh by creating a new label
 
@@ -358,9 +357,9 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   **Flags**
 
   {{<table "table table-striped table-bordered">}}
-  | Name, shorthand        | Default       | Description                                                    |
-  |------------------------|---------------|----------------------------------------------------------------|
-  | --inject-sgx           |               | Set to enable automatic injection of SGX tolerations for <br> namespace |
+  | Name, shorthand | Default | Description                                                             |
+  | --------------- | ------- | ----------------------------------------------------------------------- |
+  | --inject-sgx    |         | Set to enable automatic injection of SGX tolerations for <br> namespace |
   {{</table>}}
 
   **Examples**
@@ -376,7 +375,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   Added namespace [testspace] to Marblerun mesh
   ```
 
-* ### **`remove`**
+* ### `remove`
 
   Remove a namespace from the Marblerun mesh
 
@@ -398,7 +397,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   Namespace [default] succesfully removed from the Marblerun mesh
   ```
 
-* ### **`list`**
+* ### `list`
 
   List all namespaces currently associated with the Marblerun mesh
 
@@ -421,7 +420,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   ```
 
 
-## **`uninstall`**
+## Command `uninstall`
 
   Remove Marblerun from your kubernetes cluster.
   This command will remove all resources added by the installation command.

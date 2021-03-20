@@ -56,8 +56,7 @@ Please do not define other values except than `SecurityVersion` value for a pack
 
 Also, if an Update Manifest was already set and you want to deploy another update on top of it too, you can! Just make sure that the new Update Manifest contains each specified package as the old one does, and that the `SecurityVersion` is indeed higher than defined in the previous Update Manifest, as downgrades are obviously not supported for security reasons without completely redeploying your service mesh.
 
-## Deploy an Update Manifest
-
+## Deploying an Update Manifest
 Similar to other operations, an Update Manifest can be deployed e.g. with the help of the CLI. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
 
 This operation can be performed in the following way:
@@ -68,5 +67,5 @@ marblerun manifest update update-manifest.json $MARBLERUN --cert=admin-cert.pem 
 
 If everything went well, no message will be returned and your Marblerun logs should highlight that an Update Manifest has been set. And if something went wrong, the API endpoint will return an error message telling you what happened. If you receive `unauthorized user` back, it means Marblerun either received no client certificate over the TLS connection, or you used the wrong certificate.
 
-## Effects of an Manifest Update
+## Effects of an Update Manifest
 When a Manifest has been updated, the coordinator will generate new certificates which your Marbles will receive upon the next startup. Also, if you are trying to launch Marbles based on packages containing the old `SecurityVersion`, they will refuse to run (unless you are running in SGX Simulation or non-Enclave mode). However, so far currently running Marble will continue to run and will be able to authenticate each other as long as they are still running, so if you need to enforce an update, make sure to kill the Marbles on your host and restart them.

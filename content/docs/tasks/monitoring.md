@@ -1,11 +1,11 @@
 ---
-title: "Monitoring and Logging"
+title: "Monitoring and logging"
 date: 2020-11-14T16:28:16+05:30
 draft: false
 weight: 8
 ---
 
-# Monitoring and Logging
+# Monitoring and logging
 
 As of now, the monitoring capabilities of Marblerun are basic. For status information, the Coordinator provides the `/status` endpoint in the client API.
 It returns the following information.

@@ -1,10 +1,10 @@
 ---
-title: "Building a Service: EGo"
+title: "Building a service: EGo"
 draft: false
 weight: 5
 ---
 
-# Building a Service: EGo
+# Building a service: EGo
 To get your Go service ready for Marblerun, you possibly need to adapt its code slightly and you need to rebuild it. Details are given in the following. *Note that we are working on making these unnecessary in the future.*
 
 ## Make your service use the provided TLS credentials

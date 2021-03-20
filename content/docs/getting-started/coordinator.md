@@ -25,7 +25,7 @@ The Coordinator clients can be devided into two major groups.
 
 The Client API serves both use-cases with a compact REST-API.
 
-### Response Style
+### Response style
 
 The Client API is designed as an HTTP-REST interface.Responses follow the [JSend](https://github.com/omniti-labs/jsend) style, though only the response types `success` and `error` are returned so far.
 
@@ -57,7 +57,7 @@ For errors, `data` will always be `null`, and `message` contains the specific er
 
 The API currently contains the following endpoints. If an endpoint specifies *Returns* for either HTTP GET or HTTP POST, it means that the specified data can be found encoded inside the `data` block if the response was successful. If no returns are specified for a given endpoint, or in case all possible return values for an endpoint are declared as optional, `data` can just be `null`.
 
-#### **`/manifest`**
+#### /manifest
 
 For deploying and verifying the Manifest.
 
@@ -69,7 +69,7 @@ For deploying and verifying the Manifest.
 
 {{<table "table table-striped table-bordered">}}
 | Field value       | Type   | Description                                                                                        |
-|-------------------|--------|----------------------------------------------------------------------------------------------------|
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------- |
 | ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an Update Manifest has been applied. |
 {{</table>}}
 
@@ -77,7 +77,7 @@ For deploying and verifying the Manifest.
 
 {{<table "table table-striped table-bordered">}}
 | Field value     | Type             | Description                                                                                                                                                                                                |
-|-----------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | RecoverySecrets | array (optional) | An array containing key-value mapping for encrypted secrets to be used for recovering the Coordinator in case of disaster recovery. The key matches each supplied key from `RecoveryKeys` in the Manifest. |
 {{</table>}}
 
@@ -93,7 +93,7 @@ Example for verifying the deployed Manifest (HTTP GET):
 curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSignature' --raw-output
 ```
 
-#### **`/quote`**
+#### /quote
 
 For retrieving a remote attestation quote over the whole cluster and the root certificate.
 The quote is an SGX-DCAP quote, you can learn more about DCAP [here](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
@@ -102,7 +102,7 @@ Both the provider and the users of the confidential application can use this end
 **Returns (HTTP GET)**:
 {{<table "table table-striped table-bordered">}}
 | Field value | Type   | Description                                                                                                                                                               |
-|-------------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Cert        | string | A PEM-encoded certificate chain containing the Coordinator's Root CA and Intermediate CA, which can be used for trust establishment between a client and the Coordinator. |
 | Quote       | string | Base64-encoded quote which can be used for Remote Attestation, as described in [Verifying a deployment]({{< ref "docs/tasks/verification.md" >}})                         |
 {{</table>}}
@@ -135,7 +135,7 @@ Note that `coordinator-era.json` contains the *Packages* information for the Coo
 wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
 ```
 
-#### **`/recover`**
+#### /recover
 
 For recovering the Coordinator in case unsealing the existing state failed.
 
@@ -147,14 +147,14 @@ Example for recovering the coordinator:
 curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recover"
 ```
 
-#### **`/status`**
+#### /status
 
 For returning the current state of the coordinator.
 
 **Returns (HTTP GET)**:
 {{<table "table table-striped table-bordered">}}
 | Field value   | Type   | Description                                                                                       |
-|---------------|--------|---------------------------------------------------------------------------------------------------|
+| ------------- | ------ | ------------------------------------------------------------------------------------------------- |
 | StatusCode    | int    | A status code which matches the internal code of the Coordinator's current state.                 |
 | StatusMessage | string | A descriptive status message of what the Coordinator expects the user to do in its current state. |
 {{</table>}}
@@ -162,11 +162,11 @@ For returning the current state of the coordinator.
 **Possible values**:
 
 {{<table "table table-striped table-bordered">}}
-| StatusCode | StatusMessage                                                                                                                                                       |
-|------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| 1    | Coordinator is in recovery mode. Either upload a key to unseal the saved state, or set a new manifest. For more information on how to proceed, consult the documentation. |
-| 2    | Coordinator is ready to accept a manifest.                                                                                                                                |
-| 3    | Coordinator is running correctly and ready to accept marbles.                                                                                                             |
+| StatusCode | StatusMessage                                                                                                                                                             |
+| ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1          | Coordinator is in recovery mode. Either upload a key to unseal the saved state, or set a new manifest. For more information on how to proceed, consult the documentation. |
+| 2          | Coordinator is ready to accept a manifest.                                                                                                                                |
+| 3          | Coordinator is running correctly and ready to accept marbles.                                                                                                             |
 {{</table>}}
 
 Example for getting the status:
@@ -177,7 +177,7 @@ curl -k "https://$MARBLERUN/status"
 
 It may be useful to use this API endpoint and use it for other monitoring tools. More information can be found under [Monitoring and Logging]({{< ref "docs/tasks/monitoring.md" >}})
 
-#### **`/update`**
+#### /update
 
 For updating the packages specified in the currently set Manifest.
 

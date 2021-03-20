@@ -14,7 +14,7 @@ In this guide will show you how to deploy and verify the [Confidential Emoji.vot
 
 Choose either to follow the [First Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#first-steps-on-minikube" >}}) or use a cluster with SGX support (SGX1+FLC) and start with the [First Steps on AKS]({{< ref "docs/getting-started/quickstart.md#first-steps-on-aks" >}}).
 
-# First Steps on Minikube
+# First steps on Minikube
 
 ## Step 0: Setup
 
