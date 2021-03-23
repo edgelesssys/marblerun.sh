@@ -70,7 +70,7 @@ sgx.enclave_size = "1024M"
 sgx.thread_num = 16
 ```
 
-Note that if you try to launch another Go application or run time having high memory demands, you may need to increase the size even further.
+If your application has high memory demands, you may need to increase the size even further.
 ### Secret files
 A Marble's secrets, e.g. a certificate and private key, can be provisioned as files. Ideally, these would be placed in the Marble's in-memory filesystem. Graphene does not support this yet, but you can fall back on *Graphene Protected Files* instead:
 ```toml
