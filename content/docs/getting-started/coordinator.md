@@ -121,7 +121,7 @@ wget -P ~/.local/bin https://github.com/edgelesssys/era/releases/latest/download
 chmod +x ~/.local/bin/era
 
 # Or install it globally on your machine (requires root permissions)
-sudo -O /usr/local/bin/era https://github.com/edgelesssys/era/releases/latest/download/era
+sudo wget -O /usr/local/bin/era https://github.com/edgelesssys/era/releases/latest/download/era
 sudo chmod +x /usr/local/bin/era
 
 era -c coordinator-era.json -h $MARBLERUN -o marblerun.crt
