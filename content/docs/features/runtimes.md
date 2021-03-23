@@ -9,10 +9,10 @@ weight: 4
 Marblerun strives to be runtime-agnostic. Currently supported runtimes are described below. More will follow in future.
 
 ## EGo
-[EGo](https://github.com/edgelesssys/ego) is the preferred way for writing confidential Go applications from scratch as well as porting existing ones. Usage is very similar to conventional Go programming. Continue [here]({{< ref "docs/tasks/build-service-ego.md" >}}) to use it with Marblerun.
+[EGo](https://github.com/edgelesssys/ego) is the preferred way for writing confidential Go applications from scratch as well as porting existing ones. Usage is very similar to conventional Go programming. Continue [with our building a service with EGo hands-on]({{< ref "docs/tasks/build-service-ego.md" >}}) to use it with Marblerun.
 
 ## Edgeless RT
-With [Edgeless RT](https://github.com/edgelesssys/edgelessrt) you can create confidential C++ applications with a low TCB. Please follow the build instructions provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B) to use it with Marblerun.
+With [Edgeless RT](https://github.com/edgelesssys/edgelessrt) you can create confidential C++ applications with a low TCB. Please follow the build instructions provided [in our C++ sample](https://github.com/edgelesssys/marblerun/blob/master/samples/helloc%2B%2B) to use it with Marblerun.
 
 ## Graphene
 [Graphene](https://grapheneproject.io/) is a popular choice for wrapping unmodified applications into enclaves.

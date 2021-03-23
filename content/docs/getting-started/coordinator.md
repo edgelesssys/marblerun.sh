@@ -96,7 +96,7 @@ curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSi
 #### /quote
 
 For retrieving a remote attestation quote over the whole cluster and the root certificate.
-The quote is an SGX-DCAP quote, you can learn more about DCAP [here](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
+The quote is an SGX-DCAP quote, you can learn more about DCAP in the [official Intel DCAP orientation](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
 Both the provider and the users of the confidential application can use this endpoint to verify the integrity of the Coordinator and the cluster at any time.
 
 **Returns (HTTP GET)**:

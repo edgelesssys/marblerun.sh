@@ -43,7 +43,7 @@ The following gives an example of a simple `Packages` section with made-up value
 
 In this example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the hash of the enclave software-package, this means that `pkg0` cannot be updated. (That is, because any update to the package will change the hash.)
 
-In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See [here]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
+In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See our [adding a service hands-on]({{< ref "docs/tasks/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
 
 Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
 
@@ -238,7 +238,7 @@ The following gives some examples.
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
 ## Manifest:Admins
-The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described [here]({{< ref "docs/tasks/update-manifest.md">}})).
+The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/tasks/update-manifest.md">}})).
 
 ```javascript
 {
@@ -265,7 +265,7 @@ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
 
 ## Manifest:RecoveryKeys
 
-The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described [here]({{< ref "docs/features/recovery.md" >}})). So far, only one public key entry is supported in the current release of Marblerun.
+The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described in our [recovery chapter]({{< ref "docs/features/recovery.md" >}})). So far, only one public key entry is supported in the current release of Marblerun.
 
 ```javascript
 {

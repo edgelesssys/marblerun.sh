@@ -7,9 +7,9 @@ weight: 1
 
 # Attestation
 
-Hardware-rooted *remote attestation* is a key ingredient for distributed confidential apps. Without it, services couldn't trust each other and clients couldn't trust the app. Thus, Marblerun relies heavily on the *Data Center Attestation Primitives* (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP [here](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
+Hardware-rooted *remote attestation* is a key ingredient for distributed confidential apps. Without it, services couldn't trust each other and clients couldn't trust the app. Thus, Marblerun relies heavily on the *Data Center Attestation Primitives* (DCAP) of the latest SGX-enabled Intel Xeon processors. You can learn more about DCAP in the [official Intel DCAP orientation](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
 At the time of writing only Microsoft Azure had a public DCAP service deployed in their data-centers. Hence, our demos are heavily tested and deployed on Azure Kubernetes Service (AKS).
-However, Marblerun works with any DCAP service complying with the SGX specification. You can read more about setting up your own DCAP infrastructure [here](https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html).
+However, Marblerun works with any DCAP service complying with the SGX specification. You can read more about setting up your own DCAP infrastructure [in the Intel SGX development articles](https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html).
 
 ## Internal attestation of Marbles
 
@@ -21,5 +21,5 @@ This request contains a remote attestation certificate (or "quote"), which allow
 
 To keep things simple, the Coordinator issues one concise remote-attestation statement for your whole distributed app. Technically, the statement resembles a regular TLS certificate chain with some extra info. (TLS is the protocol that is responsible for the lock in your browser's toolbar ;-). The chain ends at the root certificate authority (CA) of the provider of the secure hardware, which currently in almost all cases will be Intel.
 
-Given the *Coordinator's* remote-attestation statement, external clients can verify that a distributed app adheres to a given Manifest, i.e., that the app is running the expected software with the expected parameters on the expected secure hardware. Afterward, clients can establish secure TLS connections to the app and use it as normal. The Coordinator acts as CA for these connections and clients don't need to verify individual Marbles. The steps required on the client-side are described [here]({{< ref "docs/tasks/verification.md" >}}).
+Given the *Coordinator's* remote-attestation statement, external clients can verify that a distributed app adheres to a given Manifest, i.e., that the app is running the expected software with the expected parameters on the expected secure hardware. Afterward, clients can establish secure TLS connections to the app and use it as normal. The Coordinator acts as CA for these connections and clients don't need to verify individual Marbles. The steps required on the client-side are described in our [verification hands-on]({{< ref "docs/tasks/verification.md" >}}).
 

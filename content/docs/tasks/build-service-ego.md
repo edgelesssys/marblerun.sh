@@ -22,4 +22,4 @@ We provide a convenience package called [github.com/edgelesssys/ego/marble](http
 
 ## Re-compile/build your service for Marblerun
 
-Finally, you need to re-build your service for the enclave environment with `ego-go` and sign it with `ego sign`. Please follow the build instructions for Go provided [here](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld).
+Finally, you need to re-build your service for the enclave environment with `ego-go` and sign it with `ego sign`. Please follow the build instructions for Go provided in our [Go sample](https://github.com/edgelesssys/marblerun/blob/master/samples/helloworld).

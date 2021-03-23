@@ -7,7 +7,7 @@ weight: 11
 
 # Recovering the Coordinator
 
-As described [here]({{< ref "docs/features/recovery.md" >}}), different situations can require the *recovery* of the Coordinator.
+As described in our [recovery chapter]({{< ref "docs/features/recovery.md" >}}), different situations can require the *recovery* of the Coordinator.
 If the Coordinator finds a sealed state during its startup which it is unable to unseal using the host-specific SGX sealing key, it will wait for further instructions.
 You have two options:
 
