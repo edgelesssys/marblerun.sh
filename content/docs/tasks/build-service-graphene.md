@@ -103,19 +103,3 @@ load_enclave() failed with error -1
 ```
 
 Make sure you installed the Intel AESM ECDSA plugins on your machine. You can do this by installing the `libsgx-quote-dev` package mentioned in the requirements above.
-
-### PackageProperties not compliant
-If the premain panics with an error message looking like this:
-```
-panic: rpc error: code = Unauthenticated desc = invalid quote: PackageProperties not compliant:
-[...]
-```
-
-Make sure you have set the correct UniqueID or SignerID/ProductID/SecurityVersion/ triple in your Marblerun manifest.
-
-### cannot accept marbles in current state
-If the premain panics with the following error message:
-```
-panic: rpc error: code = FailedPrecondition desc = cannot accept marbles in current state
-```
-Check if you have uploaded the Marblerun manifest to the coordinator before running your application. If you did, check the coordinator's current state, either via the console, or over the [`/status` API endpoint]  ({{< ref "docs/tasks/monitoring.md" >}}).
