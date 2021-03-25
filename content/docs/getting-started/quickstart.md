@@ -73,8 +73,8 @@ Therefore, we utilize SGX remote attestation and obtain a root certificate for t
 1. Port forward the Coordinator's Client API
 
 ```bash
-kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost >/dev/null &
-export MARBLERUN=localhost:25555
+kubectl -n marblerun port-forward svc/coordinator-client-api 4433:4433 --address localhost >/dev/null &
+export MARBLERUN=localhost:4433
 ```
 
 1. Verify the Quote and get the Coordinator's Root-Certificate
