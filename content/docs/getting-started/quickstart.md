@@ -62,7 +62,7 @@ The first step is to install Marblerun's *Coordinator* control-plane. To do this
 marblerun install --simulation
 ```
 
-In this command, the marblerun install command generates a Kubernetes manifest with all the necessary control plane resources.
+The `marblerun install` command generates a Kubernetes manifest with all the necessary control plane resources.
 The simulation flag tells Marblerun that real SGX hardware might not be present and the SGX-layer should be emulated.
 
 ## Step 3: Initialize and verify the Coordinator
