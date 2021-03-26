@@ -32,7 +32,7 @@ kbd {
 
 // Blocks of code
 pre {
-  display: block;
+  display: flex;
   @include font-size($code-font-size);
   color: $pre-color;
 
