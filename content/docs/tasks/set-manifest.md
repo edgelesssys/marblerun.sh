@@ -95,4 +95,6 @@ If the Manifest contains a `RecoveryKeys` entry, you will receive a JSON reply i
 
 `{"EncryptionKey":"[base64]"}`
 
-**It is important that you keep this value stored somewhere safe. Without it, you will not be able to perform a recovery step in case the SGX seal key changed.**
+{{<alert>}}
+It is important that you keep this value stored somewhere safe. Without it, you will not be able to perform a recovery step in case the SGX seal key changed.
+{{<alert>}}

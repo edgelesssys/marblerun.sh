@@ -7,7 +7,6 @@ weight: 1
 
 # Quickstart
 
-
 Set up a Kubernetes cluster and install `kubectl`. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
 
 In this guide will show you how to deploy and verify the [Confidential Emoji.voto](https://github.com/edgelesssys/emojivoto) application, an microservice that allows users to vote for their favorite emoji, and tracks votes received on a leaderboard.
@@ -63,7 +62,7 @@ kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --addre
 export MARBLERUN=localhost:25555
 ```
 
-Verify the Quote and get the Coordinator's Root-Certificate. The SGX Quote proofs the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as marblerun.cert in your current directory. The Certificate is bound to the Quote and can be used for future verification. Since we are not using SGX hardware in this case, the quote is omitted by marblerun.
+Verify the quote and get the Coordinator's root certificate. The SGX quote proves the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as `marblerun.cert` in your current directory. The certificate is bound to the quote and can be used for future verification. Since we are not using SGX hardware in this case, the quote is omitted by marblerun.
 
 ```bash
 marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
@@ -89,8 +88,7 @@ Make the voting frontend reachable for with port-forwarding:
 sudo kubectl -n emojivoto port-forward svc/web-svc 443:443 --address 0.0.0.0
 ```
 
-Install Marblerun-Certificate in your browser
-* **Warning** Be careful when adding certificates to your browser. We only do this temporarily for the sake of this demo. Make sure you don't use your browser for other activities in the meanwhile and remove the certificate afterward.
+Install Marblerun's certificate in your browser
 * Chrome:
     * Go to <chrome://settings/security>
     * Go to `"Manage certificates" > "Import..."`
@@ -99,6 +97,10 @@ Install Marblerun-Certificate in your browser
     * Go to <about:preferences#privacy>
     * Go to `Certificates: View Certificates > Authorities`
     * Go to `Import...` and select the `marblerun.crt` of the previous step
+
+{{<alert>}}
+Be careful when adding certificates to your browser. Make sure to remove the certificate again before browsing to any other website.
+{{</alert>}}
 
 Browse to [https://localhost](https://localhost).
 
@@ -146,7 +148,7 @@ Get the Coordinator's address and set the DNS. Check our docs on [how to expose 
 export MARBLERUN=mycluster.uksouth.cloudapp.azure.com
 ```
 
-Verify the Quote and get the Coordinator's Root-Certificate. The SGX Quote proofs the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as marblerun.cert in your current directory. The Certificate is bound to the Quote and can be used for future verification.
+Verify the quote and get the Coordinator's root certificate. The SGX quote proves the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as `marblerun.cert` in your current directory. The certificate is bound to the quote and can be used for future verification.
 
 ```bash
 marblerun certificate root $MARBLERUN -o marblerun.crt
@@ -174,8 +176,7 @@ helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-nam
     * Get the public IP with: `kubectl -n emojivoto get svc web-svc -o wide`
     * If you're using ingress/gateway-controllers make sure you enable [SNI-passthrough]({{< ref "docs/tasks/deploy.md#ingressgateway-configuration" >}})
 
-* Install Marblerun-Certificate in your browser
-    * **Warning** Be careful when adding certificates to your browser. We only do this temporarily for the sake of this demo. Make sure you don't use your browser for other activities in the meanwhile and remove the certificate afterward.
+* Install Marblerun's certificate in your browser
     * Chrome:
         * Go to <chrome://settings/security>
         * Go to `"Manage certificates" > "Import..."`
@@ -185,4 +186,8 @@ helm install -f ./kubernetes/sgx_values.yaml emojivoto ./kubernetes --create-nam
         * Go to `Certificates: View Certificates > Authorities`
         * Go to `Import...` and select the `marblerun.crt` of the previous step
 
-* Browse to [https://your-clusters-domain:port](#).
+{{<alert>}}
+Be careful when adding certificates to your browser. Make sure to remove the certificate again before browsing to any other website.
+{{</alert>}}
+
+* Browse to `https://your-clusters-domain:port`.

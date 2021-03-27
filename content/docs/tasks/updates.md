@@ -40,9 +40,9 @@ If the Coordinator version update also affects the data plane or the Marble boot
 kubectl rollout restart deployment your_deployment_name
 ```
 
-**Note:** when updating the Coordinator image, you need to be careful about your client's configuration.
-If you specified a `UniqueID`, your clients won't accept the new Coordinator version.
-See our [remarks on Manifest values](#manifest-values) for more information.
+{{<note>}}
+Updating the Coordinator image will change its `UniqueID`, but typically not its `SignerID`.
+{{</note>}}
 
 ### Updating Marbles
 
