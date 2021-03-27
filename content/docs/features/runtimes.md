@@ -1,10 +1,10 @@
 ---
-title: "Supported Runtimes"
+title: "Supported runtimes"
 draft: false
 weight: 4
 ---
 
-# Supported Runtimes
+# Supported runtimes
 
 Marblerun strives to be runtime-agnostic. Currently supported runtimes are described below. More will follow in future.
 
