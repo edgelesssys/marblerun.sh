@@ -13,7 +13,11 @@ The SGX device plugin can either be deployed manually or as a DaemonSet in the c
 * [Azure](https://github.com/Azure/aks-engine/blob/master/docs/topics/sgx.md#deploying-the-sgx-device-plugin)
 * [Alibaba Cloud](https://github.com/AliyunContainerService/sgx-device-plugin)
 
-Marblerun checks if an SGX device plugin is already running and deploys Azure's plugin otherwise. Note that the Azure SGX plugin is not tied to Azure. We may however switch to the official device plugin from Intel in the future.
+Marblerun checks if an SGX device plugin is already running and deploys Azure's plugin otherwise.
+
+{{<note>}}
+The Azure SGX plugin is not tied to Azure. We may however switch to Intel's device plugin in the future.
+{{</note>}}
 
 ## Manually deploying an SGX device plugin
 

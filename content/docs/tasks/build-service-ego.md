@@ -5,7 +5,11 @@ weight: 5
 ---
 
 # Building a service: EGo
-To get your Go service ready for Marblerun, you possibly need to adapt its code slightly and you need to rebuild it. Details are given in the following. *Note that we are working on making these unnecessary in the future.*
+To get your Go service ready for Marblerun, you possibly need to adapt its code slightly and you need to rebuild it. Details are given in the following.
+
+{{<note>}}
+Future versions of EGo will support building Marblerun services with zero changes.
+{{</note>}}
 
 ## Make your service use the provided TLS credentials
 

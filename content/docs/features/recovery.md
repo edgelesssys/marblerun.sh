@@ -17,4 +17,6 @@ Using virtual sealing keys, data can be unsealed independently of the host a Mar
 Still, the Coordinator itself must keep its state persistent somehow. When being pinned to a single host the default SGX sealing methods are used. However, when the Coordinator is moved to a another physical host, a manual step is required to ensure the Coordinator's state can be recovered.
 Therefore, the Manifest allows for specifying a special *Recovery Key*. The Recovery Key is a public RSA key. Upon startup, the Coordinator encrypts its own symmetric state-encryption key for this public key. The holder of the corresponding private key can use this key to recover the Coordinator, as is described [in our recovery chapter]({{< ref "docs/tasks/recover-coordinator.md" >}}).
 
-Note that the holder of the private key is also able to manipulate the state of the Coordinator. In a future version, Marblerun will support splitting the Recovery Key between a group of individuals who all must come together to recover or alter the Coordinator.
+{{<note>}}
+The owner of the Recovery Key can access the raw state of the Coordinator. In a future version, Marblerun will support splitting the Recovery Key between parties.
+{{</note>}}

@@ -7,7 +7,7 @@ weight: 11
 
 # Recovering the Coordinator
 
-As described in our [recovery chapter]({{< ref "docs/features/recovery.md" >}}), different situations can require the *recovery* of the Coordinator.
+As described in the [recovery chapter]({{< ref "docs/features/recovery.md" >}}), different situations can require the *recovery* of the Coordinator.
 If the Coordinator finds a sealed state during its startup which it is unable to unseal using the host-specific SGX sealing key, it will wait for further instructions.
 You have two options:
 
@@ -31,4 +31,7 @@ You have two options:
 2. Dismiss the sealed state by uploading a new Manifest
 
     In case there is no desire to recover the old state it can simply be dismissed by [uploading a new manifest]({{< ref "docs/tasks/set-manifest.md" >}}).
-    *Note* that if a new Manifest is uploaded to the server, the old state will be *overwritten* on disk and the `/recover` endpoint will not be available anymore.
+
+{{<note>}}
+If a new Manifest is uploaded, the old state will be overwritten on disk and the `/recover` endpoint will not be available anymore.
+{{</note>}}
