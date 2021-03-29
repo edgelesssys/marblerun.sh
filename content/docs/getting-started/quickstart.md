@@ -24,7 +24,7 @@ kubectl version --short
 
 You should see output with both a Client Version and Server Version component.
 
-Now that we have our cluster, we’ll install the Marblerun CLI.
+Now your cluster is ready and we’ll install the Marblerun CLI.
 
 ## Step 1: Install the CLI
 
