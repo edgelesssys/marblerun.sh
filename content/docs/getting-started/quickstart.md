@@ -14,7 +14,7 @@ Finally, you’ll "mesh" one or more of your own services and setup a Manifest d
 
 ## Step 0: Setup
 
-Before we can do anything, we need to ensure you have access to a Kubernetes cluster and a functioning kubectl command on your local machine. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
+First, ensure you have access to a Kubernetes cluster and kubectl installed and configured. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
 
 You can validate your setup by running:
 
