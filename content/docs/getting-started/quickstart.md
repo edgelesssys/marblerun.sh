@@ -10,7 +10,12 @@ weight: 1
 In this guide, we’ll walk you through how to install Marblerun into your Kubernetes cluster. Then we’ll deploy a sample confidential application to demonstrate the capabilities of Marblerun.
 
 Installing Marblerun is easy. First, you will install the CLI (command-line interface) onto your local machine. Using this CLI, you’ll then install the control plane onto your Kubernetes cluster.
-Finally, you’ll "mesh" one or more of your own services and setup a Manifest defining your confidential service mesh.
+Finally, you will "mesh" one or more of your own services and setup a Manifest defining your confidential service mesh.
+
+{{<note>}}
+A working SGX DCAP environment is required for Marblerun to work. For the ease of exploring and testing we provide a simulation mode with `--simulation` that runs without SGX hardware.
+In this quickstart we deploy Marblerun in simulation mode. Be aware that this is not meant for poduction and runs without real SGX enclaves.
+{{</note>}}
 
 ## Step 0: Setup
 
