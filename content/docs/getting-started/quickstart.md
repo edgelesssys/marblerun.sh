@@ -77,15 +77,17 @@ kubectl -n marblerun port-forward svc/coordinator-client-api 4433:4433 --address
 export MARBLERUN=localhost:4433
 ```
 
-1. Verify the Quote and get the Coordinator's Root-Certificate
+1. Verify the quote and get the coordinator's root certificate
 
 ```bash
 marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
 ```
 
+The CLI will obtain the coordinator's remote attestation quote and verify it against the configuration on our [release page](github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json).
 The `insecure` flag is needed because the Coordinator was installed in simulation mode, hence, it can't be verified with real SGX attestation.
+The quote contains a hash of the Coordinator's root certificate creating a chain-of-trust from the quote to the certificate.
 
-The certificate can be used for authenticating the Coordinator in future interactions.
+Consequently, the certificate can be used for authenticating the Coordinator in future interactions.
 It can also be used as a root of trust for [authenticating your confidential applications]({{< ref "docs/features/attestation.md#external-attestation-of-the-app" >}}).
 
 ## Step 4: Deploy the demo application
