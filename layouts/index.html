@@ -29,6 +29,15 @@
 	<iframe class="rounded-lg shadow video" width="560" height="315" src="https://www.youtube.com/embed/9jPDf9LRkR4?controls=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 </section>
 
+<section class="news">
+	<h4 class="text-center subHeading">📢 {{ .Params.news.title | markdownify }}</h4>
+	<div class="d-flex flex-column mt-10">
+		<div>
+			{{ .Params.news.content | markdownify }}
+		</div>
+	</div>
+</section>
+
 <section class="my-5 container rounded px-4 py-5 text-center">
 	<h2 class="text-center subHeading">Features</h2>
 

@@ -10,17 +10,20 @@ buttons:
   community:
     caption: Join the community
     url: '/community/'
+news:
+  title: "Announcing [Marblerun 0.3.0](/docs/changelog/)"
+  content: "Adds support for [Graphene-based services](/docs/examples/graphene/) and an [easy-to-use CLI](/docs/getting-started/cli/)."
 features_list:
   items:
-    - title: Everything always encrypted (even&nbsp;at&nbsp;runtime)
+    - title: Everything always encrypted
       icon: fas fa-lock
       description:
         All services run in secure enclaves; your data and code are encrypted even at runtime. Between enclaves, data is transmitted via mTLS.
-    - title: End-to-end verifiability for the whole cluster
+    - title: End-to-end verifiability
       icon: fas fa-file-signature
       description:
         Get cryptographic proof that the topology of your cluster adheres to a Manifest defined in simple JSON.
-    - title: Keep using your existing tools and stacks
+    - title: Keep using your existing tools
       icon: fas fa-tools
       description:
         Despite using the latest confidential-computing tech, Marblerun works frictionless with [K8s](https://kubernetes.io/), [Helm](https://helm.sh/) and normal services meshes like [Istio](https://istio.io/) or [Linkerd](https://linkerd.io/).
