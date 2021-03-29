@@ -154,6 +154,6 @@ Congratulations, you’re now a Marblerun user! Here are some suggested next ste
 * Explore how [Marblerun takes care of your secrets]({{< ref "docs/features/secrets-management.md" >}})
 * [Add your own service]({{< ref "docs/tasks/add-service.md" >}}) to Marblerun
 * Learn more about [Marblerun’s architecture]({{< ref "docs/getting-started/concepts.md" >}})
-* Hop into our [Gitter community chat](https://gitter.im/edgeless-systems/community)
+* Chat with us on [Discord](https://discord.gg/rH8QTH56JN)
 
 Welcome to the Marblerun community!
