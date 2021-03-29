@@ -83,7 +83,7 @@ export MARBLERUN=localhost:4433
 marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
 ```
 
-We need the `insecure` flag because Marblerun was installed in simulation mode, hence, the Coordinator can't be verified with real SGX attestation.
+The `insecure` flag is needed because the Coordinator was installed in simulation mode, hence, it can't be verified with real SGX attestation.
 
 The certificate can be used for authenticating the Coordinator in future interactions.
 It can also be used as a root of trust for [authenticating your confidential applications]({{< ref "docs/features/attestation.md#external-attestation-of-the-app" >}}).
