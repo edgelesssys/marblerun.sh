@@ -38,7 +38,7 @@ features_list:
     - title: Open source and open standards
       icon: fab fa-github
       description:
-        Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/). It has native support for [EGo](https://www.ego.dev/) based services. In the future, it will also support [Graphene](https://github.com/oscarlab/graphene).
+        Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/). It has support for [EGo](https://www.ego.dev/) and [Graphene](https://github.com/oscarlab/graphene) based services.
 blog_list:
   items:
     - title: "[Blog post #1](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-1-3-28f4bd6df679)"
