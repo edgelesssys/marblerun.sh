@@ -9,6 +9,8 @@
 	{{ $style := resources.Get "scss/bootstrap.scss" | toCSS | minify | fingerprint }}
 	<link rel="stylesheet" href="{{ $style.Permalink }}" emotion="🤩">
 	<script defer src="https://use.fontawesome.com/releases/v5.10.2/js/all.js"></script>
+	<!-- Place this tag in your head or just before your close body tag. -->
+	<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
