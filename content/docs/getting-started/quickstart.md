@@ -114,7 +114,7 @@ marblerun status
 ```
 
 Finally, install the demo application onto your cluster.
-Please make sure you have installed [Helm v3](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes").
+Please make sure you have [Helm](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes") installed at least at Version v3.2.0.
 Install emojivoto into the emojivoto namespace by running:
 
 ```bash
