@@ -56,7 +56,7 @@ marblerun
 
 Now that you have the CLI running locally and a cluster that is ready to go, it’s time to install the control plane.
 
-The first step is to install Marblerun's *Coordinator* control-plane. To do this, run:
+Install Marblerun's *Coordinator* control-plane by running:
 
 ```bash
 marblerun install --simulation
