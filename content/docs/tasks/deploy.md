@@ -16,7 +16,9 @@ This article assumes that you have an existing Kubernetes cluster. Currently, th
 * [Equinix](https://metal.equinix.com/product/features/) Bare Metal Servers
 * Alternatively, you can deploy the steps with [minikube](https://minikube.sigs.k8s.io/docs/start/)
 
-*Note that you need DCAP infrastructure in place for remote attestation to work. At the time of writing only Azure provided a public DCAP service in their data-centers. You can run Marblerun in simulation mode which omits remote attestation procedures and returns an empty quote on the Client API. If you're running your own data-center, you can read more about setting up DCAP [in the Intel SGX development articles](https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html).*
+{{<note>}}
+A working SGX DCAP environment is required for Marblerun to work. If you're not running in Azure, you'll likely need to set up your environment according to this [guide](https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html). Alternatively, for testing, you can install Marblerun in simulation mode with `--simulation`.
+{{</note>}}
 
 ## Install with the Marblerun CLI
 
