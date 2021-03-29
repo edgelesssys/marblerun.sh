@@ -89,10 +89,10 @@ marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
 ```
 
 The CLI will obtain the coordinator's remote attestation quote and verify it against the configuration on our [release page](github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json).
-The `insecure` flag is needed because the Coordinator was installed in simulation mode, hence, it can't be verified with real SGX attestation.
-The quote contains a hash of the Coordinator's root certificate creating a chain-of-trust from the quote to the certificate.
-
-Consequently, the certificate can be used for authenticating the Coordinator in future interactions.
+The SGX quote proves the integrity of the coordinator pod.
+Since we are not using SGX hardware in this case (`--simulation`), the quote verification is omitted by marblerun.
+The CLI returns a certificate as result and stores it as `marblerun.crt` in your current directory.
+The certificate is bound to the quote and can be used for future verification.
 It can also be used as a root of trust for [authenticating your confidential applications]({{< ref "docs/features/attestation.md#external-attestation-of-the-app" >}}).
 
 ## Step 4: Deploy the demo application
