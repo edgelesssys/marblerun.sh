@@ -59,8 +59,8 @@ git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 Get the Coordinator's address and set the DNS
 
 ```bash
-kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost >/dev/null &
-export MARBLERUN=localhost:25555
+kubectl -n marblerun port-forward svc/coordinator-client-api 4433:4433 --address localhost >/dev/null &
+export MARBLERUN=localhost:4433
 ```
 
 Verify the Quote and get the Coordinator's Root-Certificate. The SGX Quote proofs the integrity of the coordinator pod. Marblerun returns a certificate as result and stores it as marblerun.cert in your current directory. The Certificate is bound to the Quote and can be used for future verification. Since we are not using SGX hardware in this case, the quote is omitted by marblerun.

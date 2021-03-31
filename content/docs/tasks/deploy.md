@@ -72,9 +72,9 @@ Update the hostname with your cluster's FQDN.
 
 ## Accessing the client API
 
-The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 25555.
+The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 4433.
 Depending on your cloud provider you can provision a LoadBalancer that exposes this service to the outside world or you deploy an Ingress Gateway forwarding the traffic.
-If you are running with Minikube you can expose this service to localhost with `kubectl -n marblerun port-forward svc/coordinator-client-api 25555:25555 --address localhost`.
+If you are running with Minikube you can expose this service to localhost with `kubectl -n marblerun port-forward svc/coordinator-client-api 4433:4433 --address localhost`.
 
 ## Ingress/Gateway configuration
 
