@@ -60,12 +60,12 @@ Now you can define with which parameters (i.e., files, environments variables, a
 When you start your service, you need to pass in a couple of configuration parameters through environment variables. Here is an example:
 
 ```bash
-EDG_MARBLE_COORDINATOR_ADDR=coordinator-mesh-api.marblerun:25554 EDG_MARBLE_TYPE=mymarble EDG_MARBLE_UUID_FILE=$PWD/uuid EDG_MARBLE_DNS_NAMES=localhost,myservice erthost enclave.signed
+EDG_MARBLE_COORDINATOR_ADDR=coordinator-mesh-api.marblerun:2001 EDG_MARBLE_TYPE=mymarble EDG_MARBLE_UUID_FILE=$PWD/uuid EDG_MARBLE_DNS_NAMES=localhost,myservice erthost enclave.signed
 ```
 
 `erthost` is the generic host for Marbles, which will load your `enclave.signed`. The environment variables have the following purposes.
 
-* `EDG_MARBLE_COORDINATOR_ADDR` is the network address of the Coordinator's API for Marbles. When you deploy the Coordinator using our Helm repository as is described in our [deploying Marblerun hands-on]({{< ref "docs/tasks/deploy.md" >}}), the default address is `coordinator-mesh-api.marblerun:25554`.
+* `EDG_MARBLE_COORDINATOR_ADDR` is the network address of the Coordinator's API for Marbles. When you deploy the Coordinator using our Helm repository as is described in our [deploying Marblerun hands-on]({{< ref "docs/tasks/deploy.md" >}}), the default address is `coordinator-mesh-api.marblerun:2001`.
 
 * `EDG_MARBLE_TYPE` needs to reference one entry from your Manifest's `Marbles` section.
 
@@ -110,7 +110,7 @@ spec:
     containers:
     - env:
     - name: EDG_MARBLE_COORDINATOR_ADDR
-        value: coordinator-mesh-api.marblerun:25554
+        value: coordinator-mesh-api.marblerun:2001
     - name: EDG_MARBLE_TYPE
         value: web
     - name: EDG_MARBLE_DNS_NAMES
