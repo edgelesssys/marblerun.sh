@@ -265,7 +265,7 @@ For more information about coordinator recovery see [Recovery]({{< ref "docs/tas
 **Usage**
 
 ```bash
-marblerun recover <IP:PORT> <recovery_key_decrypted> [flags]
+marblerun recover <recovery_key_decrypted> <IP:PORT> [flags]
 ```
 
 **Flags**
