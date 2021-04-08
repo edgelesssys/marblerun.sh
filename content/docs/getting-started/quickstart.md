@@ -47,7 +47,7 @@ chmod +x ~/.local/bin/marblerun
 ### Global install (requires root)
 
 ```bash
-sudo -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
+sudo wget -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 sudo chmod +x /usr/local/bin/marblerun
 ```
 
