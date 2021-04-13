@@ -122,6 +122,88 @@ These flags apply to all sub commands of certificate
   {{</table>}}
 
 
+## Command `graphene-prepare`
+Takes a Graphene manifest template, automatically performs changes and downloads the Marblerun premain so that your application can be used in combination with Marblerun with less effort. See [Building a service: Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}}) for more information.
+
+Please note that this only works on a best-effort basis and may not instantly work correctly. While suggestions should be made for every valid TOML Graphene configuration, changes can only performed for non-hierarchically sorted configurations. as the official Graphene examples. Plus, you need to create a Marblerun manifest in addition by yourself. The unmodified manifest is saved as a backup under the old path with an added ".bak" suffix, allowing you to try out and rollback any changes performed.
+
+This command supports two modes, **spawn** and **preload**.
+
+* **`spawn`**
+
+  Replaces the original entrypoint of your application with the premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun, so make sure your Marblerun manifest is designed to supply the arguments correctly, otherwise you might run into issues when Graphene handled the arguments for it before.
+
+  **Usage**
+
+  ```bash
+  marblerun graphene-prepare spawn <path>
+  ```
+
+  **Examples**
+  ```bash
+  marblerun graphene-prepare spawn nginx.manifest.template
+  ```
+
+  Output:
+  ```bash
+  Reading file: nginx.manifest.template
+
+  Marblerun suggests the following changes to your Graphene manifest:
+  libos.entrypoint = "file:premain-graphene"
+  loader.argv0_override = "$(INSTALL_DIR)/sbin/nginx"
+  loader.insecure__use_host_env = 1
+  sgx.allowed_files.marblerun_uuid = "file:uuid"
+  sgx.enclave_size = "1024M"
+  sgx.remote_attestation = 1
+  sgx.thread_num = 16
+  sgx.trusted_files.marblerun_premain = "file:premain-graphene"
+  Do you want to automatically apply the suggested changes [y/n]? y
+  Applying changes...
+  Saving original manifest as nginx.manifest.template.bak...
+  Saving changes to nginx.manifest.template...
+  Downloading Marblerun premain from GitHub...
+  Successfully downloaded premain-graphene.
+
+  Done! You should be good to go for Marblerun!
+  ```
+
+* **`preload`**
+
+  Adds the premain as a shared library loaded on launch of your application via LD_PRELOAD. Allows for a faster launch than `spawn` and delegates more features to Graphene (but restricts Marblerun's functionalities), making it the quickest way to adapt your existing application. However, features such as argv provisioning cannot be used in Marblerun anymore in this mode.
+
+  **Usage**
+  ```bash
+  marblerun graphene-prepare preload <path>
+  ```
+
+  **Examples**
+  ```bash
+  marblerun graphene-prepare preload nginx.manifest.template
+  ```
+
+  Output:
+  ```bash
+  Reading file: nginx.manifest.template
+
+  Marblerun suggests the following changes to your Graphene manifest:
+  loader.env.LD_PRELOAD = "./premain-graphene.so"
+  loader.insecure__use_host_env = 1
+  sgx.allowed_files.marblerun_uuid = "file:uuid"
+  sgx.enclave_size = "1024M"
+  sgx.remote_attestation = 1
+  sgx.thread_num = 16
+  sgx.trusted_files.marblerun_premain = "file:premain-graphene.so"
+  Do you want to automatically apply the suggested changes [y/n]? y
+  Applying changes...
+  Saving original manifest as nginx.manifest.template.bak...
+  Saving changes to nginx.manifest.template...
+  Downloading Marblerun premain from GitHub...
+  Successfully downloaded premain-graphene.so.
+
+  Done! You should be good to go for Marblerun!
+  ```
+
+
 ## Command `install`
 
 Install Marblerun on your Kubernetes cluster.
