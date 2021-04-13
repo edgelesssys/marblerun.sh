@@ -39,12 +39,16 @@ Usage:
 
 Available Commands:
   certificate Retrieves the certificate of the Marblerun coordinator
+  check       Check the status of Marbleruns control plane
   help        Help about any command
   install     Installs marblerun on a kubernetes cluster
   manifest    Manages manifest for the Marblerun coordinator
   namespace   Manages namespaces associated with Marblerun installations
+  precheck    Check if your kubernetes cluster supports SGX
   recover     Recovers the Marblerun coordinator from a sealed state
   status      Gives information about the status of the marblerun Coordinator
+  uninstall   Removes Marblerun from a kubernetes cluster
+  version     Display version of this CLI and (if running) the Marblerun coordinator
 
 Flags:
   -h, --help   help for marblerun
@@ -161,7 +165,7 @@ These flags apply to all sub commands of manifest
 
 * ### `set`
 
-  Uploads a manifest in json format to the Marblerun coordinator.
+  Uploads a manifest in json or yaml format to the Marblerun coordinator.
   If a recovery key was set in the manifest, a recovery secret will be sent back.
 
   **Usage**
@@ -257,6 +261,21 @@ These flags apply to all sub commands of manifest
   Manifest written to: manifest-signature.json
   ```
 
+* ### `signature`
+
+  Print the signature of a Marblerun manifest.
+  The manifest can be in either json or yaml format.
+
+  **Usage**
+
+  ```bash
+  marblerun manifest signature manifest.json
+  ```
+
+  The output is the sha256 hash in base64 of the input data as it would be interpreted by the Marblerun coordinator.
+  This means if your manifest is in yaml format you will not receive the same output when hashing the file with your own tools.
+  For one manifest the output of `marblerun manifest signature` and the signature returned by `marblerun manifest get` should be the same.
+
 ## Command `recover`
 
 Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
@@ -336,6 +355,27 @@ These flags apply to all sub commands of certificate
   ```bash
   marblerun certificate chain <IP:PORT> [flags]
   ```
+
+
+## Command `check`
+
+  Check the status of Marbleruns control plane.
+  This command will check if the Marblerun coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
+
+  **Usage**
+  
+  ```bash
+  marblerun check
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                                             |
+  | --------------- | ------- | ----------------------------------------------------------------------- |
+  | --timeout       | 60      | Time to wait before aborting in seconds                                 |
+  {{</table>}}
+
 
 
 ## Command `namespace`
@@ -419,6 +459,40 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   testspace
   ```
 
+## Command `precheck`
+
+  Check if your kubernetes cluster supports SGX.
+  More precisely the command will check if any nodes in the cluster define SGX resources through the use of [Device Plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/).
+  Currently supported are:
+  * [Intel SGX Device Plugin](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html), exposing the resources:
+    * `sgx.intel.com/enclave`
+    * `sgx.intel.com/epc`
+    * `sgx.intel.com/provision`
+  
+
+  * [Azure SGX Device Plugin](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-overview#azure-device-plugin-for-intel-sgx-), exposing the resource:
+    * `kubernetes.azure.com/sgx_epc_mem_in_MiB`
+
+  **Usage**
+
+  ```bash
+  marblerun precheck
+  ```
+
+  * If your cluster does not support SGX the output is the following:
+  
+  ```bash
+  Cluster does not support SGX, you may still run Marblerun in simulation mode
+  To install Marblerun run [marblerun install --simulation]
+  ```
+
+  * If you cluster does support SGX the output is similar to the following
+
+  ```bash
+  Cluster supports SGX on 2 nodes
+  To install Marblerun run [marblerun install]
+  ```
+
 
 ## Command `uninstall`
 
@@ -434,4 +508,22 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   The output is the following:
   ```bash
   Marblerun successfully removed from your cluster
+  ```
+
+## Command `version`
+
+  Display version information of CLI, and the Marblerun coordinator running on a Kubernetes cluster.
+
+  **Usage**
+
+  ```bash
+  marblerun version
+  ```
+
+  The output is similar to the following:
+
+  ```
+  CLI Version: v0.3.0 
+  Commit: 689787ea6f3ea3e047a68e2d4deaf095d1d84db9
+  Coordinator Version: v0.3.0
   ```
