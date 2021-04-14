@@ -70,6 +70,14 @@ marblerun install --simulation
 The `marblerun install` command generates a Kubernetes manifest with all the necessary control plane resources.
 The simulation flag tells Marblerun that real SGX hardware might not be present and the SGX-layer should be emulated.
 
+Wait for the control plane to finish installing:
+
+```bash
+marblerun check
+```
+
+This command will wait until all components of Marblerun are ready to be used or return an error after a timeout period is reached.
+
 ## Step 3: Initialize and verify the Coordinator
 
 After installing the Coordinator we need to verify its integrity and establish trust in a confidential computing sense.
