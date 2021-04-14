@@ -38,18 +38,18 @@ Usage:
   marblerun [command]
 
 Available Commands:
-  certificate Retrieves the certificate of the Marblerun coordinator
-  check       Check the status of Marbleruns control plane
+  certificate      Retrieves the certificate of the Marblerun coordinator
+  check            Check the status of Marbleruns control plane
   graphene-prepare Modifies a Graphene manifest for use with Marblerun
-  help        Help about any command
-  install     Installs marblerun on a kubernetes cluster
-  manifest    Manages manifest for the Marblerun coordinator
-  namespace   Manages namespaces associated with Marblerun installations
-  precheck    Check if your kubernetes cluster supports SGX
-  recover     Recovers the Marblerun coordinator from a sealed state
-  status      Gives information about the status of the marblerun Coordinator
-  uninstall   Removes Marblerun from a kubernetes cluster
-  version     Display version of this CLI and (if running) the Marblerun coordinator
+  help             Help about any command
+  install          Installs marblerun on a kubernetes cluster
+  manifest         Manages manifest for the Marblerun coordinator
+  namespace        Manages namespaces associated with Marblerun installations
+  precheck         Check if your kubernetes cluster supports SGX
+  recover          Recovers the Marblerun coordinator from a sealed state
+  status           Gives information about the status of the marblerun Coordinator
+  uninstall        Removes Marblerun from a kubernetes cluster
+  version          Display version of this CLI and (if running) the Marblerun coordinator
 
 Flags:
   -h, --help   help for marblerun
