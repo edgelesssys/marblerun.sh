@@ -43,9 +43,10 @@ Deploy Marblerun's Coordinator to the Minikube cluster using the CLI.
 marblerun install --domain=localhost --simulation
 ```
 
-You can now find the Marblerun Coordinator Pod deployed on your cluster using kubectl:
+Wait for Marblerun to start:
+
 ```bash
-kubectl get pods -n marblerun
+marblerun check
 ```
 
 ## Step 2: Pull the demo application
@@ -124,12 +125,24 @@ sudo wget -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/r
 sudo chmod +x /usr/local/bin/marblerun
 ```
 
+### Verify the cluster supports SGX
+```bash
+marblerun precheck
+```
+If the command reports your cluster does not support SGX verify the cluster was deployed correctly as described in [this guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-get-started) or consider following the [First Steps on Minikube]({{< ref "docs/getting-started/quickstart.md#first-steps-on-minikube" >}}).
+
 ## Step 1: Deploy the Coordinator onto the cluster
 
-Deploy Marblerun's Coordinator to the Minikube cluster using the CLI. Update the domain parameter with your cluster's domain name.
+Deploy Marblerun's Coordinator to the Kubernetes cluster using the CLI. Update the domain parameter with your cluster's domain name.
 
 ```bash
 marblerun install --domain=mycluster.uksouth.cloudapp.azure.com
+```
+
+Wait for Marblerun to start:
+
+```bash
+marblerun check
 ```
 
 ## Step 2: Pull the demo application
