@@ -272,9 +272,9 @@ These flags apply to all sub commands of manifest
   marblerun manifest signature manifest.json
   ```
 
-  The output is the sha256 hash in base64 of the input data as it would be interpreted by the Marblerun coordinator.
-  This means if your manifest is in yaml format you will not receive the same output when hashing the file with your own tools.
-  For one manifest the output of `marblerun manifest signature` and the signature returned by `marblerun manifest get` should be the same.
+  The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun coordinator.
+  Note, that Internally, the coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
+  You can quickly verify the integrity of the installed manifest by comparing the output of `marblerun manifest signature` on your local version and the signature returned by `marblerun manifest get` of the coordinator's version.
 
 ## Command `recover`
 
