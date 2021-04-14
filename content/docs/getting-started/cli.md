@@ -61,7 +61,7 @@ Use "marblerun [command] --help" for more information about a command.
 Get the root and/or intermediate certificates of the Marblerun coordinator.
 
 **Flags**
-These flags apply to all sub commands of certificate
+These flags apply to all `certificate` subcommands
 
 {{<table "table table-striped table-bordered">}}
 | Name, shorthand | Default | Description                                                                                                                      |
@@ -123,15 +123,22 @@ These flags apply to all sub commands of certificate
 
 
 ## Command `graphene-prepare`
-Takes a Graphene manifest template, automatically performs changes and downloads the Marblerun premain so that your application can be used in combination with Marblerun with less effort. See [Building a service: Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}}) for more information.
+This command helps you if you want to add Graphene-based services to your Marblerun service mesh.
+It prepares your Graphene project to be used as a Marble.
+Given your [Graphene manifest template](https://graphene.readthedocs.io/en/latest/manifest-syntax.html), it will suggest the required adjustments needed and adds our bootstrapping data-plane code to your Graphene image.
+See [Building a service: Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}}) for detailed information on Marblerun’s Graphene integration and our changes in your Graphene manifest.
 
-Please note that this only works on a best-effort basis and may not instantly work correctly. While suggestions should be made for every valid TOML Graphene configuration, changes can only performed for non-hierarchically sorted configurations. as the official Graphene examples. Plus, you need to create a Marblerun manifest in addition by yourself. The unmodified manifest is saved as a backup under the old path with an added ".bak" suffix, allowing you to try out and rollback any changes performed.
+Please note that this only works on a best-effort basis and may not instantly work correctly.
+While suggestions should be made for every valid TOML Graphene configuration, changes can only be performed for non-hierarchically sorted configurations. as the official Graphene examples.
+The unmodified manifest is saved as a backup under the old path with an added ".bak" suffix, allowing you to try out and roll back any changes performed.
+
+Remember, you need to create a [Marblerun manifest]({{< ref "docs/tasks/define-manifest.md" >}}) in addition to the Graphene manifest. Adding Graphene packages to your manifest is straightforward and follows the same principles as any other SGX enclave.
 
 This command supports two modes, **spawn** and **preload**.
 
 * **`spawn`**
 
-  Replaces the original entrypoint of your application with the premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun, so make sure your Marblerun manifest is designed to supply the arguments correctly, otherwise you might run into issues when Graphene handled the arguments for it before.
+  Replaces the original entrypoint of your application with the bootstrapping Marble premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun. If you configured the arguments to your Graphene application through the [Graphene manifest](https://graphene.readthedocs.io/en/latest/manifest-syntax.html#command-line-arguments) before, you need to transfer those to the [Marblerun manifest]({{< ref "docs/tasks/define-manifest.md#manifestmarbles">}}).
 
   **Usage**
 
@@ -169,7 +176,7 @@ This command supports two modes, **spawn** and **preload**.
 
 * **`preload`**
 
-  Adds the premain as a shared library loaded on launch of your application via LD_PRELOAD. Allows for a faster launch than `spawn` and delegates more features to Graphene (but restricts Marblerun's functionalities), making it the quickest way to adapt your existing application. However, features such as argv provisioning cannot be used in Marblerun anymore in this mode.
+  Adds the premain as a shared library loaded during the launch of your application via LD_PRELOAD. Allows for a faster launch than `spawn` and delegates more features to Graphene (but restricts Marblerun's functionalities), making it the quickest way to adapt your existing application. However, features such as argv provisioning cannot be used in Marblerun anymore in this mode.
 
   **Usage**
   ```bash
