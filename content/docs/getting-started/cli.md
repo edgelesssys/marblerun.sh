@@ -253,14 +253,15 @@ marblerun install [flags]
 {{<table "table table-striped table-bordered">}}
 | Name, shorthand          | Default   | Description                                                                                           |
 | :----------------------- | :-------- | :---------------------------------------------------------------------------------------------------- |
-| --client-server-port     | 4433     | Set the client server port. Needs to be configured to the same <br> port as in your client tool stack |
+| --client-server-port     | 4433      | Set the client server port. Needs to be configured to the same <br> port as in your client tool stack |
 | --disable-auto-injection |           | Disable automatic injection of selected namespaces                                                    |
 | --domain                 | localhost | Sets the CNAME for the coordinator certificate                                                        |
 | --help, -h               |           | help for install                                                                                      |
 | --marblerun-chart-path   |           | Path to marblerun helm chart                                                                          |
-| --mesh-sever-port        | 2001     | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles   |
-| --no-sgx-device-plugin   |           | Disables the installation of an sgx device plugin                                                     |
+| --mesh-sever-port        | 2001      | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles   |
+|  --resource-key          | sgx.intel.com/epc | Resource providing SGX, different depending on used device plugin. Use this to set tolerations/resources if your device plugin is not supported by marblerun |
 | --simulation             |           | Set Marblerun to start in simulation mode, needed when not <br> running on an SGX enabled cluster     |
+| --version                |           | Version of the Coordinator to install, latest by default                                              |
 {{</table>}}
 
 **Examples**

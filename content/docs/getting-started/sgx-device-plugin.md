@@ -13,15 +13,29 @@ The SGX device plugin can either be deployed manually or as a DaemonSet in the c
 * [Azure](https://github.com/Azure/aks-engine/blob/master/docs/topics/sgx.md#deploying-the-sgx-device-plugin)
 * [Alibaba Cloud](https://github.com/AliyunContainerService/sgx-device-plugin)
 
-Marblerun checks if an SGX device plugin is already running and deploys Azure's plugin otherwise.
 
-{{<note>}}
-The Azure SGX plugin is not tied to Azure. We may however switch to Intel's device plugin in the future.
-{{</note>}}
+## Creating a cluster with an SGX device plugin
+
+If you are creating your SGX enabled kubernetes cluster using a service offered by a cloud provider, you will usually not need to choose your own.
+For example following [the quickstart guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-get-started) for a confidential computing cluster on AKS will create the cluster including SGX device plugin.
+
+
+## Out-of-process attestation
+
+Applications running in an enclave require a generated quote to perform remote attestation. To do this Intel SGX supports two modes:
+* In-process: The software generating the quote is part of the enclave application
+* Out-of-process: The software generating the quote is not part of the actual enclave application, this requires the Intel SGX Architectural Enclave Service Manager (AESM) to run on the system
+
+While Marbles build with [Ego]({{< ref "docs/tasks/build-service-ego" >}}) perform in-process attestation, other frameworks, such as [Graphene]({{< ref "docs/tasks/build-service-graphene" >}}), use out-of-process attestation.
+If you are planning to deploy your confidential application on kubernetes using out-of-process attestation, you will need to expose AESM to your application in some way.
+
+For clusters created on AKS you can follow [this guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-out-of-proc-attestation) to make your deployments able to use AESM for quote generation.
+
 
 ## Manually deploying an SGX device plugin
 
-For different reasons, you may want to deploy the device plugin manually. This requires two steps. First, add `tolerations` and `resources` to your Kubernetes deployment spec as outlined below.
+For different reasons, you may want to deploy the device plugin manually. Intel provides [a guide](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html#installation) to install their SGX plugin, however you may use any implementation exposing the SGX resource on the cluster.
+You will need to adjust your deployments to request the SGX resource provided by the plugin:
 
 ```yaml
 apiVersion: apps/v1
@@ -39,7 +53,7 @@ spec:
         app: oe-app
     spec:
       tolerations:
-      - key: kubernetes.azure.com/sgx_epc_mem_in_MiB
+      - key: sgx.intel.com/epc
         operator: Exists
         effect: NoSchedule
       containers:
@@ -48,11 +62,15 @@ spec:
         command: <exec>
         resources:
           limits:
-            kubernetes.azure.com/sgx_epc_mem_in_MiB: 10
+            sgx.intel.com/epc: 10
 ```
+Note that in this case, the plugin by Intel is used.
+Marblerun supports [automatic injection]({{< ref "docs/features/auto-injection.md" >}}) of those values, provided your used plugin is supported by Marblerun.
 
-Note that in this case, the plugin from Azure is used. Second, install Marblerun using the `--no-sgx-device-plugin` flag:
+{{<note>}}
+Currently supported plugins are:
+* [Intel](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html) using `sgx.intel.com/epc`
+* [Azure](https://github.com/Azure/aks-engine/blob/master/docs/topics/sgx.md#deploying-the-sgx-device-plugin) using `kubernetes.azure.com/sgx_epc_mem_in_MiB`
 
-```bash
-marblerun install [--no-sgx-device-plugin]
-```
+If you are using a different plugin please let us know, so we can add support!
+{{</note>}}
