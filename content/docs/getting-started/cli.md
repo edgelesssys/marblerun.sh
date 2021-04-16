@@ -40,6 +40,7 @@ Usage:
 Available Commands:
   certificate      Retrieves the certificate of the Marblerun coordinator
   check            Check the status of Marbleruns control plane
+  completion       Output script for specified shell to enable autocompletion
   graphene-prepare Modifies a Graphene manifest for use with Marblerun
   help             Help about any command
   install          Installs marblerun on a kubernetes cluster
@@ -120,6 +121,31 @@ These flags apply to all `certificate` subcommands
   | --------------- | ------- | ----------------------------------------------------------------------- |
   | --timeout       | 60      | Time to wait before aborting in seconds                                 |
   {{</table>}}
+
+
+## Command `completion`
+Generate a shell script to enable autocompletion for `marblerun` commands.
+Supported shells are:
+* `bash`:
+  * To enable completion run: 
+    ```bash
+    source <(marblerun completion bash)
+    ```
+
+* `zsh`:
+  * If completion is not already enabled you need to enable it first: 
+    ```bash
+    echo "autoload -U compinit; compinit" >> ~/.zshrc
+    ```
+  * Enable completion for `marblerun`:
+    ```bash
+    marblerun completion zsh > "${fpath[1]}/_marblerun"
+    ```
+
+
+Once enabled, command completion is just one key press away:\
+  `marblerun ma`+<kbd>Tab</kbd> completes to:\
+  `marblerun manifest`
 
 
 ## Command `graphene-prepare`
