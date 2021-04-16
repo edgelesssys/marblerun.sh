@@ -7,6 +7,21 @@ weight: 10
 
 # Changelog
 
+## Version 0.3.1
+
+* Add CLI features:
+    * `check`: Check the status of Marbleruns control plane
+    * `graphene-prepare` Modifies a Graphene manifest for use with Marblerun
+    * `precheck`: Check if your Kubernetes cluster supports SGX
+    * `uninstall` Removes Marblerun from a Kubernetes cluster
+    * `version`: Display version of this CLI and (if running) the Marblerun coordinator
+    * Add support of the YAML format for manifests in the CLI
+    * Print failure reason when setting a manifest fails
+* Miscellaneous bug fixes
+    * Fix a crash where an empty quote could cause the coordinator to crash
+    * Fix a potential segfault on Marble activation
+    * Fix a bug in the marble-injector Kubernetes MutatingAdmissionController deployment. Not setting the `CABundle` for Kubernetes version 1.19 and higher resulted in a failed authentication of the webhook in the Kubernetes API server. Ultimately, this leads to failing deployments of Marble pods
+
 ## Version 0.3.0
 
 * Add support for privileged Client API endpoints
