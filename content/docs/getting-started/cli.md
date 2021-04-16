@@ -38,23 +38,178 @@ Usage:
   marblerun [command]
 
 Available Commands:
-  certificate Retrieves the certificate of the Marblerun coordinator
-  check       Check the status of Marbleruns control plane
-  help        Help about any command
-  install     Installs marblerun on a kubernetes cluster
-  manifest    Manages manifest for the Marblerun coordinator
-  namespace   Manages namespaces associated with Marblerun installations
-  precheck    Check if your kubernetes cluster supports SGX
-  recover     Recovers the Marblerun coordinator from a sealed state
-  status      Gives information about the status of the marblerun Coordinator
-  uninstall   Removes Marblerun from a kubernetes cluster
-  version     Display version of this CLI and (if running) the Marblerun coordinator
+  certificate      Retrieves the certificate of the Marblerun coordinator
+  check            Check the status of Marbleruns control plane
+  graphene-prepare Modifies a Graphene manifest for use with Marblerun
+  help             Help about any command
+  install          Installs marblerun on a kubernetes cluster
+  manifest         Manages manifest for the Marblerun coordinator
+  namespace        Manages namespaces associated with Marblerun installations
+  precheck         Check if your kubernetes cluster supports SGX
+  recover          Recovers the Marblerun coordinator from a sealed state
+  status           Gives information about the status of the marblerun Coordinator
+  uninstall        Removes Marblerun from a kubernetes cluster
+  version          Display version of this CLI and (if running) the Marblerun coordinator
 
 Flags:
   -h, --help   help for marblerun
 
 Use "marblerun [command] --help" for more information about a command.
 ```
+## Command `certificate`
+
+Get the root and/or intermediate certificates of the Marblerun coordinator.
+
+**Flags**
+These flags apply to all `certificate` subcommands
+
+{{<table "table table-striped table-bordered">}}
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for certificate                                                                                                             |
+| --insecure, -i  |         | simulation mode                                                                                                                  |
+| --output, -o    |         | File to save the certificate to                                                                                                  |
+{{</table>}}
+
+* ### `root`
+
+  Gets the root certificate of the Marblerun coordinator.
+
+  **Usage**
+
+  ```bash
+  marblerun certificate root <IP:PORT> [flags]
+  ```
+
+* ### `intermediate`
+
+  Gets the intermediate certificate of the Marblerun coordinator.
+
+  **Usage**
+
+  ```bash
+  marblerun certificate intermediate <IP:PORT> [flags]
+  ```
+
+* ### `chain`
+
+  Gets the certificate chain of the Marblerun coordinator.
+
+  **Usage**
+
+  ```bash
+  marblerun certificate chain <IP:PORT> [flags]
+  ```
+
+## Command `check`
+
+  Check the status of Marbleruns control plane.
+  This command will check if the Marblerun coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
+
+  **Usage**
+
+  ```bash
+  marblerun check
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                                             |
+  | --------------- | ------- | ----------------------------------------------------------------------- |
+  | --timeout       | 60      | Time to wait before aborting in seconds                                 |
+  {{</table>}}
+
+
+## Command `graphene-prepare`
+This command helps you if you want to add Graphene-based services to your Marblerun service mesh.
+It prepares your Graphene project to be used as a Marble.
+Given your [Graphene manifest template](https://graphene.readthedocs.io/en/latest/manifest-syntax.html), it will suggest the required adjustments needed and adds our bootstrapping data-plane code to your Graphene image.
+See [Building a service: Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}}) for detailed information on Marblerun’s Graphene integration and our changes in your Graphene manifest.
+
+Please note that this only works on a best-effort basis and may not instantly work correctly.
+While suggestions should be made for every valid TOML Graphene configuration, changes can only be performed for non-hierarchically sorted configurations. as the official Graphene examples.
+The unmodified manifest is saved as a backup under the old path with an added ".bak" suffix, allowing you to try out and roll back any changes performed.
+
+Remember, you need to create a [Marblerun manifest]({{< ref "docs/tasks/define-manifest.md" >}}) in addition to the Graphene manifest. Adding Graphene packages to your manifest is straightforward and follows the same principles as any other SGX enclave.
+
+This command supports two modes, **spawn** and **preload**.
+
+* **`spawn`**
+
+  Replaces the original entrypoint of your application with the bootstrapping Marble premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun. If you configured the arguments to your Graphene application through the [Graphene manifest](https://graphene.readthedocs.io/en/latest/manifest-syntax.html#command-line-arguments) before, you need to transfer those to the [Marblerun manifest]({{< ref "docs/tasks/define-manifest.md#manifestmarbles">}}).
+
+  **Usage**
+
+  ```bash
+  marblerun graphene-prepare spawn <path>
+  ```
+
+  **Examples**
+  ```bash
+  marblerun graphene-prepare spawn nginx.manifest.template
+  ```
+
+  Output:
+  ```bash
+  Reading file: nginx.manifest.template
+
+  Marblerun suggests the following changes to your Graphene manifest:
+  libos.entrypoint = "file:premain-graphene"
+  loader.argv0_override = "$(INSTALL_DIR)/sbin/nginx"
+  loader.insecure__use_host_env = 1
+  sgx.allowed_files.marblerun_uuid = "file:uuid"
+  sgx.enclave_size = "1024M"
+  sgx.remote_attestation = 1
+  sgx.thread_num = 16
+  sgx.trusted_files.marblerun_premain = "file:premain-graphene"
+  Do you want to automatically apply the suggested changes [y/n]? y
+  Applying changes...
+  Saving original manifest as nginx.manifest.template.bak...
+  Saving changes to nginx.manifest.template...
+  Downloading Marblerun premain from GitHub...
+  Successfully downloaded premain-graphene.
+
+  Done! You should be good to go for Marblerun!
+  ```
+
+* **`preload`**
+
+  Adds the premain as a shared library loaded during the launch of your application via LD_PRELOAD. Allows for a faster launch than `spawn` and delegates more features to Graphene (but restricts Marblerun's functionalities), making it the quickest way to adapt your existing application. However, features such as argv provisioning cannot be used in Marblerun anymore in this mode.
+
+  **Usage**
+  ```bash
+  marblerun graphene-prepare preload <path>
+  ```
+
+  **Examples**
+  ```bash
+  marblerun graphene-prepare preload nginx.manifest.template
+  ```
+
+  Output:
+  ```bash
+  Reading file: nginx.manifest.template
+
+  Marblerun suggests the following changes to your Graphene manifest:
+  loader.env.LD_PRELOAD = "./premain-graphene.so"
+  loader.insecure__use_host_env = 1
+  sgx.allowed_files.marblerun_uuid = "file:uuid"
+  sgx.enclave_size = "1024M"
+  sgx.remote_attestation = 1
+  sgx.thread_num = 16
+  sgx.trusted_files.marblerun_premain = "file:premain-graphene.so"
+  Do you want to automatically apply the suggested changes [y/n]? y
+  Applying changes...
+  Saving original manifest as nginx.manifest.template.bak...
+  Saving changes to nginx.manifest.template...
+  Downloading Marblerun premain from GitHub...
+  Successfully downloaded premain-graphene.so.
+
+  Done! You should be good to go for Marblerun!
+  ```
+
 
 ## Command `install`
 
@@ -112,42 +267,6 @@ marblerun install [flags]
   Marblerun installed successfully
   ```
 
-
-## Command `status`
-
-Checks on the current status of the coordinator.
-
-**Usage**
-
-```bash
-marblerun status <IP:PORT> [flags]
-```
-
-**Flags**
-
-{{<table "table table-striped table-bordered">}}
-| Name, shorthand | Default | Description                                                                                                                      |
-| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h      |         | help for status                                                                                                                  |
-| --insecure, -i  |         | Set to skip quote verification, needed when running in <br> simulation mode                                                      |
-{{</table>}}
-
-**Examples**
-
-```bash
-marblerun status $MARBLERUN
-```
-
-The output is similar to the following:
-
-```bash
-No era config file specified, getting latest config from github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
-Got latest config
-2: Coordinator is ready to accept a manifest.
-```
-
-
 ## Command `manifest`
 
 Set or update a manifest, or retrieve the signature of the manifest in place.
@@ -194,7 +313,6 @@ These flags apply to all sub commands of manifest
   Successfully verified coordinator, now uploading manifest
   Manifest successfully set, recovery data saved to: recovery-secret.json
   ```
-
 
 * ### `update`
 
@@ -276,113 +394,10 @@ These flags apply to all sub commands of manifest
   Note, that Internally, the coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
   You can quickly verify the integrity of the installed manifest by comparing the output of `marblerun manifest signature` on your local version and the signature returned by `marblerun manifest get` of the coordinator's version.
 
-## Command `recover`
-
-Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see [Recovery]({{< ref "docs/tasks/recover-coordinator.md" >}})
-
-**Usage**
-
-```bash
-marblerun recover <recovery_key_decrypted> <IP:PORT> [flags]
-```
-
-**Flags**
-
-{{<table "table table-striped table-bordered">}}
-| Name, shorthand | Default | Description                                                                                                                      |
-| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h      |         | help for recover                                                                                                                 |
-| --insecure, -i  |         | Set to skip quote verification, needed when running in <br> simulation mode                                                      |
-{{</table>}}
-
-**Examples**
-
-```bash
-marblerun recover $MARBLERUN recovery_key_decrypted --era-config=era.json
-```
-
-The output is similar to the following:
-
-```bash
-Successfully verified coordinator, now uploading key
-Successfully uploaded recovery key and unsealed the Marblerun coordinator
-```
-
-## Command `certificate`
-
-Get the root and/or intermediate certificates of the Marblerun coordinator.
-
-**Flags**
-These flags apply to all sub commands of certificate
-
-{{<table "table table-striped table-bordered">}}
-| Name, shorthand | Default | Description                                                                                                                      |
-| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
-| --help, -h      |         | help for certificate                                                                                                             |
-| --insecure, -i  |         | simulation mode                                                                                                                  |
-| --output, -o    |         | File to save the certificate to                                                                                                  |
-{{</table>}}
-
-* ### `root`
-
-  Gets the root certificate of the Marblerun coordinator.
-
-  **Usage**
-
-  ```bash
-  marblerun certificate root <IP:PORT> [flags]
-  ```
-
-* ### `intermediate`
-
-  Gets the intermediate certificate of the Marblerun coordinator.
-
-  **Usage**
-
-  ```bash
-  marblerun certificate intermediate <IP:PORT> [flags]
-  ```
-
-* ### `chain`
-
-  Gets the certificate chain of the Marblerun coordinator.
-
-  **Usage**
-
-  ```bash
-  marblerun certificate chain <IP:PORT> [flags]
-  ```
-
-
-## Command `check`
-
-  Check the status of Marbleruns control plane.
-  This command will check if the Marblerun coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
-
-  **Usage**
-  
-  ```bash
-  marblerun check
-  ```
-
-  **Flags**
-
-  {{<table "table table-striped table-bordered">}}
-  | Name, shorthand | Default | Description                                                             |
-  | --------------- | ------- | ----------------------------------------------------------------------- |
-  | --timeout       | 60      | Time to wait before aborting in seconds                                 |
-  {{</table>}}
-
-
-
 ## Command `namespace`
 
 Add namespaces to Marblerun.
 If the auto-injection feature is enabled. All new pods in those namespaces will get their Marblerun configuration automatically injected.
-
 
 * ### `add`
 
@@ -468,7 +483,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
     * `sgx.intel.com/enclave`
     * `sgx.intel.com/epc`
     * `sgx.intel.com/provision`
-  
+
 
   * [Azure SGX Device Plugin](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-overview#azure-device-plugin-for-intel-sgx-), exposing the resource:
     * `kubernetes.azure.com/sgx_epc_mem_in_MiB`
@@ -480,7 +495,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   ```
 
   * If your cluster does not support SGX the output is the following:
-  
+
   ```bash
   Cluster does not support SGX, you may still run Marblerun in simulation mode
   To install Marblerun run [marblerun install --simulation]
@@ -493,6 +508,73 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   To install Marblerun run [marblerun install]
   ```
 
+## Command `recover`
+
+Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
+For more information about coordinator recovery see [Recovery]({{< ref "docs/tasks/recover-coordinator.md" >}})
+
+**Usage**
+
+```bash
+marblerun recover <recovery_key_decrypted> <IP:PORT> [flags]
+```
+
+**Flags**
+
+{{<table "table table-striped table-bordered">}}
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for recover                                                                                                                 |
+| --insecure, -i  |         | Set to skip quote verification, needed when running in <br> simulation mode                                                      |
+{{</table>}}
+
+**Examples**
+
+```bash
+marblerun recover $MARBLERUN recovery_key_decrypted --era-config=era.json
+```
+
+The output is similar to the following:
+
+```bash
+Successfully verified coordinator, now uploading key
+Successfully uploaded recovery key and unsealed the Marblerun coordinator
+```
+
+## Command `status`
+
+Checks on the current status of the coordinator.
+
+**Usage**
+
+```bash
+marblerun status <IP:PORT> [flags]
+```
+
+**Flags**
+
+{{<table "table table-striped table-bordered">}}
+| Name, shorthand | Default | Description                                                                                                                      |
+| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| --era-config    |         | Path to remote attestation config file in json format, if none <br> provided the newest configuration will be loaded from github |
+| --help, -h      |         | help for status                                                                                                                  |
+| --insecure, -i  |         | Set to skip quote verification, needed when running in <br> simulation mode                                                      |
+{{</table>}}
+
+**Examples**
+
+```bash
+marblerun status $MARBLERUN
+```
+
+The output is similar to the following:
+
+```bash
+No era config file specified, getting latest config from github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
+Got latest config
+2: Coordinator is ready to accept a manifest.
+```
 
 ## Command `uninstall`
 
@@ -523,7 +605,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   The output is similar to the following:
 
   ```
-  CLI Version: v0.3.0 
+  CLI Version: v0.3.0
   Commit: 689787ea6f3ea3e047a68e2d4deaf095d1d84db9
   Coordinator Version: v0.3.0
   ```
