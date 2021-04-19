@@ -14,28 +14,14 @@ The SGX device plugin can either be deployed manually or as a DaemonSet in the c
 * [Alibaba Cloud](https://github.com/AliyunContainerService/sgx-device-plugin)
 
 
-## Creating a cluster with an SGX device plugin
-
-If you are creating your SGX enabled kubernetes cluster using a service offered by a cloud provider, you will usually not need to choose your own.
-For example following [the quickstart guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-get-started) for a confidential computing cluster on AKS will create the cluster including SGX device plugin.
-
-
-## Out-of-process attestation
-
-Applications running in an enclave require a generated quote to perform remote attestation. To do this Intel SGX supports two modes:
-* In-process: The software generating the quote is part of the enclave application
-* Out-of-process: The software generating the quote is not part of the actual enclave application, this requires the Intel SGX Architectural Enclave Service Manager (AESM) to run on the system
-
-While Marbles build with [Ego]({{< ref "docs/tasks/build-service-ego" >}}) perform in-process attestation, other frameworks, such as [Graphene]({{< ref "docs/tasks/build-service-graphene" >}}), use out-of-process attestation.
-If you are planning to deploy your confidential application on kubernetes using out-of-process attestation, you will need to expose AESM to your application in some way.
-
-For clusters created on AKS you can follow [this guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-out-of-proc-attestation) to make your deployments able to use AESM for quote generation.
+If you are using a CC-enlightened, managed Kubernetes cluster, you will usually already have an SGX device plugin installed.
+For example, creating a confidential computing cluster on AKS has a preconfigured SGX device plugin. See [the quickstart guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-get-started) on how to get started.
 
 
 ## Manually deploying an SGX device plugin
 
-For different reasons, you may want to deploy the device plugin manually. Intel provides [a guide](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html#installation) to install their SGX plugin, however you may use any implementation exposing the SGX resource on the cluster.
-You will need to adjust your deployments to request the SGX resource provided by the plugin:
+For different reasons, you may want to deploy the device plugin manually. Intel provides [a guide](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html#installation) to install their SGX plugin.
+In any case, you will need to adjust your deployments to request the SGX resources provided by the plugin:
 
 ```yaml
 apiVersion: apps/v1
@@ -64,7 +50,8 @@ spec:
           limits:
             sgx.intel.com/epc: 10
 ```
-Note that in this case, the plugin by Intel is used.
+Note, that every plugin uses its own way of injecting SGX resources into deployments. Please refer to the documentation for your plugin of choice. This is an example of the Intel plugin.
+
 Marblerun supports [automatic injection]({{< ref "docs/features/auto-injection.md" >}}) of those values, provided your used plugin is supported by Marblerun.
 
 {{<note>}}
@@ -74,3 +61,15 @@ Currently supported plugins are:
 
 If you are using a different plugin please let us know, so we can add support!
 {{</note>}}
+
+
+## Out-of-process attestation
+
+Intel SGX supports two modes for obtaining remote attestation quotes:
+* In-process: The software generating the quote is part of the enclave application
+* Out-of-process: The software generating the quote is not part of the actual enclave application. This requires the Intel SGX Architectural Enclave Service Manager (AESM) to run on the system
+
+While Marbles build with [Ego]({{< ref "docs/tasks/build-service-ego" >}}) perform in-process attestation, other frameworks, such as [Graphene]({{< ref "docs/tasks/build-service-graphene" >}}), use out-of-process attestation.
+If your confidential application uses out-of-process attestation, you will need to expose the AESM device to your container.
+
+You can follow [the AKS guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-out-of-proc-attestation) to make your deployments able to use AESM for quote generation. Note, that in this case, your Kubernetes nodes need the AESM service installed. See the [Intel installation guide](https://download.01.org/intel-sgx/sgx-linux/2.12/docs/Intel_SGX_Installation_Guide_Linux_2.12_Open_Source.pdf) for more information.
