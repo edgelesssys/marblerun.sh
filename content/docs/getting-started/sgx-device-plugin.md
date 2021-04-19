@@ -52,7 +52,7 @@ spec:
 ```
 Note, that every plugin uses its own way of injecting SGX resources into deployments. Please refer to the documentation for your plugin of choice. This is an example of the Intel plugin.
 
-Marblerun supports [automatic injection]({{< ref "docs/features/auto-injection.md" >}}) of those values, provided your used plugin is supported by Marblerun.
+Marblerun supports [automatic injection]({{< ref "docs/features/auto-injection.md" >}}) of those values for a selection of popular plugins:
 
 {{<note>}}
 Currently supported plugins are:
