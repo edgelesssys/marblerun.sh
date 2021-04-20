@@ -41,10 +41,12 @@ features_list:
         Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/). It has support for [EGo](https://www.ego.dev/) and [Graphene](https://github.com/oscarlab/graphene) based services.
 blog_list:
   items:
-    - title: "[Blog post #1](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-1-3-28f4bd6df679)"
+    - title: "[Why confidential computing?](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-1-3-28f4bd6df679)"
       description: We give an intro to the concept of confidential computing.
-    - title: "[Blog post #2](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-2-3-c417fa581ef5)"
+    - title: "[Why services meshes?](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-2-3-c417fa581ef5)"
       description: We give intro to the service mesh concept and discuss crucial properties in the context of confidential computing.
-    - title: "[Blog post #3](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-3-3-ffc00b2c3508)"
-      description: We describe how the two fit together and describe the key features and architecture of Marblerun.
+    - title: "[An introduction to Marblerun](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-3-3-ffc00b2c3508)"
+      description: We describe key features and the architecture of Marblerun.
+    - title: "[Running Graphene on Marblerun](https://medium.com/edgelesssystems/marblerun-now-supports-graphene-thus-your-favorite-programming-language-a8b8a36787a0)"
+      description: We give an intro to Marblerun's support for Graphene-based applications.
 ---
