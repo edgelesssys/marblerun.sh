@@ -1,0 +1,47 @@
+---
+title: "Cloud"
+draft: false
+weight: 2
+---
+
+# Cloud deployment
+
+Marblerun without Intel SGX can be deployed on arbitrary cloud VMs. Please see
+our [quickstart]({{< ref "docs/getting-started/quickstart.md" >}}) guide for the details.
+
+To deploy Marblerun with Intel SGX, the cloud VM has to support Intel SGX.
+Please see the installation and usage guide for each cloud VM offering individually
+below (currently only for Microsoft Azure).
+
+## Azure confidential computing VMs
+
+[Azure confidential computing services](https://azure.microsoft.com/en-us/solutions/confidential-compute/) are generally available and provide access to VMs with Intel SGX enabled in [DCsv2 VM instances](https://docs.microsoft.com/en-us/azure/virtual-machines/dcv2-series).
+The description below uses a VM running Ubuntu 18.04.
+
+### Prerequisites
+
+* [Update and install EdgelessRT](https://github.com/edgelesssys/edgelessrt#quick-start)
+* [Update and install the Azure DCAP client](https://docs.microsoft.com/en-us/azure/confidential-computing/quick-create-portal#3-install-the-intel-and-open-enclave-packages-and-dependencies)
+
+### Deploy Marblerun
+
+You can run Marblerun standalone on your Azure DCsv2 VM, see our [standalone guide]({{< ref "docs/deployment/standalone.md" >}}).
+Alternatively, you can install a Kubernetes cluster, probably the simplest option would be [minikube](https://minikube.sigs.k8s.io/docs/start/), see our [Kubernetes deployment guide]({{< ref "docs/deployment/kubernetes.md" >}}) on how to install Marblerun in minikube.
+
+## Azure Kubernetes Services (AKS)
+
+Azure Kubernetes Service (AKS) offers a popular deployment technique relying on
+Azure's cloud resources. AKS hosts Kubernetes pods in Azure confidential compute
+VMs and exposes the underlying confidential compute hardware.
+
+This section describes the workflow to create an AKS cluster with confidential
+compute VMs and deploy Marblerun.
+
+### Prerequisites
+
+Follow the instructions on the [AKS Confidential Computing Quick Start guide](https://docs.microsoft.com/en-us/azure/confidential-computing/confidential-nodes-aks-get-started)
+to provision an AKS cluster with Intel SGX enabled worker nodes.
+
+### Deploy Marblerun
+
+See our [Kubernetes deployment guide]({{< ref "docs/deployment/kubernetes.md" >}}) on how to install Marblerun in your cluster.

@@ -7,7 +7,7 @@ weight: 4
 
 Marblerun provides its data-plane configuration through Kubernetes resource definitions. For this, like regular service meshes, Marblerun uses Kubernetes' [admission controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#mutatingadmissionwebhook).
 
-Marblerun optionally injects [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for its SGX device plugin. See the [SGX Device Plugin]({{< ref "docs/getting-started/sgx-device-plugin.md" >}}) section for more information.
+Marblerun optionally injects [tolerations](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) and [resources](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/) for its SGX device plugin. See the [Kubernetes deployment]({{< ref "docs/deployment/kubernetes.md#sgx-device-plugin-on-kubernetes" >}}) section for more information.
 
 You can enable auto-injection of the data-plane configuration for a namespace using the Marblerun CLI:
 
