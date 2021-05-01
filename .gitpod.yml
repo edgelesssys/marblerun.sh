@@ -1,0 +1,3 @@
+tasks:
+  - init: brew install hugo
+    command: hugo server --bind=0.0.0.0 --appendPort=false --baseUrl=/

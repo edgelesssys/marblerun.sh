@@ -1,9 +1,11 @@
 # Source code of marblerun.sh
 
-Publish with
+The website uses [Hugo](https://gohugo.io/). Updates to the *main* branch automatically update [www.marblerun.sh](www.marblerun.sh).
 
-```bash
-./publish_to_ghpages.sh
-```
+## Dev environment using Gitpod
 
-Note that ["extended" Hugo](https://gohugo.io/getting-started/installing/) is required to process the SCSS files.
+You can get a ready-to-use environment in your browser using Gitpod by simply clicking [here](https://gitpod.io#https://github.com/edgelesssys/www.marblerun.sh). Gitpod is configured in `.gitpod.yml`.
+
+## Custom dev environment
+
+Install ["extended" Hugo](https://github.com/gohugoio/hugo#build-and-install-the-binaries-from-source-advanced-install) and run `hugo serve`.
