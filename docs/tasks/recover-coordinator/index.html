@@ -1,31 +1,28 @@
 <!doctype html><html><head><title>Recovering the Coordinator</title><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1"><link rel=canonical href=https://marblerun.sh/docs/tasks/recover-coordinator/><link rel=stylesheet href=https://marblerun.sh/scss/bootstrap.min.b34363dc2fd8ff214ebdc9fc5affef728cbcf6271a9be12263a2904a48f10509.css emotion=🤩><script defer src=https://use.fontawesome.com/releases/v5.10.2/js/all.js></script><script async defer src=https://buttons.github.io/buttons.js></script><link rel=apple-touch-icon sizes=180x180 href=/apple-touch-icon.png><link rel=icon type=image/png sizes=32x32 href=/favicon-32x32.png><link rel=icon type=image/png sizes=16x16 href=/favicon-16x16.png><link rel=manifest href=/site.webmanifest><meta name=msapplication-TileColor content="#da532c"><meta name=theme-color content="#ffffff"><meta property="og:title" content="Marblerun - The service mesh for confidential computing"><meta property="og:description" content="Marblerun makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes. Think Istio/Consul/Linkerd for confidential computing.​"><meta property="og:image" content="https://www.marblerun.sh/img/social.png"><meta name=twitter:title content="Marblerun - The service mesh for confidential computing"><meta name=twitter:description content="Marblerun makes it easy to deploy, scale, and verify your SGX-based apps on vanilla Kubernetes."><meta name=twitter:image content="https://www.marblerun.sh/img/social.png"><meta name=twitter:card content="Marblerun"></head><body><nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top container-fluid"><a class=navbar-brand href=/><img src=/img/logo.png width=140px></a>
 <button class=navbar-toggler type=button data-toggle=collapse data-target=#navbarSupportedContent aria-controls=navbarSupportedContent aria-expanded=false aria-label="Toggle navigation">
-<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav ml-auto"><li class=nav-item><a class=nav-link href=/docs/introduction/><i class="fas fa-book"></i>&nbsp;Docs</a></li><li class=nav-item><a class=nav-link href=/community><i class="fas fa-comments"></i>&nbsp;Community</a></li><li class=nav-item><a class=nav-link href=https://github.com/edgelesssys/marblerun><i class="fab fa-github"></i>&nbsp;GitHub</a></li><li class=nav-item><a href=/docs/getting-started/quickstart class="nav-link btn btn-primary ml-3">Get started →</a></li></ul></div></nav><div class="container my-3"><div class=mb-3><div id=breadcrumbs><a href=/>Home</a>
-/ <a href=/docs>Docs</a>
-/ <a href=/tasks>Tasks</a>
-/ <a href=/recover-coordinator>Recover coordinator</a></div></div><h1 class=my-3>Docs</h1><div class=row><div class="col-12 col-lg-3"><div class=docsSidebar><div class=mb-3><a href=https://marblerun.sh/docs/introduction/ class=d-block>Introduction</a></div><div class=mb-3><h6>Getting Started</h6><a href=https://marblerun.sh/docs/getting-started/quickstart/ class="d-block pl-3">Quickstart</a>
-<a href=https://marblerun.sh/docs/getting-started/concepts/ class="d-block pl-3">Concepts</a>
-<a href=https://marblerun.sh/docs/getting-started/coordinator/ class="d-block pl-3">Coordinator</a>
-<a href=https://marblerun.sh/docs/getting-started/marbles/ class="d-block pl-3">Marbles</a>
-<a href=https://marblerun.sh/docs/getting-started/cli/ class="d-block pl-3">CLI</a>
-<a href=https://marblerun.sh/docs/getting-started/sgx-device-plugin/ class="d-block pl-3">SGX device plugin</a></div><div class=mb-3><h6>Features</h6><a href=https://marblerun.sh/docs/features/attestation/ class="d-block pl-3">Attestation</a>
-<a href=https://marblerun.sh/docs/features/recovery/ class="d-block pl-3">Recovery</a>
-<a href=https://marblerun.sh/docs/features/secrets-management/ class="d-block pl-3">Secrets management</a>
-<a href=https://marblerun.sh/docs/features/auto-injection/ class="d-block pl-3">Kubernetes integration</a>
-<a href=https://marblerun.sh/docs/features/runtimes/ class="d-block pl-3">Supported runtimes</a>
-<a href=https://marblerun.sh/docs/features/planned-features/ class="d-block pl-3">Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=https://marblerun.sh/docs/tasks/deploy/ class="d-block pl-3">Deploying Marblerun</a>
-<a href=https://marblerun.sh/docs/tasks/define-manifest/ class="d-block pl-3">Defining a Manifest</a>
-<a href=https://marblerun.sh/docs/tasks/update-manifest/ class="d-block pl-3">Updating a Manifest</a>
-<a href=https://marblerun.sh/docs/tasks/add-service/ class="d-block pl-3">Adding a service</a>
-<a href=https://marblerun.sh/docs/tasks/build-service-ego/ class="d-block pl-3">Building a service: EGo</a>
-<a href=https://marblerun.sh/docs/tasks/build-service-graphene/ class="d-block pl-3">Building a service: Graphene</a>
-<a href=https://marblerun.sh/docs/tasks/set-manifest/ class="d-block pl-3">Setting a Manifest</a>
-<a href=https://marblerun.sh/docs/tasks/monitoring/ class="d-block pl-3">Monitoring and logging</a>
-<a href=https://marblerun.sh/docs/tasks/verification/ class="d-block pl-3">Verifying a deployment</a>
-<a href=https://marblerun.sh/docs/tasks/updates/ class="d-block pl-3">Updating a deployment</a>
-<a href=https://marblerun.sh/docs/tasks/recover-coordinator/ class="d-block pl-3">Recovering the Coordinator</a></div><div class=mb-3><h6>Examples</h6><a href=https://marblerun.sh/docs/examples/helloworld/ class="d-block pl-3">Hello world</a>
-<a href=https://marblerun.sh/docs/examples/emojivoto/ class="d-block pl-3">Emoji voting</a>
-<a href=https://marblerun.sh/docs/examples/graphene/ class="d-block pl-3">Graphene-based examples</a></div><div class=mb-3><a href=https://marblerun.sh/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=recovering-the-coordinator>Recovering the Coordinator</h1><p>As described in the <a href=https://marblerun.sh/docs/features/recovery/>recovery chapter</a>, different situations can require the <em>recovery</em> of the Coordinator.
+<span class=navbar-toggler-icon></span></button><div class="collapse navbar-collapse" id=navbarSupportedContent><ul class="navbar-nav ml-auto"><li class=nav-item><a class=nav-link href=/docs/introduction/><i class="fas fa-book"></i>&nbsp;Docs</a></li><li class=nav-item><a class=nav-link href=/community><i class="fas fa-comments"></i>&nbsp;Community</a></li><li class=nav-item><a class=nav-link href=https://github.com/edgelesssys/marblerun><i class="fab fa-github"></i>&nbsp;GitHub</a></li><li class=nav-item><a href=/docs/getting-started/quickstart class="nav-link btn btn-primary ml-3">Get started →</a></li></ul></div></nav><div class="container my-3"><h1 class=my-3>Docs</h1><div class=row><div class="col-12 col-lg-3"><div class=docsSidebar><div class=mb-3><a href=/docs/introduction/ class=d-block>Introduction</a></div><div class=mb-3><h6>Getting Started</h6><a href=/docs/getting-started/quickstart/ class=d-block>Quickstart</a>
+<a href=/docs/getting-started/concepts/ class=d-block>Concepts</a>
+<a href=/docs/getting-started/coordinator/ class=d-block>Coordinator</a>
+<a href=/docs/getting-started/marbles/ class=d-block>Marbles</a>
+<a href=/docs/getting-started/cli/ class=d-block>CLI</a>
+<a href=/docs/getting-started/sgx-device-plugin/ class=d-block>SGX device plugin</a></div><div class=mb-3><h6>Features</h6><a href=/docs/features/attestation/ class=d-block>Attestation</a>
+<a href=/docs/features/recovery/ class=d-block>Recovery</a>
+<a href=/docs/features/secrets-management/ class=d-block>Secrets management</a>
+<a href=/docs/features/auto-injection/ class=d-block>Kubernetes integration</a>
+<a href=/docs/features/runtimes/ class=d-block>Supported runtimes</a>
+<a href=/docs/features/planned-features/ class=d-block>Planned features</a></div><div class=mb-3><h6>Tasks</h6><a href=/docs/tasks/deploy/ class=d-block>Deploying Marblerun</a>
+<a href=/docs/tasks/define-manifest/ class=d-block>Defining a Manifest</a>
+<a href=/docs/tasks/update-manifest/ class=d-block>Updating a Manifest</a>
+<a href=/docs/tasks/add-service/ class=d-block>Adding a service</a>
+<a href=/docs/tasks/build-service-ego/ class=d-block>Building a service: EGo</a>
+<a href=/docs/tasks/build-service-graphene/ class=d-block>Building a service: Graphene</a>
+<a href=/docs/tasks/set-manifest/ class=d-block>Setting a Manifest</a>
+<a href=/docs/tasks/monitoring/ class=d-block>Monitoring and logging</a>
+<a href=/docs/tasks/verification/ class=d-block>Verifying a deployment</a>
+<a href=/docs/tasks/updates/ class=d-block>Updating a deployment</a>
+<a href=/docs/tasks/recover-coordinator/ class="d-block text-primary">> Recovering the Coordinator</a></div><div class=mb-3><h6>Examples</h6><a href=/docs/examples/helloworld/ class=d-block>Hello world</a>
+<a href=/docs/examples/emojivoto/ class=d-block>Emoji voting</a>
+<a href=/docs/examples/graphene/ class=d-block>Graphene-based examples</a></div><div class=mb-3><a href=/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=recovering-the-coordinator>Recovering the Coordinator</h1><p>As described in the <a href=https://marblerun.sh/docs/features/recovery/>recovery chapter</a>, different situations can require the <em>recovery</em> of the Coordinator.
 If the Coordinator finds a sealed state during its startup which it is unable to unseal using the host-specific SGX sealing key, it will wait for further instructions.
 You have two options:</p><ol><li><p>Recover the sealed state by uploading the recovery secret, which was encrypted for the <code>RecoveryKeys</code> defined in the Manifest</p><p>The recovery secret can be uploaded through the <code>/recover</code> client API endpoint. In order to do so a client needs to first extract the encrypted secret by decrypting it with the corresponding private key:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>base64 -d recovery_key_encrypted_base64 &gt; recovery_key_encrypted
 openssl pkeyutl -inkey private_key.pem -in recovery_key_encrypted -pkeyopt rsa_padding_mode:oaep -pkeyopt rsa_oaep_md:sha256 -decrypt -out recovery_key_decrypted
