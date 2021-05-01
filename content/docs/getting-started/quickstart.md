@@ -14,7 +14,7 @@ Finally, you will "mesh" one or more of your own services and setup a Manifest d
 
 {{<note>}}
 A working SGX DCAP environment is required for Marblerun to work. For the ease of exploring and testing we provide a simulation mode with `--simulation` that runs without SGX hardware.
-In this quickstart we deploy Marblerun in simulation mode. Be aware that this is not meant for poduction and runs without real SGX enclaves.
+In this quickstart we deploy Marblerun in simulation mode. Be aware that this is not meant for production and runs without real SGX enclaves.
 {{</note>}}
 
 ## Step 0: Setup
