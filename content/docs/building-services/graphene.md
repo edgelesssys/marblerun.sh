@@ -1,5 +1,5 @@
 ---
-title: "Building a service: Graphene"
+title: "Graphene"
 draft: false
 weight: 6
 ---
@@ -45,7 +45,7 @@ You can choose between the two, depending on your use case. The executable comes
 For a better illustration on the differences between the two premain variants, check out our ["Hello World" sample on GitHub.](https://github.com/edgelesssys/marblerun/tree/master/samples/graphene-hello)
 
 ### Host environment variables
-The premain needs access to some host [environment variables for configuration]({{< ref "docs/tasks/add-service.md#step-3-start-your-service" >}}):
+The premain needs access to some host [environment variables for configuration]({{< ref "docs/workflows/add-service.md#step-3-start-your-service" >}}):
 ```toml
 loader.insecure__use_host_env = 1
 ```

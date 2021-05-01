@@ -2,7 +2,7 @@
 title: "Monitoring and logging"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 8
+weight: 1
 ---
 
 # Monitoring and logging
@@ -12,8 +12,8 @@ It returns the following information.
 
 - **0 recovery mode**: Found a sealed state of an old seal key. Waiting for user input on [`/recover`]({{< ref "docs/features/recovery.md" >}}).
 - **1 uninitialized**: Fresh start, initializing the Coordinator.
-- **2 waiting for a manifest**: Waiting for user input on [`/manifest`]({{< ref "docs/tasks/set-manifest.md" >}})
-- **3 accepting marbles**: Accepting Marbles through the [Marble API]({{< ref "docs/tasks/add-service.md" >}})
+- **2 waiting for a manifest**: Waiting for user input on [`/manifest`]({{< ref "docs/workflows/set-manifest.md" >}})
+- **3 accepting marbles**: Accepting Marbles through the [Marble API]({{< ref "docs/workflows/add-service.md" >}})
 
 More details about the Coordinator can be retrieved through its log as follows.
 

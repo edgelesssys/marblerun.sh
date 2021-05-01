@@ -7,7 +7,7 @@ weight: 3
 
 # Secrets management
 
-The generation and the management of cryptographic keys and certificates for Marbles (i.e., containers running enclaves) are central duties of the Coordinator. Keys and certificates are passed to Marbles on startup via placeholders defined in the Manifest. You can learn more about this mechanism in our [setting a manifest hands-on]({{< ref "docs/tasks/set-manifest.md" >}}). Specifically, the Coordinator provides the following to Marbles.
+The generation and the management of cryptographic keys and certificates for Marbles (i.e., containers running enclaves) are central duties of the Coordinator. Keys and certificates are passed to Marbles on startup via placeholders defined in the Manifest. You can learn more about this mechanism in our [setting a manifest hands-on]({{< ref "docs/workflows/set-manifest.md" >}}). Specifically, the Coordinator provides the following to Marbles.
 
 * [Virtual sealing keys](#virtual-sealing-keys)
 * [Shared symmetric keys](#shared-symmetric-keys)
@@ -31,7 +31,7 @@ As with virtual sealing keys, care has to be taken to not repeat nonces between 
 
 ## TLS credentials
 
-The Coordinator will generate a private TLS key for each new Marble and issue a corresponding X.509 certificate. Both are injected through placeholders in the Manifest. The certificate is signed by the Coordinator's RootCA. Marbles use their TLS credentials to establish secure communication channels with other Marbles and external clients (i.e., user of your app). Clients only need to verify the Coordinator's RootCA once before they can securely communicate with any Marble, as is described in more detail in our [verification hands-on]({{< ref "docs/tasks/verification.md" >}}).
+The Coordinator will generate a private TLS key for each new Marble and issue a corresponding X.509 certificate. Both are injected through placeholders in the Manifest. The certificate is signed by the Coordinator's RootCA. Marbles use their TLS credentials to establish secure communication channels with other Marbles and external clients (i.e., user of your app). Clients only need to verify the Coordinator's RootCA once before they can securely communicate with any Marble, as is described in more detail in our [verification hands-on]({{< ref "docs/workflows/verification.md" >}}).
 
 {{<note>}}
 A Marble always receives fresh TLS credentials after a restart.

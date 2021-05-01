@@ -1,5 +1,5 @@
 ---
-title: "Building a service: EGo"
+title: "EGo"
 draft: false
 weight: 5
 ---
@@ -13,7 +13,7 @@ Future versions of EGo will support building Marblerun services with zero change
 
 ## Make your service use the provided TLS credentials
 
-If your service already uses TLS and gets the credentials from, e.g., a file, you just need to [adapt the Manifest]({{< ref "docs/tasks/add-service.md#make-your-service-use-the-provided-tls-credentials" >}}). Otherwise, you need to make small code changes.
+If your service already uses TLS and gets the credentials from, e.g., a file, you just need to [adapt the Manifest]({{< ref "docs/workflows/add-service.md#make-your-service-use-the-provided-tls-credentials" >}}). Otherwise, you need to make small code changes.
 
 We provide a convenience package called [github.com/edgelesssys/ego/marble](https://pkg.go.dev/github.com/edgelesssys/ego/marble#GetTLSConfig). With it, a service can automatically get and use its Marblerun TLS credentials. The following gives an example.
 ```Go

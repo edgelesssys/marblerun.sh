@@ -104,7 +104,7 @@ Both the provider and the users of the confidential application can use this end
 | Field value | Type   | Description                                                                                                                                                               |
 | ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Cert        | string | A PEM-encoded certificate chain containing the Coordinator's Root CA and Intermediate CA, which can be used for trust establishment between a client and the Coordinator. |
-| Quote       | string | Base64-encoded quote which can be used for Remote Attestation, as described in [Verifying a deployment]({{< ref "docs/tasks/verification.md" >}})                         |
+| Quote       | string | Base64-encoded quote which can be used for Remote Attestation, as described in [Verifying a deployment]({{< ref "docs/workflows/verification.md" >}})                     |
 {{</table>}}
 
 Example for retrieving a quote
@@ -141,7 +141,7 @@ wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinat
 
 For recovering the Coordinator in case unsealing the existing state failed.
 
-This API endpoint is only available when the coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/tasks/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
+This API endpoint is only available when the coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/additional-workflows/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
 
 Example for recovering the coordinator:
 
@@ -177,13 +177,13 @@ Example for getting the status:
 curl -k "https://$MARBLERUN/status"
 ```
 
-It may be useful to use this API endpoint and use it for other monitoring tools. More information can be found under [Monitoring and Logging]({{< ref "docs/tasks/monitoring.md" >}})
+It may be useful to use this API endpoint and use it for other monitoring tools. More information can be found under [Monitoring and Logging]({{< ref "docs/additional-workflows/monitoring.md" >}})
 
 #### /update
 
 For updating the packages specified in the currently set Manifest.
 
-This API endpoint only works when `Admins` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/tasks/update-manifest.md" >}})
+This API endpoint only works when `Admins` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/additional-workflows/update-manifest.md" >}})
 
 Example for updating the manifest:
 
