@@ -9,7 +9,6 @@ weight: 5
 
 Among others, the following features are planned for Marblerun.
 
-* Support for [Occlum](https://occlum.io/) to facilitate the porting of existing software
 * Splitting recovery key between a set of parties
 * Fault-tolerant distribution of the Coordinator
 * Transparent TLS for Marbles
