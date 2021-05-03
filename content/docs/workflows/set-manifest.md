@@ -2,7 +2,7 @@
 title: "Setting a Manifest"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 7
+weight: 2.1
 ---
 
 # Setting a Manifest

@@ -126,19 +126,19 @@ These flags apply to all `certificate` subcommands
 This command helps you if you want to add Graphene-based services to your Marblerun service mesh.
 It prepares your Graphene project to be used as a Marble.
 Given your [Graphene manifest template](https://graphene.readthedocs.io/en/latest/manifest-syntax.html), it will suggest the required adjustments needed and adds our bootstrapping data-plane code to your Graphene image.
-See [Building a service: Graphene]({{< ref "docs/tasks/build-service-graphene.md" >}}) for detailed information on Marblerun’s Graphene integration and our changes in your Graphene manifest.
+See [Building a service: Graphene]({{< ref "docs/building-services/graphene.md" >}}) for detailed information on Marblerun’s Graphene integration and our changes in your Graphene manifest.
 
 Please note that this only works on a best-effort basis and may not instantly work correctly.
 While suggestions should be made for every valid TOML Graphene configuration, changes can only be performed for non-hierarchically sorted configurations. as the official Graphene examples.
 The unmodified manifest is saved as a backup under the old path with an added ".bak" suffix, allowing you to try out and roll back any changes performed.
 
-Remember, you need to create a [Marblerun manifest]({{< ref "docs/tasks/define-manifest.md" >}}) in addition to the Graphene manifest. Adding Graphene packages to your manifest is straightforward and follows the same principles as any other SGX enclave.
+Remember, you need to create a [Marblerun manifest]({{< ref "docs/workflows/define-manifest.md" >}}) in addition to the Graphene manifest. Adding Graphene packages to your manifest is straightforward and follows the same principles as any other SGX enclave.
 
 This command supports two modes, **spawn** and **preload**.
 
 * **`spawn`**
 
-  Replaces the original entrypoint of your application with the bootstrapping Marble premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun. If you configured the arguments to your Graphene application through the [Graphene manifest](https://graphene.readthedocs.io/en/latest/manifest-syntax.html#command-line-arguments) before, you need to transfer those to the [Marblerun manifest]({{< ref "docs/tasks/define-manifest.md#manifestmarbles">}}).
+  Replaces the original entrypoint of your application with the bootstrapping Marble premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun. If you configured the arguments to your Graphene application through the [Graphene manifest](https://graphene.readthedocs.io/en/latest/manifest-syntax.html#command-line-arguments) before, you need to transfer those to the [Marblerun manifest]({{< ref "docs/workflows/define-manifest.md#manifestmarbles">}}).
 
   **Usage**
 
@@ -318,7 +318,7 @@ These flags apply to all sub commands of manifest
 
   Update a manifest by uploading an update manifest to the Marblerun coordinator.
   The original manifest has to define one or multiple Admins who are allowed to update the manifest.
-  For more information see [Update]({{< ref "docs/tasks/update-manifest.md" >}})
+  For more information see [Update]({{< ref "docs/additional-workflows/update-manifest.md" >}})
 
   **Usage**
 
@@ -511,7 +511,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 ## Command `recover`
 
 Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see [Recovery]({{< ref "docs/tasks/recover-coordinator.md" >}})
+For more information about coordinator recovery see [Recovery]({{< ref "docs/additional-workflows/recover-coordinator.md" >}})
 
 **Usage**
 

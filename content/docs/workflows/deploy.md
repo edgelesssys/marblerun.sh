@@ -83,4 +83,4 @@ If you are running with Minikube you can expose this service to localhost with `
 If you're using an ingress-controller or gateway for managing access to the coordinator-client-api service make sure you're enabling SNI for your TLS connections.
 
 * For the NGINX ingress controller add the [`nginx.ingress.kubernetes.io/ssl-passthrough`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#ssl-passthrough) annotation.
-* For Istio Gateways set the [tls-mode PASSTHROUGH](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-sni-passthrough/#configure-an-ingress-gateway)
+* For Istio Gateways set the [tls-mode PASSTHROUGH](https://istio.io/latest/docs/workflows/traffic-management/ingress/ingress-sni-passthrough/#configure-an-ingress-gateway)

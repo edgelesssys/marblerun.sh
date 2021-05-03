@@ -20,7 +20,7 @@ The flag `--no-sgx-injection` disables the label `marblerun/inject-sgx`. This is
 
 ## The Marbletype label
 
-In Marblerun, marbles (i.e, secure enclaves) are defined in the [manifest]({{< ref "docs/tasks/define-manifest.md" >}}). You need to reference marbles in your Kubernetes resource description as follows using the `marblerun/marbletype` label:
+In Marblerun, marbles (i.e, secure enclaves) are defined in the [manifest]({{< ref "docs/workflows/define-manifest.md" >}}). You need to reference marbles in your Kubernetes resource description as follows using the `marblerun/marbletype` label:
 
 ```javascript
 {

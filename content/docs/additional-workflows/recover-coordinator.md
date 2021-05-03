@@ -30,7 +30,7 @@ You have two options:
 
 2. Dismiss the sealed state by uploading a new Manifest
 
-    In case there is no desire to recover the old state it can simply be dismissed by [uploading a new manifest]({{< ref "docs/tasks/set-manifest.md" >}}).
+    In case there is no desire to recover the old state it can simply be dismissed by [uploading a new manifest]({{< ref "docs/workflows/set-manifest.md" >}}).
 
 {{<note>}}
 If a new Manifest is uploaded, the old state will be overwritten on disk and the `/recover` endpoint will not be available anymore.

@@ -19,7 +19,7 @@ In this quickstart we deploy Marblerun in simulation mode. Be aware that this is
 
 ## Step 0: Setup
 
-First, ensure you have access to a Kubernetes cluster and kubectl installed and configured. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/tasks/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
+First, ensure you have access to a Kubernetes cluster and kubectl installed and configured. Probably the easiest way to get started is to run Kubernetes on your local machine using [Minikube](https://kubernetes.io/docs/workflows/tools/install-minikube/). Another easy way is to use [Azure Kubernetes Service (AKS)](https://docs.microsoft.com/en-us/azure/aks/kubernetes-walkthrough-portal), which offers SGX-enabled nodes.
 
 You can validate your setup by running:
 
@@ -160,7 +160,7 @@ Voila! Your emoji votes have never been safer!
 Congratulations, you’re now a Marblerun user! Here are some suggested next steps:
 
 * Explore how [Marblerun takes care of your secrets]({{< ref "docs/features/secrets-management.md" >}})
-* [Add your own service]({{< ref "docs/tasks/add-service.md" >}}) to Marblerun
+* [Add your own service]({{< ref "docs/workflows/add-service.md" >}}) to Marblerun
 * Learn more about [Marblerun’s architecture]({{< ref "docs/getting-started/concepts.md" >}})
 * Chat with us on [Discord](https://discord.gg/rH8QTH56JN)
 
