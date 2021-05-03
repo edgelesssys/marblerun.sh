@@ -11,7 +11,7 @@ If you instead want to deploy Marblerun in your Kubernetes cluster please refer 
 
 ## Prerequisites
 
-* [Edgeless RT](https://github.com/edgelesssys/edgelessrt) is installed and sourced.
+* [EGo](https://github.com/edgelesssys/ego#install) is installed.
 
 ## Setup the Coordinator control plane
 
