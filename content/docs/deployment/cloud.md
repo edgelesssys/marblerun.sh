@@ -20,7 +20,7 @@ The description below uses a VM running Ubuntu 18.04.
 
 ### Prerequisites
 
-* [Update and install EdgelessRT](https://github.com/edgelesssys/edgelessrt#quick-start)
+* [Update and install EGo](https://github.com/edgelesssys/ego#install)
 * [Update and install the Azure DCAP client](https://docs.microsoft.com/en-us/azure/confidential-computing/quick-create-portal#3-install-the-intel-and-open-enclave-packages-and-dependencies)
 
 ### Deploy Marblerun
