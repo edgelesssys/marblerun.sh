@@ -1,6 +1,6 @@
 # Source code of marblerun.sh
 
-The website uses [Hugo](https://gohugo.io/). Updates to the *main* branch automatically update [www.marblerun.sh](www.marblerun.sh).
+The website uses [Hugo](https://gohugo.io/). Updates to the *main* branch automatically update [www.marblerun.sh](https://www.marblerun.sh).
 
 ## Dev environment using Gitpod
 
