@@ -56,7 +56,7 @@ We recommend starting with the following values which should work fine for light
 "max_num_of_threads": 64
 ```
 
-In case you are running into issues with memory demands, check out the [Resource Configuration guide](https://github.com/occlum/occlum/blob/master/docs/resource_config_guide.md) provided by the Occlum team to debug and resolve issues related to resource limits.
+In case you are running into issues with memory demands, check out the [Resource Configuration Guide](https://github.com/occlum/occlum/blob/master/docs/resource_config_guide.md) provided by the Occlum team to debug and resolve issues related to resource limits.
 
 ## Troubleshooting
 ### failed to reserve page summary memory
