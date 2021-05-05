@@ -10,6 +10,7 @@ weight: 10
 ## Version 0.3.2
 * CLI:
   * Add auto-complete support
+  * Add `sgxsdk-package-info`: Prints the package signature properties of an SGX SDK binary
   * Kubernetes SGX-device-plugin refactoring:
     * Don't install own device-plugin with Marblerun
     * Auto-detect installed device-plugin
