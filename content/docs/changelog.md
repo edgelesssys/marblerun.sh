@@ -7,6 +7,28 @@ weight: 10
 
 # Changelog
 
+## Version 0.3.2
+* CLI:
+  * Add auto-complete support
+  * Add `sgxsdk-package-info`: Prints the package signature properties of an SGX SDK binary
+  * Kubernetes SGX-device-plugin refactoring:
+    * Don't install own device-plugin with Marblerun
+    * Auto-detect installed device-plugin
+    * Add support for Intel's device-plugin
+* Marbles:
+  * EGo:
+    * Let EGo handle filesystem mounts
+  * Occlum:
+    * Add support for Occlum workloads
+  * Graphene:
+    * Use execve instead of posix_spawn due to performance
+    * Remove obsolete preload option for premain
+* Cleanup and improve BUILD.md
+* Cleanup and improve examples
+* Miscellaneous bug fixes
+  * Fix several issues with CLI when Marblerun runs in standalone mode
+  * Fallback to latest era-config if CLI can't find version running
+
 ## Version 0.3.1
 
 * Add CLI features:
