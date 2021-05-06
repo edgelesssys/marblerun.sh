@@ -6,9 +6,6 @@ weight: 2
 
 # Cloud deployment
 
-Marblerun without Intel SGX can be deployed on arbitrary cloud VMs. Please see
-our [quickstart]({{< ref "docs/getting-started/quickstart.md" >}}) guide for the details.
-
 To deploy Marblerun with Intel SGX, the cloud VM has to support Intel SGX.
 Please see the installation and usage guide for each cloud VM offering individually
 below (currently only for Microsoft Azure).
@@ -26,7 +23,7 @@ The description below uses a VM running Ubuntu 18.04.
 ### Deploy Marblerun
 
 You can run Marblerun standalone on your Azure DCsv2 VM, see our [standalone guide]({{< ref "docs/deployment/standalone.md" >}}).
-Alternatively, you can install a Kubernetes cluster, probably the simplest option would be [minikube](https://minikube.sigs.k8s.io/docs/start/), see our [Kubernetes deployment guide]({{< ref "docs/deployment/kubernetes.md" >}}) on how to install Marblerun in minikube.
+Alternatively, you can install a Kubernetes cluster, probably the simplest option would be [minikube](https://minikube.sigs.k8s.io/docs/start/), see our [Kubernetes guide]({{< ref "docs/deployment/kubernetes.md" >}}) on how to install Marblerun in minikube.
 
 ## Azure Kubernetes Services (AKS)
 
@@ -44,4 +41,4 @@ to provision an AKS cluster with Intel SGX enabled worker nodes.
 
 ### Deploy Marblerun
 
-See our [Kubernetes deployment guide]({{< ref "docs/deployment/kubernetes.md" >}}) on how to install Marblerun in your cluster.
+See our [Kubernetes guide]({{< ref "docs/deployment/kubernetes.md" >}}) on how to install Marblerun in your AKS cluster.

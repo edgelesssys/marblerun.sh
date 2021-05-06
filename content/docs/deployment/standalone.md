@@ -6,8 +6,7 @@ weight: 5
 
 # Standalone Marblerun deployment
 
-This guide explains how Marblerun can be deployed in a standalone way.
-If you instead want to deploy Marblerun in your Kubernetes cluster please refer to our [Kubernetes deployment guide]({{< ref "docs/deployment/kubernetes.md" >}}).
+This guide walks you through deploying Marblerun standalone.
 
 ## Prerequisites
 
@@ -50,7 +49,7 @@ See our guides for building [EGo]({{< ref "docs/building-services/ego.md" >}}) a
 You can then run your Marble as follows:
 
 ```bash
-EDG_MARBLE_TYPE=YOUR_MARBLE_TYPE erthost YOUR_MARBLE_BINARY
+EDG_MARBLE_TYPE=<your_marbler_type> erthost <your_marbler_binary>
 ```
 
 Per default, a Marble starts with the following default values. You can set your desired configuration by setting the environment variables.

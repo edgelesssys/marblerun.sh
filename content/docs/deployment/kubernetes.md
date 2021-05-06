@@ -6,10 +6,7 @@ weight: 4
 
 # Kubernetes Marblerun deployment
 
-While you can run Marblerun standalone, it was designed to be run inside Kubernetes.
-We provide a [CLI]({{< ref "docs/getting-started/cli.md" >}}) that facilitates the administrative tasks of Marblerun.
-However, you can of course deploy the Marblerun components manually and interact with the control plane's REST API directly.
-We show both options in the following.
+This guide walks you through setting up Marblerun in your Kubernetes cluster.
 
 ## Prerequisites
 
@@ -24,7 +21,7 @@ The SGX device plugin can either be deployed manually or as a DaemonSet in the c
 
 {{<note>}}
 If you are using a CC-enlightened, managed Kubernetes cluster, you will usually already have an SGX device plugin installed.
-For example, creating a confidential computing cluster on AKS has a preconfigured SGX device plugin. See [our cloud deployment guide]({{< ref "docs/deployment/cloud.md#azure-kubernetes-services" >}}) for more information on AKS.
+For example, creating a confidential computing cluster on AKS has a preconfigured SGX device plugin.
 {{</note>}}
 
 ### Manually deploying an SGX device plugin
@@ -59,6 +56,7 @@ spec:
           limits:
             sgx.intel.com/epc: 10
 ```
+
 Note, that every plugin uses its own way of injecting SGX resources into deployments. Please refer to the documentation for your plugin of choice. This is an example of the Intel plugin.
 
 Marblerun supports [automatic injection]({{< ref "docs/features/auto-injection.md" >}}) of those values for a selection of popular plugins:
@@ -84,7 +82,8 @@ You can follow [the AKS guide](https://docs.microsoft.com/en-us/azure/confidenti
 
 ## Option 1: Install with the Marblerun CLI
 
-You can install Marblerun using the command line interface as follows:
+We provide a [CLI]({{< ref "docs/getting-started/cli.md" >}}) that facilitates the administrative tasks of Marblerun.
+You can install Marblerun using the CLI as follows:
 
 * For a cluster with SGX support:
 
@@ -152,9 +151,6 @@ For more information see our [concepts section]({{< ref "docs/getting-started/co
 
 The Coordinator is now in a pending state, waiting for a Manifest.
 See the [`how to add a service`]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
-You can communicate with the [client API]({{< ref "docs/getting-started/coordinator.md#client-api" >}}) directly or use the [CLI](({{< ref "docs/getting-started/cli.md" >}})) for future tasks.
-
-
 ## (Optional) Exposing the client API
 
 The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 4433.
