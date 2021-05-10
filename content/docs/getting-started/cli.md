@@ -419,7 +419,43 @@ These flags apply to all sub commands of manifest
 
   The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun coordinator.
   Note, that Internally, the coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
-  You can quickly verify the integrity of the installed manifest by comparing the output of `marblerun manifest signature` on your local version and the signature returned by `marblerun manifest get` of the coordinator's version.
+  You can quickly verify the integrity of the installed manifest by comparing the output of `marblerun manifest signature` on your local version and the signature returned by `marblerun manifest get` of the coordinator's version, or by passing the signature to the `marblerun manifest verify` command.
+
+* ### `verify`
+
+  Verify the signature of a Marblerun manifest.
+  This command compares the signature of a set manifest, as returned over the `/manifest` endpoint, to a local signature
+
+  **Usage**
+
+  ```bash
+  marblerun manifest verify <manifest/signature> <IP:PORT>
+  ```
+
+  You can pass the local manifest to reference in either YAML or JSON format. Additionally you may directly pass a signature instead of filepath.
+
+  **Examples**
+
+  ```bash
+  marblerun manifest verify manifest.json $MARBLERUN
+  ```
+  
+  If the Coordinator is running the configuration from `manifest.json` the output is the following:
+  ```bash
+  OK
+  ```
+
+  Assuming the signature of a given manifest is `6237be3a963c5ca60031e93d190a38b8b642e891b4d5b19f909a72345faaea30`
+  ```bash
+  marblerun manifest verify 6237be3a963c5ca60031e93d190a38b8b642e891b4d5b19f909a72345faaea30 $MARBLERUN
+  ```
+
+  If the Coordinator is running a manifest with the previous signature the outputs is the following:
+  ```bash
+  OK
+  ```
+
+
 
 ## Command `namespace`
 
