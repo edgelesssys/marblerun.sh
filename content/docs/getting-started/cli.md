@@ -150,7 +150,7 @@ Once enabled, command completion is just one key press away:\
 
 ## Command `graphene-prepare`
 This command helps you if you want to add Graphene-based services to your Marblerun service mesh.
-It prepares your Graphene project to be used as a Marble.
+It prepares your Graphene project to be used as a Marble by replacing the original entrypoint of your application with the bootstrapping Marble premain process which eventually spawns your application.
 Given your [Graphene manifest template](https://graphene.readthedocs.io/en/latest/manifest-syntax.html), it will suggest the required adjustments needed and adds our bootstrapping data-plane code to your Graphene image.
 See [Building a service: Graphene]({{< ref "docs/building-services/graphene.md" >}}) for detailed information on Marblerun’s Graphene integration and our changes in your Graphene manifest.
 
@@ -158,23 +158,17 @@ Please note that this only works on a best-effort basis and may not instantly wo
 While suggestions should be made for every valid TOML Graphene configuration, changes can only be performed for non-hierarchically sorted configurations. as the official Graphene examples.
 The unmodified manifest is saved as a backup under the old path with an added ".bak" suffix, allowing you to try out and roll back any changes performed.
 
-Remember, you need to create a [Marblerun manifest]({{< ref "docs/workflows/define-manifest.md" >}}) in addition to the Graphene manifest. Adding Graphene packages to your manifest is straightforward and follows the same principles as any other SGX enclave.
-
-This command supports two modes, **spawn** and **preload**.
-
-* **`spawn`**
-
-  Replaces the original entrypoint of your application with the bootstrapping Marble premain process which eventually spawns your application. Dedicates argv provisioning to Marblerun. If you configured the arguments to your Graphene application through the [Graphene manifest](https://graphene.readthedocs.io/en/latest/manifest-syntax.html#command-line-arguments) before, you need to transfer those to the [Marblerun manifest]({{< ref "docs/workflows/define-manifest.md#manifestmarbles">}}).
+Remember, you need to create a [Marblerun manifest]({{< ref "docs/workflows/define-manifest.md" >}}) in addition to the Graphene manifest. Adding Graphene packages to your manifest is straightforward and follows the same principles as any other SGX enclave. If you configured the arguments to your Graphene application through the [Graphene manifest](https://graphene.readthedocs.io/en/latest/manifest-syntax.html#command-line-arguments) before, you need to transfer those to the [Marblerun manifest]({{< ref "docs/workflows/define-manifest.md#manifestmarbles">}}).
 
   **Usage**
 
   ```bash
-  marblerun graphene-prepare spawn <path>
+  marblerun graphene-prepare <path>
   ```
 
   **Examples**
   ```bash
-  marblerun graphene-prepare spawn nginx.manifest.template
+  marblerun graphene-prepare nginx.manifest.template
   ```
 
   Output:
@@ -199,43 +193,6 @@ This command supports two modes, **spawn** and **preload**.
 
   Done! You should be good to go for Marblerun!
   ```
-
-* **`preload`**
-
-  Adds the premain as a shared library loaded during the launch of your application via LD_PRELOAD. Allows for a faster launch than `spawn` and delegates more features to Graphene (but restricts Marblerun's functionalities), making it the quickest way to adapt your existing application. However, features such as argv provisioning cannot be used in Marblerun anymore in this mode.
-
-  **Usage**
-  ```bash
-  marblerun graphene-prepare preload <path>
-  ```
-
-  **Examples**
-  ```bash
-  marblerun graphene-prepare preload nginx.manifest.template
-  ```
-
-  Output:
-  ```bash
-  Reading file: nginx.manifest.template
-
-  Marblerun suggests the following changes to your Graphene manifest:
-  loader.env.LD_PRELOAD = "./premain-graphene.so"
-  loader.insecure__use_host_env = 1
-  sgx.allowed_files.marblerun_uuid = "file:uuid"
-  sgx.enclave_size = "1024M"
-  sgx.remote_attestation = 1
-  sgx.thread_num = 16
-  sgx.trusted_files.marblerun_premain = "file:premain-graphene.so"
-  Do you want to automatically apply the suggested changes [y/n]? y
-  Applying changes...
-  Saving original manifest as nginx.manifest.template.bak...
-  Saving changes to nginx.manifest.template...
-  Downloading Marblerun premain from GitHub...
-  Successfully downloaded premain-graphene.so.
-
-  Done! You should be good to go for Marblerun!
-  ```
-
 
 ## Command `install`
 
