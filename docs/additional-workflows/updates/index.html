@@ -4,23 +4,26 @@
 <a href=/docs/getting-started/concepts/ class=d-block>Concepts</a>
 <a href=/docs/getting-started/coordinator/ class=d-block>Coordinator</a>
 <a href=/docs/getting-started/marbles/ class=d-block>Marbles</a>
-<a href=/docs/getting-started/cli/ class=d-block>CLI</a>
-<a href=/docs/getting-started/sgx-device-plugin/ class=d-block>SGX device plugin</a></div><div class=mb-3><h6>Features</h6><a href=/docs/features/attestation/ class=d-block>Attestation</a>
+<a href=/docs/getting-started/cli/ class=d-block>CLI</a></div><div class=mb-3><h6>Features</h6><a href=/docs/features/attestation/ class=d-block>Attestation</a>
 <a href=/docs/features/recovery/ class=d-block>Recovery</a>
 <a href=/docs/features/secrets-management/ class=d-block>Secrets management</a>
 <a href=/docs/features/auto-injection/ class=d-block>Kubernetes integration</a>
 <a href=/docs/features/runtimes/ class=d-block>Supported runtimes</a>
-<a href=/docs/features/planned-features/ class=d-block>Planned features</a></div><div class=mb-3><h6>Core workflows</h6><a href=/docs/workflows/deploy/ class=d-block>Deploying Marblerun</a>
-<a href=/docs/workflows/define-manifest/ class=d-block>Defining a Manifest</a>
+<a href=/docs/features/planned-features/ class=d-block>Planned features</a></div><div class=mb-3><h6>Deployment</h6><a href=/docs/deployment/cloud/ class=d-block>Cloud</a>
+<a href=/docs/deployment/on-prem/ class=d-block>On-premises</a>
+<a href=/docs/deployment/kubernetes/ class=d-block>Kubernetes</a>
+<a href=/docs/deployment/standalone/ class=d-block>Standalone</a></div><div class=mb-3><h6>Core workflows</h6><a href=/docs/workflows/define-manifest/ class=d-block>Defining a Manifest</a>
 <a href=/docs/workflows/set-manifest/ class=d-block>Setting a Manifest</a>
 <a href=/docs/workflows/add-service/ class=d-block>Adding a service</a>
 <a href=/docs/workflows/verification/ class=d-block>Verifying a deployment</a></div><div class=mb-3><h6>Additional workflows</h6><a href=/docs/additional-workflows/monitoring/ class=d-block>Monitoring and logging</a>
 <a href=/docs/additional-workflows/update-manifest/ class=d-block>Updating a Manifest</a>
 <a href=/docs/additional-workflows/updates/ class="d-block text-primary">> Updating a deployment</a>
 <a href=/docs/additional-workflows/recover-coordinator/ class=d-block>Recovering the Coordinator</a></div><div class=mb-3><h6>Building services</h6><a href=/docs/building-services/ego/ class=d-block>EGo</a>
-<a href=/docs/building-services/graphene/ class=d-block>Graphene</a></div><div class=mb-3><h6>Examples</h6><a href=/docs/examples/helloworld/ class=d-block>Hello world</a>
+<a href=/docs/building-services/graphene/ class=d-block>Graphene</a>
+<a href=/docs/building-services/occlum/ class=d-block>Occlum</a></div><div class=mb-3><h6>Examples</h6><a href=/docs/examples/helloworld/ class=d-block>Hello world</a>
 <a href=/docs/examples/emojivoto/ class=d-block>Emoji voting</a>
-<a href=/docs/examples/graphene/ class=d-block>Graphene-based examples</a></div><div class=mb-3><a href=/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=updating-a-deployment>Updating a deployment</h1><p>The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.</p><h2 id=updating-to-a-new-marblerun-version>Updating to a new Marblerun version</h2><p>When updating to a new Marblerun version, updates to both the control plane and data plane components may be required.</p><h3 id=updating-the-coordinator>Updating the Coordinator</h3><p>Updating the Coordinator follows the regular steps for <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment>updating a deployment in Kubernetes</a>.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n marblerun <span style=color:#366>set</span> image deployment/marblerun-coordinator <span style=color:#033>coordinator</span><span style=color:#555>=</span>ghcr.io/edgelesssys/coordinator:v0.2.0 --record
+<a href=/docs/examples/graphene/ class=d-block>Graphene-based examples</a>
+<a href=/docs/examples/occlum/ class=d-block>Occlum-based example</a></div><div class=mb-3><a href=/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=updating-a-deployment>Updating a deployment</h1><p>The following gives a walkthrough of typical deployment updates in a Kubernetes cluster and how to handle them with Marblerun.</p><h2 id=updating-to-a-new-marblerun-version>Updating to a new Marblerun version</h2><p>When updating to a new Marblerun version, updates to both the control plane and data plane components may be required.</p><h3 id=updating-the-coordinator>Updating the Coordinator</h3><p>Updating the Coordinator follows the regular steps for <a href=https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment>updating a deployment in Kubernetes</a>.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>kubectl -n marblerun <span style=color:#366>set</span> image deployment/marblerun-coordinator <span style=color:#033>coordinator</span><span style=color:#555>=</span>ghcr.io/edgelesssys/coordinator:v0.2.0 --record
 </code></pre></div><p>You can also use Helm to upgrade the image. Note that Helm requires you to pass all the flags with <code>upgrade</code> that you set during the initial deployment.</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>helm upgrade marblerun-coordinator edgeless/marblerun-coordinator <span style=color:#c30;font-weight:700>\
 </span><span style=color:#c30;font-weight:700></span>    -n marblerun <span style=color:#c30;font-weight:700>\
 </span><span style=color:#c30;font-weight:700></span>    --set coordinator.coordinatorImageVersion<span style=color:#555>=</span>v0.2.0

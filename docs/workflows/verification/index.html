@@ -4,23 +4,26 @@
 <a href=/docs/getting-started/concepts/ class=d-block>Concepts</a>
 <a href=/docs/getting-started/coordinator/ class=d-block>Coordinator</a>
 <a href=/docs/getting-started/marbles/ class=d-block>Marbles</a>
-<a href=/docs/getting-started/cli/ class=d-block>CLI</a>
-<a href=/docs/getting-started/sgx-device-plugin/ class=d-block>SGX device plugin</a></div><div class=mb-3><h6>Features</h6><a href=/docs/features/attestation/ class=d-block>Attestation</a>
+<a href=/docs/getting-started/cli/ class=d-block>CLI</a></div><div class=mb-3><h6>Features</h6><a href=/docs/features/attestation/ class=d-block>Attestation</a>
 <a href=/docs/features/recovery/ class=d-block>Recovery</a>
 <a href=/docs/features/secrets-management/ class=d-block>Secrets management</a>
 <a href=/docs/features/auto-injection/ class=d-block>Kubernetes integration</a>
 <a href=/docs/features/runtimes/ class=d-block>Supported runtimes</a>
-<a href=/docs/features/planned-features/ class=d-block>Planned features</a></div><div class=mb-3><h6>Core workflows</h6><a href=/docs/workflows/deploy/ class=d-block>Deploying Marblerun</a>
-<a href=/docs/workflows/define-manifest/ class=d-block>Defining a Manifest</a>
+<a href=/docs/features/planned-features/ class=d-block>Planned features</a></div><div class=mb-3><h6>Deployment</h6><a href=/docs/deployment/cloud/ class=d-block>Cloud</a>
+<a href=/docs/deployment/on-prem/ class=d-block>On-premises</a>
+<a href=/docs/deployment/kubernetes/ class=d-block>Kubernetes</a>
+<a href=/docs/deployment/standalone/ class=d-block>Standalone</a></div><div class=mb-3><h6>Core workflows</h6><a href=/docs/workflows/define-manifest/ class=d-block>Defining a Manifest</a>
 <a href=/docs/workflows/set-manifest/ class=d-block>Setting a Manifest</a>
 <a href=/docs/workflows/add-service/ class=d-block>Adding a service</a>
 <a href=/docs/workflows/verification/ class="d-block text-primary">> Verifying a deployment</a></div><div class=mb-3><h6>Additional workflows</h6><a href=/docs/additional-workflows/monitoring/ class=d-block>Monitoring and logging</a>
 <a href=/docs/additional-workflows/update-manifest/ class=d-block>Updating a Manifest</a>
 <a href=/docs/additional-workflows/updates/ class=d-block>Updating a deployment</a>
 <a href=/docs/additional-workflows/recover-coordinator/ class=d-block>Recovering the Coordinator</a></div><div class=mb-3><h6>Building services</h6><a href=/docs/building-services/ego/ class=d-block>EGo</a>
-<a href=/docs/building-services/graphene/ class=d-block>Graphene</a></div><div class=mb-3><h6>Examples</h6><a href=/docs/examples/helloworld/ class=d-block>Hello world</a>
+<a href=/docs/building-services/graphene/ class=d-block>Graphene</a>
+<a href=/docs/building-services/occlum/ class=d-block>Occlum</a></div><div class=mb-3><h6>Examples</h6><a href=/docs/examples/helloworld/ class=d-block>Hello world</a>
 <a href=/docs/examples/emojivoto/ class=d-block>Emoji voting</a>
-<a href=/docs/examples/graphene/ class=d-block>Graphene-based examples</a></div><div class=mb-3><a href=/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=verifying-a-deployment>Verifying a deployment</h1><p>An important feature of Marblerun is providing the ability to verifying the confidentiality and integrity of the whole application on the client-side.
+<a href=/docs/examples/graphene/ class=d-block>Graphene-based examples</a>
+<a href=/docs/examples/occlum/ class=d-block>Occlum-based example</a></div><div class=mb-3><a href=/docs/changelog/ class=d-block>Changelog</a></div></div></div><div class="col-12 col-lg-9"><article><h1 id=verifying-a-deployment>Verifying a deployment</h1><p>An important feature of Marblerun is providing the ability to verifying the confidentiality and integrity of the whole application on the client-side.
 To that end, we provide a simple REST-API that clients can use before interacting with the application.</p><h2 id=establishing-trust>Establishing trust</h2><p>The first step is to establish trust with the whole microservice mesh.
 Therefore, Marblerun exposes the <code>/quote</code> endpoint that returns a quote and a certificate chain consisting of a root CA and an intermediate CA for the whole mesh. The root CA stays fixed over the whole lifetime of the Coordinator&rsquo;s configuration, while the intermediate CA changes in case you update the packages specified in your Manifest. For more information, see <a href=https://marblerun.sh/docs/additional-workflows/update-manifest/>Updating a Manifest</a>.</p><p>Verifying the quote can be done manually, but to ease the process we provide the Edgeless Remote Attestation tools (<a href=https://github.com/edgelesssys/era>era</a>) for this purpose:</p><div class=highlight><pre style=background-color:#f0f3f3;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#09f;font-style:italic># Either install era for the current user</span>
 wget -P ~/.local/bin https://github.com/edgelesssys/era/releases/latest/download/era
