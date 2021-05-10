@@ -6,9 +6,7 @@ weight: 2
 
 # Cloud deployment
 
-To deploy Marblerun with Intel SGX, the cloud VM has to support Intel SGX.
-Please see the installation and usage guide for each cloud VM offering individually
-below (currently only for Microsoft Azure).
+This guide walks you through setting up Marblerun on different CSP offerings individually.
 
 ## Azure confidential computing VMs
 
