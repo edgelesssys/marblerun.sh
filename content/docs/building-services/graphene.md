@@ -35,7 +35,7 @@ The premain needs access to some host [environment variables for configuration](
 ```toml
 loader.insecure__use_host_env = 1
 ```
-The premain will remove all other variables before the actual application is launched, so this is secure.
+The premain will remove all other variables before the actual application is launched, but there may still be risks. Don't use this on production until [secure forwarding of host environment variables](https://github.com/oscarlab/graphene/issues/2356) will be available.
 
 ### uuid file
 The Marble must be able to store its uuid:
