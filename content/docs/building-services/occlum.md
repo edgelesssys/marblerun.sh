@@ -8,7 +8,7 @@ weight: 6
 Running an Occlum app with Marblerun requires some changes to its manifest.
 
 ## Requirements
-Set up an environment to create Occlum images. For an easy start, we recommend that you use either [the official Occlum Docker image](https://hub.docker.com/r/occlum/occlum), or [use our provided Dockerfile](https://github.com/edgelesssys/marblerun/blob/master/samples/occlum-hello/Dockerfile). For a working DCAP remote attestation environment we recommend [our cloud deployment guide]({{< ref "/docs/deployment/cloud.md">}}).
+Set up an environment to create Occlum images. For an easy start, we recommend that you use either [the official Occlum Docker image](https://hub.docker.com/r/occlum/occlum) or [use our provided Dockerfile](https://github.com/edgelesssys/marblerun/blob/master/samples/occlum-hello/Dockerfile). For a working DCAP remote attestation environment we recommend [our cloud deployment guide]({{< ref "/docs/deployment/cloud.md">}}).
 
 To build your service, you can start with Occlum's [Introduction](https://github.com/occlum/occlum#introduction) to get your application up and running, and then come back here to adapt it for use with Marblerun.
 
@@ -26,7 +26,7 @@ To pass environment variables to the enclave, Occlum requires them to be specifi
 You can provide default (hardcoded) values under `default`, and you may also define them additionally as `untrusted` in case you want to allow changes to the Marble configuration after build time.
 
 For example, this configuration:
-```json
+```javascript
 "env": {
     "default": [
         "OCCLUM=yes",
@@ -50,7 +50,7 @@ will allow you both to embed the expected default values during build time, but 
 The premain process is written in Go. The enclave needs to have enough resources for the Go runtime, plus additional memory to launch your application.
 
 We recommend starting with the following values which should work fine for light-wight to medium memory demanding applications:
-```json
+```javascript
 "user_space_size": "2048MB",
 "default_mmap_size": "900MB"
 "max_num_of_threads": 64
@@ -59,16 +59,13 @@ We recommend starting with the following values which should work fine for light
 In case you are running into issues with memory demands, check out the [Resource Configuration Guide](https://github.com/occlum/occlum/blob/master/docs/resource_config_guide.md) provided by the Occlum team to debug and resolve issues related to resource limits.
 
 ## Troubleshooting
-### failed to reserve page summary memory
-If you receive the following fatal error during launch of your Occlum image:
-```
-fatal error: failed to reserve page summary memory
-```
+### `fatal error: failed to reserve page summary memory`
 
-Make sure you allocated enough memory in `Occlum.json` [as described above](#resource-limits). The most important parameters are `user_space_size` and `default_mmap_size`.
+If you receive this error during the launch of your Occlum image, make sure you allocated enough memory in `Occlum.json` [as described above](#resource-limits). The most important parameters are `user_space_size` and `default_mmap_size`.
 
-### ERROR: The entrypoint does not seem to exist
-If you receive this error message after the Marblerun premain executed:
+### `ERROR: The entrypoint does not seem to exist`
+
+If you receive the following error message after the Marblerun premain executed:
 ```
 ERROR: The entrypoint does not seem to exist: '/bin/your_application'
 Please make sure that you define a valid entrypoint in your manifest (for example: /bin/hello_world).
