@@ -40,7 +40,7 @@ To install the CLI manually, run:
 ### For the current user
 
 ```bash
-wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
+wget -P ~/.local/bin https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 chmod +x ~/.local/bin/marblerun
 ```
 

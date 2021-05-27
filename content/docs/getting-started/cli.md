@@ -13,7 +13,7 @@ To install the Marblerun CLI on your machine you can use our pre-built binaries.
 ### For the current user
 
 ```bash
-wget -P ~/.local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
+wget -P ~/.local/bin https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 chmod +x ~/.local/bin/marblerun
 ```
 
