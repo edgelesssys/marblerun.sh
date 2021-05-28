@@ -12,10 +12,10 @@ To that end, we provide a simple REST-API that clients can use before interactin
 
 ## Establishing trust
 
-The first step is to establish trust with the whole microservice mesh.
-Therefore, Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root CA and an intermediate CA for the whole mesh. The root CA stays fixed over the whole lifetime of the Coordinator's configuration, while the intermediate CA changes in case you update the packages specified in your Manifest. For more information, see [Updating a Manifest]({{< ref "docs/additional-workflows/update-manifest.md" >}}).
+The first step is to establish trust in the deployment.
+Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root CA and an intermediate CA for the deployment. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you update the packages specified in your Manifest. For more information, see [Updating a Manifest]({{< ref "docs/additional-workflows/update-manifest.md" >}}).
 
-Verifying the quote can be done manually, but to ease the process we provide the Edgeless Remote Attestation tools ([era](https://github.com/edgelesssys/era)) for this purpose:
+The simplest way to verify the quote is via the Edgeless Remote Attestation ([era](https://github.com/edgelesssys/era)) tools:
 
 ```bash
 # Either install era for the current user

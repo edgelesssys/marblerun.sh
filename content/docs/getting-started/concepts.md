@@ -26,8 +26,6 @@ When we started looking into the concept of *confidential microservices*, we rea
 * How to establish secure connections between services within a cluster based on remote attestation?
 * How to securely and safely restart and migrate services between nodes?
 
-Ultimately, a *confidential service mesh* should enable *distributed confidential apps* that can be used, managed, and deployed with the ease of a *confidential monolith*.
-
 ## Marblerun approach
 
 Most general-purpose service meshes are implemented using so-called *sidecars*. The most prevalent sidecar is probably [Envoy](https://www.envoyproxy.io/).

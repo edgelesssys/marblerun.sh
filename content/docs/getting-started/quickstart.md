@@ -10,7 +10,7 @@ weight: 1
 In this guide, we’ll walk you through how to install Marblerun into your Kubernetes cluster. Then we’ll deploy a sample confidential application to demonstrate the capabilities of Marblerun.
 
 Installing Marblerun is easy. First, you will install the CLI (command-line interface) onto your local machine. Using this CLI, you’ll then install the control plane onto your Kubernetes cluster.
-Finally, you will "mesh" one or more of your own services and setup a Manifest defining your confidential service mesh.
+Finally, you will add your own services and set up a corresponding Manifest.
 
 {{<note>}}
 A working SGX DCAP environment is required for Marblerun to work. For the ease of exploring and testing we provide a simulation mode with `--simulation` that runs without SGX hardware.
@@ -80,8 +80,8 @@ This command will wait until all components of Marblerun are ready to be used or
 
 ## Step 3: Initialize and verify the Coordinator
 
-After installing the Coordinator we need to verify its integrity and establish trust in a confidential computing sense.
-Therefore, we utilize SGX remote attestation and obtain a root certificate for the entire confidential service mesh.
+After installing the Coordinator we need to verify its integrity.
+For this, we utilize SGX remote attestation and obtain the Coordinator's root certificate.
 
 1. Port forward the Coordinator's Client API
 

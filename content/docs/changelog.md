@@ -48,7 +48,7 @@ weight: 10
 
 * Add support for privileged Client API endpoints
 * Allow increasing the minimum required `SecurityVersion` for packages after a manifest has been set initially (also referred to as 'Manifest Update')
-* Add an intermediate certificate to the Marblerun certificate chain. Keep the root certificate permanent and change the intermediate with each manifest update. Return the whole cert-chain on the client API. Clients can pin the intermediate for automatically catching a manifest update. Alternatively, they can pin the root certificate that will be valid for the lifetime of the service mesh.
+* Add an intermediate certificate to the Marblerun certificate chain. Keep the root certificate permanent and change the intermediate with each manifest update. Return the whole cert-chain on the client API. Clients can pin the intermediate CA for automatically catching a manifest update. Alternatively, they can pin the root certificate that will be valid for the lifetime of  the deployment.
 * Add a command-line interface (`CLI`) for administrating Marblerun
 * Add integration for `Graphene`-based Marbles
 * Add a Kubernetes mutating admission webhook as `marble-injector` service for automatically providing Pods with their Marble configuration

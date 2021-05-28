@@ -13,7 +13,7 @@ Yet, updates play an important role to ensure your software stays secure. To avo
 ## Requirements
 In order to deploy an Update Manifest, the original Manifest, you need to be in possession of a certificate/private key pair which has been defined in the `Admins` section of the original Manifest, as described in ["Defining a Manifest"]({{< ref "docs/workflows/define-Manifest.md#manifestmarbles" >}}).
 
-If no administrator has been initially set up, no Manifest Updates can be performed, meaning you have to redeploy your service mesh.
+If no administrator has been initially set up, no Manifest Updates can be applied.
 
 ## Defining an Update Manifest
 The format of an Update Manifest follows the syntax of the original Manifest, though it only expects to contain a package name and a new `SecurityVersion` value set for it.
@@ -54,7 +54,7 @@ If you now want to update the minimum required version for `pkg1`, the complete 
 
 Please do not define other values except than `SecurityVersion` value for a package, as Marblerun will refuse to accept such an Update Manifest.
 
-Also, if an Update Manifest was already set and you want to deploy another update on top of it too, you can! Just make sure that the new Update Manifest contains each specified package as the old one does, and that the `SecurityVersion` is indeed higher than defined in the previous Update Manifest, as downgrades are obviously not supported for security reasons without completely redeploying your service mesh.
+Also, if an Update Manifest was already set and you want to deploy another update on top of it too, you can! Just make sure that the new Update Manifest contains each specified package as the old one does, and that the `SecurityVersion` is indeed higher than defined in the previous Update Manifest, as downgrades are not supported for security reasons.
 
 ## Deploying an Update Manifest
 Similar to other operations, an Update Manifest can be deployed e.g. with the help of the CLI. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
