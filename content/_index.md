@@ -12,7 +12,7 @@ buttons:
     url: '/community/'
 news:
   title: "Announcing [Marblerun 0.3.2](/docs/changelog/)"
-  content: "Adds support for [Occlum](https://www.occlum.io)! Check out the [example](/docs/examples/occlum/)."
+  content: "Adds support for [Occlum](https://www.occlum.io)! Check out the [blog post](https://edgelesssys.medium.com/marblerun-now-supports-occlum-even-more-confidential-computing-at-scale-2f6dd17e00c0)."
 features_list:
   items:
     - title: Everything always encrypted
@@ -38,7 +38,7 @@ features_list:
     - title: Open source and open standards
       icon: fab fa-github
       description:
-        Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/). It has support for [EGo](https://www.ego.dev/) and [Graphene](https://github.com/oscarlab/graphene) based services.
+        Marblerun is open source and builds upon the industry standard [Open Enclave](https://openenclave.io/sdk/). It has support for [EGo](https://www.ego.dev/), [Graphene](https://github.com/oscarlab/graphene), and [Occlum](https://occlum.io) based services.
 blog_list:
   items:
     - title: "[Why confidential computing?](https://edgelesssys.medium.com/why-we-need-a-service-mesh-for-confidential-computing-part-1-3-28f4bd6df679)"
@@ -49,4 +49,6 @@ blog_list:
       description: We describe key features and the architecture of Marblerun.
     - title: "[Running Graphene on Marblerun](https://medium.com/edgelesssystems/marblerun-now-supports-graphene-thus-your-favorite-programming-language-a8b8a36787a0)"
       description: We give an intro to Marblerun's support for Graphene-based applications.
+    - title: "[Running Occlum on Marblerun](https://medium.com/edgelesssystems/marblerun-now-supports-graphene-thus-your-favorite-programming-language-a8b8a36787a0)"
+      description: We give an intro to Marblerun's support for Occlum-based applications.
 ---
