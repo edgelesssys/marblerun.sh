@@ -11,8 +11,8 @@ buttons:
     caption: Join the community
     url: '/community/'
 news:
-  title: "Announcing [Marblerun 0.3.0](/docs/changelog/)"
-  content: "Adds support for [Graphene-based services](/docs/examples/graphene/) and an [easy-to-use CLI](/docs/getting-started/cli/)."
+  title: "Announcing [Marblerun 0.3.2](/docs/changelog/)"
+  content: "Adds support for [Occlum](https://www.occlum.io)! Check out the [example](/docs/examples/occlum/)."
 features_list:
   items:
     - title: Everything always encrypted

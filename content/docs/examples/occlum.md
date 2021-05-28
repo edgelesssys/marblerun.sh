@@ -1,10 +1,9 @@
 ---
-title: "Occlum-based example"
+title: "Occlum-based examples"
 draft: false
 weight: 3
 ---
 
-# Occlum-based example
+# Occlum-based examples
 
-To get you started to port your Occlum application for use with Marblerun, we offer you an example with an [a "Hello World" application](https://github.com/edgelesssys/marblerun/tree/master/samples/occlum-hello).
-Checkout the provided manifests and the Makefile to get an understanding of how an Occlum application can be integrated within Marblerun.
+* A ["hello world"](https://github.com/edgelesssys/marblerun/tree/master/samples/occlum-hello) app to get you started. 👋🌎
