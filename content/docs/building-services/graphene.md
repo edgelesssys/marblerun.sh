@@ -5,7 +5,7 @@ weight: 6
 ---
 
 # Building a service: Graphene
-Running a Graphene app with Marblerun requires some changes to its manifest. These are explained in the following. See also the [helloworld example]({{< ref "docs/examples/graphene.md" >}}).
+Running a Graphene app with Marblerun requires some changes to its manifest. These are explained in the following. See also the [helloworld example](https://github.com/edgelesssys/marblerun/tree/master/samples/graphene-hello).
 
 ## Requirements
 First, get Graphene up and running. You can use either the [Building](https://graphene.readthedocs.io/en/latest/building.html) or [Cloud Deployment](https://graphene.readthedocs.io/en/latest/cloud-deployment.html) guide to build and initially setup Graphene.
@@ -77,7 +77,7 @@ You can specify the files' content in the Marblerun Manifest:
 ```
 Note that Graphene requires to initialize the protected files key by writing it hex-encoded to the virtual `protected_files_key` device. This can be easily done through the above manifest configuration.
 
-You can see this in action in the [nginx example]({{< ref "docs/examples/graphene.md" >}}).
+You can see this in action in the [nginx example](https://github.com/edgelesssys/marblerun/tree/master/samples/graphene-nginx).
 
 ## Troubleshooting
 ### aesm_service returned error: 30

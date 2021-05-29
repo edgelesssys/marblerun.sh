@@ -7,4 +7,4 @@ weight: 4
 
 # Marbles
 
-Marbles represent the data plane in Marblerun and run your actual application code in secure enclaves within otherwise normal Docker containers. Marbles communicate with the Coordinator via gRPC over TLS. See the [Add a Service]({{< ref "docs/workflows/add-service.md" >}}) section on how to build and configure a Marble.
+Marbles are Marblerun's data planes and run your application code in secure enclaves within otherwise normal Docker containers. Marbles communicate with the Coordinator via gRPC over TLS. See the [Add a Service]({{< ref "docs/workflows/add-service.md" >}}) section on how to build and configure a Marble.

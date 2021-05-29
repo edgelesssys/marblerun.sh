@@ -7,8 +7,8 @@ weight: 3
 
 # Coordinator
 
-The Coordinator represents the control plane in Marblerun.
-It communicates with the data plane through gRPC and provides an HTTP-REST interface on the client-side.
+The Coordinator is Marblerun's control plane.
+It communicates with the Marble's data plane through gRPC and provides an HTTP-REST interface on the client-side.
 The Coordinator can be configured with several environment variables:
 
 * `EDG_COORDINATOR_MESH_ADDR`: The listener address for the gRPC server
@@ -18,7 +18,7 @@ The Coordinator can be configured with several environment variables:
 
 ## Client API
 
-The Coordinator clients can be devided into two major groups.
+The Coordinator clients can be divided into two major groups.
 
 * The owners/providers/administrators who need to interact with the coordinator for deploying their confidential application and administrative tasks
 * The users/customers who use the coordinator for remote attestation and establishing trust with the application
@@ -27,7 +27,7 @@ The Client API serves both use-cases with a compact REST-API.
 
 ### Response style
 
-The Client API is designed as an HTTP-REST interface.Responses follow the [JSend](https://github.com/omniti-labs/jsend) style, though only the response types `success` and `error` are returned so far.
+The Client API is designed as an HTTP-REST interface. Responses follow the [JSend](https://github.com/omniti-labs/jsend) style, though only the response types `success` and `error` are returned so far.
 
 In general, a successful API call (HTTP Code 200) will return a response in the following style:
 
