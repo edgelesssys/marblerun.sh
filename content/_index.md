@@ -49,6 +49,6 @@ blog_list:
       description: We describe key features and the architecture of Marblerun.
     - title: "[Running Graphene on Marblerun](https://medium.com/edgelesssystems/marblerun-now-supports-graphene-thus-your-favorite-programming-language-a8b8a36787a0)"
       description: We give an intro to Marblerun's support for Graphene-based applications.
-    - title: "[Running Occlum on Marblerun](https://medium.com/edgelesssystems/marblerun-now-supports-graphene-thus-your-favorite-programming-language-a8b8a36787a0)"
+    - title: "[Running Occlum on Marblerun](https://medium.com/edgelesssystems/marblerun-now-supports-occlum-even-more-confidential-computing-at-scale-2f6dd17e00c0)"
       description: We give an intro to Marblerun's support for Occlum-based applications.
 ---
