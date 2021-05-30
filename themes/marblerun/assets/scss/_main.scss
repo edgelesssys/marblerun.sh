@@ -59,8 +59,10 @@ i.fa {
 }
 
 .docsSidebar {
+  position: fixed;
   h6 {
     font-weight: 600;
+    color: #00010d;
   }
   a {
     color: $edg-dark-gray;
