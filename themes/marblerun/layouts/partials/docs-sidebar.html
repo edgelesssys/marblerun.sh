@@ -1,27 +1,41 @@
 <div class="docsSidebar">
+  <h1 class="my-3">Docs</h1>
   {{ $currentPage := . }}
+
   {{ range .Site.Sections }}
   {{ if eq .Title "Docs" }}
   {{ range .Pages }}
   <div class="mb-3">
+
     {{ if .IsSection }}
-    <h6>{{ .Title }}</h6>
+    <a href="{{ (index .Pages 0).RelPermalink }}" class="d-block">
+      <h6>{{ .Title }}</h6>
+    </a>
+
+    {{ if .InSection $currentPage }}
+
     {{ range .Pages }}
-    {{ $isCurrent := eq $currentPage .}}
+    {{ $isCurrent := eq $currentPage . }}
+
     {{ if .Params.external }}
-      <a href="{{ .Params.forward }}" class="d-block">{{ .Title }} <i class="fas fa-external-link-square-alt"></i></a>
+    <a href="{{ .Params.forward }}" class="d-block">{{ .Title }} <i class="fas fa-external-link-square-alt"></i></a>
     {{ else }}
-      <a href="{{ .RelPermalink }}" class="d-block {{ if $isCurrent}}text-primary{{ end }}">
-        {{ if $isCurrent}}>{{ end }} {{ .Title }}
-      </a>
-    {{ end }}
-    {{ end }}
-    {{ else if and .IsPage .Content }}
-    {{ $isCurrent := eq $currentPage .}}
-    <a href="{{ .RelPermalink }}" class="d-block {{ if $isCurrent}}text-primary{{ end }}">
+    <a href="{{ .RelPermalink }}" class="d-block {{ if $isCurrent }}text-primary{{ end }}">
       {{ if $isCurrent}}>{{ end }} {{ .Title }}
     </a>
     {{ end }}
+
+    {{ end }}
+
+    {{ end }}
+
+    {{ else if and .IsPage .Content }}
+    {{ $isCurrent := eq $currentPage .}}
+    <a href="{{ .RelPermalink }}" class="d-block">
+      <h6 class="{{ if $isCurrent }}text-primary{{ end }}">{{ if $isCurrent}}>{{ end }} {{ .Title }}</h6>
+    </a>
+    {{ end }}
+
   </div>
   {{ end }}
   {{ end }}
