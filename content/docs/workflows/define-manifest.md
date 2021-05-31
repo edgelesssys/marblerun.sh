@@ -74,7 +74,10 @@ Marbles represent the actual services in your mesh. They are defined in the `Mar
                     "--first",
                     "serve"
                 ]
-            }
+            },
+            "TLS": [
+                "backend_first_tls"
+            ]
         },
         "frontend": {
             "Package": "frontend",
@@ -85,7 +88,10 @@ Marbles represent the actual services in your mesh. They are defined in the `Mar
                     "MARBLE_CERT": "{{ pem .Marblerun.MarbleCert.Cert }}",
                     "MARBLE_KEY": "{{ pem .Marblerun.MarbleCert.Private }}"
                 }
-            }
+            },
+            "TLS": [
+                "frontend_tls_1", "frontend_tls_2"
+            ]
         }
     }
     //...
@@ -97,6 +103,7 @@ Each Marble corresponds to a `Package` (see the [previous section](#manifestpack
 * `Files`: Files and their contents
 * `Env`: Environment variables
 * `Argv`: Command line arguments
+* `TLS`: Tags defined in the [`TLS` section](#manifesttls)
 
 These `Parameters` are passed from the Coordinator to secure enclaves (i.e., Marbles) after successful initial remote attestation. In the remote attestation step, the Coordinator ensures that enclaves run the software defined in the `Packages` section. It is important to note that `Parameters` are only accessible from within the corresponding secure enclave. `Parameters` may contain arbitrary static data. However, they can also be used to securely communicate different types of dynamically generated cryptographic keys and certificates to Marbles. For this, we use [Go Templates](https://golang.org/pkg/text/template/) with the following syntax.
 
@@ -288,6 +295,49 @@ Use the following command to preserve newlines correctly:
 
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
+```
+
+
+## Manifest:TLS
+
+The TLS entry holds a list of tags which can be used in a Marble's definition. Each tag can define multiple `Incoming` and `Outgoing` connections. To elevate the connection between two marbles to TLS, the client needs to set the server under `Outgoing` and the server needs to define its service under `Incoming`.
+
+Outgoing connections are defined by `Port` and `Addr`. For `Addr`, you can use both IP addresses and domains, e.g., the DNS names of other services.
+
+Incoming connections are defined by `Port`. For services used by external clients, you must disable client authentication by setting `DisableClientAuth` to `true` and set `Cert`. Use the name of a certificate defined in the [Secrets section](#manifestsecrets).
+
+```javascript
+{
+    //...
+    "TLS":
+    {
+        "frontend_tls_1": {
+            "Outgoing": [
+                {
+                    "Port": "8080",
+                    "Addr": "service.name"
+                },
+                {
+                    "Port": "4443",
+                    "Addr": "10.111.37.164"
+                }
+            ],
+            "Incoming": [
+                {
+                    "Port": "8443"
+                },
+                {
+                    "Port": "8080",
+                    "Cert": "rsa_cert",
+                    "DisableClientAuth": true
+                }
+            ]
+        },
+        "backend_first_tls": {
+            // ...
+        }
+    }
+}
 ```
 
 ## Manifest:Infrastructures
