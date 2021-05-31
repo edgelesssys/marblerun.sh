@@ -18,6 +18,8 @@ To get your service ready for Marblerun, you need to rebuild it with one of the 
 
 ### Make your service use the provided TLS credentials
 
+Skip this step, when using EGo with TTLS.
+
 Quick refresher: Marblerun's Coordinator issues TLS credentials for each verified Marble (i.e., a service running in a secure enclave) as is described in our [secrets management chapter]({{< ref "docs/features/secrets-management.md#tls-credentials" >}}).
 
 The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environment variables, or command line arguments. This is defined in the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}).
@@ -53,7 +55,9 @@ Use `UniqueID` (i.e., `MRENCLAVE` in Intel SGX speak) or the triplet of `SignerI
 
 ### **Step 2.2:** Define the parameters
 
-Now you can define with which parameters (i.e., files, environments variables, and command line arguments) your service is allowed to run. This is done in the `Marbles` section of the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}). As discussed in [Step #1.1](#step-11-make-your-service-use-the-provided-tls-credentials), you need to make sure that the TLS credentials for your service (i.e., `Marblerun.MarbleCert.Cert` and `Marblerun.MarbleCert.Private`) are injected such that your service will find them at runtime. If your service is written in Go and you're using the `marble` package, there is no need to inject these explicitly.
+Now you can define with which parameters (i.e., files, environments variables, and command line arguments) your service is allowed to run. This is done in the `Marbles` section of the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}). When using EGo, define all TTLS connections as described in the [manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifesttls" >}}).
+
+Otherwise, as discussed in [Step #1.1](#step-11-make-your-service-use-the-provided-tls-credentials), you need to make sure that the TLS credentials for your service (i.e., `Marblerun.MarbleCert.Cert` and `Marblerun.MarbleCert.Private`) are injected such that your service will find them at runtime. If your service is written in Go and you're using the `marble` package, there is no need to inject these explicitly.
 
 ## **Step 3:** Start your service
 
