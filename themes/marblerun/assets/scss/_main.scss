@@ -73,7 +73,10 @@ i.fa {
 }
 
 .docsSidebar {
-  position: fixed;
+  @media (min-width: 900px) {
+    position: fixed;
+  }
+  cursor: pointer;
   h6 {
     font-weight: 600;
     color: #00010d;
