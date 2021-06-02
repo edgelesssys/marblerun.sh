@@ -13,9 +13,9 @@ However, Marblerun works with any DCAP service complying with the SGX specificat
 
 ## Coordinator deployment
 
-In a first step, the Marblerun Coordinator is deployed to the cluster.
-The Coordinator generates a X.509 certificate chain with a root and intermediate certificate authority (CA).
-It generates a remote attestation quote which contains the hash of the root certificate as well as a hardware measurement of the enclave the Coordinator is running in.
+Initially, the Marblerun Coordinator is deployed to the cluster.
+The Coordinator generates an X.509 certificate chain with a root and intermediate certificate authority (CA).
+It generates a remote attestation quote which contains the hash of the root certificate as well as a hardware measurement of its enclave.
 
 The admin revices the quote and verifies that measurement matches the Coordinator's binary to verify there was no manipulation to the Coordinators code.
 The admin also revices the certificate chain of the Coordinator and verifies that the hash of the root certificate is contained in the quote.
