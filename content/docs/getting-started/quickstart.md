@@ -128,6 +128,13 @@ You can check that the state of Marblerun changed and is now ready to authentica
 marblerun status
 ```
 
+Create and annotate the emojivoto namespace for [auto-injection]({{< ref "docs/features/auto-injection.md" >}}):
+
+```bash
+kubectl create namespace emojivoto
+marblerun namespace add emojivoto --no-sgx-injection
+```
+
 Finally, install the demo application onto your cluster.
 Please make sure you have [Helm](https://helm.sh/docs/intro/install/) ("the package manager for Kubernetes") installed at least at Version v3.2.0.
 Install emojivoto into the emojivoto namespace by running:
