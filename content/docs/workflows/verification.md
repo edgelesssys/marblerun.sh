@@ -2,7 +2,7 @@
 title: "Verifying a deployment"
 date: 2020-11-14T16:28:16+05:30
 draft: false
-weight: 8
+weight: 4
 ---
 
 # Verifying a deployment
@@ -11,7 +11,7 @@ Marblerun provids a simple REST-API for clients to verify the confidentiality an
 
 ## Establishing trust in the Coordinator
 
-Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root and intermediate CA. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you [update]({{< ref "docs/additional-workflows/update-manifest.md" >}}) the packages specified in your Manifest.
+Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root and intermediate CA. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you [update]({{< ref "docs/workflows/update-manifest.md" >}}) the packages specified in your Manifest.
 
 The simplest way to verify the quote is via the Edgeless Remote Attestation ([era](https://github.com/edgelesssys/era)) tools:
 

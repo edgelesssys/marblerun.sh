@@ -2,7 +2,7 @@
 title: "Defining a Manifest"
 date: 2020-11-19T16:44:36+01:00
 draft: false
-weight: 2
+weight: 1
 ---
 
 # Defining a Manifest
@@ -238,7 +238,7 @@ The following gives some examples.
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
 ## Manifest:Admins
-The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/additional-workflows/update-manifest.md">}})).
+The optional entry `Admins` can be used to define one or multiple PEM-encoded self-signed X.509 certificates. Marblerun uses these certificates to authenticate updates to certain parameters of an already set manifest. (The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/workflows/update-manifest.md">}})).
 
 ```javascript
 {

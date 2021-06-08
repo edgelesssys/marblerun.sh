@@ -302,7 +302,7 @@ These flags apply to all sub commands of manifest
 
   Update a manifest by uploading an update manifest to the Marblerun coordinator.
   The original manifest has to define one or multiple Admins who are allowed to update the manifest.
-  For more information see [Update]({{< ref "docs/additional-workflows/update-manifest.md" >}})
+  For more information see [Update]({{< ref "docs/workflows/update-manifest.md" >}})
 
   **Usage**
 
@@ -495,7 +495,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 ## Command `recover`
 
 Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see [Recovery]({{< ref "docs/additional-workflows/recover-coordinator.md" >}})
+For more information about coordinator recovery see [Recovery]({{< ref "docs/workflows/recover-coordinator.md" >}})
 
 **Usage**
 
