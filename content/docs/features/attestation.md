@@ -48,7 +48,7 @@ If a client (i.e., a relying party, a customer) wants to connect to a Marble, th
 The Coordinator issues one concise remote-attestation statement for your whole distributed app.
 The Coordinator's build-time measurement is distributed to the relying party (this must be done by the admin or operator).
 The relying party requests the Coordinator's quote and certificate chain.
-The quote contains the hash of the Coordinator's root CA certificate, with is verified against the received certificate chain.
+The quote contains the hash of the Coordinator's root CA certificate, which is verified against the received certificate chain.
 The quote also contains the Coordinator's measurement, which is verified against the build-time measurement.
 
 The relying party then requests the manifest from the Coordinator and ensures it contains the expected Marbles and their expected measurements.
