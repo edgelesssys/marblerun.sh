@@ -74,12 +74,11 @@ i.fa {
 
 .docsSidebar {
   @media (min-width: 900px) {
-    position: fixed;
   }
   cursor: pointer;
   h6 {
     font-weight: 600;
-    color: #00010d;
+    color: $edg-dark;
   }
   a {
     color: $edg-dark-gray;
