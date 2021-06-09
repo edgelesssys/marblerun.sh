@@ -1,7 +1,7 @@
 ---
 title: "CLI"
 draft: false
-weight: 5
+weight: 2
 ---
 
 # Command Line Interface (CLI)
@@ -9,15 +9,19 @@ weight: 5
 We provide a command-line interface (CLI) for Marblerun.
 This CLI allows you to install Marblerun on your cluster and interacts with the control plane through the Client API for all administrative tasks in the service mesh.
 
+{{< toc >}}
+## Installation
+
 To install the Marblerun CLI on your machine you can use our pre-built binaries.
-### For the current user
+
+**For the current user**
 
 ```bash
 wget -P ~/.local/bin https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 chmod +x ~/.local/bin/marblerun
 ```
 
-### Global install (requires root)
+**Global install (requires root)**
 
 ```bash
 sudo wget -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
@@ -302,7 +306,7 @@ These flags apply to all sub commands of manifest
 
   Update a manifest by uploading an update manifest to the Marblerun coordinator.
   The original manifest has to define one or multiple Admins who are allowed to update the manifest.
-  For more information see [Update]({{< ref "docs/additional-workflows/update-manifest.md" >}})
+  For more information see [Update]({{< ref "docs/workflows/update-manifest.md" >}})
 
   **Usage**
 
@@ -495,7 +499,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 ## Command `recover`
 
 Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see [Recovery]({{< ref "docs/additional-workflows/recover-coordinator.md" >}})
+For more information about coordinator recovery see [Recovery]({{< ref "docs/workflows/recover-coordinator.md" >}})
 
 **Usage**
 

@@ -2,7 +2,7 @@
 title: "Updating a Manifest"
 date: 2021-01-19T15:33:00+01:00
 draft: false
-weight: 3
+weight: 6
 ---
 
 # Updating a Manifest

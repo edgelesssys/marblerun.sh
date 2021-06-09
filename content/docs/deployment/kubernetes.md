@@ -82,7 +82,7 @@ You can follow [the AKS guide](https://docs.microsoft.com/en-us/azure/confidenti
 
 ## Option 1: Install with the Marblerun CLI
 
-We provide a [CLI]({{< ref "docs/getting-started/cli.md" >}}) that facilitates the administrative tasks of Marblerun.
+We provide a [CLI]({{< ref "docs/reference/cli.md" >}}) that facilitates the administrative tasks of Marblerun.
 You can install Marblerun using the CLI as follows:
 
 * For a cluster with SGX support:
@@ -105,7 +105,7 @@ For more information see our [concepts section]({{< ref "docs/getting-started/co
 
 The Coordinator is now in a pending state, waiting for a Manifest.
 See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
-For more information on the CLI see our [guide]({{< ref "docs/getting-started/cli.md" >}}).
+For more information on the CLI see our [guide]({{< ref "docs/reference/cli.md" >}}).
 
 ## Option 2: Install with Helm
 
