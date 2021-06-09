@@ -7,22 +7,16 @@ weight: 8
 
 # Verifying a deployment
 
-An important feature of Marblerun is providing the ability to verifying the confidentiality and integrity of the whole application on the client-side.
-To that end, we provide a simple REST-API that clients can use before interacting with the application.
+Marblerun provids a simple REST-API for clients to verify the confidentiality and integrity of the coordinator and the deployed Marbles.
 
-## Establishing trust
+## Establishing trust in the Coordinator
 
-The first step is to establish trust in the deployment.
-Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root CA and an intermediate CA for the deployment. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you update the packages specified in your Manifest. For more information, see [Updating a Manifest]({{< ref "docs/additional-workflows/update-manifest.md" >}}).
+Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root and intermediate CA. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you [update]({{< ref "docs/additional-workflows/update-manifest.md" >}}) the packages specified in your Manifest.
 
 The simplest way to verify the quote is via the Edgeless Remote Attestation ([era](https://github.com/edgelesssys/era)) tools:
 
 ```bash
-# Either install era for the current user
-wget -P ~/.local/bin https://github.com/edgelesssys/era/releases/latest/download/era
-chmod +x ~/.local/bin/era
-
-# Or install it globally on your machine (requires root permissions)
+# Install era globally on your machine (requires root permissions)
 sudo wget -O /usr/local/bin/era https://github.com/edgelesssys/era/releases/latest/download/era
 sudo chmod +x /usr/local/bin/era
 
@@ -30,12 +24,8 @@ sudo chmod +x /usr/local/bin/era
 era -c coordinator-era.json -h $MARBLERUN -output-chain marblerun-chain.pem -output-root marblerun-root.pem -output-intermediate marblerun-intermedite.pem
 ```
 
-{{<note>}}
-On Ubuntu, `~/.local/bin` is only added to PATH when the directory exists when initializing your bash environment during login. You might need to re-login after creating the directory. Also, non-default shells such as `zsh` do not add this path by default. Therefore, if you receive `command not found: era` as an error message for a local user installation, either make sure `~/.local/bin` was added to your PATH successfully or simply use the machine-wide installation method.
-{{</note>}}
-
-era requires the Coordinator's UniqueID and SignerID (or MRENCLAVE and MRSIGNER in SGX terms) to verify the quote.
-In production, these would be generated when building Coordinator and distributed to your clients.
+Era requires the Coordinator's UniqueID (or MRENCLAVE in SGX terms) or the tuple ProductID, SecurityVersion, SignerID (MRSIGNER) to verify the quote.
+In production, these would be generated when building the Coordinator and distributed to your clients.
 For testing, we have published a Coordinator image at `ghcr.io/edgelesssys/coordinator`.
 You can pull the corresponding `coordinator-era.json` file from our release page:
 
@@ -43,7 +33,7 @@ You can pull the corresponding `coordinator-era.json` file from our release page
 wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
 ```
 
-After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem` and `marblerun-intermediate.pem` in your directory which you can choose to use for your application, depending on use case. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. If this is not a critical issue for you, you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated Manifest.
+After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem` and `marblerun-intermediate.pem` in your directory. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. Else you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated Manifest.
 
 ## Verifying the Manifest
 
