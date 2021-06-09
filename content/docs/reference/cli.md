@@ -9,15 +9,19 @@ weight: 2
 We provide a command-line interface (CLI) for Marblerun.
 This CLI allows you to install Marblerun on your cluster and interacts with the control plane through the Client API for all administrative tasks in the service mesh.
 
+{{< toc >}}
+## Installation
+
 To install the Marblerun CLI on your machine you can use our pre-built binaries.
-### For the current user
+
+**For the current user**
 
 ```bash
 wget -P ~/.local/bin https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
 chmod +x ~/.local/bin/marblerun
 ```
 
-### Global install (requires root)
+**Global install (requires root)**
 
 ```bash
 sudo wget -O /usr/local/bin/marblerun https://github.com/edgelesssys/marblerun/releases/latest/download/marblerun
