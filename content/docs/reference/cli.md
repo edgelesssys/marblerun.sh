@@ -1,7 +1,7 @@
 ---
 title: "CLI"
 draft: false
-weight: 5
+weight: 2
 ---
 
 # Command Line Interface (CLI)
