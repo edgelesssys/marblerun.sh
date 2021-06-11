@@ -57,17 +57,6 @@ Once installed, verify the CLI is running correctly with:
 marblerun
 ```
 
-### Attestation requirements
-
-To verify remote SGX reports, the CLI relies on the [Azure DCAP Client](https://github.com/microsoft/Azure-DCAP-Client).
-If you plan to use marblerun outside of simulation mode you need to install the client:
-```bash
-echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main" | sudo tee /etc/apt/sources.list.d/msprod.list
-wget -qO - https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
-sudo apt update
-sudo apt -y install az-dcap-client
-```
-
 ## Step 2: Install the control-plane onto your cluster
 
 Now that you have the CLI running locally and a cluster that is ready to go, it’s time to install the control plane.
