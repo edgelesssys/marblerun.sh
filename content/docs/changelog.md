@@ -7,6 +7,32 @@ weight: 10
 
 # Changelog
 
+
+## Version 0.3.3
+* CLI
+  * Add manifest verify command
+  * Fix intel device plugin installation
+* Buid
+  * Update commit hash on every build
+* Coordinator
+  * TTLS
+    * Add TTLS support for EGo Marbles
+  * Refactor state to use storage module
+    * Future support of different storage backends
+  * Add user management
+    * Add users to manifest
+    * Users are authenticated via certificates
+    * Users have permissions for actions on other resources
+      * Actions are set/get/update
+      * Resources are Secrets, Marbles, and Packages
+* Attestation
+  * Use cross-signed intermediate certificate
+    * Fixes bug where OpenSSL only accepts self-signed root certificates
+* Github
+  * Add issue templates
+  * Add CODE_OF_CONDUCT.md
+  * Add CONTRIBUTING.md
+
 ## Version 0.3.2
 * CLI:
   * Add auto-complete support
