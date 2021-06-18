@@ -8,7 +8,7 @@ weight: 1
 # Attestation
 
 Hardware-rooted *remote attestation* is a key ingredient for distributed confidential apps. Marblerun relies heavily on the [*Data Center Attestation Primitives* (DCAP)](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf) of the latest SGX-enabled Intel Xeon processors.
-At the time of writing only Microsoft Azure had a public DCAP service deployed in their data-centers. Hence, our demos are heavily tested and deployed on Azure Kubernetes Service (AKS).
+At the time of writing, only Microsoft Azure had a public DCAP service deployed in their data centers. Hence, our demos are heavily tested and deployed on Azure Kubernetes Service (AKS).
 However, Marblerun works with any DCAP service complying with the SGX specification. You can read more about setting up your own DCAP infrastructure [in the Intel SGX development articles](https://software.intel.com/content/www/us/en/develop/articles/intel-software-guard-extensions-data-center-attestation-primitives-quick-install-guide.html).
 
 ## Coordinator deployment
@@ -36,7 +36,7 @@ The Coordinator's certificate chain as well as the freshly generated Marble cert
 
 ## Confidential service mesh
 
-The Marble and the Coordinator can now communicate securely and authenticated over TLS (with client authentication), using the Coordinator's CA as root of trust.
+The Marble and the Coordinator can now communicate securely and authenticated over TLS (with client authentication), using the Coordinator's CA as the root of trust.
 Different Marbles can communicate with each other in the same way.
 
 If a client (i.e., a relying party, a customer) wants to connect to a Marble, the Coordinator's certificate is used as a trusted CA to establish a TLS connection and verify the Marble's certificate.

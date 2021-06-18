@@ -7,7 +7,7 @@ weight: 4
 
 # Verifying a deployment
 
-Marblerun provids a simple REST-API for clients to verify the confidentiality and integrity of the coordinator and the deployed Marbles.
+Marblerun provides a simple REST-API for clients to verify the confidentiality and integrity of the coordinator and the deployed Marbles.
 
 ## Establishing trust in the Coordinator
 
@@ -33,7 +33,7 @@ You can pull the corresponding `coordinator-era.json` file from our release page
 wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
 ```
 
-After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem` and `marblerun-intermediate.pem` in your directory. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. Else you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated Manifest.
+After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem`, and `marblerun-intermediate.pem` in your directory. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. Else you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated Manifest.
 
 ## Verifying the Manifest
 

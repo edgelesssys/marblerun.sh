@@ -8,7 +8,7 @@ weight: 6
 Running a Graphene app with Marblerun requires some changes to its manifest. These are explained in the following. See also the [helloworld example](https://github.com/edgelesssys/marblerun/tree/master/samples/graphene-hello).
 
 ## Requirements
-First, get Graphene up and running. You can use either the [Building](https://graphene.readthedocs.io/en/latest/building.html) or [Cloud Deployment](https://graphene.readthedocs.io/en/latest/cloud-deployment.html) guide to build and initially setup Graphene.
+First, get Graphene up and running. You can use either the [Building](https://graphene.readthedocs.io/en/latest/building.html) or [Cloud Deployment](https://graphene.readthedocs.io/en/latest/cloud-deployment.html) guide to build and initially set up Graphene.
 
 Before running your application, make sure you got the prerequisites for ECDSA remote attestation installed on your system. You can collectively install them with the following command:
 ```sh
@@ -28,7 +28,7 @@ loader.argv0_override = "hello"
 ```
 After the premain is done running, it will automatically spawn your application.
 
-For a better illustration on the differences between the two premain variants, check out our ["Hello World" sample on GitHub.](https://github.com/edgelesssys/marblerun/tree/master/samples/graphene-hello)
+For a better illustration of the differences between the two premain variants, check out our ["Hello World" sample on GitHub.](https://github.com/edgelesssys/marblerun/tree/master/samples/graphene-hello)
 
 ### Host environment variables
 The premain needs access to some host [environment variables for configuration]({{< ref "docs/workflows/add-service.md#step-3-start-your-service" >}}):

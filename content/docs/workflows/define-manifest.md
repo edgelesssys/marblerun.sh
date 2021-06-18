@@ -12,13 +12,13 @@ This article describes how to define these in your `manifest.json`.
 
 ## Manifest:Packages
 
-The `Packages` section of the Manifest lists all the secure enclave software-packages that your application uses. A package is defined by the following properties.
+The `Packages` section of the Manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.
 
-* `UniqueID`: this value will pin this package to one specific release build of an application. It represents the globally unique ID of the enclave software-package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
+* `UniqueID`: this value will pin this package to one specific release build of an application. It represents the globally unique ID of the enclave software package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
 * `SignerID`: this value limits Marblerun to only accept releases signed by a given public key. On SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
 * `ProductID`: an integer that uniquely identifies the enclave software for a given `SignerID`. Can only be used in conjunction with `SignerID`.
 * `SecurityVersion`: an integer that reflects the security-patch level of the enclave software. Can only be used in conjunction with `SignerID`.
-* `Debug`: set to `true` if the enclave is to be run in debug mode. This allows you to experiment deploying your application with Marblerun without having to worry about setting correct values for the above properties, but note that enclaves in debug mode are not secure.
+* `Debug`: set to `true` if the enclave is to be run in debug mode. This allows you to experiment with deploying your application with Marblerun without having to worry about setting correct values for the above properties, but note that enclaves in debug mode are not secure.
 
 The following gives an example of a simple `Packages` section with made-up values.
 
@@ -41,11 +41,11 @@ The following gives an example of a simple `Packages` section with made-up value
 }
 ```
 
-In this example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the hash of the enclave software-package, this means that `pkg0` cannot be updated. (That is, because any update to the package will change the hash.)
+In this example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is the hash of the enclave software package, this means that `pkg0` cannot be updated. (That is because any update to the package will change the hash.)
 
-In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See our [adding a service hands-on]({{< ref "docs/workflows/add-service.md#step-21-define-the-enclave-software-package" >}}) on how to get these values for a given service.
+In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See our [adding a service hands-on]({{< ref "docs/workflows/add-service.md#step-21-define-the-enclave-software package" >}}) on how to get these values for a given service.
 
-Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having alter the Manifest.
+Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having to alter the Manifest.
 
 ## Manifest:Marbles
 
@@ -98,7 +98,7 @@ Each Marble corresponds to a `Package` (see the [previous section](#manifestpack
 * `Env`: Environment variables
 * `Argv`: Command line arguments
 
-These `Parameters` are passed from the Coordinator to secure enclaves (i.e., Marbles) after successful initial remote attestation. In the remote attestation step, the Coordinator ensures that enclaves run the software defined in the `Packages` section. It is important to note that `Parameters` are only accessible from within the corresponding secure enclave. `Parameters` may contain arbitrary static data. However, they can also be used to securely communicate different types of dynamically generated cryptographic keys and certificates to Marbles. For this, we use [Go Templates](https://golang.org/pkg/text/template/) with the following syntax.
+These `Parameters` are passed from the Coordinator to secure enclaves (i.e., Marbles) after successful initial remote attestation. In the remote attestation step, the Coordinator ensures that enclaves run the software-defined in the `Packages` section. It is important to note that `Parameters` are only accessible from within the corresponding secure enclave. `Parameters` may contain arbitrary static data. However, they can also be used to securely communicate different types of dynamically generated cryptographic keys and certificates to Marbles. For this, we use [Go Templates](https://golang.org/pkg/text/template/) with the following syntax.
 
 `{{ <encoding> <name of key or certificate> }}`
 
@@ -152,7 +152,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
 When defining a custom key or certificate, the following fields are available.
 
 * `Type`: can be either `symmetric-key` for a symmetric encryption key, `cert-rsa`, `cert-ecdsa` or `cert-ed25519`
-* `Size`: the size of the key in bits. For symmetric keys, this needs to be a multiple of `8`. For ECDSA, this needs to map to a curve supported by Go's crypto library, currently: `224`, `256`, `384`, or `521`. For Ed25519, this should be ommitted.
+* `Size`: the size of the key in bits. For symmetric keys, this needs to be a multiple of `8`. For ECDSA, this needs to map to a curve supported by Go's crypto library, currently: `224`, `256`, `384`, or `521`. For Ed25519, this should be omitted.
 * `Shared` (default: `false`): specifies if the secret should be shared across all Marbles (`true`), or if the secret should be uniquely generated for each Marble (`false`). See [Secrets management]({{< ref "docs/features/secrets-management.md" >}}) for more info.
 * `ValidFor` (only for certificates, default: `365`): validity of the certificate in days; cannot be specified in combination with the `NotAfter`.
 * `Cert` (only for certificates): allows for the specification of additional X.509 certificate properties. See below for details.
@@ -211,7 +211,7 @@ Typically, you only define a subset of these. Commonly used properties include f
 * `KeyUsage` & `ExtKeyUsage`
 * `Subject` (+ children)
 
-The following X.509 properties cannot not be specified, because they are set by the Coordinator when creating a certificate.
+The following X.509 properties cannot be specified because they are set by the Coordinator when creating a certificate.
 * `IsCA`: always set to "false"
 * `Issuer`: always set to "Marblerun Coordinator"
 * `BasicConstraintsValid`: always set to "true"

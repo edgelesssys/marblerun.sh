@@ -8,7 +8,7 @@ weight: 6
 Running an Occlum app with Marblerun requires some changes to its manifest.
 
 ## Requirements
-Set up an environment to create Occlum images. For an easy start, we recommend that you use either [the official Occlum Docker image](https://hub.docker.com/r/occlum/occlum) or [use our provided Dockerfile](https://github.com/edgelesssys/marblerun/blob/master/samples/occlum-hello/Dockerfile). For a working DCAP remote attestation environment we recommend [our cloud deployment guide]({{< ref "/docs/deployment/cloud.md">}}).
+Set up an environment to create Occlum images. For an easy start, we recommend that you use either [the official Occlum Docker image](https://hub.docker.com/r/occlum/occlum) or [use our provided Dockerfile](https://github.com/edgelesssys/marblerun/blob/master/samples/occlum-hello/Dockerfile). For a working DCAP remote attestation environment, we recommend [our cloud deployment guide]({{< ref "/docs/deployment/cloud.md">}}).
 
 To build your service, you can start with Occlum's [Introduction](https://github.com/occlum/occlum#introduction) to get your application up and running, and then come back here to adapt it for use with Marblerun.
 
@@ -49,7 +49,7 @@ will allow you both to embed the expected default values during build time, but 
 ### Resource limits
 The premain process is written in Go. The enclave needs to have enough resources for the Go runtime, plus additional memory to launch your application.
 
-We recommend starting with the following values which should work fine for light-wight to medium memory demanding applications:
+We recommend starting with the following values which should work fine for light-weight to medium memory demanding applications:
 ```javascript
 "user_space_size": "2048MB",
 "default_mmap_size": "900MB"
@@ -81,7 +81,7 @@ Have you allocated enough memory?
 panic: posix_spawn failed with error code -1
 ```
 
-Make sure you specified the correct file name of your target application. For the latter error message, also make sure enough memory is allocated. To find out the specific reason for why this error is occurring, you can set the environment variable `OCCLUM_LOG_LEVEL=error` by appending it in front of your run command like this:
+Make sure you specified the correct file name of your target application. For the latter error message, also make sure enough memory is allocated. To find out the specific reason why this error is occurring, you can set the environment variable `OCCLUM_LOG_LEVEL=error` by appending it in front of your run command like this:
 
 ```sh
 OCCLUM_LOG_LEVEL=error make run
