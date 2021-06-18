@@ -125,7 +125,7 @@ marblerun manifest set tools/manifest.json $MARBLERUN --insecure
 You can check that the state of Marblerun changed and is now ready to authenticate your services by running:
 
 ```bash
-marblerun status
+marblerun status $MARBLERUN
 ```
 
 Create and annotate the emojivoto namespace for [auto-injection]({{< ref "docs/features/auto-injection.md" >}}):
