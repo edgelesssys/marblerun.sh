@@ -143,7 +143,7 @@ This API endpoint only works when `Users` were defined in the Manifest. For more
 {{<table "table table-striped table-bordered">}}
 | Field value                 | Type   | Description                                                      |
 | --------------------------- | ------ | ---------------------------------------------------------------- |
-| \<SecretName\> (one or more)| array  | An array containing key-value mappings for the requested secret. |
+| \<SecretName\> (one or more)| map    | A map containing key-value pairs for the requested secret.       |
 {{</table>}}
 
 Each GET requests allows specifying one or more secrets in the form of a query string, where each parameter `s` specifies one secret.

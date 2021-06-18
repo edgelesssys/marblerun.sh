@@ -252,7 +252,7 @@ The following gives some examples.
 ## Manifest:Users
 The optional entry `Users` can be used to define one or multiple users.
 Each user requires one PEM-encoded self-signed X.509 certificates for authentication and allows the allocation of various permissions. 
-Marblerun requires the definition of at least one user for updating a manifest or setting user-defined secrets. The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/workflows/update-manifest.md">}}), for setting user-defined secrets take a look at the [Managing Secrets entry]({{< ref "docs/workflows/managing-secrets.md" >}}).
+Marblerun requires the definition of at least one user for updating a manifest or setting user-defined secrets. The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/workflows/update-manifest.md">}}), for setting user-defined secrets take a look at the [managing secrets entry]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 ```javascript
 {

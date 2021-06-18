@@ -569,12 +569,21 @@ These flags apply to all `secret` subcommands
   **Examples**
 
   ```bash
-  marblerun secret get generic_secret symmetric_key_shared $MARBLERUN -c admin.crt -k admin.key -o marblerun_secrets.json
+  marblerun secret get generic_secret symmetric_key_shared $MARBLERUN -c admin.crt -k admin.key
   ```
 
   The output is similar to the following:
-  ```bash
-  Saved secret to: marblerun_secrets.json
+
+  ```
+  generic_secret:
+  	Type:          plain
+  	Data:          SGVsbG8gZnJvbSB0aGUgTWFyYmxlcnVuIERvY3MhCg==
+
+  symmetric_key_shared:
+  	Type:          symmetric-key
+  	UserDefined:   false
+  	Size:          128
+  	Key:           uVGpoJZTRICLccJiVNt9jA==
   ```
 
 * ### `set`
