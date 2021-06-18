@@ -14,7 +14,7 @@ Finally, you will add your own services and set up a corresponding Manifest.
 
 {{<note>}}
 A working SGX DCAP environment is required for Marblerun to work. For the ease of exploring and testing we provide a simulation mode with `--simulation` that runs without SGX hardware.
-In this quickstart we deploy Marblerun in simulation mode. Be aware that this is not meant for production and runs without real SGX enclaves.
+In this quickstart, we deploy Marblerun in simulation mode. Be aware that this is not meant for production and runs without real SGX enclaves.
 {{</note>}}
 
 ## Step 0: Setup
@@ -27,7 +27,7 @@ You can validate your setup by running:
 kubectl version --short
 ```
 
-You should see output with both a Client Version and Server Version component.
+You should see an output with both a Client Version and Server Version component.
 
 Now your cluster is ready and we’ll install the Marblerun CLI.
 
@@ -57,11 +57,11 @@ Once installed, verify the CLI is running correctly with:
 marblerun
 ```
 
-## Step 2: Install the control-plane onto your cluster
+## Step 2: Install the control plane onto your cluster
 
 Now that you have the CLI running locally and a cluster that is ready to go, it’s time to install the control plane.
 
-Install Marblerun's *Coordinator* control-plane by running:
+Install Marblerun's *Coordinator* control plane by running:
 
 ```bash
 marblerun install --simulation
@@ -99,7 +99,7 @@ marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
 The CLI will obtain the coordinator's remote attestation quote and verify it against the configuration on our [release page](github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json).
 The SGX quote proves the integrity of the coordinator pod.
 Since we are not using SGX hardware in this case (`--simulation`), the quote verification is omitted by marblerun.
-The CLI returns a certificate as result and stores it as `marblerun.crt` in your current directory.
+The CLI returns a certificate and stores it as `marblerun.crt` in your current directory.
 The certificate is bound to the quote and can be used for future verification.
 It can also be used as a root of trust for [authenticating your confidential applications]({{< ref "docs/features/attestation.md#external-attestation-of-the-app" >}}).
 

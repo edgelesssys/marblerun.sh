@@ -147,7 +147,7 @@ Supported shells are:
     ```
 
 
-Once enabled, command completion is just one key press away:\
+Once enabled, command completion is just one keypress away:\
   `marblerun ma`+<kbd>Tab</kbd> completes to:\
   `marblerun manifest`
 
@@ -260,7 +260,7 @@ marblerun install [flags]
 Set or update a manifest, or retrieve the signature of the manifest in place.
 
 **Flags**
-These flags apply to all sub commands of manifest
+These flags apply to all subcommands of manifest
 
 {{<table "table table-striped table-bordered">}}
 | Name, shorthand | Default | Description                                                                                                                      |
@@ -464,7 +464,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 
 ## Command `precheck`
 
-  Check if your kubernetes cluster supports SGX.
+  Check if your Kubernetes cluster supports SGX.
   More precisely the command will check if any nodes in the cluster define SGX resources through the use of [Device Plugins](https://kubernetes.io/docs/concepts/extend-kubernetes/compute-storage-net/device-plugins/).
   Currently supported are:
   * [Intel SGX Device Plugin](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html), exposing the resources:
@@ -489,7 +489,7 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
   To install Marblerun run [marblerun install --simulation]
   ```
 
-  * If you cluster does support SGX the output is similar to the following
+  * If your cluster does support SGX the output is similar to the following
 
   ```bash
   Cluster supports SGX on 2 nodes
@@ -566,7 +566,7 @@ Got latest config
 
 ## Command `uninstall`
 
-  Remove Marblerun from your kubernetes cluster.
+  Remove Marblerun from your Kubernetes cluster.
   This command will remove all resources added by the installation command.
 
   **Usage**

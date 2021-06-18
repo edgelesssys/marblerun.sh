@@ -141,7 +141,7 @@ For returning the current state of the coordinator.
 {{<table "table table-striped table-bordered">}}
 | Field value   | Type   | Description                                                                                       |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------- |
-| StatusCode    | int    | A status code which matches the internal code of the Coordinator's current state.                 |
+| StatusCode    | int    | A status code that matches the internal code of the Coordinator's current state.                 |
 | StatusMessage | string | A descriptive status message of what the Coordinator expects the user to do in its current state. |
 {{</table>}}
 

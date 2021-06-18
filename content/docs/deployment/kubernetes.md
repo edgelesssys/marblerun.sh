@@ -62,7 +62,7 @@ Note, that every plugin uses its own way of injecting SGX resources into deploym
 Marblerun supports [automatic injection]({{< ref "docs/features/auto-injection.md" >}}) of those values for a selection of popular plugins:
 
 {{<note>}}
-Currently supported plugins are:
+Currently, supported plugins are:
 * [Intel](https://intel.github.io/intel-device-plugins-for-kubernetes/cmd/sgx_plugin/README.html) using `sgx.intel.com/epc`
 * [Azure](https://github.com/Azure/aks-engine/blob/master/docs/topics/sgx.md#deploying-the-sgx-device-plugin) using `kubernetes.azure.com/sgx_epc_mem_in_MiB`
 

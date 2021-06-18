@@ -69,7 +69,7 @@ You currently have two options regarding PCCS for your on-premises machines and 
 
 2. Run your own PCCS and expose it to your machine or cluster. See [Intel's demo reference implementation](https://github.com/intel/SGXDataCenterAttestationPrimitives/blob/master/QuoteGeneration/pccs/README.md) and  [design guide](https://download.01.org/intel-sgx/latest/dcap-latest/linux/docs/SGX_DCAP_Caching_Service_Design_Guide.pdf) for more information.
 
-    Follow these steps to setup your machines for your PCCS:
+    Follow these steps to set up your machines for your PCCS:
 
       * Install the [DCAP client libraries](https://download.01.org/intel-sgx/latest/dcap-latest/linux/docs/Intel_SGX_DCAP_Linux_SW_Installation_Guide.pdf)
       * Install a [configuration that points to your PCCS](https://github.com/intel/SGXDataCenterAttestationPrimitives/blob/master/QuoteGeneration/qpl/README.md#configuration)

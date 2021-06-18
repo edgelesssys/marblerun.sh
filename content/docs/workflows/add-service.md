@@ -20,17 +20,17 @@ To get your service ready for Marblerun, you need to rebuild it with one of the 
 
 Quick refresher: Marblerun's Coordinator issues TLS credentials for each verified Marble (i.e., a service running in a secure enclave) as is described in our [secrets management chapter]({{< ref "docs/features/secrets-management.md#tls-credentials" >}}).
 
-The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environments variables, or commandline arguments. This is defined in the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}).
+The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environment variables, or command line arguments. This is defined in the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}).
 
-For now, you just need to make sure that your service reads the certificate and the private key from arbitrary paths, environment variables, or commandline arguments, e.g., the file `/tmp/mycert.cert` or the environment variable `MY_PRIVATE_KEY`, and uses them at runtime for internal and external connections. If you're lucky, your service already does this and you don't need to change a thing in the code.
+For now, you just need to make sure that your service reads the certificate and the private key from arbitrary paths, environment variables, or command line arguments, e.g., the file `/tmp/mycert.cert` or the environment variable `MY_PRIVATE_KEY`, and uses them at runtime for internal and external connections. If you're lucky, your service already does this and you don't need to change a thing in the code.
 
 ## **Step 2:** Define your service in the Manifest
 
 Now that your service is ready, you need to make two types of entries in the Manifest regarding its properties and parameters.
 
-### **Step 2.1:** Define the enclave software-package
+### **Step 2.1:** Define the enclave software package
 
-As is described in more detail in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestpackages" >}}), the Manifest contains a section `Packages`, in which allowed enclave software-packages are defined.
+As is described in more detail in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestpackages" >}}), the Manifest contains a section `Packages`, in which allowed enclave software packages are defined.
 
 To add an entry for your service, run the `oesign` tool on the enclave file you built in the previous step as follows. (`oesign` is installed with [Edgeless RT](https://github.com/edgelesssys/edgelessrt).)
 
@@ -79,14 +79,14 @@ Typically, you'll write a Kubernetes resource definition for your service, which
 
 For your services to take advantage of Marblerun, they need to be "added to the mesh" by having the data plane configuration injected into their pods.
 This is typically done by labeling the namespace, deployment, or pod with the `marblerun/inject=enabled` Kubernetes label.
-This label triggers automatic configuration injection when the resources are created. (See the [auto injection page]({{< ref "docs/features/auto-injection.md" >}}) for more on how this works.)
+This label triggers automatic configuration injection when the resources are created. (See the [auto-injection page]({{< ref "docs/features/auto-injection.md" >}}) for more on how this works.)
 Alternatively, you can enable a namespace for auto-injection using the Marblerun CLI:
 
 ```bash
 marblerun namespace add NAMESPACE [--no-sgx-injection]
 ```
 
-In order for our injection service to know which type of Marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
+For our injection service to know which type of Marble your service corresponds to, you also need to add the `marblerun/marbletype` Kubernetes label.
 An example for a Marble of type `web` could look like this:
 
 ```yaml

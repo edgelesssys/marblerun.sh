@@ -11,7 +11,7 @@ weight: 1
 
 ![logo](/img/mr_logo.svg)
 
-Marblerun is a framework for creating distributed confidential-computing apps.
+Marblerun is a framework for creating distributed confidential computing apps.
 
 Build your confidential microservices with [EGo or another runtime]({{< ref "docs/features/runtimes.md" >}}), distribute them with Kubernetes on an SGX-enabled cluster, and let Marblerun take care of the rest. Deploy end-to-end secure and verifiable AI pipelines or crunch on sensitive big data in the cloud. Confidential computing at scale has never been easier.
 

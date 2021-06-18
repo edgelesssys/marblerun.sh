@@ -6,9 +6,9 @@ weight: 6
 ---
 
 # Updating a Manifest
-In order to ensure the confidentiality of a deployed application, Marblerun uses a Manifest to which defines the software packages and the infrastructure your deployment uses. To verify that your deployment has not been altered with, the Manifest is usually set in stone after it was set to ensure no one can alter with your cluster.
+In order to ensure the confidentiality of a deployed application, Marblerun uses a Manifest to define the software packages and the infrastructure your deployment uses. To verify that your deployment has not been altered, the Manifest is usually set in stone after it was set to ensure no one can alter with your cluster.
 
-Yet, updates play an important role to ensure your software stays secure. To avoid having to redeploy your application from scratch, Marblerun allows to upload a separate "Update Manifest" which increases the minimum `SecurityVersion` of one or multiple already deployed package. After such an update is performed, an old version of a defined software package cannot be loaded anymore under the current Manifest.
+Yet, updates play an important role to ensure your software stays secure. To avoid having to redeploy your application from scratch, Marblerun allows uploading a separate "Update Manifest" which increases the minimum `SecurityVersion` of one or multiple already deployed packages. After such an update is performed, an old version of a defined software package cannot be loaded anymore under the current Manifest.
 
 ## Requirements
 In order to deploy an Update Manifest, the original Manifest, you need to be in possession of a certificate/private key pair which has been defined in the `Admins` section of the original Manifest, as described in ["Defining a Manifest"]({{< ref "docs/workflows/define-Manifest.md#manifestmarbles" >}}).
@@ -39,7 +39,7 @@ For example, the current `Packages` section of your original Manifest looks like
 }
 ```
 
-If you now want to update the minimum required version for `pkg1`, the complete definition for the update Manifest just needs to be as short this example:
+If you now want to update the minimum required version for `pkg1`, the complete definition for the update Manifest just needs to be as short as this example:
 
 
 ```javascript
@@ -57,7 +57,7 @@ Please do not define other values except than `SecurityVersion` value for a pack
 Also, if an Update Manifest was already set and you want to deploy another update on top of it too, you can! Just make sure that the new Update Manifest contains each specified package as the old one does, and that the `SecurityVersion` is indeed higher than defined in the previous Update Manifest, as downgrades are not supported for security reasons.
 
 ## Deploying an Update Manifest
-Similar to other operations, an Update Manifest can be deployed e.g. with the help of the CLI. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the according private key.
+Similar to other operations, an Update Manifest can be deployed e.g. with the help of the CLI. Note that for this operation, you need to specify one of your defined `Admins` certificates as a TLS client certificate, combined with the corresponding private key.
 
 This operation can be performed in the following way:
 
