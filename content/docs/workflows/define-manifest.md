@@ -250,8 +250,8 @@ The following gives some examples.
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
 ## Manifest:Users
-The optional entry `Users` can be used to define one or multiple users.
-Each user requires one PEM-encoded self-signed X.509 certificates for authentication and allows the allocation of various permissions. 
+The optional entry `Users` defines user credentials and permissions for authentication and access control.
+Each user is authenticated via a public key. The key needs to be specified as a PEM-encoded self-signed X.509 certificate. 
 Marblerun requires the definition of at least one user for updating a manifest or setting user-defined secrets. The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/workflows/update-manifest.md">}}), for setting user-defined secrets take a look at the [managing secrets entry]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 ```javascript

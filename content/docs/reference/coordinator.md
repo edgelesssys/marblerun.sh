@@ -157,7 +157,7 @@ Example for retrieving the secrets `symmetric_key_shared` and `cert_shared`:
 curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key https://$MARBLERUN/secrets?s=symmetric_key_shared&s=cert_shared
 ```
 
-Setting secrets requires uploading a file containing the secrets using a POST request. For more information refer to [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+Setting secrets requires uploading them in JSON format using a POST request. For more information refer to [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 Example for setting secrets from the file `secrets.json`:
 ```bash

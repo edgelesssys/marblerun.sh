@@ -549,7 +549,7 @@ These flags apply to all `secret` subcommands
 
 * ### `get`
 
-  Retrieves one or more secrets from the coordinator. A User has to authenticate themselves using certificate and private key, and has to be permitted to read the requested secrets.
+  Retrieves one or more secrets from the coordinator. Requires credentials in the form of a private key and self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
   Secrets are returned in JSON format with key data in base64 encoding.
 
   **Usage**
@@ -588,8 +588,8 @@ These flags apply to all `secret` subcommands
 
 * ### `set`
 
-  Sets one or more secrets for the coordinator. A User has to authenticate themselves using certificate and private key, and has to be permitted to write the specified secrets.
-  Secrets to set are specified in a special secrets file in json format. For more information see [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+  Sets one or more secrets for the coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Secrets to set are specified in a special secrets file in JSON format. For more information see [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
   **Usage**
 
