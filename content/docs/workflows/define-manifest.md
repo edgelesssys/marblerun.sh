@@ -251,7 +251,7 @@ The following gives some examples.
 
 ## Manifest:Users
 The optional entry `Users` defines user credentials and permissions for authentication and access control.
-Each user is authenticated via a public key. The key needs to be specified as a PEM-encoded self-signed X.509 certificate.
+Each user is authenticated via a client certificate. The certificate needs to be specified as a PEM-encoded self-signed X.509 certificate.
 Users can perform [update a manifest]({{< ref "docs/workflows/update-manifest.md">}}) and [read or write secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 ```javascript
