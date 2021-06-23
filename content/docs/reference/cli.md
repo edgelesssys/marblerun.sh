@@ -589,7 +589,8 @@ These flags apply to all `secret` subcommands
 * ### `set`
 
   Sets one or more secrets for the coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
-  Secrets to set are specified in a special secrets file in JSON format. For more information see [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+  Secrets to set are specified in a special secrets file in JSON format, or created by the CLI from a PEM encoded certificate and key.
+  For more information see [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
   **Usage**
 
@@ -597,10 +598,22 @@ These flags apply to all `secret` subcommands
   marblerun secret set <secret.json> <IP:PORT> [flags]
   ```
 
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                  |
+  | --------------- | ------- | -------------------------------------------- |
+  | --from-pem      |         | set to load a secret from a PEM encoded file |
+  {{</table>}}
+
   **Examples**
 
   ```bash
   marblerun secret set secret.json $MARBLERUN -c admin.crt -k admin.key
+  ```
+
+  ```bash
+  marblerun secret set certificate_secret $MARBLERUN -c admin.crt -k admin.key --from-pem certificate.pem
   ```
 
   The output is the following:

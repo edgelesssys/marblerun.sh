@@ -79,3 +79,19 @@ This file can then be uploaded using the CLI and the users credentials:
 marblerun secret set secret_file.json $MARBLERUN --cert=admin-cert.pem --key=admin-key.pem --era-config=era.json
 ```
 The secrets will then be available to Marbles or other users over the REST-API. If the user lacks permission to set one of the secrets, or a secret the user tried to upload was malformed an error occurs instead.
+
+Alternatively the CLI also supports directly uploading a PEM encoded certificate and key.
+Take for example this file containing a certificate and corresponding private key: 
+```
+-----BEGIN CERTIFICATE-----
+MIICpjC ... zrNxzg==
+-----END CERTIFICATE-----
+
+-----BEGIN PRIVATE KEY-----
+MIICeAI ... 8bu8Z+Fe
+-----END PRIVATE KEY-----
+```
+To set this certificate as a secret named `user-certificate` one would use the following command:
+```bash
+marblerun secret set user-certificate $MARBLERUN --from-pem secret_file.pem --cert=admin-cert.pem --key=admin-key.pem --era-config=era.json
+```
