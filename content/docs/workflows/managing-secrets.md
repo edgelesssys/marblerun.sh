@@ -93,5 +93,5 @@ MIICeAI ... 8bu8Z+Fe
 ```
 To set this certificate as a secret named `user-certificate` one would use the following command:
 ```bash
-marblerun secret set user-certificate $MARBLERUN --from-pem secret_file.pem --cert=admin-cert.pem --key=admin-key.pem --era-config=era.json
+marblerun secret set secret_file.pem $MARBLERUN --from-pem user-secret --cert=admin-cert.pem --key=admin-key.pem --era-config=era.json
 ```

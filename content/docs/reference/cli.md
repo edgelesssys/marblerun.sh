@@ -613,7 +613,7 @@ These flags apply to all `secret` subcommands
   ```
 
   ```bash
-  marblerun secret set certificate_secret $MARBLERUN -c admin.crt -k admin.key --from-pem certificate.pem
+  marblerun secret set certificate.pem $MARBLERUN -c admin.crt -k admin.key --from-pem certificate_secret
   ```
 
   The output is the following:

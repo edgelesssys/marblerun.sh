@@ -251,8 +251,8 @@ The following gives some examples.
 
 ## Manifest:Users
 The optional entry `Users` defines user credentials and permissions for authentication and access control.
-Each user is authenticated via a public key. The key needs to be specified as a PEM-encoded self-signed X.509 certificate. 
-Marblerun requires the definition of at least one user for updating a manifest or setting user-defined secrets. The process of updating a manifest is described in our [updating a manifest hands-on]({{< ref "docs/workflows/update-manifest.md">}}), for setting user-defined secrets take a look at the [managing secrets entry]({{< ref "docs/workflows/managing-secrets.md" >}}).
+Each user is authenticated via a public key. The key needs to be specified as a PEM-encoded self-signed X.509 certificate.
+Users can perform [update a manifest]({{< ref "docs/workflows/update-manifest.md">}}) and [read or write secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 ```javascript
 {
