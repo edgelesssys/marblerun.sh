@@ -137,7 +137,7 @@ curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recove
 
 For setting and retrieving secrets.
 
-This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 **Returns (HTTP GET)**:
 {{<table "table table-striped table-bordered">}}
@@ -157,7 +157,7 @@ Example for retrieving the secrets `symmetric_key_shared` and `cert_shared`:
 curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key https://$MARBLERUN/secrets?s=symmetric_key_shared&s=cert_shared
 ```
 
-Setting secrets requires uploading them in JSON format using a POST request. For more information refer to [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+Setting secrets requires uploading them in JSON format using a POST request. For more information refer to [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 Example for setting secrets from the file `secrets.json`:
 ```bash

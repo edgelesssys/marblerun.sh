@@ -590,7 +590,7 @@ These flags apply to all `secret` subcommands
 
   Sets one or more secrets for the coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
   Secrets to set are specified in a special secrets file in JSON format, or created by the CLI from a PEM encoded certificate and key.
-  For more information see [Managing Secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+  For more information see [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
   **Usage**
 
