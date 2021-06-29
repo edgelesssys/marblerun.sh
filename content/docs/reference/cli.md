@@ -52,6 +52,7 @@ Available Commands:
   namespace        Manages namespaces associated with Marblerun installations
   precheck         Check if your kubernetes cluster supports SGX
   recover          Recovers the Marblerun coordinator from a sealed state
+  secret           Manages secrets for the Marblerun coordinator
   status           Gives information about the status of the marblerun Coordinator
   uninstall        Removes Marblerun from a kubernetes cluster
   version          Display version of this CLI and (if running) the Marblerun coordinator
@@ -305,7 +306,7 @@ These flags apply to all subcommands of manifest
 * ### `update`
 
   Update a manifest by uploading an update manifest to the Marblerun coordinator.
-  The original manifest has to define one or multiple Admins who are allowed to update the manifest.
+  The original manifest has to define one or multiple Users who are allowed to update the manifest.
   For more information see [Update]({{< ref "docs/workflows/update-manifest.md" >}})
 
   **Usage**
@@ -529,6 +530,96 @@ The output is similar to the following:
 Successfully verified coordinator, now uploading key
 Successfully uploaded recovery key and unsealed the Marblerun coordinator
 ```
+
+## Command `secret`
+
+Manages secrets for the Coordinator
+
+**Flags**
+These flags apply to all `secret` subcommands
+
+{{<table "table table-striped table-bordered">}}
+| Name, shorthand | Default | Description                                                                                                                 |
+| --------------- | ------- | --------------------------------------------------------------------------------------------------------------------------- |
+| --cert, -c      |         | PEM encoded Marblerun user certificate file (required)                                                                      |
+| --era-config    |         | Path to remote attestation config file in json format, if none provided the newest configuration will be loaded from github |
+| --insecure, -i  |         | Set to skip quote verification, needed when running in simulation mode                                                      |
+| --key, -k       |         | PEM encoded Marblerun user key file (required)                                                                              |
+{{</table>}}
+
+* ### `get`
+
+  Retrieves one or more secrets from the coordinator. Requires credentials in the form of a private key and self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Secrets are returned in JSON format with key data in base64 encoding.
+
+  **Usage**
+
+  ```bash
+  marblerun secret get SECRETNAME ... <IP:PORT> [flags]
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                |
+  | --------------- | ------- | -------------------------- |
+  | --output, -o    |         | File to save the secret to |
+  {{</table>}}
+
+  **Examples**
+
+  ```bash
+  marblerun secret get generic_secret symmetric_key_shared $MARBLERUN -c admin.crt -k admin.key
+  ```
+
+  The output is similar to the following:
+
+  ```
+  generic_secret:
+  	Type:          plain
+  	Data:          SGVsbG8gZnJvbSB0aGUgTWFyYmxlcnVuIERvY3MhCg==
+
+  symmetric_key_shared:
+  	Type:          symmetric-key
+  	UserDefined:   false
+  	Size:          128
+  	Key:           uVGpoJZTRICLccJiVNt9jA==
+  ```
+
+* ### `set`
+
+  Sets one or more secrets for the coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Secrets to set are specified in a special secrets file in JSON format, or created by the CLI from a PEM encoded certificate and key.
+  For more information see [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+
+  **Usage**
+
+  ```bash
+  marblerun secret set <secret.json> <IP:PORT> [flags]
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                  |
+  | --------------- | ------- | -------------------------------------------- |
+  | --from-pem      |         | set to load a secret from a PEM encoded file |
+  {{</table>}}
+
+  **Examples**
+
+  ```bash
+  marblerun secret set secret.json $MARBLERUN -c admin.crt -k admin.key
+  ```
+
+  ```bash
+  marblerun secret set certificate.pem $MARBLERUN -c admin.crt -k admin.key --from-pem certificate_secret
+  ```
+
+  The output is the following:
+  ```
+  Secret successfully set
+  ```
 
 ## Command `status`
 

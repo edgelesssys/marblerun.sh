@@ -133,6 +133,37 @@ Example for recovering the coordinator:
 curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recover"
 ```
 
+### /secrets
+
+For setting and retrieving secrets.
+
+This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+
+**Returns (HTTP GET)**:
+{{<table "table table-striped table-bordered">}}
+| Field value                 | Type   | Description                                                      |
+| --------------------------- | ------ | ---------------------------------------------------------------- |
+| \<SecretName\> (one or more)| map    | A map containing key-value pairs for the requested secret.       |
+{{</table>}}
+
+Each GET requests allows specifying one or more secrets in the form of a query string, where each parameter `s` specifies one secret.
+A query string for the secrets `symmetric_key_shared` and `cert_shared` may look like the following:
+```
+s=symmetric_key_shared&s=cert_shared
+```
+
+Example for retrieving the secrets `symmetric_key_shared` and `cert_shared`:
+```bash
+curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key https://$MARBLERUN/secrets?s=symmetric_key_shared&s=cert_shared
+```
+
+Setting secrets requires uploading them in JSON format using a POST request. For more information refer to [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+
+Example for setting secrets from the file `secrets.json`:
+```bash
+curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key --data-binary @secrets.json https://$MARBLERUN/secrets
+```
+
 ### /status
 
 For returning the current state of the coordinator.
@@ -167,10 +198,10 @@ It may be useful to use this API endpoint and use it for other monitoring tools.
 
 For updating the packages specified in the currently set Manifest.
 
-This API endpoint only works when `Admins` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/workflows/update-manifest.md" >}})
+This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/workflows/update-manifest.md" >}})
 
 Example for updating the manifest:
 
 ```bash
-curl --cacert marblerun.crt --cert admin_certificate.crt --key admin_private.key -w "%{http_code}" --data-binary @update_manifest.json https://$MARBLERUN/update
+curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key -w "%{http_code}" --data-binary @update_manifest.json https://$MARBLERUN/update
 ```
