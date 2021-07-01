@@ -388,10 +388,44 @@ These flags apply to all subcommands of manifest
   }
   ```
 
+* ### `log`
+
+  Retrieves a structured log of updates to the manifest. This allows users to easily check what the currently supported security versions are and if certain secrets have been set by another user.
+
+  **Usage**
+
+  ```bash
+  marblerun manifest log <IP:PORT> [flags]
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                    |
+  | --------------- | --------| ---------------------------------------------- |
+  | --output, -o    |         | Save log to file instead of printing to stdout |
+  {{</table>}}
+
+  **Examples**
+
+  ```bash
+  marblerun manifest log $MARBLERUN
+  ```
+
+  The output is similar to the following:
+  ```
+  Successfully verified coordinator, now requesting update log
+  Update log:
+  {"time":"2021-07-01T09:10:23.128Z","update":"initial manifest set"}
+  {"time":"2021-07-01T09:32:54.207Z","update":"secret set","user":"admin","secret":"symmetric_key_unset","type":"symmetric-key"}
+  {"time":"2021-07-01T09:32:54.207Z","update":"secret set","user":"admin","secret":"cert_unset","type":"cert-ed25519"}
+  {"time":"2021-07-01T10:05:44.791Z","update":"SecurityVersion increased","user":"admin","package":"world","new version":4}
+  ```
+
 * ### `signature`
 
   Print the signature of a Marblerun manifest.
-  The manifest can be in either json or yaml format.
+  The manifest can be in either JSON or YAML format.
 
   **Usage**
 
@@ -401,7 +435,32 @@ These flags apply to all subcommands of manifest
 
   The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun coordinator.
   Note, that Internally, the coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
-  You can quickly verify the integrity of the installed manifest by comparing the output of `marblerun manifest signature` on your local version and the signature returned by `marblerun manifest get` of the coordinator's version.
+
+* ### `verify`
+  Verifies that the signature returned by the Coordinator is equal to a local signature.
+  Can be used to quickly verify the integrity of the installed manifest.
+  You can provide a signature directly, or a manifest in either JSON or YAML format.
+
+  **Usage**
+
+  ```bash
+  marblerun manifest verify <manifest/signature> <IP:PORT> [flags]
+  ```
+
+  **Examples**
+
+  ```bash
+  marblerun manifest verify manifest.json $MARBLERUN
+  ```
+
+  ```bash
+  marblerun manifest verify 152493c4a85845480a04b95f79dd447a4573862e0d2c102c71b91b8b3cbcade5 $MARBLERUN
+  ```
+
+  If the signatures match, the output is the following:
+  ```bash
+  OK
+  ```
 
 ## Command `namespace`
 
