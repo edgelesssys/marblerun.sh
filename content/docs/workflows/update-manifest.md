@@ -11,7 +11,8 @@ In order to ensure the confidentiality of a deployed application, Marblerun uses
 Yet, updates play an important role to ensure your software stays secure. To avoid having to redeploy your application from scratch, Marblerun allows uploading a separate "Update Manifest" which increases the minimum `SecurityVersion` of one or multiple already deployed packages. After such an update is performed, an old version of a defined software package cannot be loaded anymore under the current Manifest.
 
 ## Requirements
-In order to deploy an Update Manifest, the original Manifest, you need to be in possession of a certificate/private key pair which has been defined in the `Users` section of the original Manifest, as described in ["Defining a Manifest"]({{< ref "docs/workflows/define-Manifest.md#manifestmarbles" >}}).
+In order to deploy an Update Manifest, you need to be in possession of a certificate/private key pair belonging to a user from the `Users` section of the original Manifest, as described in ["Defining a Manifest"]({{< ref "docs/workflows/define-Manifest.md#manifestmarbles" >}}).
+Furthermore the user needs to be [permitted to update]({{< ref "docs/workflows/define-Manifest.md#manifestroles" >}}) the chosen packages.
 
 If no administrator has been initially set up, no Manifest Updates can be applied.
 

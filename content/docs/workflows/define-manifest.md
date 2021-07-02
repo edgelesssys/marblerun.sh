@@ -153,6 +153,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
         },
         "secret_key_unset": {
             "Type": "symmetric-key",
+            "Size": 128,
             "UserDefined": true
         }
     }
@@ -250,21 +251,30 @@ The following gives some examples.
 * Inject a symmetric key in hex format: `{{ hex .Secrets.secret_aes_key }}`
 
 ## Manifest:Users
-The optional entry `Users` defines user credentials and permissions for authentication and access control.
+The optional entry `Users` defines user credentials and role bindings for authentication and access control.
 Each user is authenticated via a client certificate. The certificate needs to be specified as a PEM-encoded self-signed X.509 certificate.
-Users can [update a manifest]({{< ref "docs/workflows/update-manifest.md">}}) and [read or write secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+Users with the appropriate roles can [update a manifest]({{< ref "docs/workflows/update-manifest.md">}}) and [read or write secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 ```javascript
 {
     //...
     "Users": {
         "alice": {
-            "Certificate": "-----BEGIN CERTIFICATE-----\nMIIFPjCCA..."
+            "Certificate": "-----BEGIN CERTIFICATE-----\nMIIFPjCCA...",
+            "Roles": [
+                "secret_manager",
+                "update_frontend"
+            ]
         },
         "bob": {
-            "Certificate": "-----BEGIN CERTIFICATE-----\nMIIFP..."
+            "Certificate": "-----BEGIN CERTIFICATE-----\nMIIFP...",
+            "Roles": [
+                "secret_manager",
+                "update_backend"
+            ]
         }
     }
+    //...
 }
 ```
 When verifying certificates in this context, Marblerun ignores their `issuer`, `subject`, and `expiration date` fields. Thus, users cannot lock themselves out through expired certificates.
@@ -280,6 +290,48 @@ Use the following command to preserve newlines correctly:
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
 ```
+## Manifest:Roles
+
+Marblerun supports Role-based access control (RBAC).
+An RBAC Role represents a set of permissions for a Marblerun `User`. Permissions are purely additive (there are no "deny" rules).
+Each role defines a `ResourceType` (one of `Packages` or `Secrets`), a list of `ResourceNames` of that type, and a list of `Actions` that role permits on the listed resources. \
+Valid `Actions` are:
+* For `"ResourceType": "Secrets"`: `ReadSecret` and `WriteSecret`, allowing reading and writing a secret respectively
+* For `"ResourceType": "Packages"`: `UpdateSecurityVersion`, allowing to update the `SecurityVersion` of a given package
+
+```javascript
+{
+    //...
+    "Roles": {
+        "update_frontend": {
+            "ResourceType": "Packages",
+            "ResourceNames": ["frontend"],
+            "Actions": ["UpdateSecurityVersion"]
+        },
+        "update_backend": {
+            "ResourceType": "Packages",
+            "ResourceNames": ["backend"],
+            "Actions": ["UpdateSecurityVersion"]
+        },
+        "secret_manager": {
+            "ResourceType": "Secrets",
+            "ResourceNames": [
+                "secret_key_unset",
+                "generic_secret"
+            ],
+            "Actions": [
+                "ReadSecret",
+                "WriteSecret"
+            ]
+        }
+    }
+    //...
+}
+```
+{{<note>}}
+Deployment updates will only be possible if you create a role with permissions to update the particular packages and bind a user to that role.
+The same applies for setting user-defined secrets.
+{{</note>}}
 
 ## Manifest:RecoveryKeys
 
@@ -292,6 +344,7 @@ The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be
     {
         "recoveryKey1": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
     }
+    //...
 }
 ```
 
@@ -307,7 +360,6 @@ Use the following command to preserve newlines correctly:
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
 ```
-
 
 ## Manifest:TLS
 
