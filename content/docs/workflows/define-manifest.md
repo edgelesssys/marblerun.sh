@@ -290,39 +290,10 @@ Use the following command to preserve newlines correctly:
 ```bash
 awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
 ```
-
-## Manifest:RecoveryKeys
-
-The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described in our [recovery chapter]({{< ref "docs/features/recovery.md" >}})). So far, only one public key entry is supported in the current release of Marblerun.
-
-```javascript
-{
-    //...
-    "RecoveryKeys":
-    {
-        "recoveryKey1": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
-    }
-    //...
-}
-```
-
-This key can be generated with the help of OpenSSL.
-
-```bash
-openssl genrsa -out private_key.pem 4096
-openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
-```
-
-Use the following command to preserve newlines correctly:
-
-```bash
-awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
-```
-
 ## Manifest:Roles
 
 Marblerun supports Role-based access control (RBAC).
-An RBAC Role contains rules that represent a set of permissions for the Marblerun entities `Users` and `Marbles`. Permissions are purely additive (there are no "deny" rules).
+An RBAC Role represents a set of permissions for the Marblerun entities `Users` and `Marbles`. Permissions are purely additive (there are no "deny" rules).
 Each role defines a `ResourceType` (one of `Packages` or `Secrets`), a list of `ResourceNames` of that type, and a list of `Actions` that role permits on the listed resources. \
 Valid `Actions` are:
 * For `"ResourceType": "Secrets"`: `ReadSecret` and `WriteSecret`, allowing reading and writing a secret respectively
@@ -361,6 +332,34 @@ Valid `Actions` are:
 Deployment updates will only be possible if you create a role with permissions to update the particular packages and bind a user to that role.
 The same applies for setting user-defined secrets.
 {{</note>}}
+
+## Manifest:RecoveryKeys
+
+The optional entry `RecoveryKeys` holds PEM-encoded RSA public keys which can be used to recover a failed Marblerun deployment. (The process of recovering a Marblerun instance is described in our [recovery chapter]({{< ref "docs/features/recovery.md" >}})). So far, only one public key entry is supported in the current release of Marblerun.
+
+```javascript
+{
+    //...
+    "RecoveryKeys":
+    {
+        "recoveryKey1": "-----BEGIN PUBLIC KEY-----\nMIIBpTANBgk..."
+    }
+    //...
+}
+```
+
+This key can be generated with the help of OpenSSL.
+
+```bash
+openssl genrsa -out private_key.pem 4096
+openssl rsa -in private_key.pem -outform PEM -pubout -out public_key.pem
+```
+
+Use the following command to preserve newlines correctly:
+
+```bash
+awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' public_key.pem
+```
 
 ## Manifest:TLS
 
