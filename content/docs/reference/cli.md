@@ -37,7 +37,7 @@ go build -o marblerun github.com/edgelesssys/marblerun/cli
 To list all available commands, either run `marblerun` with no commands or execute `marblerun help`
 The output is the following:
 
-```bash
+```
 Usage:
   marblerun [command]
 
@@ -61,6 +61,18 @@ Flags:
 
 Use "marblerun [command] --help" for more information about a command.
 ```
+
+### Requirements
+
+If the coordinator is running on an Azure VM, the CLI relies on the [Azure DCAP Client](https://github.com/microsoft/Azure-DCAP-Client) to verify quotes.
+To install the dependency run:
+```bash
+echo "deb [arch=amd64] https://packages.microsoft.com/ubuntu/18.04/prod bionic main" | sudo tee /etc/apt/sources.list.d/msprod.list
+wget -qO - https://packages.microsoft.com/keys/microsoft.asc | sudo apt-key add -
+sudo apt update
+sudo apt -y install az-dcap-client
+```
+
 ## Command `certificate`
 
 Get the root and/or intermediate certificates of the Marblerun coordinator.
