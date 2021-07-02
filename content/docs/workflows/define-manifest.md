@@ -293,7 +293,7 @@ awk 'NF {sub(/\r/, ""); printf "%s\\n",$0;}' admin_certificate.pem
 ## Manifest:Roles
 
 Marblerun supports Role-based access control (RBAC).
-An RBAC Role represents a set of permissions for the Marblerun entities `Users` and `Marbles`. Permissions are purely additive (there are no "deny" rules).
+An RBAC Role represents a set of permissions for a Marblerun `User`. Permissions are purely additive (there are no "deny" rules).
 Each role defines a `ResourceType` (one of `Packages` or `Secrets`), a list of `ResourceNames` of that type, and a list of `Actions` that role permits on the listed resources. \
 Valid `Actions` are:
 * For `"ResourceType": "Secrets"`: `ReadSecret` and `WriteSecret`, allowing reading and writing a secret respectively
