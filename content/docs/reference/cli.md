@@ -181,20 +181,20 @@ Remember, you need to create a [Marblerun manifest]({{< ref "docs/workflows/defi
   Reading file: nginx.manifest.template
 
   Marblerun suggests the following changes to your Graphene manifest:
-  libos.entrypoint = "file:premain-graphene"
+  libos.entrypoint = "file:premain-libos"
   loader.argv0_override = "$(INSTALL_DIR)/sbin/nginx"
   loader.insecure__use_host_env = 1
   sgx.allowed_files.marblerun_uuid = "file:uuid"
   sgx.enclave_size = "1024M"
   sgx.remote_attestation = 1
   sgx.thread_num = 16
-  sgx.trusted_files.marblerun_premain = "file:premain-graphene"
+  sgx.trusted_files.marblerun_premain = "file:premain-libos"
   Do you want to automatically apply the suggested changes [y/n]? y
   Applying changes...
   Saving original manifest as nginx.manifest.template.bak...
   Saving changes to nginx.manifest.template...
   Downloading Marblerun premain from GitHub...
-  Successfully downloaded premain-graphene.
+  Successfully downloaded premain-libos.
 
   Done! You should be good to go for Marblerun!
   ```

@@ -16,12 +16,12 @@ sudo apt install libsgx-quote-ex-dev
 ```
 ## Configuration
 ### Entrypoint and argv
-We provide the `premain-graphene` executable with the [Marblerun Releases](https://github.com/edgelesssys/marblerun/releases). It will contact the Coordinator, set up the environment, and run the actual application.
+We provide the `premain-libos` executable with the [Marblerun Releases](https://github.com/edgelesssys/marblerun/releases). It will contact the Coordinator, set up the environment, and run the actual application.
 
 Set the premain executable as the entry point of the Graphene project and place the actual entry point in argv0:
 ```toml
-libos.entrypoint = "file:premain-graphene"
-sgx.trusted_files.premain = "file:premain-graphene"
+libos.entrypoint = "file:premain-libos"
+sgx.trusted_files.premain = "file:premain-libos"
 
 # argv0 needs to contain the name of your executable
 loader.argv0_override = "hello"
