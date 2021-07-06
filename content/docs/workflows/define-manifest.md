@@ -225,7 +225,6 @@ Typically, you only define a subset of these. Commonly used properties include f
 * `Subject` (+ children)
 
 The following X.509 properties cannot be specified because they are set by the Coordinator when creating a certificate.
-* `IsCA`: always set to "false"
 * `Issuer`: always set to "Marblerun Coordinator"
 * `BasicConstraintsValid`: always set to "true"
 * `NotBefore`: always set to the host time at creation
