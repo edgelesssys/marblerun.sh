@@ -339,7 +339,10 @@ These flags apply to all subcommands of manifest
 
 * ### `get`
 
-  Retrieves the signature of an uploaded manifest. This allows a user to verify what manifest is running on the coordinator.
+  Retrieves the manifest and signature from the Marblerun coordinator.
+  This allows a user to verify what configuration is running on the coordinator.
+
+  Using the `display-update` flag, users can generate a manifest, including all applied updates up to that point.
 
   **Usage**
 
@@ -350,22 +353,39 @@ These flags apply to all subcommands of manifest
   **Flags**
 
   {{<table "table table-striped table-bordered">}}
-  | Name, shorthand | Default        | Description             |
-  | --------------- | -------------- | ----------------------- |
-  | --output, -o    | signature.json | Define file to write to |
+  | Name, shorthand      | Default | Description                                         |
+  | -------------------- | --------| --------------------------------------------------- |
+  | --display-update, -u |         | Set to merge updates into the displayed manifest    |
+  | --output, -o         |         | Save output to file instead of printing to stdout   |
+  | --signature, -s      |         | Set to additionally display the manifests signature |
   {{</table>}}
 
   **Examples**
 
   ```bash
-  marblerun manifest get $MARBLERUN --output=manifest-signature.json --era-config=era.json
+  marblerun manifest get $MARBLERUN -s --era-config=era.json
   ```
 
-  The output is the following:
+  The output is similar to the following:
 
   ```bash
-  Successfully verified coordinator, now requesting manifest signature
-  Manifest written to: manifest-signature.json
+  Successfully verified coordinator, now requesting manifest
+  {
+  "ManifestSignature": "1ae03179b6e0c4e94546c1a8abff711c8d0975a9ee8ca5445aaa249c22b68724",
+  "Manifest": {
+      "Packages": {
+          "world": {
+              "Debug": true
+          }
+      },
+      "Marbles": {
+          "hello": {
+              "Package": "world",
+              "Parameters": {}
+          }
+      }
+  }
+  }
   ```
 
 * ### `signature`
