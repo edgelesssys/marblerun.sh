@@ -52,9 +52,10 @@ For deploying and verifying the Manifest.
 
 
 {{<table "table table-striped table-bordered">}}
-| Field value       | Type   | Description                                                                                        |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------- |
-| ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an Update Manifest has been applied. |
+| Field value       | Type   | Description                                                                                              |
+| ----------------- | ------ | -------------------------------------------------------------------------------------------------------- |
+| ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an Update Manifest has been applied.       |
+| Manifest          | bytes  | The currently set manifest in base64 encoding. Does not change when an Update Manifest has been applied. |
 {{</table>}}
 
 **Returns (HTTP POST)**:
