@@ -48,9 +48,8 @@ For deploying and verifying the Manifest.
 * Before deploying the application to the cluster the manifest needs to be set once by the provider
 * Users can retrieve and inspect the manifest through this endpoint before interacting with the application
 
-**Returns (HTTP GET)**:
-
-
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value       | Type   | Description                                                                                              |
 | ----------------- | ------ | -------------------------------------------------------------------------------------------------------- |
@@ -58,8 +57,8 @@ For deploying and verifying the Manifest.
 | Manifest          | bytes  | The currently set manifest in base64 encoding. Does not change when an Update Manifest has been applied. |
 {{</table>}}
 
-**Returns (HTTP POST)**:
-
+##### POST
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value     | Type             | Description                                                                                                                                                                                                |
 | --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -84,7 +83,8 @@ For retrieving a remote attestation quote over the whole cluster and the root ce
 The quote is an SGX-DCAP quote, you can learn more about DCAP in the [official Intel DCAP orientation](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
 Both the provider and the users of the confidential application can use this endpoint to verify the integrity of the Coordinator and the cluster at any time.
 
-**Returns (HTTP GET)**:
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value | Type   | Description                                                                                                                                                               |
 | ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -126,6 +126,8 @@ wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinat
 
 For recovering the Coordinator in case unsealing the existing state failed.
 
+##### POST
+
 This API endpoint is only available when the coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/workflows/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
 
 Example for recovering the coordinator:
@@ -140,7 +142,8 @@ For setting and retrieving secrets.
 
 This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
-**Returns (HTTP GET)**:
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value                 | Type   | Description                                                      |
 | --------------------------- | ------ | ---------------------------------------------------------------- |
@@ -158,6 +161,7 @@ Example for retrieving the secrets `symmetric_key_shared` and `cert_shared`:
 curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key https://$MARBLERUN/secrets?s=symmetric_key_shared&s=cert_shared
 ```
 
+##### POST
 Setting secrets requires uploading them in JSON format using a POST request. For more information refer to [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 Example for setting secrets from the file `secrets.json`:
@@ -169,7 +173,8 @@ curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key -
 
 For returning the current state of the coordinator.
 
-**Returns (HTTP GET)**:
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value   | Type   | Description                                                                                       |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------- |
@@ -197,8 +202,19 @@ It may be useful to use this API endpoint and use it for other monitoring tools.
 
 ### /update
 
-For updating the packages specified in the currently set Manifest.
+For updating the packages specified in the currently set Manifest or retrieving a log of all performed updates.
 
+##### GET
+**Returns:**
+
+A structured log of all updates performed via the `/update` or `/secrets` endpoint, including timestamp, author, and affected resources.
+
+Example for getting the update log:
+```bash
+curl -k "https://$MARBLERUN/update"
+```
+
+##### POST
 This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/workflows/update-manifest.md" >}})
 
 Example for updating the manifest:
