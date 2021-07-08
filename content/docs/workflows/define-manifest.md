@@ -113,8 +113,8 @@ The following enconding types are available.
 
 * `raw`: raw bytes
 * `hex`: hex string
-* `base64`: [Base64](https://de.wikipedia.org/wiki/Base64) encoding
-* `pem`: [PEM](https://en.wikipedia.org/wiki/Privacy-Enhanced_Mail) encoding with a header matching the type of the requested key or certificate
+* `base64`: Base64 encoding
+* `pem`: PEM encoding with a header matching the type of the requested key or certificate
 
 The following named keys and certificates are always available.
 
