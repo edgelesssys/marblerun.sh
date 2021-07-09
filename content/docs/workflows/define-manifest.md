@@ -10,6 +10,8 @@ weight: 1
 The Manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKeys`.
 This article describes how to define these in your `manifest.json`.
 
+For a working example see the manifest of the [emojivoto demo](https://github.com/edgelesssys/emojivoto/blob/main/tools/manifest.json). See also the [sample and template manifests](https://github.com/edgelesssys/marblerun/tree/master/samples).
+
 ## Manifest:Packages
 
 The `Packages` section of the Manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.
