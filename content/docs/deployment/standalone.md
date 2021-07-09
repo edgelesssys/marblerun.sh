@@ -14,7 +14,7 @@ This guide walks you through deploying Marblerun standalone.
 
 ## Setup the Coordinator control plane
 
-You can download the latest release of our Coordinator control plane on [GitHub](https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-enclave.signed).
+You can download the [latest release](https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-enclave.signed) of our Coordinator control plane on GitHub.
 If you prefer to build from source please refer to our [build guide](https://github.com/edgelesssys/marblerun/blob/master/BUILD.md).
 
 You can then run the Coordinator's enclave:

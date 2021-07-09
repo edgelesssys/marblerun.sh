@@ -21,7 +21,7 @@ To keep things simple, Marblerun issues one concise remote-attestation statement
 
 ## Key features
 
-:lock: Authentication and integrity verification of microservices wrt. the Manifest
+:lock: Authentication and integrity verification of microservices based on the Manifest
 
 
 :key: Secrets management for microservices

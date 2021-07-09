@@ -2,7 +2,7 @@
 title: Marblerun - The control plane for confidential computing
 claim: The control plane for confidential computing
 description:
-  "**Marblerun** makes it easy to deploy, scale, and verify SGX-based apps on Kubernetes. It runs alongside your favorite service mesh and takes care of all things [confidential computing](https://confidentialcomputing.io/). It's open source, written in Go, and truely cloud native."
+  "**Marblerun** makes it easy to deploy, scale, and verify SGX-based apps on Kubernetes. It runs alongside your favorite service mesh and takes care of all things [confidential computing](https://confidentialcomputing.io/). It's open source, written in Go, and truly cloud native."
 buttons:
   get_started:
     caption: Get started →
