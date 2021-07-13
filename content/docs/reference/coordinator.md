@@ -24,7 +24,7 @@ In general, a successful API call (HTTP Code 200) will return a response in the 
 }
 ```
 
-Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the coordinator, or may just be `null` to acknowledge that the requested operation was performed successfully.
+Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the Coordinator, or may just be `null` to acknowledge that the requested operation was performed successfully.
 
 Whereas an error (HTTP Code 4xx or 5xx) might look like this:
 
@@ -128,9 +128,9 @@ For recovering the Coordinator in case unsealing the existing state failed.
 
 ##### POST
 
-This API endpoint is only available when the coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/workflows/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
+This API endpoint is only available when the Coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/workflows/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
 
-Example for recovering the coordinator:
+Example for recovering the Coordinator:
 
 ```bash
 curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recover"
@@ -171,7 +171,7 @@ curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key -
 
 ### /status
 
-For returning the current state of the coordinator.
+For returning the current state of the Coordinator.
 
 ##### GET
 **Returns**:

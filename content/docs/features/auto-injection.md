@@ -53,7 +53,7 @@ If no such entry exists or a valid `marblerun/marbletype` label is missing, the 
 The webhook will inject the following environment variables into each container of a pod:
 
 * `EDG_MARBLE_TYPE`:  The value of the `marblerun/marbletype` label
-* `EDG_MARBLE_COORDINATOR_ADDR`:  The address of the Marblerun coordinator running on the cluster
+* `EDG_MARBLE_COORDINATOR_ADDR`:  The address of the Marblerun Coordinator running on the cluster
 * `EDG_MARBLE_DNS_NAMES`:  DNS names of the pod derived from marbletype and namespace: `marbletype, marbletype.namespace, marbletype.namespace.svc.cluster.local`
 * `EDG_MARBLE_UUID_FILE`:  The mounted UUID of the Marble
 

@@ -7,7 +7,7 @@ weight: 4
 
 # Verifying a deployment
 
-Marblerun provides a simple REST-API for clients to verify the confidentiality and integrity of the coordinator and the deployed Marbles.
+Marblerun provides a simple REST-API for clients to verify the confidentiality and integrity of the Coordinator and the deployed Marbles.
 
 ## Establishing trust in the Coordinator
 
