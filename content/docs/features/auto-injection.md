@@ -45,7 +45,7 @@ metadata:
 We use this label to map Kubernetes Pods to Marblerun Marbles.
 When you deploy your application, Marblerun will read out this label's value, `voting-svc` in the example above.
 It will check the Marbles section of your manifest for an entry with the same name.
-If such entry is present in the Manifest, the Pod is provided with the particular configuration for this Marble.
+If such entry is present in the manifest, the Pod is provided with the particular configuration for this Marble.
 If no such entry exists or a valid `marblerun/marbletype` label is missing, the Pod's creation is rejected.
 
 ## Injected environment variables

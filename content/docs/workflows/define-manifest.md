@@ -1,20 +1,20 @@
 ---
-title: "Defining a Manifest"
+title: "Defining a manifest"
 date: 2020-11-19T16:44:36+01:00
 draft: false
 weight: 1
 ---
 
-# Defining a Manifest
+# Defining a manifest
 
-The Manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKeys`.
+The manifest is a simple JSON file that determines the key properties of your cluster: `Packages`, `Marbles`, `Secrets`, and `RecoveryKeys`.
 This article describes how to define these in your `manifest.json`.
 
 For a working example see the manifest of the [emojivoto demo](https://github.com/edgelesssys/emojivoto/blob/main/tools/manifest.json). See also the [sample and template manifests](https://github.com/edgelesssys/marblerun/tree/master/samples).
 
 ## Manifest:Packages
 
-The `Packages` section of the Manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.
+The `Packages` section of the manifest lists all the secure enclave software packages that your application uses. A package is defined by the following properties.
 
 * `UniqueID`: this value will pin this package to one specific release build of an application. It represents the globally unique ID of the enclave software package; on SGX, this corresponds to the `MRENCLAVE` value, which is the SHA-256 hash of the enclave's initial contents and its configuration.
 * `SignerID`: this value limits Marblerun to only accept releases signed by a given public key. On SGX, this corresponds to the `MRSIGNER` value, which is the SHA-256 hash of the enclave issuer's RSA-3072 public key.
@@ -47,7 +47,7 @@ In this example, `pkg0` is identified through `UniqueID`. Since `UniqueID` is th
 
 In contrast, `pkg1` is identified through the triplet `SignerID`, `ProductID`, and `SecurityVersion`. `SignerID` cryptographically identifies the vendor of the package; `ProductID` is an arbitrary product ID chosen by the vendor, and `SecurityVersion` is the security-patch level of the product. See our [adding a service hands-on]({{< ref "docs/workflows/add-service.md#step-21-define-the-enclave-software package" >}}) on how to get these values for a given service.
 
-Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having to alter the Manifest.
+Future versions of Marblerun will accept any `SecurityVersion` that is equal or higher than the one specified in `Packages` for a given combination of `SignerID` and `ProductID`. This way, updates to packages can be made without having to alter the manifest.
 
 ## Manifest:Marbles
 

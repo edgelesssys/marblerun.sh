@@ -63,7 +63,7 @@ A Marble's secrets, e.g. a certificate and private key, can be provisioned as fi
 sgx.protected_files.cert = "file:server.crt"
 sgx.protected_files.privkey = "file:server.key"
 ```
-You can specify the files' content in the Marblerun Manifest:
+You can specify the files' content in the Marblerun manifest:
 ```javascript
 ...
     "Parameters": {

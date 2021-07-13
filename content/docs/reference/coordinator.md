@@ -43,7 +43,7 @@ The API currently contains the following endpoints. If an endpoint specifies *Re
 
 ### /manifest
 
-For deploying and verifying the Manifest.
+For deploying and verifying the manifest.
 
 * Before deploying the application to the cluster the manifest needs to be set once by the provider
 * Users can retrieve and inspect the manifest through this endpoint before interacting with the application
@@ -51,10 +51,10 @@ For deploying and verifying the Manifest.
 ##### GET
 **Returns**:
 {{<table "table table-striped table-bordered">}}
-| Field value       | Type   | Description                                                                                              |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------------- |
-| ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an Update Manifest has been applied.       |
-| Manifest          | bytes  | The currently set manifest in base64 encoding. Does not change when an Update Manifest has been applied. |
+| Field value       | Type   | Description                                                                                     |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an update has been applied.       |
+| Manifest          | bytes  | The currently set manifest in base64 encoding. Does not change when an update has been applied. |
 {{</table>}}
 
 ##### POST
@@ -62,16 +62,16 @@ For deploying and verifying the Manifest.
 {{<table "table table-striped table-bordered">}}
 | Field value     | Type             | Description                                                                                                                                                                                                |
 | --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RecoverySecrets | array (optional) | An array containing key-value mapping for encrypted secrets to be used for recovering the Coordinator in case of disaster recovery. The key matches each supplied key from `RecoveryKeys` in the Manifest. |
+| RecoverySecrets | array (optional) | An array containing key-value mapping for encrypted secrets to be used for recovering the Coordinator in case of disaster recovery. The key matches each supplied key from `RecoveryKeys` in the manifest. |
 {{</table>}}
 
-Example for setting the Manifest (HTTP POST):
+Example for setting the manifest (HTTP POST):
 
 ```bash
 curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
 ```
 
-Example for verifying the deployed Manifest (HTTP GET):
+Example for verifying the deployed manifest (HTTP GET):
 
 ```bash
 curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSignature' --raw-output
@@ -140,7 +140,7 @@ curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recove
 
 For setting and retrieving secrets.
 
-This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+This API endpoint only works when `Users` were defined in the manifest. For more information, look up [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
 ##### GET
 **Returns**:
@@ -202,7 +202,7 @@ It may be useful to use this API endpoint and use it for other monitoring tools.
 
 ### /update
 
-For updating the packages specified in the currently set Manifest or retrieving a log of all performed updates.
+For updating the packages specified in the currently set manifest or retrieving a log of all performed updates.
 
 ##### GET
 **Returns:**
@@ -215,7 +215,7 @@ curl -k "https://$MARBLERUN/update"
 ```
 
 ##### POST
-This API endpoint only works when `Users` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/workflows/update-manifest.md" >}})
+This API endpoint only works when `Users` were defined in the manifest. For more information, look up ["updating a manifest"]({{< ref "docs/workflows/update-manifest.md" >}})
 
 Example for updating the manifest:
 

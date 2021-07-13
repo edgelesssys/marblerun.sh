@@ -11,7 +11,7 @@ Marblerun provides a simple REST-API for clients to verify the confidentiality a
 
 ## Establishing trust in the Coordinator
 
-Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root and intermediate CA. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you [update]({{< ref "docs/workflows/update-manifest.md" >}}) the packages specified in your Manifest.
+Marblerun exposes the `/quote` endpoint that returns a quote and a certificate chain consisting of a root and intermediate CA. The root CA is fixed for the lifetime of your deployment, while the intermediate CA changes in case you [update]({{< ref "docs/workflows/update-manifest.md" >}}) the packages specified in your manifest.
 
 The simplest way to verify the quote is via the Edgeless Remote Attestation ([era](https://github.com/edgelesssys/era)) tools:
 
@@ -33,21 +33,14 @@ You can pull the corresponding `coordinator-era.json` file from our release page
 wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json
 ```
 
-After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem`, and `marblerun-intermediate.pem` in your directory. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. Else you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated Manifest.
+After successful verification, you'll have `marblerun-chain.pem`, `marblerun-root.pem`, and `marblerun-intermediate.pem` in your directory. In case you want to pin against specific versions of your application, using the intermediate CA as a trust anchor is a good choice. Else you can pin against the root CA in which case different versions of your application can talk with each other, though you may not be able to launch them if they do not meet the minimum `SecurityVersion` specified in your original or updated manifest.
 
-## Verifying the Manifest
+## Verifying the manifest
 
-Establishing trust with the service mesh allows you to verify the deployed Manifest in the second step.
+Establishing trust with the service mesh allows you to verify the deployed manifest in the second step.
 To that end, Marblerun exposes the endpoint `/manifest`.
-Using the CLI you can get the Manifest's signature aka its sha256 hash:
+Using the CLI you can get the manifest's signature aka its sha256 hash and compare it against your local version:
 
 ```bash
-marblerun manifest get $MARBLERUN -o manifest-signature.json
-cat manifest-signature.json | jq '.data.ManifestSignature' --raw-output
-```
-
-Compare this against your local version of the Manifest:
-
-```bash
-sha256sum manifest.json
+marblerun manifest verify manifest.json $MARBLERUN
 ```

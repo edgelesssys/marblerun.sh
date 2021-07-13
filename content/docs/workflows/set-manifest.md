@@ -1,18 +1,18 @@
 ---
-title: "Setting a Manifest"
+title: "Setting a manifest"
 date: 2020-11-14T16:28:16+05:30
 draft: false
 weight: 2
 ---
 
-# Setting a Manifest
+# Setting a manifest
 
-The Manifest is a JSON document that defines which services span the mesh and how they should be configured.
+The manifest is a JSON document that defines which services span the mesh and how they should be configured.
 It further defines what Infrastructure providers are allowed.
-You can set a Manifest through Marblerun's Client REST-API.
-The endpoint for all Manifest operations is `/manifest`.
+You can set a manifest through Marblerun's Client REST-API.
+The endpoint for all manifest operations is `/manifest`.
 
-See the following Manifest for example (`manifest.json`).
+See the following manifest for example (`manifest.json`).
 
 ```json
 {
@@ -91,7 +91,7 @@ To set the manifest we can use the command line interface, which automatically p
 marblerun manifest set manifest.json $MARBLERUN
 ```
 
-If the Manifest contains a `RecoveryKeys` entry, you will receive a JSON reply including a recovery secret, encrypted with the public key supplied in `RecoveryKeys`. The reply will look like this, with `[base64]` as your encrypted recovery secret.
+If the manifest contains a `RecoveryKeys` entry, you will receive a JSON reply including a recovery secret, encrypted with the public key supplied in `RecoveryKeys`. The reply will look like this, with `[base64]` as your encrypted recovery secret.
 
 `{"EncryptionKey":"[base64]"}`
 

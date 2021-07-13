@@ -10,7 +10,7 @@ weight: 1
 In this guide, you will install Marblerun into your Kubernetes cluster and deploy a sample confidential application to demonstrate the capabilities of Marblerun.
 
 Installing Marblerun is easy. First, you will install the CLI (command-line interface) onto your local machine. Using this CLI, you’ll then install the control plane onto your Kubernetes cluster.
-Finally, you will add your own services and set up a corresponding Manifest.
+Finally, you will add your own services and set up a corresponding manifest.
 
 {{<note>}}
 A working SGX DCAP environment is required for Marblerun to work. For the ease of exploring and testing we provide a simulation mode with `--simulation` that runs without SGX hardware.
@@ -113,7 +113,7 @@ Clone the [demo application's repository]( https://github.com/edgelesssys/emojiv
 git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 ```
 
-Marblerun guarantees that the topology of your distributed app adheres to a Manifest specified in simple JSON.
+Marblerun guarantees that the topology of your distributed app adheres to a manifest specified in simple JSON.
 Marblerun verifies the integrity of services, bootstraps them, and sets up encrypted connections between them.
 The emojivoto demo already comes with a [manifest](https://github.com/edgelesssys/emojivoto/blob/main/tools/manifest.json), which you can deploy onto Marblerun by running:
 

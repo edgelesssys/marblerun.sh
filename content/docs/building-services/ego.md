@@ -14,7 +14,7 @@ Simply follow the steps on [adding a service]({{< ref "docs/workflows/add-servic
 
 ## Manaul TLS credentials handling
 
-If your service already uses TLS and gets the credentials from, e.g., a file, you just need to [adapt the Manifest]({{< ref "docs/workflows/add-service.md#make-your-service-use-the-provided-tls-credentials" >}}). Otherwise, you need to make small code changes.
+If your service already uses TLS and gets the credentials from, e.g., a file, you just need to [adapt the manifest]({{< ref "docs/workflows/add-service.md#make-your-service-use-the-provided-tls-credentials" >}}). Otherwise, you need to make small code changes.
 
 We provide a convenience package called [github.com/edgelesssys/ego/marble](https://pkg.go.dev/github.com/edgelesssys/ego/marble#GetTLSConfig). With it, a service can automatically get and use its Marblerun TLS credentials. The following gives an example.
 ```Go

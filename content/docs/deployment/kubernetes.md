@@ -102,8 +102,8 @@ The domain is used as the CommonName in the Coordinator's TLS certificate.
 Depending on which domain you expose Coordinator's client API, you need to set the CommonName accordingly.
 The client API can be used by users/clients of your application to obtain one concise remote attestation statement for your cluster.
 
-The Coordinator is now in a pending state, waiting for a Manifest.
-See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
+The Coordinator is now in a pending state, waiting for a manifest.
+See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a manifest.
 
 ## Option 2: Install with Helm
 
@@ -146,8 +146,8 @@ The domain is used as the CommonName in the Coordinator's TLS certificate.
 Depending on which domain you expose Coordinator's client API, you need to set the CommonName accordingly.
 The client API can be used by users/clients of your application to obtain one concise remote attestation statement for your cluster.
 
-The Coordinator is now in a pending state, waiting for a Manifest.
-See the [`how to add a service`]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
+The Coordinator is now in a pending state, waiting for a manifest.
+See the [`how to add a service`]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a manifest.
 ## (Optional) Exposing the client API
 
 The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 4433.
