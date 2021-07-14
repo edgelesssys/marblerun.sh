@@ -42,20 +42,20 @@ Usage:
   marblerun [command]
 
 Available Commands:
-  certificate      Retrieves the certificate of the Marblerun coordinator
+  certificate      Retrieves the certificate of the Marblerun Coordinator
   check            Check the status of Marbleruns control plane
   completion       Output script for specified shell to enable autocompletion
   graphene-prepare Modifies a Graphene manifest for use with Marblerun
   help             Help about any command
   install          Installs marblerun on a kubernetes cluster
-  manifest         Manages manifest for the Marblerun coordinator
+  manifest         Manages manifest for the Marblerun Coordinator
   namespace        Manages namespaces associated with Marblerun installations
   precheck         Check if your kubernetes cluster supports SGX
-  recover          Recovers the Marblerun coordinator from a sealed state
-  secret           Manages secrets for the Marblerun coordinator
+  recover          Recovers the Marblerun Coordinator from a sealed state
+  secret           Manages secrets for the Marblerun Coordinator
   status           Gives information about the status of the marblerun Coordinator
   uninstall        Removes Marblerun from a kubernetes cluster
-  version          Display version of this CLI and (if running) the Marblerun coordinator
+  version          Display version of this CLI and (if running) the Marblerun Coordinator
 
 Flags:
   -h, --help   help for marblerun
@@ -64,7 +64,7 @@ Use "marblerun [command] --help" for more information about a command.
 ```
 ## Command `certificate`
 
-Get the root and/or intermediate certificates of the Marblerun coordinator.
+Get the root and/or intermediate certificates of the Marblerun Coordinator.
 
 **Flags**
 These flags apply to all `certificate` subcommands
@@ -80,7 +80,7 @@ These flags apply to all `certificate` subcommands
 
 * ### `root`
 
-  Gets the root certificate of the Marblerun coordinator.
+  Gets the root certificate of the Marblerun Coordinator.
 
   **Usage**
 
@@ -90,7 +90,7 @@ These flags apply to all `certificate` subcommands
 
 * ### `intermediate`
 
-  Gets the intermediate certificate of the Marblerun coordinator.
+  Gets the intermediate certificate of the Marblerun Coordinator.
 
   **Usage**
 
@@ -100,7 +100,7 @@ These flags apply to all `certificate` subcommands
 
 * ### `chain`
 
-  Gets the certificate chain of the Marblerun coordinator.
+  Gets the certificate chain of the Marblerun Coordinator.
 
   **Usage**
 
@@ -111,7 +111,7 @@ These flags apply to all `certificate` subcommands
 ## Command `check`
 
   Check the status of Marbleruns control plane.
-  This command will check if the Marblerun coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
+  This command will check if the Marblerun Coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
 
   **Usage**
 
@@ -217,7 +217,7 @@ marblerun install [flags]
 | :----------------------- | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | --client-server-port     | 4433              | Set the client server port. Needs to be configured to the same <br> port as in your client tool stack                                                        |
 | --disable-auto-injection |                   | Disable automatic injection of selected namespaces                                                                                                           |
-| --domain                 | localhost         | Sets the CNAME for the coordinator certificate                                                                                                               |
+| --domain                 | localhost         | Sets the CNAME for the Coordinator certificate                                                                                                               |
 | --help, -h               |                   | help for install                                                                                                                                             |
 | --marblerun-chart-path   |                   | Path to marblerun helm chart                                                                                                                                 |
 | --mesh-sever-port        | 2001              | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles                                                          |
@@ -273,7 +273,7 @@ These flags apply to all subcommands of manifest
 
 * ### `set`
 
-  Uploads a manifest in json or yaml format to the Marblerun coordinator.
+  Uploads a manifest in json or yaml format to the Marblerun Coordinator.
   If a recovery key was set in the manifest, a recovery secret will be sent back.
 
   **Usage**
@@ -299,13 +299,13 @@ These flags apply to all subcommands of manifest
   The output is similar to the following:
 
   ```bash
-  Successfully verified coordinator, now uploading manifest
+  Successfully verified Coordinator, now uploading manifest
   Manifest successfully set, recovery data saved to: recovery-secret.json
   ```
 
 * ### `update`
 
-  Update a manifest by uploading an update manifest to the Marblerun coordinator.
+  Update a manifest by uploading an update manifest to the Marblerun Coordinator.
   The original manifest has to define one or multiple Users who are allowed to update the manifest.
   For more information see [Update]({{< ref "docs/workflows/update-manifest.md" >}})
 
@@ -333,14 +333,14 @@ These flags apply to all subcommands of manifest
   The output is the following:
 
   ```bash
-  Successfully verified coordinator, now uploading manifest
+  Successfully verified Coordinator, now uploading manifest
   Manifest successfully updated
   ```
 
 * ### `get`
 
-  Retrieves the manifest and signature from the Marblerun coordinator.
-  This allows a user to verify what configuration is running on the coordinator.
+  Retrieves the manifest and signature from the Marblerun Coordinator.
+  This allows a user to verify what configuration is running on the Coordinator.
 
   Using the `display-update` flag, users can generate a manifest, including all applied updates up to that point.
 
@@ -369,7 +369,7 @@ These flags apply to all subcommands of manifest
   The output is similar to the following:
 
   ```bash
-  Successfully verified coordinator, now requesting manifest
+  Successfully verified Coordinator, now requesting manifest
   {
   "ManifestSignature": "1ae03179b6e0c4e94546c1a8abff711c8d0975a9ee8ca5445aaa249c22b68724",
   "Manifest": {
@@ -414,7 +414,7 @@ These flags apply to all subcommands of manifest
 
   The output is similar to the following:
   ```
-  Successfully verified coordinator, now requesting update log
+  Successfully verified Coordinator, now requesting update log
   Update log:
   {"time":"2021-07-01T09:10:23.128Z","update":"initial manifest set"}
   {"time":"2021-07-01T09:32:54.207Z","update":"secret set","user":"admin","secret":"symmetric_key_unset","type":"symmetric-key"}
@@ -433,8 +433,8 @@ These flags apply to all subcommands of manifest
   marblerun manifest signature manifest.json
   ```
 
-  The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun coordinator.
-  Note, that Internally, the coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
+  The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun Coordinator.
+  Note, that Internally, the Coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
 
 * ### `verify`
   Verifies that the signature returned by the Coordinator is equal to a local signature.
@@ -578,8 +578,8 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 
 ## Command `recover`
 
-Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see [Recovery]({{< ref "docs/workflows/recover-coordinator.md" >}})
+Recover the Marblerun Coordinator from a sealed state by uploading a recovery key.
+For more information about Coordinator recovery see [Recovery]({{< ref "docs/workflows/recover-coordinator.md" >}})
 
 **Usage**
 
@@ -606,8 +606,8 @@ marblerun recover $MARBLERUN recovery_key_decrypted --era-config=era.json
 The output is similar to the following:
 
 ```bash
-Successfully verified coordinator, now uploading key
-Successfully uploaded recovery key and unsealed the Marblerun coordinator
+Successfully verified Coordinator, now uploading key
+Successfully uploaded recovery key and unsealed the Marblerun Coordinator
 ```
 
 ## Command `secret`
@@ -628,7 +628,7 @@ These flags apply to all `secret` subcommands
 
 * ### `get`
 
-  Retrieves one or more secrets from the coordinator. Requires credentials in the form of a private key and self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Retrieves one or more secrets from the Coordinator. Requires credentials in the form of a private key and self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
   Secrets are returned in JSON format with key data in base64 encoding.
 
   **Usage**
@@ -667,7 +667,7 @@ These flags apply to all `secret` subcommands
 
 * ### `set`
 
-  Sets one or more secrets for the coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Sets one or more secrets for the Coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
   Secrets to set are specified in a special secrets file in JSON format, or created by the CLI from a PEM encoded certificate and key.
   For more information see [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
 
@@ -702,7 +702,7 @@ These flags apply to all `secret` subcommands
 
 ## Command `status`
 
-Checks on the current status of the coordinator.
+Checks on the current status of the Coordinator.
 
 **Usage**
 
@@ -752,7 +752,7 @@ Got latest config
 
 ## Command `version`
 
-  Display version information of CLI, and the Marblerun coordinator running on a Kubernetes cluster.
+  Display version information of CLI, and the Marblerun Coordinator running on a Kubernetes cluster.
 
   **Usage**
 

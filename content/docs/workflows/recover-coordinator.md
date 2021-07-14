@@ -11,7 +11,7 @@ As described in the [recovery chapter]({{< ref "docs/features/recovery.md" >}}),
 If the Coordinator finds a sealed state during its startup which it is unable to unseal using the host-specific SGX sealing key, it will wait for further instructions.
 You have two options:
 
-1. Recover the sealed state by uploading the recovery secret, which was encrypted for the `RecoveryKeys` defined in the Manifest
+1. Recover the sealed state by uploading the recovery secret, which was encrypted for the `RecoveryKeys` defined in the manifest
 
     The recovery secret can be uploaded through the `/recover` client API endpoint. In order to do so a client needs to first extract the encrypted secret by decrypting it with the corresponding private key:
 
@@ -28,10 +28,10 @@ You have two options:
 
     If the recovery worked correctly, the Coordinator should apply the sealed state again without returning an error. In case the Coordinator was not able to restore the state with the uploaded key, an error will be returned in the logs and the `/recover` endpoint will stay open for further interaction.
 
-2. Dismiss the sealed state by uploading a new Manifest
+2. Dismiss the sealed state by uploading a new manifest
 
     In case there is no desire to recover the old state it can simply be dismissed by [uploading a new manifest]({{< ref "docs/workflows/set-manifest.md" >}}).
 
 {{<note>}}
-If a new Manifest is uploaded, the old state will be overwritten on disk and the `/recover` endpoint will not be available anymore.
+If a new manifest is uploaded, the old state will be overwritten on disk and the `/recover` endpoint will not be available anymore.
 {{</note>}}

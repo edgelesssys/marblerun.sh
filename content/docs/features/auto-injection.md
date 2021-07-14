@@ -45,7 +45,7 @@ metadata:
 We use this label to map Kubernetes Pods to Marblerun Marbles.
 When you deploy your application, Marblerun will read out this label's value, `voting-svc` in the example above.
 It will check the Marbles section of your manifest for an entry with the same name.
-If such entry is present in the Manifest, the Pod is provided with the particular configuration for this Marble.
+If such entry is present in the manifest, the Pod is provided with the particular configuration for this Marble.
 If no such entry exists or a valid `marblerun/marbletype` label is missing, the Pod's creation is rejected.
 
 ## Injected environment variables
@@ -53,7 +53,7 @@ If no such entry exists or a valid `marblerun/marbletype` label is missing, the 
 The webhook will inject the following environment variables into each container of a pod:
 
 * `EDG_MARBLE_TYPE`:  The value of the `marblerun/marbletype` label
-* `EDG_MARBLE_COORDINATOR_ADDR`:  The address of the Marblerun coordinator running on the cluster
+* `EDG_MARBLE_COORDINATOR_ADDR`:  The address of the Marblerun Coordinator running on the cluster
 * `EDG_MARBLE_DNS_NAMES`:  DNS names of the pod derived from marbletype and namespace: `marbletype, marbletype.namespace, marbletype.namespace.svc.cluster.local`
 * `EDG_MARBLE_UUID_FILE`:  The mounted UUID of the Marble
 

@@ -22,7 +22,7 @@ features_list:
     - title: End-to-end verifiability
       icon: fas fa-file-signature
       description:
-        Get cryptographic proof that the topology of your cluster adheres to a Manifest defined in simple JSON.
+        Get cryptographic proof that the topology of your cluster adheres to a manifest defined in simple JSON.
     - title: Keep using your existing tools
       icon: fas fa-tools
       description:

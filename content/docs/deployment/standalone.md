@@ -38,8 +38,8 @@ Per default, the Coordinator starts with the following default values. You can s
 The Coordinator's state is sealed to `$PWD/marblerun-coordinator-data/sealed_data`. If you want a fresh restart remove this file first: `rm $PWD/marblerun-coordinator-data/sealed_data`.
 {{</note>}}
 
-The Coordinator is now in a pending state, waiting for a Manifest.
-See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
+The Coordinator is now in a pending state, waiting for a manifest.
+See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a manifest.
 
 ### Run your workloads
 
@@ -58,7 +58,7 @@ Per default, a Marble starts with the following default values. You can set your
 | Setting | Default Value | Environment Variable |
 | --- | --- | --- |
 | network address of the Coordinator’s API for Marbles | localhost:2001 |  EDG_MARBLE_COORDINATOR_ADDR |
-| reference on one entry from your Manifest’s `Marbles` section | - (this needs to be set every time) | EDG_MARBLE_TYPE |
+| reference on one entry from your manifest’s `Marbles` section | - (this needs to be set every time) | EDG_MARBLE_TYPE |
 | local file path where the Marble stores its UUID | $PWD/uuid | EDG_MARBLE_UUID_FILE |
 | DNS names the Coordinator will issue the Marble’s certificate for | $EDG_MARBLE_TYPE | EDG_MARBLE_DNS_NAMES |
 {{</table>}}

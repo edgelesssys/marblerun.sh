@@ -29,7 +29,7 @@ helm upgrade marblerun-coordinator edgeless/marblerun-coordinator \
     --set coordinator.coordinatorImageVersion=v0.2.0
 ```
 
-If the Coordinator is rescheduled on the same host as before, it will continue running with the same Manifest as before.
+If the Coordinator is rescheduled on the same host as before, it will continue running with the same manifest as before.
 However, if the Coordinator gets rescheduled to another node during the updating process you need to perform the [recovery step]({{< ref "docs/features/recovery.md" >}}).
 
 The Marbles won't be affected by the Coordinator update and will continue running.
@@ -55,4 +55,4 @@ The process is similar to a regular update of your application, as is described 
 Updating your application is straightforward with Marblerun.
 You can roll out the new version similar to a regular [deployment update](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/#updating-a-deployment).
 The Coordinator will manage the attestation and bootstrapping of your new version.
-Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the Manifest in effect.
+Notably, nothing changes on the client-side of Marblerun, the version update is transparent and adherent to the manifest in effect.

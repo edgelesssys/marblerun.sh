@@ -102,8 +102,8 @@ The domain is used as the CommonName in the Coordinator's TLS certificate.
 Depending on which domain you expose Coordinator's client API, you need to set the CommonName accordingly.
 The client API can be used by users/clients of your application to obtain one concise remote attestation statement for your cluster.
 
-The Coordinator is now in a pending state, waiting for a Manifest.
-See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
+The Coordinator is now in a pending state, waiting for a manifest.
+See the [how to add a service]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a manifest.
 
 ## Option 2: Install with Helm
 
@@ -146,17 +146,17 @@ The domain is used as the CommonName in the Coordinator's TLS certificate.
 Depending on which domain you expose Coordinator's client API, you need to set the CommonName accordingly.
 The client API can be used by users/clients of your application to obtain one concise remote attestation statement for your cluster.
 
-The Coordinator is now in a pending state, waiting for a Manifest.
-See the [`how to add a service`]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a Manifest.
+The Coordinator is now in a pending state, waiting for a manifest.
+See the [`how to add a service`]({{< ref "docs/workflows/add-service.md" >}}) documentation for more information on how to create and set a manifest.
 ## (Optional) Exposing the client API
 
-The coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 4433.
+The Coordinator creates a [`LoadBalancer`](https://kubernetes.io/docs/concepts/services-networking/service/#loadbalancer) service called `coordinator-client-api` exposing the client API on the default port 4433.
 Depending on your deployment type you can provision a LoadBalancer that exposes this service to the outside world, or you deploy an Ingress Gateway forwarding the traffic.
 If you are running with Minikube you can expose this service to localhost with `kubectl -n marblerun port-forward svc/coordinator-client-api 4433:4433 --address localhost`.
 
 ### Ingress/Gateway configuration
 
-If you're using an ingress-controller or gateway for managing access to the coordinator-client-api service, make sure you're enabling SNI for your TLS connections.
+If you're using an ingress-controller or gateway for managing access to the `coordinator-client-api` service, make sure you're enabling SNI for your TLS connections.
 
 * For the NGINX ingress controller add the [`nginx.ingress.kubernetes.io/ssl-passthrough`](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#ssl-passthrough) annotation.
 * For Istio Gateways set the [tls-mode PASSTHROUGH](https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-sni-passthrough/#configure-an-ingress-gateway)
