@@ -1,0 +1,439 @@
+:root {
+    --edg-dark: #00010d;
+    --edg-teal: #5bd9d9;
+    --edg-dark-teal: #2bbcbc;
+    --edg-light-teal: #bdecec;
+    --edg-pink: #d34fea;
+    --edg-dark-pink: #70008A;
+    --edg-dark-gray: #8195a6;
+    --edg-light-gray: #f2f2f2;
+    --theme-color: var(--edg-dark-teal);
+    --theme-color-light: var(--edg-teal);
+    --theme-color-dark: #007773;
+    --theme-color-secondary: #2E2E46;
+    --theme-color-secondary-dark: #50006C;
+    --theme-color-secondary-light: var(--edg-pink);
+    --text-color-base: #2E2E46;
+    --text-color-secondary: #646473;
+    --text-color-tertiary: #81818E;
+    --code-color-dark-1: var(--text-color-base);
+    --code-color-dark-2: #3E4756;
+    --code-color-dark-3: var(--edg-dark-pink);
+    --code-color-light-1: #5379AA;
+}
+
+::selection {
+    background: var(--theme-color-light);
+}
+
+body {
+    font-size: 100%;
+    line-height: 1.5;
+    font-family: 'Source Sans Pro', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text-color-base);
+}
+
+* {
+    text-decoration: none !important;
+}
+
+aside.sidebar {
+    border: none;
+    background-color: var(--edg-light-gray);
+    color: var(--text-color-base);
+}
+
+.sidebar ul li a {
+    color: var(--text-color-secondary);
+    font-size: 1rem;
+}
+
+.sidebar ul li a:hover {
+    text-decoration: none;
+    color: var(--theme-color-secondary-light);
+}
+
+.sidebar .sidebar-nav ul li.active>a {
+    color: var(--theme-color-secondary-light);
+    border-right: 0.2rem solid var(--theme-color-secondary-light);
+}
+
+.search .results-panel.show {
+    background-color: #fff;
+    color: var(--text-color-base);
+}
+
+.search .matching-post {
+    padding: 0;
+    border-top: 0.3rem solid var(--edg-light-gray);
+}
+
+.search a {
+    padding: 1rem;
+    display: block;
+    transition: background-color 0.3s ease;
+}
+
+.search a:hover {
+    color: var(--theme-color-dark);
+}
+
+.search p.empty {
+    margin: 0;
+    padding: 1rem;
+    background-color: var(--edg-light-gray);
+}
+
+.search input:focus {
+    box-shadow: 0 0 5px var(--edg-pink);
+    border: 1px solid var(--edg-pink);
+}
+
+.sidebar>h1 {
+    font-size: 2rem;
+}
+
+.sidebar-logo {
+    display: block;
+    width: 16rem;
+    margin-left: 2rem;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 0;
+}
+
+body .sidebar-toggle {
+    background: none;
+    bottom: 0;
+    left: 0;
+    cursor: pointer;
+    padding: 1rem;
+}
+
+body .sidebar-toggle-button {
+    position: relative;
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+body .sidebar-toggle span {
+    transition: all 0.3s linear;
+    background-color: var(--theme-color-secondary-light);
+    height: 0.25rem;
+    width: 1.5rem;
+    position: absolute;
+    left: 0;
+    margin: 0;
+    transform-origin: 0;
+}
+
+body.close .sidebar-toggle span {
+    transform-origin: center;
+}
+
+body .sidebar-toggle span:nth-child(1) {
+    top: 0;
+}
+
+body .sidebar-toggle span:nth-child(2) {
+    top: 0.65rem;
+}
+
+body .sidebar-toggle span:nth-child(3) {
+    top: 1.25rem;
+}
+
+.sidebar-toggle .sidebar-toggle-button:hover {
+    opacity: 1;
+}
+
+.sidebar-toggle:hover span:nth-child(1) {
+    transform: rotate(45deg);
+    width: 1.75rem;
+}
+
+.sidebar-toggle:hover span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle:hover span:nth-child(3) {
+    transform: rotate(-45deg);
+    width: 1.75rem;
+}
+
+.close .sidebar-toggle:hover span:nth-child(1) {
+    transform: rotate(0);
+    width: 1.5rem;
+    top: 0.65rem;
+}
+
+.close .sidebar-toggle:hover span:nth-child(2) {
+    opacity: 1;
+    transform: rotate(90deg);
+}
+
+.close .sidebar-toggle:hover span:nth-child(3) {
+    transform: rotate(0);
+    width: 1.5rem;
+    top: 0.65rem;
+}
+
+th {
+    text-align: left;
+}
+
+.markdown-section blockquote {
+    margin: 1em 0;
+}
+
+.markdown-section em,
+.markdown-section blockquote {
+    color: var(--text-color-tertiary);
+}
+
+.cover-main img {
+    max-width: 10rem;
+    max-height: 10rem;
+}
+
+section.cover {
+    background: none !important;
+    background-color: var(--edg-dark) !important;
+    background-image: url("marblerun_grid_gray.svg") !important;
+    background-repeat: no-repeat !important;
+    background-size: 25em !important;
+    background-position-x: 7vw !important;
+    background-position-y: 25vh !important;
+}
+
+section.cover-main {
+    margin: none !important;
+    height: 100%;
+}
+
+section.cover-main img {
+    max-width: none;
+    max-height: none;
+}
+
+section.cover h1 {
+    background-color: var(--edg-dark);
+    font-weight: 700;
+    font-size: 2.7em;
+    color: #fff;
+}
+
+section.cover p {
+    background-color: var(--edg-dark);
+    color: rgba(255, 255, 255, .8);
+    line-height: inherit;
+}
+
+section.cover .cover-article {
+    margin: 20vh 20vw;
+    max-width: 1000px;
+}
+
+.anchor {
+    position: relative;
+}
+
+.anchor::before {
+    visibility: hidden;
+    position: absolute;
+    top: 0.25em;
+    left: -1.5em;
+    content: ' ⚓';
+    opacity: 0.4;
+    font-size: 0.75em;
+}
+
+.anchor:hover::before {
+    visibility: visible;
+}
+
+.app-name-link {
+    white-space: nowrap;
+}
+
+.app-sub-sidebar li:before {
+    display: none;
+}
+
+.markdown-section pre,
+.markdown-section pre>code {
+    font-size: 1em;
+    line-height: 1.5;
+}
+
+.markdown-section code {
+    display: inline-block;
+    font-family: 'Source Code Pro', monospace;
+    color: inherit;
+    font-size: 0.9em;
+    padding: 0.1em 0.3em;
+}
+
+.markdown-section pre {
+    padding: 2rem;
+}
+
+.markdown-section pre>code {
+    padding: 0;
+}
+
+.markdown-section hr {
+    width: 25%;
+    border-bottom: 5px solid #F1F1F2;
+}
+
+.lang-json .token.property {
+    color: var(--code-color-dark-1);
+}
+
+.lang-json .token.string,
+.token.boolean,
+.token.number,
+.token.null {
+    color: var(--code-color-light-1);
+}
+
+.markdown-section ol,
+.markdown-section p,
+.markdown-section ul {
+    line-height: inherit;
+}
+
+.markdown-section a {
+    text-decoration: none;
+    border-bottom: 0.1rem solid var(--theme-color-light);
+    transition: all 0.3s ease;
+}
+
+.markdown-section a:hover {
+    border-color: var(--theme-color);
+    color: var(--theme-color-dark);
+}
+
+.alert {
+    padding: 2rem;
+    border: 0.1rem solid var(--theme-color-secondary-light);
+}
+
+.markdown-section p.warn {
+    border-left: 4px solid var(--edg-teal);
+    background-color: #f8f8f8;
+}
+
+.markdown-section p.tip {
+    border-left: 4px solid var(--edg-pink);
+}
+
+.markdown-section p.tip:before {
+    background-color: var(--edg-pink);
+}
+
+.shields img {
+    height: 1.25em;
+}
+
+.feature-frame {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.feature-frame .anchor:hover::before {
+    visibility: hidden;
+}
+
+.feature-box {
+    min-height: 100%;
+    display: block;
+    padding: 1em;
+    flex: 0 0 33%;
+    transition: all .3s ease;
+}
+
+.feature-box:hover {
+    background-color: var(--edg-light-gray);
+    border-radius: 10px;
+}
+
+.feature-content p {
+    color: var(--text-color-tertiary);
+}
+
+
+/* Badges */
+
+.markdown-section>p:first-child>a {
+    border: none;
+}
+
+.docsify-copy-code-button {
+    background: var(--edg-light-teal) !important;
+    color: var(--text-color-secondary) !important;
+}
+
+@media screen and (max-width: 768px) {
+    section.cover {
+        height: auto;
+    }
+    section.cover .cover-main {
+        margin: 0 5vw;
+    }
+    .cover-main img {
+        max-width: 100px;
+        max-height: 100px;
+    }
+    body.close .sidebar-toggle {
+        background-color: transparent;
+        padding: 1rem;
+    }
+    .sidebar-toggle:hover span:nth-child(1) {
+        transform: rotate(0);
+        width: 1.5rem;
+        top: 0.65rem;
+    }
+    .sidebar-toggle:hover span:nth-child(2) {
+        opacity: 1;
+        transform: rotate(90deg);
+        transform-origin: center;
+    }
+    .sidebar-toggle:hover span:nth-child(3) {
+        transform: rotate(0);
+        width: 1.5rem;
+        top: 0.65rem;
+    }
+    .close .sidebar-toggle:hover span:nth-child(1) {
+        transform: rotate(45deg);
+        width: 1.75rem;
+    }
+    .close .sidebar-toggle:hover span:nth-child(2) {
+        opacity: 0;
+    }
+    .close .sidebar-toggle:hover span:nth-child(3) {
+        transform: rotate(-45deg);
+        width: 1.75rem;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .markdown-section {
+        max-width: 75rem;
+        padding: 1rem 3rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    body {
+        font-size: 112.5%;
+    }
+}
+
+@media (min-width: 1400px) {
+    body {
+        font-size: 125%;
+    }
+}

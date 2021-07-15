@@ -1,8 +1,0 @@
-baseURL = "https://marblerun.sh"
-languageCode = "en-us"
-title = "Marblerun - The Control Plane for Confidential Computing"
-theme = "marblerun"
-enableEmoji = true
-pygmentsCodefences = true
-pygmentsCodefencesGuessSyntax = true
-pygmentsStyle = "manni"
