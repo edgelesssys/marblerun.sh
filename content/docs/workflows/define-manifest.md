@@ -146,9 +146,7 @@ In the [previous section](#manifestmarbles), we discussed how certain cryptograp
             "Shared": false,
             "ValidFor": 7,
             "Cert": {
-                "SerialNumber": 42,
                 "Subject": {
-                    "SerialNumber": "42",
                     "CommonName": "Marblerun Unit Test"
                 }
             }
@@ -179,7 +177,6 @@ When specifying a custom certificate in the `Secrets` section, the following pro
 ```javascript
 "Cert": {
         "SignatureAlgorithm": 0,
-        "SerialNumber": null,
         "Subject": {
             "Country": null,
             "Organization": null,
@@ -188,7 +185,6 @@ When specifying a custom certificate in the `Secrets` section, the following pro
             "Province": null,
             "StreetAddress": null,
             "PostalCode": null,
-            "SerialNumber": "",
             "CommonName": "",
             "Names": null,
             "ExtraNames": null
@@ -228,6 +224,7 @@ Typically, you only define a subset of these. Commonly used properties include f
 
 The following X.509 properties cannot be specified because they are set by the Coordinator when creating a certificate.
 * `Issuer`: always set to "Marblerun Coordinator"
+* `SerialNumber`: always set to a unique, random value
 * `BasicConstraintsValid`: always set to "true"
 * `NotBefore`: always set to the host time at creation
 
