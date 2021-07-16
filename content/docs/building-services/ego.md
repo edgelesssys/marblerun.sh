@@ -12,7 +12,7 @@ To get your Go service ready for Marblerun, we provide two solutions. With [Tran
 ## TTLS
 Simply follow the steps on [adding a service]({{< ref "docs/workflows/add-service.md" >}}). No code changes and no recompiling needed.
 
-## Manaul TLS credentials handling
+## Manual TLS credentials handling
 
 If your service already uses TLS and gets the credentials from, e.g., a file, you just need to [adapt the manifest]({{< ref "docs/workflows/add-service.md#make-your-service-use-the-provided-tls-credentials" >}}). Otherwise, you need to make small code changes.
 
