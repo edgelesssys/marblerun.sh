@@ -18,7 +18,7 @@ To deploy Marblerun with Intel SGX, the machine or VM has to support Intel SGX.
 Particularly, Marblerun requires support for the SGX Datacenter Attestation Primitives (DCAP).
 You can verify [if your CPU supports DCAP](https://www.intel.com/content/www/us/en/support/articles/000057420/software/intel-security-products.html).
 
-For more information read the [Properly Detecting Intel Software Guard Extensions (Intel® SGX) in Your Applications](https://software.intel.com/content/www/us/en/develop/articles/properly-detecting-intel-software-guard-extensions-in-your-applications.html) article.
+For more information read this article on [detecting Intel Software Guard Extensions](https://software.intel.com/content/www/us/en/develop/articles/properly-detecting-intel-software-guard-extensions-in-your-applications.html) in your applications.
 
 #### BIOS
 
@@ -44,8 +44,8 @@ Most of the popular hypervisors support SGX:
 
 #### Driver
 
-You need to [install the SGX Driver for systems supporting the Launch Control Configuration](https://download.01.org/intel-sgx/latest/dcap-latest/linux/docs/Intel_SGX_DCAP_Linux_SW_Installation_Guide.pdf).
-Azure provides the [instructions on how to install this driver](https://docs.microsoft.com/en-us/azure/confidential-computing/quick-create-portal#2-install-the-intel-sgx-dcap-driver) that you can use for your on-premises machines.
+You need to install the [SGX Driver for systems supporting the Launch Control Configuration](https://download.01.org/intel-sgx/latest/dcap-latest/linux/docs/Intel_SGX_DCAP_Linux_SW_Installation_Guide.pdf).
+Azure provides the instructions on [how to install this driver](https://docs.microsoft.com/en-us/azure/confidential-computing/quick-create-portal#2-install-the-intel-sgx-dcap-driver) that you can use for your on-premises machines.
 
 ### SGX Datacenter Attestation Primitives (DCAP)
 

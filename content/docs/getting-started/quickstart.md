@@ -7,10 +7,10 @@ weight: 1
 
 # Quickstart
 
-In this guide, we’ll walk you through how to install Marblerun into your Kubernetes cluster. Then we’ll deploy a sample confidential application to demonstrate the capabilities of Marblerun.
+In this guide, you will install Marblerun into your Kubernetes cluster and deploy a sample confidential application to demonstrate the capabilities of Marblerun.
 
 Installing Marblerun is easy. First, you will install the CLI (command-line interface) onto your local machine. Using this CLI, you’ll then install the control plane onto your Kubernetes cluster.
-Finally, you will add your own services and set up a corresponding Manifest.
+Finally, you will add your own services and set up a corresponding manifest.
 
 {{<note>}}
 A working SGX DCAP environment is required for Marblerun to work. For the ease of exploring and testing we provide a simulation mode with `--simulation` that runs without SGX hardware.
@@ -28,14 +28,13 @@ kubectl version --short
 ```
 
 You should see an output with both a Client Version and Server Version component.
-
 Now your cluster is ready and we’ll install the Marblerun CLI.
 
 ## Step 1: Install the CLI
 
 If this is your first time running Marblerun, you will need to download the marblerun command-line interface (CLI) onto your local machine. The CLI will allow you to interact with your Marblerun deployment.
 
-To install the CLI manually, run:
+To install the CLI, run:
 
 ### For the current user
 
@@ -83,21 +82,21 @@ This command will wait until all components of Marblerun are ready to be used or
 After installing the Coordinator we need to verify its integrity.
 For this, we utilize SGX remote attestation and obtain the Coordinator's root certificate.
 
-1. Port forward the Coordinator's Client API
+Port forward the Coordinator's Client API
 
 ```bash
 kubectl -n marblerun port-forward svc/coordinator-client-api 4433:4433 --address localhost >/dev/null &
 export MARBLERUN=localhost:4433
 ```
 
-1. Verify the quote and get the coordinator's root certificate
+Verify the quote and get the Coordinator's root certificate
 
 ```bash
 marblerun certificate root $MARBLERUN -o marblerun.crt --insecure
 ```
 
-The CLI will obtain the coordinator's remote attestation quote and verify it against the configuration on our [release page](github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json).
-The SGX quote proves the integrity of the coordinator pod.
+The CLI will obtain the Coordinator's remote attestation quote and verify it against the configuration on our [release page](github.com/edgelesssys/marblerun/releases/latest/download/coordinator-era.json).
+The SGX quote proves the integrity of the Coordinator pod.
 Since we are not using SGX hardware in this case (`--simulation`), the quote verification is omitted by marblerun.
 The CLI returns a certificate and stores it as `marblerun.crt` in your current directory.
 The certificate is bound to the quote and can be used for future verification.
@@ -107,14 +106,14 @@ It can also be used as a root of trust for [authenticating your confidential app
 
 To get a feel for how Marblerun would work for one of your services, you can install a demo application.
 The emojivoto application is a standalone Kubernetes application that uses a mix of gRPC and HTTP calls to allow the users to vote on their favorite emojis.
-Created as a demo application for the popular [Linkerd](https://linkerd.io) service mesh, we've created a confidential variant that uses TLS for all gRPC and HTTP connections.
-Clone the demo application from the [GitHub repository]( https://github.com/edgelesssys/emojivoto.git) by running:
+Created as a demo application for the popular [Linkerd](https://linkerd.io) service mesh, we've made a confidential variant that uses a confidential service mesh for all gRPC and HTTP connections.
+Clone the [demo application's repository]( https://github.com/edgelesssys/emojivoto.git) from the GitHub by running:
 
 ```bash
 git clone https://github.com/edgelesssys/emojivoto.git && cd emojivoto
 ```
 
-Marblerun guarantees that the topology of your distributed app adheres to a Manifest specified in simple JSON.
+Marblerun guarantees that the topology of your distributed app adheres to a manifest specified in simple JSON.
 Marblerun verifies the integrity of services, bootstraps them, and sets up encrypted connections between them.
 The emojivoto demo already comes with a [manifest](https://github.com/edgelesssys/emojivoto/blob/main/tools/manifest.json), which you can deploy onto Marblerun by running:
 
@@ -145,10 +144,10 @@ helm install -f ./kubernetes/nosgx_values.yaml emojivoto ./kubernetes --create-n
 
 ## Step 5: Watch it run
 
-You can now check the Marblerun log and see the services being authenticated by the coordinator.
+You can now check the Marblerun log and see the services being authenticated by the Coordinator.
 
 ```bash
-kubectl -n marblerun logs -f -ledgeless.systems/control-plane-component=coordinator
+kubectl -n marblerun logs -f -l edgeless.systems/control-plane-component=coordinator
 ```
 
 Port forward the front-end web service to access it on your local machine by running:

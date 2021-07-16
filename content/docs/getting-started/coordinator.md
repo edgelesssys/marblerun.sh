@@ -18,7 +18,7 @@ The Coordinator can be configured with several environment variables:
 
 The Coordinator clients can be divided into two major groups.
 
-* The owners/providers/administrators who need to interact with the coordinator for deploying their confidential application and administrative tasks
-* The users/customers who use the coordinator for remote attestation and establishing trust with the application
+* The owners/providers/administrators who need to interact with the Coordinator for deploying their confidential application and administrative tasks
+* The users/customers who use the Coordinator for remote attestation and establishing trust with the application
 
 The [Client API]({{< ref "docs/reference/coordinator" >}}) serves both use-cases with a compact REST-API.

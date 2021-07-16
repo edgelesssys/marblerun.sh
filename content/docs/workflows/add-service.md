@@ -18,19 +18,21 @@ To get your service ready for Marblerun, you need to rebuild it with one of the 
 
 ### Make your service use the provided TLS credentials
 
+Skip this step, when using EGo with TTLS.
+
 Quick refresher: Marblerun's Coordinator issues TLS credentials for each verified Marble (i.e., a service running in a secure enclave) as is described in our [secrets management chapter]({{< ref "docs/features/secrets-management.md#tls-credentials" >}}).
 
-The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environment variables, or command line arguments. This is defined in the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}).
+The TLS X.509 certificate and the corresponding private key can be securely passed to a service through files, environment variables, or command line arguments. This is defined in the manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}).
 
 For now, you just need to make sure that your service reads the certificate and the private key from arbitrary paths, environment variables, or command line arguments, e.g., the file `/tmp/mycert.cert` or the environment variable `MY_PRIVATE_KEY`, and uses them at runtime for internal and external connections. If you're lucky, your service already does this and you don't need to change a thing in the code.
 
-## **Step 2:** Define your service in the Manifest
+## **Step 2:** Define your service in the manifest
 
-Now that your service is ready, you need to make two types of entries in the Manifest regarding its properties and parameters.
+Now that your service is ready, you need to make two types of entries in the manifest regarding its properties and parameters.
 
 ### **Step 2.1:** Define the enclave software package
 
-As is described in more detail in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestpackages" >}}), the Manifest contains a section `Packages`, in which allowed enclave software packages are defined.
+As is described in more detail in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestpackages" >}}), the manifest contains a section `Packages`, in which allowed enclave software packages are defined.
 
 To add an entry for your service, run the `oesign` tool on the enclave file you built in the previous step as follows. (`oesign` is installed with [Edgeless RT](https://github.com/edgelesssys/edgelessrt).)
 
@@ -53,7 +55,9 @@ Use `UniqueID` (i.e., `MRENCLAVE` in Intel SGX speak) or the triplet of `SignerI
 
 ### **Step 2.2:** Define the parameters
 
-Now you can define with which parameters (i.e., files, environments variables, and command line arguments) your service is allowed to run. This is done in the `Marbles` section of the Manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}). As discussed in [Step #1.1](#step-11-make-your-service-use-the-provided-tls-credentials), you need to make sure that the TLS credentials for your service (i.e., `Marblerun.MarbleCert.Cert` and `Marblerun.MarbleCert.Private`) are injected such that your service will find them at runtime. If your service is written in Go and you're using the `marble` package, there is no need to inject these explicitly.
+Now you can define with which parameters (i.e., files, environments variables, and command line arguments) your service is allowed to run. This is done in the `Marbles` section of the manifest as is described in our [writing a manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifestmarbles" >}}). When using EGo, define all TTLS connections as described in the [manifest hands-on]({{< ref "docs/workflows/define-manifest.md#manifesttls" >}}).
+
+Otherwise, as discussed in [Step #1.1](#step-11-make-your-service-use-the-provided-tls-credentials), you need to make sure that the TLS credentials for your service (i.e., `Marblerun.MarbleCert.Cert` and `Marblerun.MarbleCert.Private`) are injected such that your service will find them at runtime. If your service is written in Go and you're using the `marble` package, there is no need to inject these explicitly.
 
 ## **Step 3:** Start your service
 
@@ -67,7 +71,7 @@ EDG_MARBLE_COORDINATOR_ADDR=coordinator-mesh-api.marblerun:2001 EDG_MARBLE_TYPE=
 
 * `EDG_MARBLE_COORDINATOR_ADDR` is the network address of the Coordinator's API for Marbles. When you deploy the Coordinator using our Helm repository as is described in our [deploying Marblerun hands-on]({{< ref "docs/deployment" >}}), the default address is `coordinator-mesh-api.marblerun:2001`.
 
-* `EDG_MARBLE_TYPE` needs to reference one entry from your Manifest's `Marbles` section.
+* `EDG_MARBLE_TYPE` needs to reference one entry from your manifest's `Marbles` section.
 
 * `EDG_MARBLE_UUID_FILE` is the local file path where the Marble stores its UUID. Every instance of a Marble has its unique and public UUID. The file is needed to allow a Marble to restart under its UUID.
 

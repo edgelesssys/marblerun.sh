@@ -42,19 +42,20 @@ Usage:
   marblerun [command]
 
 Available Commands:
-  certificate      Retrieves the certificate of the Marblerun coordinator
+  certificate      Retrieves the certificate of the Marblerun Coordinator
   check            Check the status of Marbleruns control plane
   completion       Output script for specified shell to enable autocompletion
   graphene-prepare Modifies a Graphene manifest for use with Marblerun
   help             Help about any command
   install          Installs marblerun on a kubernetes cluster
-  manifest         Manages manifest for the Marblerun coordinator
+  manifest         Manages manifest for the Marblerun Coordinator
   namespace        Manages namespaces associated with Marblerun installations
   precheck         Check if your kubernetes cluster supports SGX
-  recover          Recovers the Marblerun coordinator from a sealed state
+  recover          Recovers the Marblerun Coordinator from a sealed state
+  secret           Manages secrets for the Marblerun Coordinator
   status           Gives information about the status of the marblerun Coordinator
   uninstall        Removes Marblerun from a kubernetes cluster
-  version          Display version of this CLI and (if running) the Marblerun coordinator
+  version          Display version of this CLI and (if running) the Marblerun Coordinator
 
 Flags:
   -h, --help   help for marblerun
@@ -75,7 +76,7 @@ sudo apt -y install az-dcap-client
 
 ## Command `certificate`
 
-Get the root and/or intermediate certificates of the Marblerun coordinator.
+Get the root and/or intermediate certificates of the Marblerun Coordinator.
 
 **Flags**
 These flags apply to all `certificate` subcommands
@@ -91,7 +92,7 @@ These flags apply to all `certificate` subcommands
 
 * ### `root`
 
-  Gets the root certificate of the Marblerun coordinator.
+  Gets the root certificate of the Marblerun Coordinator.
 
   **Usage**
 
@@ -101,7 +102,7 @@ These flags apply to all `certificate` subcommands
 
 * ### `intermediate`
 
-  Gets the intermediate certificate of the Marblerun coordinator.
+  Gets the intermediate certificate of the Marblerun Coordinator.
 
   **Usage**
 
@@ -111,7 +112,7 @@ These flags apply to all `certificate` subcommands
 
 * ### `chain`
 
-  Gets the certificate chain of the Marblerun coordinator.
+  Gets the certificate chain of the Marblerun Coordinator.
 
   **Usage**
 
@@ -122,7 +123,7 @@ These flags apply to all `certificate` subcommands
 ## Command `check`
 
   Check the status of Marbleruns control plane.
-  This command will check if the Marblerun coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
+  This command will check if the Marblerun Coordinator and/or the Marblerun webhook are deployed on a Kubernetes cluster and wait until all replicas of the deployment have the `available` status.
 
   **Usage**
 
@@ -192,20 +193,20 @@ Remember, you need to create a [Marblerun manifest]({{< ref "docs/workflows/defi
   Reading file: nginx.manifest.template
 
   Marblerun suggests the following changes to your Graphene manifest:
-  libos.entrypoint = "file:premain-graphene"
+  libos.entrypoint = "file:premain-libos"
   loader.argv0_override = "$(INSTALL_DIR)/sbin/nginx"
   loader.insecure__use_host_env = 1
   sgx.allowed_files.marblerun_uuid = "file:uuid"
   sgx.enclave_size = "1024M"
   sgx.remote_attestation = 1
   sgx.thread_num = 16
-  sgx.trusted_files.marblerun_premain = "file:premain-graphene"
+  sgx.trusted_files.marblerun_premain = "file:premain-libos"
   Do you want to automatically apply the suggested changes [y/n]? y
   Applying changes...
   Saving original manifest as nginx.manifest.template.bak...
   Saving changes to nginx.manifest.template...
   Downloading Marblerun premain from GitHub...
-  Successfully downloaded premain-graphene.
+  Successfully downloaded premain-libos.
 
   Done! You should be good to go for Marblerun!
   ```
@@ -228,7 +229,7 @@ marblerun install [flags]
 | :----------------------- | :---------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | --client-server-port     | 4433              | Set the client server port. Needs to be configured to the same <br> port as in your client tool stack                                                        |
 | --disable-auto-injection |                   | Disable automatic injection of selected namespaces                                                                                                           |
-| --domain                 | localhost         | Sets the CNAME for the coordinator certificate                                                                                                               |
+| --domain                 | localhost         | Sets the CNAME for the Coordinator certificate                                                                                                               |
 | --help, -h               |                   | help for install                                                                                                                                             |
 | --marblerun-chart-path   |                   | Path to marblerun helm chart                                                                                                                                 |
 | --mesh-sever-port        | 2001              | Set the mesh server port. Needs to be configured to the same <br> port as in the data-plane marbles                                                          |
@@ -284,7 +285,7 @@ These flags apply to all subcommands of manifest
 
 * ### `set`
 
-  Uploads a manifest in json or yaml format to the Marblerun coordinator.
+  Uploads a manifest in json or yaml format to the Marblerun Coordinator.
   If a recovery key was set in the manifest, a recovery secret will be sent back.
 
   **Usage**
@@ -310,14 +311,14 @@ These flags apply to all subcommands of manifest
   The output is similar to the following:
 
   ```bash
-  Successfully verified coordinator, now uploading manifest
+  Successfully verified Coordinator, now uploading manifest
   Manifest successfully set, recovery data saved to: recovery-secret.json
   ```
 
 * ### `update`
 
-  Update a manifest by uploading an update manifest to the Marblerun coordinator.
-  The original manifest has to define one or multiple Admins who are allowed to update the manifest.
+  Update a manifest by uploading an update manifest to the Marblerun Coordinator.
+  The original manifest has to define one or multiple Users who are allowed to update the manifest.
   For more information see [Update]({{< ref "docs/workflows/update-manifest.md" >}})
 
   **Usage**
@@ -344,13 +345,16 @@ These flags apply to all subcommands of manifest
   The output is the following:
 
   ```bash
-  Successfully verified coordinator, now uploading manifest
+  Successfully verified Coordinator, now uploading manifest
   Manifest successfully updated
   ```
 
 * ### `get`
 
-  Retrieves the signature of an uploaded manifest. This allows a user to verify what manifest is running on the coordinator.
+  Retrieves the manifest and signature from the Marblerun Coordinator.
+  This allows a user to verify what configuration is running on the Coordinator.
+
+  Using the `display-update` flag, users can generate a manifest, including all applied updates up to that point.
 
   **Usage**
 
@@ -361,28 +365,79 @@ These flags apply to all subcommands of manifest
   **Flags**
 
   {{<table "table table-striped table-bordered">}}
-  | Name, shorthand | Default        | Description             |
-  | --------------- | -------------- | ----------------------- |
-  | --output, -o    | signature.json | Define file to write to |
+  | Name, shorthand      | Default | Description                                         |
+  | -------------------- | --------| --------------------------------------------------- |
+  | --display-update, -u |         | Set to merge updates into the displayed manifest    |
+  | --output, -o         |         | Save output to file instead of printing to stdout   |
+  | --signature, -s      |         | Set to additionally display the manifests signature |
   {{</table>}}
 
   **Examples**
 
   ```bash
-  marblerun manifest get $MARBLERUN --output=manifest-signature.json --era-config=era.json
+  marblerun manifest get $MARBLERUN -s --era-config=era.json
   ```
 
-  The output is the following:
+  The output is similar to the following:
 
   ```bash
-  Successfully verified coordinator, now requesting manifest signature
-  Manifest written to: manifest-signature.json
+  Successfully verified Coordinator, now requesting manifest
+  {
+  "ManifestSignature": "1ae03179b6e0c4e94546c1a8abff711c8d0975a9ee8ca5445aaa249c22b68724",
+  "Manifest": {
+      "Packages": {
+          "world": {
+              "Debug": true
+          }
+      },
+      "Marbles": {
+          "hello": {
+              "Package": "world",
+              "Parameters": {}
+          }
+      }
+  }
+  }
+  ```
+
+* ### `log`
+
+  Retrieves a structured log of updates to the manifest. This allows users to easily check what the currently supported security versions are and if certain secrets have been set by another user.
+
+  **Usage**
+
+  ```bash
+  marblerun manifest log <IP:PORT> [flags]
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                    |
+  | --------------- | --------| ---------------------------------------------- |
+  | --output, -o    |         | Save log to file instead of printing to stdout |
+  {{</table>}}
+
+  **Examples**
+
+  ```bash
+  marblerun manifest log $MARBLERUN
+  ```
+
+  The output is similar to the following:
+  ```
+  Successfully verified Coordinator, now requesting update log
+  Update log:
+  {"time":"2021-07-01T09:10:23.128Z","update":"initial manifest set"}
+  {"time":"2021-07-01T09:32:54.207Z","update":"secret set","user":"admin","secret":"symmetric_key_unset","type":"symmetric-key"}
+  {"time":"2021-07-01T09:32:54.207Z","update":"secret set","user":"admin","secret":"cert_unset","type":"cert-ed25519"}
+  {"time":"2021-07-01T10:05:44.791Z","update":"SecurityVersion increased","user":"admin","package":"world","new version":4}
   ```
 
 * ### `signature`
 
   Print the signature of a Marblerun manifest.
-  The manifest can be in either json or yaml format.
+  The manifest can be in either JSON or YAML format.
 
   **Usage**
 
@@ -390,9 +445,34 @@ These flags apply to all subcommands of manifest
   marblerun manifest signature manifest.json
   ```
 
-  The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun coordinator.
-  Note, that Internally, the coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
-  You can quickly verify the integrity of the installed manifest by comparing the output of `marblerun manifest signature` on your local version and the signature returned by `marblerun manifest get` of the coordinator's version.
+  The output is the sha256 hash in base64 encoding of the manifest as it would be interpreted by the Marblerun Coordinator.
+  Note, that Internally, the Coordinator handles the manifest in JSON format. Hence, the signature is always based on the JSON format of your manifest.
+
+* ### `verify`
+  Verifies that the signature returned by the Coordinator is equal to a local signature.
+  Can be used to quickly verify the integrity of the installed manifest.
+  You can provide a signature directly, or a manifest in either JSON or YAML format.
+
+  **Usage**
+
+  ```bash
+  marblerun manifest verify <manifest/signature> <IP:PORT> [flags]
+  ```
+
+  **Examples**
+
+  ```bash
+  marblerun manifest verify manifest.json $MARBLERUN
+  ```
+
+  ```bash
+  marblerun manifest verify 152493c4a85845480a04b95f79dd447a4573862e0d2c102c71b91b8b3cbcade5 $MARBLERUN
+  ```
+
+  If the signatures match, the output is the following:
+  ```bash
+  OK
+  ```
 
 ## Command `namespace`
 
@@ -510,8 +590,8 @@ If the auto-injection feature is enabled. All new pods in those namespaces will 
 
 ## Command `recover`
 
-Recover the Marblerun coordinator from a sealed state by uploading a recovery key.
-For more information about coordinator recovery see [Recovery]({{< ref "docs/workflows/recover-coordinator.md" >}})
+Recover the Marblerun Coordinator from a sealed state by uploading a recovery key.
+For more information about Coordinator recovery see [Recovery]({{< ref "docs/workflows/recover-coordinator.md" >}})
 
 **Usage**
 
@@ -538,13 +618,103 @@ marblerun recover $MARBLERUN recovery_key_decrypted --era-config=era.json
 The output is similar to the following:
 
 ```bash
-Successfully verified coordinator, now uploading key
-Successfully uploaded recovery key and unsealed the Marblerun coordinator
+Successfully verified Coordinator, now uploading key
+Successfully uploaded recovery key and unsealed the Marblerun Coordinator
 ```
+
+## Command `secret`
+
+Manages secrets for the Coordinator
+
+**Flags**
+These flags apply to all `secret` subcommands
+
+{{<table "table table-striped table-bordered">}}
+| Name, shorthand | Default | Description                                                                                                                 |
+| --------------- | ------- | --------------------------------------------------------------------------------------------------------------------------- |
+| --cert, -c      |         | PEM encoded Marblerun user certificate file (required)                                                                      |
+| --era-config    |         | Path to remote attestation config file in json format, if none provided the newest configuration will be loaded from github |
+| --insecure, -i  |         | Set to skip quote verification, needed when running in simulation mode                                                      |
+| --key, -k       |         | PEM encoded Marblerun user key file (required)                                                                              |
+{{</table>}}
+
+* ### `get`
+
+  Retrieves one or more secrets from the Coordinator. Requires credentials in the form of a private key and self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Secrets are returned in JSON format with key data in base64 encoding.
+
+  **Usage**
+
+  ```bash
+  marblerun secret get SECRETNAME ... <IP:PORT> [flags]
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                |
+  | --------------- | ------- | -------------------------- |
+  | --output, -o    |         | File to save the secret to |
+  {{</table>}}
+
+  **Examples**
+
+  ```bash
+  marblerun secret get generic_secret symmetric_key_shared $MARBLERUN -c admin.crt -k admin.key
+  ```
+
+  The output is similar to the following:
+
+  ```
+  generic_secret:
+  	Type:          plain
+  	Data:          SGVsbG8gZnJvbSB0aGUgTWFyYmxlcnVuIERvY3MhCg==
+
+  symmetric_key_shared:
+  	Type:          symmetric-key
+  	UserDefined:   false
+  	Size:          128
+  	Key:           uVGpoJZTRICLccJiVNt9jA==
+  ```
+
+* ### `set`
+
+  Sets one or more secrets for the Coordinator. Requires credentials in the form of a private key and a self-signed certificate of the corresponding public key. The corresponding user needs to be permitted to access the requested secrets.
+  Secrets to set are specified in a special secrets file in JSON format, or created by the CLI from a PEM encoded certificate and key.
+  For more information see [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+
+  **Usage**
+
+  ```bash
+  marblerun secret set <secret.json> <IP:PORT> [flags]
+  ```
+
+  **Flags**
+
+  {{<table "table table-striped table-bordered">}}
+  | Name, shorthand | Default | Description                                  |
+  | --------------- | ------- | -------------------------------------------- |
+  | --from-pem      |         | set to load a secret from a PEM encoded file |
+  {{</table>}}
+
+  **Examples**
+
+  ```bash
+  marblerun secret set secret.json $MARBLERUN -c admin.crt -k admin.key
+  ```
+
+  ```bash
+  marblerun secret set certificate.pem $MARBLERUN -c admin.crt -k admin.key --from-pem certificate_secret
+  ```
+
+  The output is the following:
+  ```
+  Secret successfully set
+  ```
 
 ## Command `status`
 
-Checks on the current status of the coordinator.
+Checks on the current status of the Coordinator.
 
 **Usage**
 
@@ -594,7 +764,7 @@ Got latest config
 
 ## Command `version`
 
-  Display version information of CLI, and the Marblerun coordinator running on a Kubernetes cluster.
+  Display version information of CLI, and the Marblerun Coordinator running on a Kubernetes cluster.
 
   **Usage**
 

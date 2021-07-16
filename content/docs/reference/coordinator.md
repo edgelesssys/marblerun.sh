@@ -24,7 +24,7 @@ In general, a successful API call (HTTP Code 200) will return a response in the 
 }
 ```
 
-Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the coordinator, or may just be `null` to acknowledge that the requested operation was performed successfully.
+Depending on the API endpoint and the data submitted, `data` might contain a specific answer from the Coordinator, or may just be `null` to acknowledge that the requested operation was performed successfully.
 
 Whereas an error (HTTP Code 4xx or 5xx) might look like this:
 
@@ -43,35 +43,35 @@ The API currently contains the following endpoints. If an endpoint specifies *Re
 
 ### /manifest
 
-For deploying and verifying the Manifest.
+For deploying and verifying the manifest.
 
 * Before deploying the application to the cluster the manifest needs to be set once by the provider
 * Users can retrieve and inspect the manifest through this endpoint before interacting with the application
 
-**Returns (HTTP GET)**:
-
-
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
-| Field value       | Type   | Description                                                                                        |
-| ----------------- | ------ | -------------------------------------------------------------------------------------------------- |
-| ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an Update Manifest has been applied. |
+| Field value       | Type   | Description                                                                                     |
+| ----------------- | ------ | ----------------------------------------------------------------------------------------------- |
+| ManifestSignature | string | A SHA-256 of the currently set manifest. Does not change when an update has been applied.       |
+| Manifest          | bytes  | The currently set manifest in base64 encoding. Does not change when an update has been applied. |
 {{</table>}}
 
-**Returns (HTTP POST)**:
-
+##### POST
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value     | Type             | Description                                                                                                                                                                                                |
 | --------------- | ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| RecoverySecrets | array (optional) | An array containing key-value mapping for encrypted secrets to be used for recovering the Coordinator in case of disaster recovery. The key matches each supplied key from `RecoveryKeys` in the Manifest. |
+| RecoverySecrets | array (optional) | An array containing key-value mapping for encrypted secrets to be used for recovering the Coordinator in case of disaster recovery. The key matches each supplied key from `RecoveryKeys` in the manifest. |
 {{</table>}}
 
-Example for setting the Manifest (HTTP POST):
+Example for setting the manifest (HTTP POST):
 
 ```bash
 curl --cacert marblerun.crt --data-binary @manifest.json "https://$MARBLERUN/manifest"
 ```
 
-Example for verifying the deployed Manifest (HTTP GET):
+Example for verifying the deployed manifest (HTTP GET):
 
 ```bash
 curl --cacert marblerun.crt "https://$MARBLERUN/manifest" | jq '.data.ManifestSignature' --raw-output
@@ -83,7 +83,8 @@ For retrieving a remote attestation quote over the whole cluster and the root ce
 The quote is an SGX-DCAP quote, you can learn more about DCAP in the [official Intel DCAP orientation](https://download.01.org/intel-sgx/sgx-dcap/1.9/linux/docs/Intel_SGX_DCAP_ECDSA_Orientation.pdf).
 Both the provider and the users of the confidential application can use this endpoint to verify the integrity of the Coordinator and the cluster at any time.
 
-**Returns (HTTP GET)**:
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value | Type   | Description                                                                                                                                                               |
 | ----------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -125,19 +126,55 @@ wget https://github.com/edgelesssys/marblerun/releases/latest/download/coordinat
 
 For recovering the Coordinator in case unsealing the existing state failed.
 
-This API endpoint is only available when the coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/workflows/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
+##### POST
 
-Example for recovering the coordinator:
+This API endpoint is only available when the Coordinator is in recovery mode. Before you can use the endpoint, you need to decrypt the recovery secret which you may have received when setting the manifest initially. See [Recovering the Coordinator]({{< ref "docs/workflows/recover-coordinator.md" >}}) to retrieve the recovery key needed to use this API endpoint correctly.
+
+Example for recovering the Coordinator:
 
 ```bash
 curl -k -X POST --data-binary @recovery_key_decrypted "https://$MARBLERUN/recover"
 ```
 
+### /secrets
+
+For setting and retrieving secrets.
+
+This API endpoint only works when `Users` were defined in the manifest. For more information, look up [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+
+##### GET
+**Returns**:
+{{<table "table table-striped table-bordered">}}
+| Field value                 | Type   | Description                                                      |
+| --------------------------- | ------ | ---------------------------------------------------------------- |
+| \<SecretName\> (one or more)| map    | A map containing key-value pairs for the requested secret.       |
+{{</table>}}
+
+Each GET requests allows specifying one or more secrets in the form of a query string, where each parameter `s` specifies one secret.
+A query string for the secrets `symmetric_key_shared` and `cert_shared` may look like the following:
+```
+s=symmetric_key_shared&s=cert_shared
+```
+
+Example for retrieving the secrets `symmetric_key_shared` and `cert_shared`:
+```bash
+curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key https://$MARBLERUN/secrets?s=symmetric_key_shared&s=cert_shared
+```
+
+##### POST
+Setting secrets requires uploading them in JSON format using a POST request. For more information refer to [Managing secrets]({{< ref "docs/workflows/managing-secrets.md" >}}).
+
+Example for setting secrets from the file `secrets.json`:
+```bash
+curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key --data-binary @secrets.json https://$MARBLERUN/secrets
+```
+
 ### /status
 
-For returning the current state of the coordinator.
+For returning the current state of the Coordinator.
 
-**Returns (HTTP GET)**:
+##### GET
+**Returns**:
 {{<table "table table-striped table-bordered">}}
 | Field value   | Type   | Description                                                                                       |
 | ------------- | ------ | ------------------------------------------------------------------------------------------------- |
@@ -165,12 +202,23 @@ It may be useful to use this API endpoint and use it for other monitoring tools.
 
 ### /update
 
-For updating the packages specified in the currently set Manifest.
+For updating the packages specified in the currently set manifest or retrieving a log of all performed updates.
 
-This API endpoint only works when `Admins` were defined in the Manifest. For more information, look up [Updating a Manifest]({{< ref "docs/workflows/update-manifest.md" >}})
+##### GET
+**Returns:**
+
+A structured log of all updates performed via the `/update` or `/secrets` endpoint, including timestamp, author, and affected resources.
+
+Example for getting the update log:
+```bash
+curl -k "https://$MARBLERUN/update"
+```
+
+##### POST
+This API endpoint only works when `Users` were defined in the manifest. For more information, look up ["updating a manifest"]({{< ref "docs/workflows/update-manifest.md" >}})
 
 Example for updating the manifest:
 
 ```bash
-curl --cacert marblerun.crt --cert admin_certificate.crt --key admin_private.key -w "%{http_code}" --data-binary @update_manifest.json https://$MARBLERUN/update
+curl --cacert marblerun.crt --cert user_certificate.crt --key user_private.key -w "%{http_code}" --data-binary @update_manifest.json https://$MARBLERUN/update
 ```
